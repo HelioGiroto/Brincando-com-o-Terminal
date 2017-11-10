@@ -5,10 +5,15 @@ https://github.com/HelioGiroto/noticias.git
 …or create a new repository on the command line
 
 echo "# noticias" >> README.md
+
 git init
+
 git add README.md
+
 git commit -m "first commit"
+
 git remote add origin https://github.com/HelioGiroto/noticias.git
+
 git push -u origin master
 
 
