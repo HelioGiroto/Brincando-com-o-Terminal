@@ -1,0 +1,36 @@
+#1
+compare -fuzz 90% -metric ae a1.jpg a2.jpg null:
+
+#2
+compare -metric mae a1.jpg a2.jpg null:
+compare -verbose -metric mae a1.jpg a2.jpg null:
+
+#3
+compare -metric ae a1.jpg a2.jpg null:
+
+
+
+ae 		= qtde de pixels.
+-fuzz 	= margem de tolerância de diferença de cor.
+
+mae		= distancia (diferença) média (tente colocar -verbose antes de -metric para entender pq é a média).
+
+null:	= Omita isso e veja a diferença.
+
+
+# ver todos em http://www.imagemagick.org/script/command-line-options.php#metric
+
+
+————————————
+
+Outro exemplo:
+
+
+$ convert tux01.png tux02.png -resize '400x300!' MIFF:- | compare -metric AE -fuzz '10%' - null:
+1982 
+
+O resultado será a quantidade de pixels diferentes entre as imagens, que neste caso, foi "1982". Se as imagens forem idênticas, o resultado será zero. 
+
+Explicando: o convert recebe como parâmetros as duas imagens (tux01.png tux02.png) e as redimensiona para um tamanho em comum (-resize '400x300!'). Feito isso, elas são repassadas ao comando compare, que calculará a quantidade de pixels diferentes. 
+
+Fonte: https://www.vivaolinux.com.br/dica/Como-fazer-diff-entre-duas-imagens
