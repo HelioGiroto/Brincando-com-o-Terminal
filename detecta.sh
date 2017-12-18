@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read
+sleep 2
 cd /home/h/Descargas/detecta
 fswebcam -bqr 320x240 --no-banner --png --save 0.png
 
@@ -14,8 +14,8 @@ do
 	sleep 5
 	#diff $foto_atual $foto_ant > /dev/null
 	
-	margem=$(compare -fuzz 50% -metric ae $foto_atual $foto_ant null: 2>&1)
-	[ $margem -eq 0 ] && echo '' || cvlc --play-and-exit beep.mp3  		
+	tolerancia=$(compare -fuzz 50% -metric ae $foto_atual $foto_ant null: 2>&1)
+	[ $tolerancia -eq 0 ] || cvlc --play-and-exit beep.mp3  		
 
 	# [ $? -eq 0 ] && echo '' || cvlc --play-and-exit beep.mp3  
 	sufixo=$((sufixo+1))
