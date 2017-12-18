@@ -2,20 +2,21 @@
 
 read
 cd /home/h/Descargas/detecta
+fswebcam -bqr 320x240 --no-banner --png --save 0.png
 
 sufixo=1
 
 while :
 do
-	foto_atual=$sufixo.jpg
-	foto_ant=$((sufixo-1)).jpg
+	foto_atual=$sufixo.png
+	foto_ant=$((sufixo-1)).png
+	fswebcam -bqr 320x240 --no-banner --png --save $foto_atual
+	sleep 5
+	#diff $foto_atual $foto_ant > /dev/null
+	
+	margem=$(compare -fuzz 50% -metric ae $foto_atual $foto_ant null: 2>&1)
+	[ $margem -eq 0 ] && echo '' || cvlc --play-and-exit beep.mp3  		
 
-	fswebcam -b -q -r 320x240 --jpeg 50 --save $foto_atual
-	diff $foto_atual $foto_ant > /dev/null
-	[ $? -eq 0 ] && echo '' || cvlc beep.mp3  
-
+	# [ $? -eq 0 ] && echo '' || cvlc --play-and-exit beep.mp3  
 	sufixo=$((sufixo+1))
-	sleep 1
-
-
 done
