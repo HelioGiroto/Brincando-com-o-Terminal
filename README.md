@@ -1,5 +1,5 @@
 # Brincando-com-o-Terminal
-Uso do comando TPUT e outros em Shell Script...
+Uso do comando TPUT e outras "brincadeiras" úteis em Shell Script...
 
 
 Para executá-lo em sua máquina apenas digite isso no terminal:
