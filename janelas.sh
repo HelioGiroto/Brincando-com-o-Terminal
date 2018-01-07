@@ -1,0 +1,3 @@
+#!/bin/bash
+chromium-browser --app="data:text/html,<html><body><script>window.moveTo(0,0);window.resizeTo(900,500);window.location='http://www.google.com';</script></body></html>" & chromium-browser --app="data:text/html,<html><body><script>window.moveTo(901,0);window.resizeTo(900,500);window.location='http://www.google.com';</script></body></html>" & chromium-browser --app="data:text/html,<html><body><script>window.moveTo(0,501);window.resizeTo(900,500);window.location='http://www.google.com';</script></body></html>" & chromium-browser --app="data:text/html,<html><body><script>window.moveTo(901,501);window.resizeTo(900,500);window.location='http://www.google.com';</script></body></html>"
+# Autor: Helio Giroto
