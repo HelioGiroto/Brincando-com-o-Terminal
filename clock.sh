@@ -1,5 +1,5 @@
 #!/bin/bash
-while :; do echo -ne "$(date +%T )\r"; done
+while :; do echo -ne "$(date +%T)\r"; done
 
 # Variações:
 
