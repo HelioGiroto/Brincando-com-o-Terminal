@@ -1,0 +1,39 @@
+COMO ACRESCENTAR UMA LINHA DE DADO NO COMEÇO DE UM ARQUIVO
+(Como atualizar um banco de dados txt ou csv com dados recentes nas primeiras linhas)
+
+O mais fácil é acrescentar no fim com ... >> arq.ext. Porém no inicio requer habilidade.
+
+vamos criar na linha de comando mesmo um arquivo chamado dados.txt dessa forma:
+
+$ cat << EOF > dados.txt
+> 2
+> 3
+> 4
+> 5
+> EOF
+$
+
+Agora vamos criar um arquivo com um dado recente de nome recente.txt
+
+$ echo 1 > recente.txt
+
+Podemos fazer de duas formas:
+	1. Colocamos dados.txt no fim de recente.txt, ou
+	2. Listamos (cat) os dois arquivos e redirecionamos a um terceiro chamado total.txt
+
+
+$ cat dados.txt >> recente.txt
+
+ou
+
+$ cat recente.txt dados.txt > total.txt
+
+
+PRONTO.
+
+
+
+# Sobre EOF: https://stackoverflow.com/questions/2500436/how-does-cat-eof-work-in-bash
+
+
+
