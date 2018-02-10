@@ -10,12 +10,17 @@
 # Entre duas datas - A mais atual menos a mais passada (Retorna o número de dias)::
 # echo $(( ($(date --date="20130101" +%s) - $(date --date="20000101" +%s)) / (60*60*24) ))
 
-
 # Pega a data de modificação do arquivo sismos5+ e converte em segundos linux:
-anterior=$( ls -l sismos5+ | date +%s )
+anterior=$( date -r sismos5+ +%s )
 
 # Transforma tb a data de hoje em epoch (tempo linux) - segundos:
 hoje=$( date +%s )
+
+
+# Como converter data epoch em data comúm:
+# date -d @1518223872
+
+
 
 # Calcula o dia atual (em segundos linux) MENOS a data $anterior:
 periodo=$( echo $(( ($hoje - $anterior) / (60*60*24) +2 )) )			# o número 2 no final indica uma margem de 2 dias a mais.
