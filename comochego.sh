@@ -1,4 +1,6 @@
 #!/bin/bash
+# Funciona COM ou SEM parâmetros (no Terminal Linux ou Mac) :)
+# Ex.: $ bash comochego.sh Av. Paulista, 1000 São Paulo
 
 function abre {
 	destino=$(sed 's/ /+/g'<<<$d)
@@ -8,7 +10,7 @@ function abre {
 	exit
 }
 
-[[ $1 ]] && { d=$*; abre; }
+[[ $1 ]] && { d=$*; abre; }	# Tendo parâmetro o usará como variável e abrirá a função, se não...
 
 echo
 echo -n "Destino: "
