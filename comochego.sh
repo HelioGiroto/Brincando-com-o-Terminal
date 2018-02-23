@@ -1,16 +1,21 @@
 #!/bin/bash
-echo
 
+function abre {
+	destino=$(sed 's/ /+/g'<<<$d)
+	cidade=$(sed 's/ /+/g'<<<$c)
+	echo; echo "Abrindo https://www.google.com/maps/dir/here/${destino},${cidade} ....."; echo
+	chromium-browser https://www.google.com/maps/dir/here/${destino},${cidade} &> /dev/null
+	exit
+}
+
+[[ $1 ]] && { d=$*; abre; }
+
+echo
 echo -n "Destino: "
 read d
-destino=$(sed 's/ /+/g'<<<$d)
 
 echo -n "Cidade: "
 read c
-cidade=$(sed 's/ /+/g'<<<$c)
+abre
 
-echo; echo "Abrindo https://www.google.com/maps/dir/here/${destino},${cidade} ....."; echo
-
-chromium-browser https://www.google.com/maps/dir/here/${destino},${cidade} &> /dev/null
-
-
+# Autor: H.G.
