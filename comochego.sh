@@ -1,12 +1,14 @@
 #!/bin/bash
-# Funciona COM ou SEM parâmetros (no Terminal Linux ou Mac) :)
+# Funciona COM ou SEM parâmetros (no Terminal Linux ou Mac*) :)
 # Ex.: $ bash comochego.sh Av. Paulista, 1000 São Paulo
 
 function abre {
 	destino=$(sed 's/ /+/g'<<<$d)
 	cidade=$(sed 's/ /+/g'<<<$c)
 	echo; echo "Abrindo https://www.google.com/maps/dir/here/${destino},${cidade} ....."; echo
-	chromium-browser https://www.google.com/maps/dir/here/${destino},${cidade} &> /dev/null
+	firefox https://www.google.com/maps/dir/here/${destino},${cidade} &> /dev/null
+	# Usuários MAC*: Comente essa linha acima e DESCOMENTE a linha abaixo:
+	# open -a Safari https://www.google.com/maps/dir/here/${destino},${cidade} &> /dev/null
 	exit
 }
 
