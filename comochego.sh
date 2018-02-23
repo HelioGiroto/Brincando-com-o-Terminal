@@ -7,7 +7,7 @@ function abre {
 	cidade=$(sed 's/ /+/g'<<<$c)
 	echo; echo "Abrindo https://www.google.com/maps/dir/here/${destino},${cidade} ....."; echo
 	firefox https://www.google.com/maps/dir/here/${destino},${cidade} &> /dev/null
-	# Usuários MAC*: Comente essa linha acima (Colocando #) e DESCOMENTE a linha abaixo:
+	# Usuários MAC*: Comente essa linha acima (Colocando #) e DESCOMENTE a linha abaixo (tirando o #):
 	# open -a Safari https://www.google.com/maps/dir/here/${destino},${cidade} &> /dev/null
 	exit
 }
