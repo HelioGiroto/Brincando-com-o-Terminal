@@ -1,0 +1,13 @@
+Caro lucidlynx2011 caso tenha permição root pode "mover" pastas entre usuários pelo shell [aquela janela preta] usando o comando
+
+sudo cp -r /home/usuario1/pasta1/ /home/usuario2/
+
+neste exemplo estou copiando a pasta1 do usuario1 para o usuario2
+
+Outro exemplo
+
+cp -r /home/usuario1/Músicas/ /home/usuario2/
+
+Mas cuidado caso já exista uma pasta com o mesmo nome no caminho indicado, esta será sobrescrita sem nenhum aviso. Tenha certeza de estar copiando para um caminho livre de arrependimentos.
+
+Espero ter ajudado, até mais.
