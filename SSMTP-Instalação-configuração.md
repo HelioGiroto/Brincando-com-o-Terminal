@@ -1,14 +1,18 @@
 Como instalar e configurar o SSMTP no Raspberry Pi
 
-1. Instale: 
-sudo apt-get install ssmtp
-sudo apt-get update
+1. Instale:
+
+<b>sudo apt-get install ssmtp
+
+sudo apt-get update</b>
 
 2. Configure:
 	2.1. Crie uma cópia de segurança do arquivo de configuração antes de modificá-lo, desse modo:
+	
 		<b>sudo cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.old</b>
 
 	2.2. Edite o arquivo “/etc/ssmtp/smtp.conf”:
+	
 		<b>sudo gedit /etc/ssmtp/smtp.conf</b>
 
 		Digite:
@@ -27,16 +31,19 @@ sudo apt-get update
 		Altere acima: "SeuEmail@..." pelo nome de seu email. E "SuaSenha" por sua senha real.
 
 	2.3. Edite o arquivo 'revaliases':
+	
 		<b>sudo gedit /etc/ssmtp/revaliases</b>
 
 		Digite essas duas linhas no final do arquivo:
 	
 			root:SeuEmail@gmail.com:smtp.gmail.com:587
+			
 			mainuser:SeuEmail@gmail.com:smtp.mail.com:587
 
 		Não se esqueça de mudar "SeuEmail@..." pelo nome de seu email.
 
 3. Dê permissão na sua conta Google abrindo essa URL:
+
 	https://myaccount.google.com/lesssecureapps?pli=1
 
 	Ative a opção: "Permitir aplicativos menos seguros". Em seguida feche a página.
