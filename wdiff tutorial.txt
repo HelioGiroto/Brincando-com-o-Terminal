@@ -1,0 +1,37 @@
+O wdiff compara dois textos palavra por palavra e mostra o que tem a mais ou a menos nos textos que são comparados.
+
+$ wdiff arq1 arq2 
+
+(Use o -n para nowrap).
+
+Resultado:
+
+[-palavra-]
+{+palabra+}
+
+Tente tb:
+
+$ wdiff a1 a2 | colordiff
+
+
+Sendo que:
+
+[- -] = O que falta no 2o. arquivo (arq2).
+{+ +} = O que tem a mais no 2o. arq (arq2).
+
+
+Contagem:
+
+$ wdiff -s a1 a2 	## Statistics - mas não é tão preciso como abaixo:
+
+Do que tem a menos:
+$ wdiff a1 a2 | grep -o '\[-' | wc -l
+
+Do que tem a mais:
+$ wdiff a1 a2 | grep -o '\{+' | wc -l
+
+
+
+----------------------
+Ver outras ferramentas de comparação em:
+https://www.linuxdescomplicado.com.br/2014/12/ferramentas-para-comparacao-e-mesclagem.html
