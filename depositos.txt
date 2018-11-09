@@ -1,0 +1,4 @@
+sed -i 's/.$/;/; s/"//g' agosto.txt       # adaptacao no arquivo txt
+# O txt do extrato tem que ser retirado as áspas e tem que ter o delimitador no fim da linha (de registro).
+
+awk -F';' '{if ($6 == "C") { suma = suma + $5 }} END {printf "%.2f\n", suma}' *.txt
