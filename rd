@@ -6,6 +6,9 @@ hxnormalize -x http://72.55.164.118:8566 | hxselect -s'\n' -c "div:nth-child(4) 
 #Pixeluvo - preço:
 hxnormalize -x -i0 https://store.steampowered.com/app/314500/Pixeluvo | hxselect -c -s'\n' "div.price" # pixeluvo pixelmator
 
+# Sem mensagem de erros
+hxnormalize -x -i0 https://store.steampowered.com/app/314500/Pixeluvo 2> /dev/null | hxselect -c -s'\n' "div.price" 2> /dev/null
+
 
 # ultimos registros de audiencia - net:
 sex nov 9 19:07:37 -02 2018;3;
