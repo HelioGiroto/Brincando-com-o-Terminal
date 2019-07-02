@@ -1,0 +1,45 @@
+#Vamos criar 3 araquivos:
+
+$ cat <<EOF > a.txt
+> ola
+> tudo
+> bem
+> como
+> vai
+> EOF
+
+
+$ cat <<EOF > b.txt
+> ola
+> tudoo
+> bem
+> como
+> vai
+> EOF
+
+
+$ cat <<EOF > c.txt
+> ola
+> tudo
+> bem
+> como
+> vai
+> EOF
+
+
+# AGORA DIGITEMOS OS COMANDOS:
+	$ diff a.txt c.txt &> /dev/null
+	$ [[ $? == "0" ]] && echo "Não tem diferença" || echo "Tem diferença"
+
+Não tem diferença
+
+# Resultado de $? é 0 então os arquivos são iguais.
+# Resultado de $? é 1 então os arquivos são diferentes.
+
+
+
+# Script bash:
+diff $1 $2 &> /dev/null
+[[ $? == "0" ]] && echo "Não tem diferença" || echo "Tem diferença"
+
+
