@@ -19,6 +19,7 @@
 # Este arquivo está em /etc/xdg/openbox
 # Adaptado por Helio Giroto
 
+exec /usr/bin/gnome-terminal --full-screen "$@" -e tmux &
 nitrogen --restore &
 tint2 &
 compton &
