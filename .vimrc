@@ -1,0 +1,14 @@
+syntax enable
+set encoding=utf-8
+set number
+set hlsearch
+set ignorecase
+set autoindent
+set linebreak
+set wrap
+set ruler
+set cursorline
+set number
+set mouse=a
+set noerrorbells
+set history=1000
