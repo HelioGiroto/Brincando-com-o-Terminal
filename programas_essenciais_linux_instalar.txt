@@ -51,3 +51,5 @@ mplayer
 alpine
 wkhtmltopdf
 gpick
+gnome-tweaks
+gnome-sushi
