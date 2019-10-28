@@ -65,3 +65,6 @@ fswebcam
 dialog
 jq
 twidge
+node.js
+brave
+pixeluvo
