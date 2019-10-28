@@ -25,6 +25,7 @@ html-xml-utils
 xclip
 googler
 ffmpeg
+melt
 imagemagick
 speedtest-cli
 youtube-dl
@@ -53,3 +54,13 @@ wkhtmltopdf
 gpick
 gnome-tweaks
 gnome-sushi
+wdiff
+colordiff
+openbox
+obconf
+tint2
+feh
+fswebcam
+dialog
+jq
+twidge
