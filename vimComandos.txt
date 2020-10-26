@@ -61,7 +61,8 @@ ABRIR NOVA JANELA DIVIDIDA:
 
 
 
-
+MAPEAR TECLAS (Redefinir Teclas):
+	ESC :nmap <C-a> ggVG - Muda as teclas control + a para selecionar todo conteudo do arquivo.
 
 
 
