@@ -1,0 +1,68 @@
+VIM
+
+ESC i: insere justo no cursor
+ESC a: insere após o cursor
+ESC o: insere na linha abaixo do cursor
+
+NAVEGAÇÃO:
+	- teclas hjkl
+	- w ou b: Próx ou anterior PALAVRA (word ou back-word)
+	- ESC $ ou ^: Vai para fim ou inicio da linha.
+	- ESC :$ - Fim do arquivo tb pode ser ESC G
+	- ESC gg: inicio do arq.
+	- ESC :8 - Vai para a linha 8. Pode ser tb 8G
+	- ESC ( ou ): Vai para FRASE anterior ou posterior.
+	- ESC { ou }: Vai para o PARÁGRAFO anterior ou posterior.
+
+u: undo
+
+
+BUSCA:
+	ESC :/ 
+
+
+SUBSTITUIR: (Como o ctrl + H do Gedit)
+	- ESC :% s/antes/depois/ : Muda apenas primeira ocorrencia.	
+	- ESC :% s/antes/depois/g : Muda todas ocorrencia.	
+	- ESC :% s/antes/depois/gc : Muda todas ocorrencia.	
+
+
+
+
+SELECIONAR:
+	ESC v : visual
+		+ hjkl: move para estar selecionando
+
+	ggVG : Seleciona tudo.
+
+	:1,11y - Copia das linhas 1 até 11.
+	:1,11d - corta das linhas 1 até 11.
+	:1,11w nomeArq - Copia linhas 1 até 11 e salva noutro arquivo chamado nomeArq.
+
+	ESC shiift v: Seleleciona paragrafo todo.
+
+
+CORTA COPIA E PASTE:	
+	yy: copia toda linha
+	nro yy: copia nro de linhas daqui para baixo para clipboard 
+
+	d: deleta o que foi selecionado com v (cortando)
+	dd: deleta a linh que o cursor esteja posicionado. (cortando)
+
+	p: paste
+
+
+
+ABRIR NOVA JANELA DIVIDIDA:
+	:vsp nomeArq: Abre janela ao lado para novo nomeArq
+	:sp nomeArq: Abre nova janela abaixo para novo nomeArq.
+
+	Ctrl ww : Navega para a outra janela aberta (vert. ou horiz.)
+
+
+
+
+
+
+
+
