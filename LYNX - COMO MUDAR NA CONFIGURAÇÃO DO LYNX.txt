@@ -1,0 +1,65 @@
+O QUE MUDAR NA CONFIGURAÇÃO DO LYNX
+
+CAMINHO E COMANDO PARA MUDANÇA:
+
+pi@raspberrypi:/etc/lynx-cur $ pwd
+/etc/lynx-cur
+ 
+pi@raspberrypi:/etc/lynx-cur $ sudo gedit lynx.cfg 
+
+
+=======================================================
+
+1a mudança COOKIES
+
+   For Debian, Lynx can be installed using:
+   sudo apt-get install lynx
+   After it's installed, just start it from the command line by typing 'lynx' (without the quotes). You can also
+   run it from within the desktop by selecting 'Lynx-cur' from the Other menu.
+   By default, Lynx will ask for your permission every time a site wants to create a cookie for you. If this
+   becomes annoying it can be switched off permanently by editing the Lynx config file:
+   /etc/lynx-cur/lynx.cfg
+   Find the following line:
+
+#ACCEPT_ALL_COOKIES:FALSE
+   and change it to:
+ACCEPT_ALL_COOKIES:TRUE
+
+
+- OUTRA mudança tb: 
+
+#FORCE_COOKIE_PROMPT:PROMPT            PARA             FORCE_COOKIE_PROMPT:YES
+
+
+
+DÚVIDAS: 
+
+#SET_COOKIES:TRUE (NÃO MEXE)   E TBs: 
+PERSISTENT_COOKIES:FALSE
+
+#ENABLE_LYNXRC:ACCEPT_ALL_COOKIES:ON
+#ENABLE_LYNXRC:SET_COOKIES:OFF
+
+
+=====================================================
+
+2a. mudança IMAGENS para mostrar como links
+
+#MAKE_LINKS_FOR_ALL_IMAGES:FALSE    para       TRUE.
+
+DÚVIDAS: 
+
+#ENABLE_LYNXRC:MAKE_LINKS_FOR_ALL_IMAGES:OFF
+
+
+======================================================
+
+3A MUDANÇA: 
+
+#UNDERLINE_LINKS:FALSE               para            UNDERLINE_LINKS:TRUE
+
+Dúvidas:
+
+#ENABLE_LYNXRC:UNDERLINE_LINKS:OFF
+
+
