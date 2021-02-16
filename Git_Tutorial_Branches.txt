@@ -1,0 +1,51 @@
+# USANDO BRANCHES NO GIT - Ramos...
+
+## cria novo branch:
+git branch novo_ramo
+
+
+## Navega entre/para novo branch (como se fosse um cd para diretórios):
+git checkout novo_ramo
+ 
+
+## verifica em que qual branch está atualmente (pwd):
+git status
+ 
+
+## Traz conteudo de todo github para este branch ???:
+git pull
+git pull origin .
+git pull origin novo_ramo
+ 
+
+## cria novo arquivo para este branch:
+> novo.txt
+
+
+## É o atual texto que estou editando...
+ 
+
+## é preciso fazer add e commit para que este branch esteja comitado.
+git add .
+git commit -m '...'
+
+
+## navega entre os branchs....
+git checkout novo_ramo
+
+
+## para fazer push deste branch (SEM fazer merge!):
+## origin - tem o mesmo nome (origem). novo_branch - o nome que será assumido no gitHub:
+git push origin novo_branch
+
+
+## Fará um merge, ou seja, a fusão entre este branch e o master!
+git checkout master 		# vai até o branch master.
+git status			# certifica-se que é o branch master!t
+git merge novo_branch		# funde/fusiona o novo_branch para este (master)	
+git push			# para fazer push.
+
+## Voltando à um commit anterior:
+git checkout nome_branch_que_será_restaurado
+git log					# Para ver o id do commit
+git reset --hard <nro do id do commit>
