@@ -19,6 +19,7 @@ Plugin 'scrooloose/nerdtree' 	" https://vimawesome.com/plugin/nerdtree-red
 nnoremap <c-t> :NERDTreeToggle<CR>
 
 
+
 call vundle#end()
 filetype plugin indent on
 
@@ -89,6 +90,23 @@ set mouse=a
 set noerrorbells
 set history=1000
 
+"""""""""""""""""""""""""""""""""""""
+" CORES - THEMES:
+" http://vimcolors.com/
+
+set termguicolors
+" the configuration options should be placed before `colorscheme miramare`
+" let g:miramare_enable_italic = 1
+" let g:miramare_disable_italic_comment = 1
+" colorscheme miramare
+" colorscheme vacme 	" claro
+" colorscheme ambient	" marrom e cinza
+" colorscheme vanilla-cake
+colorscheme desert-night
+""""""""""""""""""""""""""""""""""""""
+
+
+
 let mapleader=","
 
 
@@ -158,5 +176,4 @@ vnoremap <leader>? c¿<Esc>p$a?
 
 "ver: https://vi.stackexchange.com/questions/18231/what-is-the-difference-of-using-au-bufnewfile-bufread-py-and-au-filetype-py
 "https://vim.fandom.com/wiki/Use_abbreviations_for_frequently-used_words
-
 
