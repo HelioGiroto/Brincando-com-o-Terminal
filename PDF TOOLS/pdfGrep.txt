@@ -1,0 +1,12 @@
+# Para procurar sentença num documento pdf
+
+## Com duas palavras:
+
+pdfgrep -inC2 obesidade TOTAL.pdf | grep -i sobrepeso
+
+# flag -n para dar o número da página.
+# flag -i para ignorar Case
+# flag -C2 para imprimir duas linhas acima e abaixo da linha da palavra encontrada.
+
+
+

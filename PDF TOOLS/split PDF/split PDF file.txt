@@ -1,0 +1,9 @@
+
+desmembrar um pdf.
+unmerge
+split 
+
+fonte: https://superuser.com/questions/345086/split-pdf-document-from-command-line-in-linux
+
+$ pdfseparate total.pdf separado-%d.pdf
+

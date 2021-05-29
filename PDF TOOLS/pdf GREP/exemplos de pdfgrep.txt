@@ -1,0 +1,9 @@
+
+
+ 1597  pdfgrep -i "blaaaaa" *.pdf
+
+ 1598  aaa="fdas"
+ 1599  pdfgrep -i $aaa *.pdf
+
+
+
