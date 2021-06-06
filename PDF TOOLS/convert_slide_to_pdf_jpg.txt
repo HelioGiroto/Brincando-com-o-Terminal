@@ -1,0 +1,40 @@
+# Exporta todo o arquivo de Impress para PDF
+
+# faz o split do pdf total para dividí-lo em vários conforme nro de páginas do total.pdf:
+
+pdfseparate total.pdf separado-%d.pdf
+
+# converte arquivos pdf para jpg:
+mogrify -quality 100 -density 300 -format jpg *.pdf
+
+
+# Caso dê erro, é porque será necessário alterar configurações do ImageMagick. Para isso:
+
+## Navegue até a seguinte pasta:
+cd /etc/ImageMagick-6
+### ou:
+cd /etc/ImageMagick
+
+
+## Abra o arquivo policy.xml
+sudo gedit policy.xml
+
+
+## Verifique se tais linhas esto comentadas desta forma:
+<!-- <policy domain="coder" rights="none" pattern="MVG" /> -->
+
+
+## Mude esta linha:
+<policy domain="coder" rights="none" pattern="PDF" />
+
+## para esta:
+<policy domain="coder" rights="read|write" pattern="PDF" />
+
+
+
+## Adicione esta:
+<policy domain="coder" rights="read|write" pattern="LABEL" />
+
+
+## Feche, restarte o Terminal e estará funcionando normalmente
+

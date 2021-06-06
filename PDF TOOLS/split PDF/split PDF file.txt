@@ -7,3 +7,4 @@ fonte: https://superuser.com/questions/345086/split-pdf-document-from-command-li
 
 $ pdfseparate total.pdf separado-%d.pdf
 
+
