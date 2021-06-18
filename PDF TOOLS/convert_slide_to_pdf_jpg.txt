@@ -10,6 +10,8 @@ mogrify -quality 100 -density 300 -format jpg *.pdf
 
 # Caso dê erro, é porque será necessário alterar configurações do ImageMagick. Para isso:
 
+### Fonte: https://stackoverflow.com/questions/42928765/convertnot-authorized-aaaa-error-constitute-c-readimage-453
+
 ## Navegue até a seguinte pasta:
 cd /etc/ImageMagick-6
 ### ou:
