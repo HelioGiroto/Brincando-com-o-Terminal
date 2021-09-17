@@ -13,10 +13,14 @@
 4. Reiniciar a máquina digitando nome do usuário e senha
 
 5. Comando su com senha do administrador:
-	~~~ su ~~~
+	~~~ bash
+	su 
+	~~~
 
 6. Instalar por apt os principais pacotes para funcionamento do openbox:
-	~~~ apt install openbox xinit aptitude slim lxterminal menu obconf nitrogen compton tint2 thunar arandr rofi ~~~
+	~~~ bash
+	apt install openbox xinit aptitude slim lxterminal menu obconf nitrogen compton tint2 thunar arandr rofi 
+	~~~
 
 7. Reiniciar a máquina
 
@@ -25,14 +29,14 @@
 9. Abre o terminal usando o botão mouse direito e aplications até encontrar lxterminal...
 
 10. Instalar sudo
-	~~~ 
+	~~~ bash
 	su
 	# passa senha 
 	apt install sudo
 	~~~
 
 11. Configura sudo
-	~~~ 
+	~~~ bash
 	su
 	vim /etc/sudoers
 	# acrescenta abaixo à linha root ALL...
@@ -41,7 +45,9 @@
 	~~~
 
 12. Instala outros pacotes essenciais:
-	~~~ sudo apt install lxapperance conky bc gawk sed lynx curl wget html-xml-utils xclip ffmpeg imagemagick youtube-dl nmap gnumeric abiword htop mc ranger mupdf alpine colordiff feh fswebcam dialog jq numix-icon-theme-circle git gimp hugo ~~~ 
+	~~~ bash
+	sudo apt install lxapperance conky bc gawk sed lynx curl wget html-xml-utils xclip ffmpeg imagemagick youtube-dl nmap gnumeric abiword htop mc ranger mupdf alpine colordiff feh fswebcam dialog jq numix-icon-theme-circle git gimp hugo 
+	~~~ 
 
 
 13. Instala o VSCode:
@@ -49,7 +55,9 @@
 
 
 14. Configura o openbox usando o script abaixo
-	~~~ bash configura-openbox.sh ~~~
+	~~~ bash
+	bash configura-openbox.sh 
+	~~~
 
 
  
