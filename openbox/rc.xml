@@ -352,6 +352,13 @@
     <!-- FIM DAS MINHAS ALTERAÇÕES 1 -->
     <!-- Keybindings for running applications -->
     <!-- MINHAS ALTERAÇÕES 2 -->
+    <!-- SUPER m - Menu -->
+    <keybind key="W-m">
+      <action name="ShowMenu">
+        <menu>root-menu</menu>
+      </action>
+    </keybind>  
+    
     <!-- SUPER t - Terminal -->
     <keybind key="W-t">
       <action name="Execute">
@@ -442,7 +449,34 @@
         <command>gedit</command>
       </action>
     </keybind>
-    <!-- SUPER 9 - Senha Github -->
+    
+        
+    <!-- SUPER c - Calculadora -->
+    <keybind key="W-c">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Galculator</name>
+        </startupnotify>
+        <command>galculator</command>
+      </action>
+    </keybind>
+    
+        
+    <!-- SUPER 5 - Calculadora -->
+    <keybind key="W-5">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Galculator</name>
+        </startupnotify>
+        <command>galculator</command>
+      </action>
+    </keybind>
+    
+    
+    
+    <!-- SUPER 9 - Github Senha -->
     <keybind key="W-9">
       <action name="Execute">
         <startupnotify>
@@ -462,7 +496,7 @@
         <command>code</command>
       </action>
     </keybind>
-    <!-- SUPER g - VS Code -->
+    <!-- SUPER g - Gimp -->
     <keybind key="W-g">
       <action name="Execute">
         <startupnotify>
@@ -472,6 +506,18 @@
         <command>gimp</command>
       </action>
     </keybind>
+    
+    <!-- SUPER s - Skype -->
+    <keybind key="W-s">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Skype Web</name>
+        </startupnotify>
+        <command>chromium https://web.skype.com</command>
+      </action>
+    </keybind>
+    
     <!-- SUPER espaço - ROFI -->
     <keybind key="W-space">
       <action name="Execute">
@@ -479,7 +525,8 @@
           <enabled>true</enabled>
           <name>Rofi</name>
         </startupnotify>
-        <command>rofi -show run -theme solarized -font "hack 12"</command>
+        <!-- command>rofi -show run -theme solarized -font "hack 12"</command -->
+        <command>rofi -show combi -combi-modi "window,run" -theme solarized -font "hack 12"</command>
       </action>
     </keybind>
     <!-- Launch scrot when Print is pressed -->
