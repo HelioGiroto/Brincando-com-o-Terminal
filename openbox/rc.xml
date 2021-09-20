@@ -442,7 +442,7 @@
         <command>gedit</command>
       </action>
     </keybind>
-    <!-- SUPER 9 - Gedit -->
+    <!-- SUPER 9 - Senha Github -->
     <keybind key="W-9">
       <action name="Execute">
         <startupnotify>
