@@ -442,6 +442,16 @@
         <command>gedit</command>
       </action>
     </keybind>
+    <!-- SUPER 9 - Gedit -->
+    <keybind key="W-9">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>GitHub Pass</name>
+        </startupnotify>
+        <command>sh -c "cat ~/Documentos/.tk | xclip -sel clip"</command>
+      </action>
+    </keybind>
     <!-- SUPER v - VS Code -->
     <keybind key="W-v">
       <action name="Execute">
