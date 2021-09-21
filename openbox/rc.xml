@@ -358,7 +358,6 @@
         <menu>root-menu</menu>
       </action>
     </keybind>  
-    
     <!-- SUPER t - Terminal -->
     <keybind key="W-t">
       <action name="Execute">
@@ -449,8 +448,6 @@
         <command>gedit</command>
       </action>
     </keybind>
-    
-        
     <!-- SUPER c - Calculadora -->
     <keybind key="W-c">
       <action name="Execute">
@@ -461,8 +458,6 @@
         <command>galculator</command>
       </action>
     </keybind>
-    
-        
     <!-- SUPER 5 - Calculadora -->
     <keybind key="W-5">
       <action name="Execute">
@@ -472,10 +467,7 @@
         </startupnotify>
         <command>galculator</command>
       </action>
-    </keybind>
-    
-    
-    
+    </keybind>  
     <!-- SUPER 9 - Github Senha -->
     <keybind key="W-9">
       <action name="Execute">
@@ -506,7 +498,6 @@
         <command>gimp</command>
       </action>
     </keybind>
-    
     <!-- SUPER s - Skype -->
     <keybind key="W-s">
       <action name="Execute">
@@ -517,7 +508,6 @@
         <command>chromium https://web.skype.com</command>
       </action>
     </keybind>
-    
     <!-- SUPER espaço - ROFI -->
     <keybind key="W-space">
       <action name="Execute">
@@ -535,14 +525,24 @@
         <command>scrot</command>
       </action>
     </keybind>
+    
     <keybind key="A-F10">
       <action name="ToggleMaximize"/>
     </keybind>
+    
     <keybind key="C-A-Delete">
       <action name="Execute">
         <command>lxterminal -e sudo poweroff</command>
       </action>
     </keybind>
+    
+    <!-- SUPER + Delete: Bloqueia tela / Desbloqueia com a senha -->
+    <keybind key="W-Delete">
+      <action name="Execute">
+        <command>xtrlock -b</command>
+      </action>
+    </keybind>
+    
     <!-- FIM DAS MINHAS ALTERAÇÕES -->
   </keyboard>
   <mouse>
