@@ -312,6 +312,14 @@
             </action>
         </item>
         <separator/>
+        <item label="Bloqueio de tela">
+            <action name="Execute">
+                <execute>
+                    xtrlock -b
+                </execute>
+            </action>
+        </item>
+        
         <item label="Exit">
             <action name="Exit">
                 <execute>
