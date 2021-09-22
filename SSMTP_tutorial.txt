@@ -1,8 +1,8 @@
 Como instalar e configurar o SSMTP no Raspberry Pi
 
 1. Instale: 
-sudo apt-get install ssmtp
 sudo apt-get update
+sudo apt-get install ssmtp
 
 2. Configure:
 	2.1. Crie uma cópia de segurança do arquivo de configuração antes de modificá-lo, desse modo:

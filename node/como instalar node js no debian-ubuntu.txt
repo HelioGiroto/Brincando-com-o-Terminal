@@ -1,0 +1,31 @@
+como instalar a ultima versao do nodejs no ubuntu
+
+// Using Ubuntu
+$ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
+
+// Using Debian, AS ROOT
+# curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+# apt-get install -y nodejs
+
+
+Fonte dos comandos em:
+https://github.com/nodesource/distributions/blob/master/README.md#debinstall
+
+
+# antiga forma:
+
+  356  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+  357  source ~/.profile 
+  358  nvm ls-remote
+  359  nvm install 12.13.0
+  360  node -v
+
+	# fonte: https://www.hostinger.com.br/tutoriais/instalar-node-js-ubuntu/
+
+
+
+// depois...:
+sudo apt install npm
+
+
