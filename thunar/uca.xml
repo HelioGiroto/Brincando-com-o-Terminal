@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Abrir terminal nessa pasta</name>
+	<unique-id>1631809188049771-1</unique-id>
+	<command>lxterminal</command>
+	<description>ALT + t</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>spacefm-find</icon>
+	<name>Busca Arquivos e Pastas</name>
+	<unique-id>1632863368296214-1</unique-id>
+	<command>mate-search-tool</command>
+	<description>ALT + F2</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+</actions>
