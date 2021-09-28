@@ -378,6 +378,7 @@
         <command>lxterminal</command>
       </action>
     </keybind>
+    
     <!-- Ctrl + Alt + t - Terminal -->
     <keybind key="C-A-t">
       <action name="Execute">
@@ -519,6 +520,14 @@
         <command>rofi -show combi -combi-modi "window,run" -theme solarized -font "hack 12"</command>
       </action>
     </keybind>
+    
+    <!-- ALT F2 - Search Tool -->
+    <keybind key="A-F2">
+      <action name="Execute">
+        <command>mate-search-tool</command>
+      </action>
+    </keybind>
+    
     <!-- Launch scrot when Print is pressed -->
     <keybind key="Print">
       <action name="Execute">

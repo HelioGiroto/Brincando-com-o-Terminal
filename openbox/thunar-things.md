@@ -1,0 +1,2 @@
+# abrir pasta ../thunar
+
