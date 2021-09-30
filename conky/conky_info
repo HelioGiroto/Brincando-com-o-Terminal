@@ -15,16 +15,17 @@ conky.config = {
 	no_buffers = true,
 	text_buffer_size = 2048,
 
-	gap_x = 10,
+	gap_x = 20,
 	gap_y = 40,
-	minimum_width = 300, 
+	minimum_width = 250, 
 	maximum_width = 350,
 	minimum_height = 380,
 	
 	own_window = true,
-	own_window_class = 'conky',
+	own_window_type = 'desktop',
+	own_window_class = 'Conky',
 	own_window_argb_visual = true,
-	own_window_argb_value = 120,
+	own_window_argb_value = 0,
 	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 	
 	border_inner_margin = 10,
@@ -51,9 +52,6 @@ conky.config = {
 
 conky.text = 
 [[
-
-#${scroll 160 $nodename - $sysname $kernel on $machine }
-
 ${color1}HOJE ${hr 2}$color
 ${color0}Data: $color${time %d %B %Y - %A} ${alignr}
 ${color0}Hora: $color${time %H:%M}
@@ -68,6 +66,7 @@ ${color0}Processes:$color $processes${alignr}${color0}Running: $color$running_pr
 ${color1}MEMORY & SWAP ${hr 2}$color
 ${color0}RAM Usage: ${color}$mem / $memmax
 $memperc% ${color6}${membar 6}$color
+
 ${color0}Swap Usage: ${color}$swap / $swapmax
 $swapperc% ${color6}${swapbar 6}$color
 
@@ -79,8 +78,8 @@ ${color3} NAME                PID   CPU %  MEM %$color${color2}
  ${top_mem name 5} ${top_mem pid 5} ${top_mem cpu 5} ${top_mem mem 5}
 
 ${color1}CPU ${hr 2}$color
-${color0}CPU Temperature: $color${acpitemp}°C
 ${color0}CPU Usage:$color $cpu% ${color7}${cpubar 6}
+${color0}CPU Temperature: $color${acpitemp}°C
 ${color0}Avg. Load: $color $loadavg
 
 File systems:
@@ -95,7 +94,8 @@ ${color0}Total:$color ${totaldown eth0} ${alignr}${color0}Total: $color${totalup
 
 Networking:
 Up: ${upspeed eth0}  - Down: ${downspeed eth0}
- 
+
+
 ]];
 
 

@@ -1,5 +1,4 @@
 -- Conky adaptado por Hélio Giroto
--- MOSTRA AS TECLAS DE ATALHO DO OPENBOX
 -- Setembro/2021
 -- https://github.com/HelioGiroto/
 
@@ -16,21 +15,21 @@ conky.config = {
 	no_buffers = true,
 	text_buffer_size = 2048,
 
-	gap_x = 10,
+	gap_x = 20,
 	gap_y = 40,
-	minimum_width = 300, 
+	minimum_width = 225, 
 	maximum_width = 350,
-	minimum_height = 380,
 	
 	own_window = true,
-	own_window_class = 'conky',
+	own_window_type = 'desktop',
+	own_window_class = 'Conky',
 	own_window_argb_visual = true,
-	own_window_argb_value = 120,
+	own_window_argb_value = 0,
 	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 	
 	border_inner_margin = 10,
 	border_outer_margin = 0,
-	alignment = 'top_right',
+	alignment = 'top_left',
 
 	draw_shades = false,
 	draw_outline = false,
@@ -45,33 +44,56 @@ conky.config = {
 
 	default_color = 'white',
 	color0 = 'FFFFFF',
-	color1 = 'FFA500'
+	color1 = 'FFA500',
+	color2 = '99bbff'
 };
+
 
 
 
 conky.text = 
 [[
+${color1}TECLAS DE ATALHO ${hr 2}$color
 
-${color1}HOJE ${hr 2}$color
-${color0}Data: $color${time %d %B %Y - %A} ${alignr}
-${color0}Hora: $color${time %H:%M}
+SUPER m 	 - Menu
+SUPER d 	 - Desktop
+
+SUPER t 	 - Terminal
+SUPER 1 	 - Terminal
+Ctrl + Alt + t  - Terminal
+
+SUPER f 	 - File Manager
+SUPER 2 	 - File Manager
+
+SUPER w 	 - WebBrowser
+SUPER 3 	 - WebBrowser
+
+SUPER e 	 - Gedit
+SUPER 4 	 - Gedit
+
+SUPER c 	 - Calculadora
+SUPER 5 	 - Calculadora
+
+SUPER 9 	 - Github Senha
+SUPER v 	 - VS Code
+SUPER espaço 	  - ROFI
+SUPER g 	 - Gimp
+SUPER s 	 - Skype
+
+ALT F2 	 - Search File/Folder
+
+SUPER + dir 	 - Metade dir. da tela
+SUPER + esq 	 - Metade esq. da tela
+
+SUPER + Delete	 - Bloqueia tela
 
 
-${stippled_hr 2}
+${color2}${font Liberation Sans:pixelsize=60}${time %H:%M}${font}$color
 
-Networking:
+${font Sans-serif:pixelsize=30}${time %d/%m/%Y}${font}
 
- 
+${exec cal}
+
 ]];
-
-
-
-
-
-
-
-
-
 
 
