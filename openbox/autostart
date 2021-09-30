@@ -1,4 +1,8 @@
 nitrogen --restore &
-tint2 &
+# tint2 &
 compton &
-bash start_conky.sh &
+conky -p 2 -c /etc/conky/conky_info &
+conky -c /etc/conky/conky_shortcuts &
+
+# abaixo corrigir pq nao funciona:
+# bash start_conky.sh &
