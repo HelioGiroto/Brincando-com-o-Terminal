@@ -1,3 +1,4 @@
 nitrogen --restore &
 tint2 &
 compton &
+bash start_conky.sh &

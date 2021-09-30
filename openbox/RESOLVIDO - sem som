@@ -8,6 +8,13 @@ https://www.vivaolinux.com.br/topico/Debian/Problemas-com-o-audio-do-Debian
 https://sempreupdate.com.br/ubuntu-como-resolver-problemas-da-placa-de-som/
 
 
+https://bbs.archlinux.org/viewtopic.php?id=241104
+https://www.ti-enxame.com/pt/debian/pulseaudio-sem-som-nos-alto-falantes/962225167/
+
+systemctl --user restart pulseaudio
+
+
+
 COMO RESOLVI:
 
 # SITE: https://linuxdicasesuporte.blogspot.com/2017/06/resolvendo-problemas-de-som-no-debian.html
