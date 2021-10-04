@@ -1,0 +1,7 @@
+# para instalar o calendario 
+# $ cal
+ 
+sudo apt install calendar whois vacation mailutils 
+sudo apt install bsdmainutils
+
+

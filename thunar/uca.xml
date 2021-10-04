@@ -11,6 +11,16 @@
 	<directories/>
 </action>
 <action>
+	<icon>visualstudiocode</icon>
+	<name>Abrir VS Code a partir daqui</name>
+	<unique-id>1633356626849230-1</unique-id>
+	<command>code .</command>
+	<description>Alt + Shift + V</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
 	<icon>spacefm-find</icon>
 	<name>Busca Arquivos e Pastas</name>
 	<unique-id>1632863368296214-1</unique-id>

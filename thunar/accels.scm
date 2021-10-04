@@ -12,6 +12,7 @@
 ; (gtk_accel_path "<Actions>/ThunarLauncher/open" "<Primary>o")
 ; (gtk_accel_path "<Actions>/ThunarWindow/reload" "<Primary>r")
 ; (gtk_accel_path "<Actions>/ThunarWindow/view-side-pane-menu" "")
+(gtk_accel_path "<Actions>/ThunarActions/uca-action-1633356626849230-1" "<Shift><Alt>v")
 ; (gtk_accel_path "<Actions>/ThunarWindow/open-network" "")
 ; (gtk_accel_path "<Actions>/ThunarLauncher/paste" "<Primary>v")
 ; (gtk_accel_path "<Actions>/ThunarWindow/contents/help-menu" "")
