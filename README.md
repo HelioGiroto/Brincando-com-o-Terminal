@@ -5,3 +5,6 @@ Uso do comando TPUT e outras "brincadeiras" úteis em Shell Script...
 Para executá-lo em sua máquina apenas digite isso no terminal:
 
 #### `curl https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/tput_play.sh | bash`
+
+
+## Para instalar e configurar openbox, ver tem_pasta_oculta

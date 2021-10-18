@@ -11,11 +11,22 @@
 	<directories/>
 </action>
 <action>
+	<icon>text-editor</icon>
+	<name>Abrir no Gedit</name>
+	<unique-id>1634572691874033-1</unique-id>
+	<command>gedit %f</command>
+	<description>Alt + e</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
 	<icon>visualstudiocode</icon>
 	<name>Abrir VS Code a partir daqui</name>
 	<unique-id>1633356626849230-1</unique-id>
 	<command>code .</command>
-	<description>Alt + Shift + V</description>
+	<description>Alt + v</description>
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>

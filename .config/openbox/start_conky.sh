@@ -4,4 +4,5 @@
 # Autor: Helio Giroto
 
 conky -p 2 -c /etc/conky/conky_info &
-conky -c /etc/conky/conky_shortcuts &
+
+conky -p 2 -c /etc/conky/conky_shortcuts &

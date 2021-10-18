@@ -43,7 +43,7 @@
   </placement>
   <theme>
     <name>Nightmare</name>
-    <titleLayout>LC</titleLayout>
+    <titleLayout>NSLC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
       N: window icon
@@ -57,21 +57,21 @@
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
-      <name>sans</name>
-      <size>8</size>
+      <name>Sans</name>
+      <size>9</size>
       <!-- font size in points -->
-      <weight>bold</weight>
+      <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
-      <slant>normal</slant>
+      <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveWindow">
-      <name>sans</name>
-      <size>8</size>
+      <name>Sans</name>
+      <size>9</size>
       <!-- font size in points -->
-      <weight>bold</weight>
+      <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
-      <slant>normal</slant>
+      <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="MenuHeader">
@@ -357,7 +357,7 @@
       <action name="ShowMenu">
         <menu>root-menu</menu>
       </action>
-    </keybind>  
+    </keybind>
     <!-- SUPER t - Terminal -->
     <keybind key="W-t">
       <action name="Execute">
@@ -378,7 +378,6 @@
         <command>lxterminal</command>
       </action>
     </keybind>
-    
     <!-- Ctrl + Alt + t - Terminal -->
     <keybind key="C-A-t">
       <action name="Execute">
@@ -468,7 +467,7 @@
         </startupnotify>
         <command>galculator</command>
       </action>
-    </keybind>  
+    </keybind>
     <!-- SUPER 9 - Github Senha -->
     <keybind key="W-9">
       <action name="Execute">
@@ -520,38 +519,32 @@
         <command>rofi -show combi -combi-modi "window,run" -theme solarized -font "hack 12"</command>
       </action>
     </keybind>
-    
     <!-- ALT F2 - Search Tool -->
     <keybind key="A-F2">
       <action name="Execute">
         <command>mate-search-tool</command>
       </action>
     </keybind>
-    
     <!-- Launch scrot when Print is pressed -->
     <keybind key="Print">
       <action name="Execute">
         <command>scrot</command>
       </action>
     </keybind>
-    
     <keybind key="A-F10">
       <action name="ToggleMaximize"/>
     </keybind>
-    
     <keybind key="C-A-Delete">
       <action name="Execute">
         <command>lxterminal -e sudo poweroff</command>
       </action>
     </keybind>
-    
     <!-- SUPER + Delete: Bloqueia tela / Desbloqueia com a senha -->
     <keybind key="W-Delete">
       <action name="Execute">
         <command>xtrlock -b</command>
       </action>
     </keybind>
-    
     <!-- FIM DAS MINHAS ALTERAÇÕES -->
   </keyboard>
   <mouse>
