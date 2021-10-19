@@ -41,8 +41,11 @@ sed '/^.\{65\}/d'		# o mesmo de acima.
 
 
 
-sed -n '45,50p' arquivo           # imprime as linhas nos. 45-50
-sed -n '51q;45,50p' arquivo       # mesma coisa, mas faz muito mais rapidamente
+sed -n '45,50p' arquivo         # imprime as linhas nos. 45-50
+sed -n '51q;45,50p' arquivo     # mesma coisa, mas faz muito mais rapidamente
+
+seq 10 | sed '1,5d'		# apaga linhas de 1 a 5 (as 5 primeiras linhas).
+seq 10 | sed '7,9d'		# apaga as linhas 7,8,9
 
 
 sed 's/foo/bar/g' arquivo         # comando de substituição padrão
