@@ -19,7 +19,7 @@
 
 6. Instalar por apt os principais pacotes para funcionamento do openbox:
 	~~~ bash
-	apt install openbox xinit aptitude slim lxterminal menu obconf nitrogen compton tint2 thunar arandr rofi 
+	apt install openbox xinit aptitude slim lxterminal obmenu menu obconf nitrogen compton tint2 thunar arandr rofi 
 	~~~
 
 7. Reiniciar a máquina
@@ -46,7 +46,7 @@
 
 12. Instala outros pacotes essenciais:
 	~~~ bash
-	sudo apt install lxapperance conky bc gawk sed lynx curl wget html-xml-utils xclip ffmpeg imagemagick youtube-dl nmap gnumeric abiword htop mc ranger mupdf alpine colordiff feh fswebcam dialog jq numix-icon-theme-circle git gimp hugo 
+	sudo apt install lxapperance conky bc gawk sed lynx curl wget html-xml-utils xclip ffmpeg imagemagick youtube-dl nmap gnumeric abiword htop mc ranger mupdf alpine colordiff feh fswebcam dialog jq numix-icon-theme-circle git gimp hugo xtrlock mate-utils
 	~~~ 
 
 
