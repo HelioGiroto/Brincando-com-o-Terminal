@@ -46,7 +46,7 @@
 
 12. Instala outros pacotes essenciais:
 	~~~ bash
-	sudo apt install lxapperance conky bc gawk sed lynx curl wget html-xml-utils xclip ffmpeg imagemagick youtube-dl nmap gnumeric abiword htop mc ranger mupdf alpine colordiff feh fswebcam dialog jq numix-icon-theme-circle git gimp hugo xtrlock mate-utils
+	sudo apt install lxapperance conky bc gawk sed lynx curl wget html-xml-utils xclip ffmpeg imagemagick youtube-dl nmap gnumeric abiword htop mc ranger mupdf alpine colordiff feh fswebcam dialog jq numix-icon-theme-circle git gimp hugo xtrlock mate-utils xserver-xorg-input-synaptics
 	~~~ 
 
 
