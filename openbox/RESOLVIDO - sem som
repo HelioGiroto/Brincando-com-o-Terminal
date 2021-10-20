@@ -1,18 +1,36 @@
 sem som 
 
+MELHOR FONTE:
+https://linuxdicasesuporte.blogspot.com/2017/06/resolvendo-problemas-de-som-no-debian.html
+https://askubuntu.com/questions/1262628/no-cards-available-for-configuration-pulseaudio
+
+0- Deixa tocando YouTube
+
+1- reinstala o kernel:
+sudo apt install --reinstall linux-image-$(uname -r)
+sudo apt install --reinstall linux-modules-$(uname -r)
+sudo apt install --reinstall linux-modules-extra-$(uname -r)
+
+2- abre pavucontrol	
+	em configuração:
+		audio interno: perfil = Duplex estéreo analógico
+	abre/fecha cadeados...
+
+3 - no Terminal:
+rm -fr ~/.config/pulse
+
+4 - [des]conecta phones 
+
+
+
+
+
 https://www.google.com/search?q=DEBIAN+nao+sai+som+por+que&oq=DEBIAN+nao+sai+som+por+que&aqs=chrome..69i57.11257j0j7&sourceid=chrome&ie=UTF-8
 https://www.vivaolinux.com.br/topico/Debian/Debian-10-sem-som#:~:text=Re%3A%20Debian%2010%20sem%20som,-pinduvoz&text=Est%C3%A1%20em%20ingl%C3%AAs%2C%20mas%2C%20basicamente,arquivo%20%22%2Fetc%2Fmodprobe.&text=Depois%20voc%C3%AA%20reinicia%20e%20o,e%20mudar%20os%20volumes%20dela.
 https://www.linuxuprising.com/2018/06/fix-no-sound-dummy-output-issue-in.html
 https://www.vivaolinux.com.br/dica/Corrigindo-Erro-do-PulseAudio-no-Debian/
 https://www.vivaolinux.com.br/topico/Debian/Problemas-com-o-audio-do-Debian
 https://sempreupdate.com.br/ubuntu-como-resolver-problemas-da-placa-de-som/
-
-
-https://bbs.archlinux.org/viewtopic.php?id=241104
-https://www.ti-enxame.com/pt/debian/pulseaudio-sem-som-nos-alto-falantes/962225167/
-
-systemctl --user restart pulseaudio
-
 
 
 COMO RESOLVI:
