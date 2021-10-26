@@ -22,6 +22,7 @@ conky.config = {
 	minimum_height = 380,
 	
 	own_window = true,
+	own_window_transparent = true,
 	own_window_type = 'desktop',
 	own_window_class = 'Conky',
 	own_window_argb_visual = true,
@@ -56,46 +57,58 @@ ${color1}HOJE ${hr 2}$color
 ${color0}Data: $color${time %d %B %Y - %A} ${alignr}
 ${color0}Hora: $color${time %H:%M}
 
-${color1}SYSTEM INFORMATION ${hr 2}$color
-${color0}${execi 30 cat /proc/cpuinfo | grep 'model name' | cut -d':' -f2 | uniq | sed 's/^ //; s/  //g'}
-${color0}System: $color$nodename ${alignr}${color0}Uptime: $color$uptime${alignr}
-${color0}Kernel: $color$kernel${alignr}${color0}O.S.: $color${execi 30 uname -o}
-${color0}Frequency: $color$freq_g GHz${alignr}${color0}Arch: $color$machine
-${color0}Processes:$color $processes${alignr}${color0}Running: $color$running_processes
+${color1}INFORMAÇÃO DO SISTEMA ${hr 2}$color
+${color0}${exec cat /proc/cpuinfo | grep 'model name' | cut -d':' -f2 | uniq | sed 's/^ //; s/  //g'}
+${color0}System    : $color$nodename ${alignr}${color0}Uptime: $color$uptime${alignr}
+${color0}O.S.      : $color${exec uname -o} ${alignr}${color0}Arch: $color$machine
+${color0}Kernel    : $color$kernel 
+${color0}Distro    : $color${exec lsb_release -ds}
+${color0}WM        : $color${exec echo $GDMSESSION}
+${color0}Frequency : $color$freq_g GHz${alignr}
+${color0}Processes : $color$processes${alignr}${color0}Running: $color$running_processes
 
-${color1}MEMORY & SWAP ${hr 2}$color
-${color0}RAM Usage: ${color}$mem / $memmax
-$memperc% ${color6}${membar 6}$color
+${color1}BATERIA ${hr 2}$color
+${color grey}Battery :$color ${battery_percent BAT0}% - ${battery_time} 
+${color grey}Status  :$color ${battery}
+${battery_bar 4} 
 
-${color0}Swap Usage: ${color}$swap / $swapmax
-$swapperc% ${color6}${swapbar 6}$color
-
-${color3} NAME                PID   CPU %  MEM %$color${color2}
- ${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}$color
- ${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
- ${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
- ${top_mem name 4} ${top_mem pid 4} ${top_mem cpu 4} ${top_mem mem 4}
- ${top_mem name 5} ${top_mem pid 5} ${top_mem cpu 5} ${top_mem mem 5}
+${color1}HD ${hr 2}$color
+${color0}Tam.  :$color ${fs_size} 
+${color0}Usado :$color ${fs_used} - ${fs_used_perc}% ${alignr}${color0}Livre :$color ${fs_free}
+${fs_bar 6 /}
 
 ${color1}CPU ${hr 2}$color
 ${color0}CPU Usage:$color $cpu% ${color7}${cpubar 6}
 ${color0}CPU Temperature: $color${acpitemp}°C
 ${color0}Avg. Load: $color $loadavg
 
-File systems:
-${fs_used /}/${fs_size /} ${fs_bar 6 /}
+${color1}MEMORY & SWAP ${hr 2}$color
+${color0}RAM Usage: ${color}$mem / $memmax
+$memperc% ${color6}${membar 6}$color
+${color0}SWAP Usage: ${color}$swap / $swapmax
+$swapperc% ${color6}${swapbar 6}$color
 
-${stippled_hr 2}
+${color3} NAME               PID   CPU %  MEM %$color${color2}
+ ${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}$color
+ ${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
+ ${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
+ ${top_mem name 4} ${top_mem pid 4} ${top_mem cpu 4} ${top_mem mem 4}
+ ${top_mem name 5} ${top_mem pid 5} ${top_mem cpu 5} ${top_mem mem 5}
 
-#${color1}NETWORKING ${hr 2}$color
-${color0}Wired (${addr eth0})
-${color0}Down:$color ${downspeed eth0}/s ${alignr}${color0}Up:$color ${upspeed eth0}/s
-${color0}Total:$color ${totaldown eth0} ${alignr}${color0}Total: $color${totalup eth0}
+# ver: https://docs.rackspace.com/support/how-to/identifying-network-interfaces-on-linux/
+# enp2s0 ou lo (parra ethernet)
+${color1}INTERNET ${hr 2}$color
+${color0}Nome da Rede       :$color ${wireless_essid}
+${color0}Qualidade do sinal :$color ${wireless_link_qual_perc wlp3s0}%
+${color0}IP                 :$color (${addr wlp3s0})
+${color0}Total Down:$color ${totaldown wlp3s0} ${alignr}${color0}Total Up: $color${totalup wlp3s0}
+#${color0}Up:$color ${upspeedf wlp3s0} ${color0} - Down:$color ${downspeedf wlp3s0}
 
-Networking:
-Up: ${upspeed eth0}  - Down: ${downspeed eth0}
-
-
+${color0}Velocidade$color
+${color0}Down  :$color ${downspeed wlp3s0}/s ${alignr}${color0}Up :$color ${upspeed wlp3s0}/s
+${downspeedgraph wlp3s0}
+${upspeedgraph wlp3s0}
+#${stippled_hr 2}
 ]];
 
 

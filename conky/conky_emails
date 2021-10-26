@@ -1,11 +1,11 @@
 -- Conky adaptado por Hélio Giroto
--- Setembro/2021
+-- Outubro/2021
 -- https://github.com/HelioGiroto/
 
 
 conky.config = {
 	background = false,
-	update_interval = 1,
+	update_interval = 60,
 
 	cpu_avg_samples = 2,
 	net_avg_samples = 2,
@@ -15,10 +15,10 @@ conky.config = {
 	no_buffers = true,
 	text_buffer_size = 2048,
 
-	gap_x = 20,
+	gap_x = 320,
 	gap_y = 40,
 	minimum_width = 225, 
-	maximum_width = 350,
+	maximum_width = 450,
 	
 	own_window = true,
 	own_window_type = 'desktop',
@@ -53,47 +53,9 @@ conky.config = {
 
 conky.text = 
 [[
-${color1}TECLAS DE ATALHO ${hr 2}$color
+${color1}ÚLTIMOS 5 EMAILS ${hr 2}$color
 
-SUPER m 	 - Menu
-SUPER d 	 - Desktop
-
-SUPER t 	 - Terminal
-SUPER 1 	 - Terminal
-Ctrl + Alt + t  - Terminal
-
-SUPER f 	 - File Manager
-SUPER 2 	 - File Manager
-
-SUPER w 	 - WebBrowser
-SUPER 3 	 - WebBrowser
-
-SUPER e 	 - Gedit
-SUPER 4 	 - Gedit
-
-SUPER c 	 - Calculadora
-SUPER 5 	 - Calculadora
-
-SUPER 9 	 - Github Senha
-SUPER v 	 - VS Code
-SUPER espaço 	  - ROFI
-SUPER g 	 - Gimp
-SUPER s 	 - Skype
-
-ALT F2 	 - Search File/Folder
-
-SUPER + dir 	 - Metade dir. da tela
-SUPER + esq 	 - Metade esq. da tela
-
-SUPER + Delete	 - Bloqueia tela
-
-${color1}DATA/HORA ${hr 2}$color
-${alignc}${color2}${font Liberation Sans:pixelsize=60}${time %H:%M}${font}$color
-
-${alignc}${font Sans-serif:pixelsize=25}${time %d/%m/%Y}${font}
-${alignc}${time %A}
-
-${exec ncal -hb}
+${execI 60 cat ~/emails.txt}
 
 ]];
 
