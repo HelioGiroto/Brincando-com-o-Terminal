@@ -3,16 +3,22 @@
 https://github.com/woho/openbox-menu
 
 
-# rofi 
-rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi
-rofi -show run -theme solarized -font "hack 12" 
-
-
 # como mudar rc.xlm do openbox:
 
 http://openbox.org/wiki/Help:Bindings
 https://medium.com/daniels-tech-world/how-to-add-custom-keybindings-in-openbox-29a97088abae
 https://askubuntu.com/questions/305767/how-i-can-create-a-shortcut-to-maximize-minimize-windows-in-lubuntu
+
+
+# Se não funcionar "Aplicativos" do menu (1a.linha):
+ 1997  sudo apt --reinstall install obmenu*
+ 1998  sudo apt --reinstall install openbox*
+ 1999  reboot
+
+
+# rofi 
+rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi
+rofi -show run -theme solarized -font "hack 12" 
 
 
 <!-- Keybindings for window tiling -->

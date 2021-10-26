@@ -22,7 +22,7 @@
         <item label="3. Navegador Web">
             <action name="Execute">
                 <execute>
-                    chromium
+                    google-chrome
                 </execute>
             </action>
         </item>
@@ -37,12 +37,10 @@
         <item label="5. Calculadora">
             <action name="Execute">
                 <execute>
-                    galculator
+                    gnome-calculator
                 </execute>
             </action>
-        </item>
-        
-        
+        </item>   
 
         <item label="v- VS Code">
             <action name="Execute">
@@ -89,7 +87,7 @@
                 <item label="Wiki Page">
                     <action name="Execute">
                         <execute>
-                            chromium http://crunchbanglinux.org/wiki/conky
+                            google-chrome http://crunchbanglinux.org/wiki/conky
                         </execute>
                     </action>
                 </item>
@@ -221,7 +219,7 @@
                 <item label="Online Help">
                     <action name="Execute">
                         <execute>
-                            chromium http://code.google.com/p/tint2/wiki/Welcome
+                            google-chrome http://code.google.com/p/tint2/wiki/Welcome
                         </execute>
                     </action>
                 </item>

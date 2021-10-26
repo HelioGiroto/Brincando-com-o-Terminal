@@ -413,9 +413,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Chrome</name>
+          <name>Chromium</name>
         </startupnotify>
-        <command>google-chrome</command>
+        <command>chromium</command>
       </action>
     </keybind>
     <!-- SUPER 3 - WebBrowser -->
@@ -423,9 +423,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Chrome</name>
+          <name>Chromium</name>
         </startupnotify>
-        <command>google-chrome</command>
+        <command>chromium</command>
       </action>
     </keybind>
     <!-- SUPER e - Gedit -->
@@ -453,9 +453,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>calculadora</name>
+          <name>Galculator</name>
         </startupnotify>
-        <command>gnome-calculator</command>
+        <command>galculator</command>
       </action>
     </keybind>
     <!-- SUPER 5 - Calculadora -->
@@ -463,9 +463,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Calculadora</name>
+          <name>Galculator</name>
         </startupnotify>
-        <command>gnome-calculator</command>
+        <command>galculator</command>
       </action>
     </keybind>
     <!-- SUPER 9 - Github Senha -->
@@ -505,7 +505,7 @@
           <enabled>true</enabled>
           <name>Skype Web</name>
         </startupnotify>
-        <command>google-chrome https://web.skype.com</command>
+        <command>chromium https://web.skype.com</command>
       </action>
     </keybind>
     <!-- SUPER espaço - ROFI -->
@@ -516,8 +516,7 @@
           <name>Rofi</name>
         </startupnotify>
         <!-- command>rofi -show run -theme solarized -font "hack 12"</command -->
-	<!-- <command>rofi -show combi -combi-modi: "window,run,combi" -theme solarized -font "hack 12"</command> -->
-        <command>rofi -modi drun,run -show drun -theme solarized -font "hack 12" -show-icons</command>
+        <command>rofi -show combi -combi-modi "window,run" -theme solarized -font "hack 12"</command>
       </action>
     </keybind>
     <!-- ALT F2 - Search Tool -->
