@@ -1,3 +1,4 @@
+sleep 1
 nitrogen --restore &
 # tint2 &	# tira barra tint2
 compton &
