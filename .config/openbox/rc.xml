@@ -468,6 +468,19 @@
         <command>galculator</command>
       </action>
     </keybind>
+    
+    <!-- SUPER p - Pavucontrol -->
+    <keybind key="W-p">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Pavucontrol</name>
+        </startupnotify>
+        <command>pavucontrol</command>
+      </action>
+    </keybind>
+   
+    
     <!-- SUPER 9 - Github Senha -->
     <keybind key="W-9">
       <action name="Execute">
@@ -542,7 +555,9 @@
     <!-- SUPER + Delete: Bloqueia tela / Desbloqueia com a senha -->
     <keybind key="W-Delete">
       <action name="Execute">
-        <command>xtrlock -b</command>
+        <command>xtrlock</command>
+        <!-- Caso queira somente a tela preta, use comando abaixo: -->
+        <!-- <command>xtrlock -b</command> -->
       </action>
     </keybind>
     <!-- FIM DAS MINHAS ALTERAÇÕES -->

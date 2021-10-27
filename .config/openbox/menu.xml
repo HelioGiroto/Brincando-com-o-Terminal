@@ -61,6 +61,15 @@
             </action>
         </item>
         
+        
+	<item label="p- Pavucontrol">
+	    <action name="Execute">
+		<execute>
+	    	    pavucontrol
+		</execute>
+	    </action>
+        </item>
+        
         <separator/>
         
         <item label="Reconfigure">
