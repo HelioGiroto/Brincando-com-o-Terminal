@@ -8,3 +8,5 @@ Para executá-lo em sua máquina apenas digite isso no terminal:
 
 
 ## Para instalar e configurar openbox, ver tem_pasta_oculta
+
+
