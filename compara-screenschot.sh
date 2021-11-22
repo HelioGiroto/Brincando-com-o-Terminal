@@ -86,6 +86,21 @@ else
 	scrot 
 	
 	# corta a imagem gerada com imagemagick e salva:
+	
+	
+	# obtem o tamanho : #identify -ping -format '%w %h' image.jpg
+	# LARGURA=$(identify -ping -format '%w' image.jpg)
+	# ALTURA=$(identify -ping -format '%h' image.jpg)
+	
+	# If you want the crop rectangle to start at top corner X: 50 Y: 100 
+	# and the crop rectangle to be of size W: 640 H:480, then use the command:
+	# convert foo.png -crop 640x480+50+100 out.png
+	# mogrify -crop 640x480+50+100 foo.png
+	
+	
+	# convert $ULTIMO -crop $TAMANHO+$TOPO_X+$TOPO_Y out.png # depois deleta o #ULTIMO
+
+	
 
 
 
