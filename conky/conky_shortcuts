@@ -55,43 +55,47 @@ conky.text =
 [[
 ${color1}TECLAS DE ATALHO ${hr 2}$color
 
-SUPER m 	 - Menu
-SUPER d 	 - Desktop
+SUPER M 	 - Menu
+SUPER D 	 - Desktop
 
-SUPER t 	 - Terminal
-SUPER 1 	 - Terminal
-Ctrl + Alt + t  - Terminal
+SUPER 1 | T	 - Terminal
+SUPER 2 | F 	   - File Manager / Thunar
+SUPER 3 | W	 - WebBrowser
+SUPER 4 | E 	 - Gedit
+SUPER 5 | C	 - Calculadora
+SUPER 9 	 - Github Pwd
 
-SUPER f 	 - File Manager
-SUPER 2 	 - File Manager
+SUPER V 	 - VS Code
+SUPER A 	 - Audacity
+SUPER G 	 - Gimp
+SUPER K	 - Kdenlive
+SUPER J 	 - JDownloader
+SUPER S 	 - Skype
 
-SUPER w 	 - WebBrowser
-SUPER 3 	 - WebBrowser
+ALT + F2 	 - Search File/Folder
+SUPER espaço 	  - Rofi
+SUPER P 	 - Pavucontrol
+Ctrl + Alt + T  - Terminal
 
-SUPER e 	 - Gedit
-SUPER 4 	 - Gedit
-
-SUPER c 	 - Calculadora
-SUPER 5 	 - Calculadora
-
-SUPER 9 	 - Github Senha
-SUPER v 	 - VS Code
-SUPER espaço 	  - ROFI
-SUPER g 	 - Gimp
-SUPER s 	 - Skype
-
-ALT F2 	 - Search File/Folder
+Print		 - Scrot
+Alt + Print	 - Scrot - Screen Area
+SUPER + Print	 - SimpleScreenRecorder
 
 SUPER + dir 	 - Metade dir. da tela
 SUPER + esq 	 - Metade esq. da tela
 
-SUPER + Delete	 - Bloqueia tela
+SUPER + Del	 - Bloqueia tela
+
+Ctrl + Alt + 1  - Teclado Español
+Ctrl + Alt + 2  - Teclado Brasileiro
+Ctrl + Alt + 3  - Teclado Hebraico
+Ctrl + Alt + 4  - Teclado Grego
+Ctrl + Alt + 0  - Mapa
 
 ${color1}DATA/HORA ${hr 2}$color
 ${alignc}${color2}${font Liberation Sans:pixelsize=60}${time %H:%M}${font}$color
-
-${alignc}${font Sans-serif:pixelsize=25}${time %d/%m/%Y}${font}
 ${alignc}${time %A}
+${alignc}${font Sans-serif:pixelsize=25}${time %d/%m/%Y}${font}
 
 ${exec ncal -hb}
 

@@ -42,7 +42,7 @@
             </action>
         </item>   
 
-        <item label="v- VS Code">
+        <item label="V- VS Code">
             <action name="Execute">
                 <execute>
                     code
@@ -51,22 +51,50 @@
         </item>
 
 
-        <item label="g- Gimp">
+        <item label="A- Audacity">
+            <action name="Execute">
+                <execute>
+                    audacity
+                </execute>
+            </action>
+        </item>
+
+
+        <item label="G- Gimp">
             <action name="Execute">
                 <execute>
                     gimp
                 </execute>
             </action>
         </item>
-        
-        
-	<item label="p- Pavucontrol">
-	    <action name="Execute">
-		<execute>
-	    	    pavucontrol
-		</execute>
-	    </action>
+
+
+        <item label="K- Kdenlive">
+            <action name="Execute">
+                <execute>
+                    kdenlive
+                </execute>
+            </action>
         </item>
+
+
+        <item label="J- JDonwloader">
+            <action name="Execute">
+                <execute>
+                    /bin/sh "/home/h/jd2/JDownloader2"
+                </execute>
+            </action>
+        </item>
+
+
+        <item label="P- Pavulcontrol">
+            <action name="Execute">
+                <execute>
+                    pavucontrol
+                </execute>
+            </action>
+        </item>
+
         
         <separator/>
         
@@ -78,10 +106,10 @@
 
         <menu id="settings" label="Configurações">
             <menu id="conkyconfig" label="Conky">
-                <item label="Edit .conkyrc">
+                <item label="Edit conky config">
                     <action name="Execute">
                         <execute>
-                            gedit ~/.conkyrc
+                            sudo gedit ~/.conkyrc
                         </execute>
                     </action>
                 </item>
@@ -314,7 +342,8 @@
         <item label="Executar">
             <action name="Execute">
                 <execute>
-                    rofi -show combi -combi-modi "window,run" -theme solarized -font "hack 12"
+                    <!-- rofi -show combi -combi-modi "window,run" -theme solarized -font "hack 12" -->
+		    rofi -modi drun,run -show drun -theme solarized -font "hack 12" -show-icons
                 </execute>
             </action>
         </item>
@@ -322,7 +351,8 @@
         <item label="Bloqueio de tela">
             <action name="Execute">
                 <execute>
-                    xtrlock -b
+			<!-- xtrlock -b -->
+			xtrlock
                 </execute>
             </action>
         </item>

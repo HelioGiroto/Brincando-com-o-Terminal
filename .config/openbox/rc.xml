@@ -468,19 +468,6 @@
         <command>gnome-calculator</command>
       </action>
     </keybind>
-    
-    <!-- SUPER p - Pavucontrol -->
-    <keybind key="W-p">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>Pavucontrol</name>
-        </startupnotify>
-        <command>pavucontrol</command>
-      </action>
-    </keybind>
-   
-    
     <!-- SUPER 9 - Github Senha -->
     <keybind key="W-9">
       <action name="Execute">
@@ -501,6 +488,7 @@
         <command>code</command>
       </action>
     </keybind>
+
     <!-- SUPER g - Gimp -->
     <keybind key="W-g">
       <action name="Execute">
@@ -511,6 +499,18 @@
         <command>gimp</command>
       </action>
     </keybind>
+
+    <!-- SUPER k - Kdenlive -->
+    <keybind key="W-k">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Kdenlive</name>
+        </startupnotify>
+        <command>kdenlive</command>
+      </action>
+    </keybind>
+
     <!-- SUPER s - Skype -->
     <keybind key="W-s">
       <action name="Execute">
@@ -521,7 +521,43 @@
         <command>google-chrome https://web.skype.com</command>
       </action>
     </keybind>
+
+    <!-- SUPER j - JDownloader -->
+    <keybind key="W-j">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>JDonwloader</name>
+        </startupnotify>
+        <command>/bin/sh "/home/h/jd2/JDownloader2"</command>
+      </action>
+    </keybind>
+
+
+    <!-- SUPER a - Audacity -->
+    <keybind key="W-a">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Audacity</name>
+        </startupnotify>
+        <command>audacity</command>
+      </action>
+    </keybind>
+
+    <!-- SUPER p - Pavucontrol -->
+    <keybind key="W-p">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Pavucontrol</name>
+        </startupnotify>
+        <command>pavucontrol</command>
+      </action>
+    </keybind>
+
     <!-- SUPER espaço - ROFI -->
+    <!-- Com Ubuntu, este atalho não funciona 100% -->
     <keybind key="W-space">
       <action name="Execute">
         <startupnotify>
@@ -533,6 +569,7 @@
         <command>rofi -modi drun,run -show drun -theme solarized -font "hack 12" -show-icons</command>
       </action>
     </keybind>
+
     <!-- ALT F2 - Search Tool -->
     <keybind key="A-F2">
       <action name="Execute">
@@ -545,22 +582,71 @@
         <command>scrot</command>
       </action>
     </keybind>
+
+    <!-- SUPER Print: Screen Simple Recorder -->
+    <keybind key="W-Print">
+      <action name="Execute">
+        <command>simplescreenrecorder</command>
+      </action>
+    </keybind>
+
+
     <keybind key="A-F10">
       <action name="ToggleMaximize"/>
     </keybind>
+
     <keybind key="C-A-Delete">
       <action name="Execute">
         <command>lxterminal -e sudo poweroff</command>
       </action>
     </keybind>
+
     <!-- SUPER + Delete: Bloqueia tela / Desbloqueia com a senha -->
     <keybind key="W-Delete">
       <action name="Execute">
         <command>xtrlock</command>
-        <!-- Caso queira somente a tela preta, use comando abaixo: -->
-        <!-- <command>xtrlock -b</command> -->
       </action>
     </keybind>
+
+    <!-- Muda o idioma do teclado -->
+    <!-- setxkbmap -option grp:alt_shift_toggle gr,latam,il,br -->
+    <!-- teclado espanhol internacional -->
+    <keybind key="C-A-1">
+      <action name="Execute">
+        <command>setxkbmap latam</command>
+      </action>
+    </keybind>
+
+    <!-- teclado português Brasil -->
+    <keybind key="C-A-2">
+      <action name="Execute">
+        <command>setxkbmap br</command>
+      </action>
+    </keybind>
+
+    <!-- teclado hebraico -->
+    <keybind key="C-A-3">
+      <action name="Execute">
+        <command>setxkbmap il</command>
+      </action>
+    </keybind>
+
+    <!-- teclado grego -->
+    <keybind key="C-A-4">
+      <action name="Execute">
+        <command>setxkbmap gr</command>
+      </action>
+    </keybind>
+
+
+    <!-- teclado mapa -->
+    <keybind key="C-A-0">
+      <action name="Execute">
+        <command>onboard</command>
+      </action>
+    </keybind>
+
+
     <!-- FIM DAS MINHAS ALTERAÇÕES -->
   </keyboard>
   <mouse>

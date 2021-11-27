@@ -100,7 +100,7 @@ ${color3} NAME               PID   CPU %  MEM %$color${color2}
 ${color1}INTERNET ${hr 2}$color
 ${color0}Nome da Rede       :$color ${wireless_essid}
 ${color0}Qualidade do sinal :$color ${wireless_link_qual_perc wlp3s0}%
-${color0}IP                 :$color (${addr wlp3s0})
+${color0}IP                 :$color ${addr wlp3s0}
 ${color0}Total Down:$color ${totaldown wlp3s0} ${alignr}${color0}Total Up: $color${totalup wlp3s0}
 #${color0}Up:$color ${upspeedf wlp3s0} ${color0} - Down:$color ${downspeedf wlp3s0}
 
