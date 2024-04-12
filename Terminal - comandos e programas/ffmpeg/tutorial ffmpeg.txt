@@ -1,0 +1,15 @@
+TUTORIAL FFMPEG
+
+-. Ver informações sobre o vídeo:
+	ffmpeg -i video.ogg
+
+-. Converter o formato de um vídeo:
+	ffmpeg -i video.avi video.mp4
+
+# ver tb formatos suportados....
+#fonte: https://opensource.com/article/17/6/ffmpeg-convert-media-file-formats
+
+
+
+- Criar vídeo de imagens jpg, png, etc:
+

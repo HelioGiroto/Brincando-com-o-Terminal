@@ -1,4 +1,4 @@
-# Instalação do Debian Minimal e Openbox - OPENBOX RAIZ
+# Instalação do Debian Minimal e Openbox - OPENBOX RAIZ 
 
 Guia de passo a passo para instalação mínima do Linux Debian com Openbox:
 
@@ -18,13 +18,13 @@ Guia de passo a passo para instalação mínima do Linux Debian com Openbox:
 
 ## 2. Criar USB instalador (desde outra máquina)
 
-- Instalar programa para criar USB instalador. No Terminal:
-sudo apt install gnome-multi-writer
+	- Instalar programa para criar USB instalador. No Terminal:
+		sudo apt install gnome-multi-writer
 
-- Insere o Pendrive na máquina
-- Abre desde o Terminal: gnome-multi-writer
-- Clica no ícone de abrir pasta
-- Escolhe a imagem ISO baixada de Debian para que seja copiada no pendrive.
+	- Insere o Pendrive na máquina
+	- Abre desde o Terminal: gnome-multi-writer
+	- Clica no ícone de abrir pasta
+	- Escolhe a imagem ISO baixada de Debian para que seja copiada no pendrive.
 
 
 
@@ -84,15 +84,25 @@ FONTE: https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/ma
 sudo apt install xorg xterm openbox obconf 
 startx
 
-sudo apt install openbox xinit aptitude slim lxterminal obmenu menu obconf nitrogen compton tint2 thunar arandr rofi git ranger
+sudo apt install openbox xinit aptitude slim lxterminal menu obconf nitrogen compton tint2 thunar arandr rofi git
 
 - No Terminal clonar o meu 
-git clone https://github.com/HelioGiroto/Brincando-com-o-Terminal.git
+	git clone https://github.com/HelioGiroto/Brincando-com-o-Terminal.git
 
 - Copiar as pastas de .config do repositório para .config da máquina
 
 - Ver: 
-vim tmux gedit chromium simplescreenrecorder audacity gcc cheese conky bc awk sed grep lynx curl wget html-xml-utils xclip googler ffmpeg imagemagick speedtest-cli youtube-dl nmap numix-icon-theme-circle espeak mbrola gnumeric galculator abiword shotwell htop mc mupdf mpack ssmtp mplayer alpine wkhtmltopdf gpick gnome-tweaks gnome-sushi wdiff colordiff tint2 feh ranger fswebcam dialog jq xtrlock mate-utils pavucontrol calendar whois bsdmainutils onboard pdfgrep numlockx lxappearance lxappearance-obconf vlc python3-pip python3-dev python3-tk python3-pynput mirage plank
+vim tmux ranger gedit chromium simplescreenrecorder audacity gcc cheese conky bc gawk sed grep lynx curl wget html-xml-utils xclip googler ffmpeg imagemagick speedtest-cli youtube-dl nmap numix-icon-theme-circle espeak mbrola gnumeric galculator abiword shotwell htop mc mupdf mpack ssmtp mplayer alpine wkhtmltopdf gpick gnome-tweaks gnome-sushi gnome-multi-writer wdiff colordiff tint2 feh fswebcam dialog jq xtrlock mate-utils pavucontrol calendar whois bsdmainutils onboard pdfgrep numlockx lxappearance lxappearance-obconf vlc python3-pip mirage plank xserver-xorg-input-synaptics nodejs npm pandoc gnome-control-center mediainfo mp3info mpv openjdk-18-jre default-jre xdotool youtube-dl
+
+
+
+	Instalar pandoc: 
+		ver erros em: https://stackoverflow.com/questions/29240290/pandoc-for-windows-pdflatex-not-found
+		https://pandoc.org/installing.html
+	
+	
+Para informações dos pacotes acima, dar comando:
+	sudo apt show ...
 
 
 (lxappearance-obconf = $ obconf)
@@ -115,6 +125,7 @@ vim tmux gedit chromium simplescreenrecorder audacity gcc cheese conky bc awk se
 	sudo apt install python3-pynput		# para obter posições do mouse na tela
 	sudo apt install python3-tk		# Necessário para pyautogui
 	pip list				# Lista os módulos instalados
+	sudo apt install python3-dev
 	
 
 ## Conky
@@ -163,8 +174,28 @@ vim tmux gedit chromium simplescreenrecorder audacity gcc cheese conky bc awk se
 	# history
 
 ```
-Fonte - https://github.com/HelioGiroto/Brincando-com-o-Terminal/blob/master/history%20ilimitado%20e%20fusionado.txt
+	Fonte - https://github.com/HelioGiroto/Brincando-com-o-Terminal/blob/master/history%20ilimitado%20e%20fusionado.txt
 
+
+## Habilitar os cliques no pad do touchpad (mouse) 
+
+	- Instalar 
+		sudo apt install xserver-xorg-input-synaptics
+	- Verificar se tem a pasta xorg.conf.d em (se não, criá-la): 
+		ls /usr/share/X11/
+	- Copiar o arquivo 70-synaptics... a sua pasta de usuário:
+		sudo cp /usr/share/X11/xorg.conf.d/70-synaptics.conf /etc/X11/xorg.conf.d/
+	- Editar o arquivo 70-synaptics
+		sudo gedit /etc/X11/xorg.conf.d/70-synaptics.conf
+	- Acrescenta as linhas (Option "TapButton1"... etc) para que esteja desta forma as primeiras linhas:
+		```
+			Section "InputClass"
+				Identifier "touchpad catchall"
+				Driver "synaptics"
+				MatchIsTouchpad "on"
+				Option "TapButton1" "1"
+				Option "TapButton2" "3"
+		```
 
 
 ## Instalar fontes:
@@ -212,17 +243,32 @@ Fonte: https://www.youtube.com/watch?v=9xM5zDM7HcQ
 
 
 ## Configurar a abertura de vídeos:
-- Abre o Thunar
-- Seleciona o video 
-- Clic botão direito
-- Abrir com > Definir aplicação padrão > 
-- Digita no espaço correspondente: mplayer %f
+	- Abre o Thunar
+	- Seleciona o video 
+	- Clic botão direito
+	- Abrir com > Definir aplicação padrão > 
+	- Digita no espaço correspondente: mplayer %f
 
 
-## Instalar o VScode
- - Baixar via: https://code.visualstudio.com/docs/?dv=linux64_deb
- - Terminal: sudo dpkg -i code-1.85.2-1705561292-amd64.deb 
- 
+## ~Instalar o VScode~
+ 	 ~- Baixar via: https://code.visualstudio.com/docs/?dv=linux64_deb~
+	 ~- Terminal: sudo dpkg -i code-1.85.2-1705561292-amd64.deb~ 
+	 
+## Instalar o VSCodium
+	fonte - https://vscodium.com/
+	
+			wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+		    | gpg --dearmor \
+		    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+		    
+		    
+		    echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
+		    | sudo tee /etc/apt/sources.list.d/vscodium.list
+		    
+		    
+		    sudo apt update && sudo apt install codium
+
+    
 
 ## Arquivos de configuração
 	ver documentação do Bunsenlabs 	- https://forums.bunsenlabs.org/viewtopic.php?id=6461
@@ -238,8 +284,7 @@ Openbox:
 		.config/openbox/rc.xml
 
 
-Configurar o tint2: 
-
+Tint2: 
 	 - Salve o arquivo de configuração de tint2 na pasta .config/tint2rc com a extensão .tint2rc
 	 - Abra o programa: tint2conf e escolha o tema.
 	 - Clique no Visto Verde (canto superior esquerdo).
@@ -248,7 +293,7 @@ Configurar o tint2:
 		https://github.com/search?q=tint2rc&type=repositories
 		https://terminalroot.com.br/2021/12/os-12-melhores-temas-para-seu-tint2.html
 		https://github.com/ututogit/tint2-configs
-		ver - https://github.com/addy-dclxvi/tint2-theme-collections/tree/master/launchy
+		ver !!! -> https://github.com/addy-dclxvi/tint2-theme-collections/tree/master/launchy
 
 
 Configurar os temas do rofi:
@@ -270,6 +315,11 @@ jgmenu:
 	https://arcolinux.com/adding-jgmenu-to-your-openbox-system/
 
 
+Slim:
+	sudo gedit /etc/slim.conf
+	cd /usr/share/slim/themes/default
+
+
 ## Instalação de themas
 
 https://github.com/topics/openbox-theme
@@ -277,8 +327,8 @@ https://github.com/zakuradev/openbox-themes
 https://github.com/cath3ad/Openbox-Theme-Collections
 
  - Mover para a pasta: 
-git clone https://github.com/addy-dclxvi/openbox-theme-collections ~/.themes
-git clone https://github.com/addy-dclxvi/Openbox-Theme-Collections ~/.themes
+	git clone https://github.com/addy-dclxvi/openbox-theme-collections ~/.themes
+	git clone https://github.com/addy-dclxvi/Openbox-Theme-Collections ~/.themes
 
 
 
@@ -287,6 +337,7 @@ git clone https://github.com/addy-dclxvi/Openbox-Theme-Collections ~/.themes
 https://github.com/addy-dclxvi/conky-theme-collections
 https://github.com/addy-dclxvi/openbox-theme-collections
 https://github.com/addy-dclxvi/tint2-theme-collections
+
 
 ## Vídeos: 
 https://youtube.com/playlist?list=PLqFFYhp2jiyZDxOYBFEkc5oDNzrtlf7yi
@@ -308,4 +359,31 @@ Pesquisei em:
 		https://answers.microsoft.com/pt-br/windows/forum/all/qual-a-diferen%C3%A7a-entre-uefi-boot-e-legacy-os/f1405682-2f43-44bc-bb4b-3007d99d4649
 		https://ojmoura.wordpress.com/2013/10/07/arranque-seguro-e-uefi/
 
+===
+
+
+ERRO AO INSTALAR O NPM
+
+Fonte: 
+https://sempreupdate.com.br/como-corrigir-os-erros-var-lib-dpkg-lock-ou-o-could-not-get-lock-var-lib-dpkg-lock-frontend/
+https://askubuntu.com/questions/1438501/how-to-fix-this-waiting-for-cache-lock-could-not-get-lock-var-lib-dpkg-loc
+
+	sudo rm -rf /var/lib/apt/lists/lock
+	
+	# Se não, tentar tb:
+	sudo rm /var/lib/dpkg/lock
+	sudo rm /var/cache/apt/archives/lock
+	
+	# Pode tb tentar:
+	sudo rm /var/lib/dpkg/lock-frontend
+	sudo dpkg --configure -a
+	sudo apt update
+	sudo apt-get -f install
+	
+	# Em seguida: 
+	sudo kill -9 3321
+	sudo kill -9 36696
+	# sendo que 3321 pode ser outro nro que no Terminal seja indicado.
+
+	
 ===

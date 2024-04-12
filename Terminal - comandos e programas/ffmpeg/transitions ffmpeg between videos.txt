@@ -1,0 +1,43 @@
+0. Extract part of video from a larger file (it seems that is is the best to supply -ss and -t parameters with values in seconds):
+
+ffmpeg -i original.f4v -ss 3262 -t 3115.5 -vcodec copy -acodec copy out.f4v
+
+1. Shift audio forward by 25 ms (i.e. shift video 25 ms back compared to original file):
+
+ffmpeg -i input_video.f4v -itsoffset 0.25 -i input_video.f4v -map 0:0 -map 1:1 -acodec copy -vcodec copy output_synchronized.f4v
+
+2. Convert an image to desired resolution (in case it was originally exported to another resolution from Inkscape):
+
+convert input_image.png -resize 1280x720 output_image.png 
+
+But actually I tend to export to the correct resolution directly from .svg..
+
+3. Produce a 5 second title clip from an image file:
+
+ffmpeg -loop 1 -i input_image.png -c:v libx264 -t 5 -pix_fmt yuv420p output_clip.mp4
+
+4. Fade out effect on title clip:
+
+ffmpeg -i title_clip.mp4 -y -vf fade=out:105:20 title_fade_out.mp4
+
+5. Fade in effect on the video clip:
+
+ffmpeg -i input_video.mp4 -strict experimental -y -vf fade=in:0:20 slide_fade_in.mp4
+
+(the fade: parameter takes in/out:starting_frame:finishing_frame values)
+(also, it seems to take a lot of time as it redecodes the whole file...) 
+
+5.5. Adding a silent audio to the autio stream:
+
+ffmpeg -ar 48000 -ac 2 -f s16le -i /dev/zero -i video.mov -shortest -c:v copy -c:a aac -strict experimental output.mov
+
+(according to http://stackoverflow.com/questions/12368151/adding-silent-audio-to-mov-in-ffmpeg)
+
+6. Concatenating two video streams (both should have video and audio substreams...):
+
+ffmpeg -i file_one.mp4 -i file_two.f4v -filter_complex '[0:0] [0:1] [1:0] [1:1] concat=n=2:v=1:a=1 [v] [a]' -map '[v]' -map '[a]' file_concatenated.f4v
+
+
+7. If any of the stream does not have audio (e.g. produced from images as in 3), add audio stream to it:
+
+ffmpeg -f lavfi -i aevalsrc=0 -i without_audio.mp4 -shortest -c:v copy -c:a mp3 -strict experimental with_audio.mp4

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Abrir terminal nessa pasta</name>
+	<submenu></submenu>
+	<unique-id>1631809188049771-1</unique-id>
+	<command>lxterminal</command>
+	<description>ALT + t</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>text-editor</icon>
+	<name>Abrir no Gedit</name>
+	<submenu></submenu>
+	<unique-id>1634572691874033-1</unique-id>
+	<command>gedit %f</command>
+	<description>Alt + e</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>visualstudiocode</icon>
+	<name>Abrir VS Codium a partir daqui</name>
+	<submenu></submenu>
+	<unique-id>1633356626849230-1</unique-id>
+	<command>vscodium</command>
+	<description>Alt + v</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>spacefm-find</icon>
+	<name>Busca Arquivos e Pastas (Alt F2)</name>
+	<submenu></submenu>
+	<unique-id>1632863368296214-1</unique-id>
+	<command>mate-search-tool</command>
+	<description>ALT + F2</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+</actions>

@@ -1,0 +1,17 @@
+Documento com papel de carta:
+(marcos para cartas minimalista)
+https://co.pinterest.com/yodensy/marcos-para-cartas/
+
+
+- Formatar > Estilo de Páginas (Alt + Shift P)
+- Área > Figura
+- Adicionar / importar (Escolhe img)
+- Em Estilo: Posição e tamanhos personalizados.
+- Dimensionar o tamanho da folha A4 = l: 21 X a: 29.7cm
+- Pode mudar a transparência - No 1o. menú em Transparência (ao invés de Área) > Seleciona Transparência e define o nro (quanto maior o nro mais claro)
+
+
+
+
+
+
