@@ -12,6 +12,16 @@
  
 Fonte: https://www.youtube.com/watch?v=VDgitgfaYWo&list=PLqFFYhp2jiybP152TuCXc5TCnbn_XNaC6&index=14
 
+==========
 
+Desde o Terminal > pasta do Repositorio
+
+git status
+git add .
+git commit -m 'blablabla'
+git push
+
+user  = nome de usuário
+Senha = cola chave copiada (token)
 
 

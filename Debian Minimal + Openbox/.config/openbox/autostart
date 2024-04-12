@@ -1,9 +1,0 @@
-sleep 1
-nitrogen --restore &
-# tint2 &	# tira barra tint2
-compton &
-conky -p 2 -c /etc/conky/conky_info &
-conky -c /etc/conky/conky_shortcuts &
-
-# Corrigir abaixo pq não funciona
-#bash start_conky.sh &
