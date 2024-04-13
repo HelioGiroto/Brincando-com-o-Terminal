@@ -1,4 +1,4 @@
-# Tutorial de ffmpeg:
+# Tutorial de ffmpeg: 
 
 ## Script para criação de shorts da semana santa 2024:
 	# junta audio com foto

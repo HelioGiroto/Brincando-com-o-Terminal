@@ -1,0 +1,12 @@
+ 2210  sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target  
+
+ 2212  xrandr -q
+ 2213  xrandr --output eDP-1 --brightness 0.7
+ 2214  xrandr --output eDP-1 --brightness 0.3
+ 2215  while true; do echo Jesus!; done
+
+
+ 2219  sudo apt install xdotool
+
+ 2221  while true; do sleep 540; xdotool key "Shift"; done
+

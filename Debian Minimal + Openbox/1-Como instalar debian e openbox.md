@@ -35,12 +35,21 @@ Conectar cabo de rede
 Telas da instalação:
 
 - País, idiomas do sistema e teclado
+![[localechooser_shortlist_0.png]]
+![[localechooser_languagelist_0.png]]
+![[keyboard-configuration_xkb-keymap_0.png]]
 - Conectando rede (ethernet ou wifi)
+![[netcfg_choose_interface_0.png]]
 - Nome da máquina
+
 - Nome do dominio = vazio
+![[netcfg_get_domain_0.png]]
 - Senha do root (opcional) *
+![[passwd_root-password_0.png]]
 - Nome do usuário
+![[passwd_user-fullname_0.png]]
 - Senha do usuário
+![[passwd_user-password_0.png]]
 - Estado do Brasil - para configuraçao de horário.
 - Particionar discos (Sim/Nao) = N
 - Particionar discos - Usar disco o inteiro
@@ -92,35 +101,35 @@ sudo apt install openbox xinit aptitude slim lxterminal menu obconf nitrogen com
 - Copiar as pastas de .config do repositório para .config da máquina
 
 - Ver: 
-vim tmux ranger gedit chromium simplescreenrecorder audacity gcc cheese conky bc gawk sed grep lynx curl wget html-xml-utils xclip googler ffmpeg imagemagick speedtest-cli youtube-dl nmap numix-icon-theme-circle espeak mbrola gnumeric galculator abiword shotwell htop mc mupdf mpack ssmtp mplayer alpine wkhtmltopdf gpick gnome-tweaks gnome-sushi gnome-multi-writer wdiff colordiff tint2 feh fswebcam dialog jq xtrlock mate-utils pavucontrol calendar whois bsdmainutils onboard pdfgrep numlockx lxappearance lxappearance-obconf vlc python3-pip mirage plank xserver-xorg-input-synaptics nodejs npm pandoc gnome-control-center mediainfo mp3info mpv openjdk-18-jre default-jre xdotool youtube-dl
+vim tmux ranger gedit chromium simplescreenrecorder audacity gcc cheese conky bc gawk sed grep lynx curl wget html-xml-utils xclip googler ffmpeg imagemagick speedtest-cli youtube-dl nmap numix-icon-theme-circle espeak mbrola gnumeric galculator abiword shotwell htop mc mupdf mpack ssmtp mplayer alpine wkhtmltopdf gpick gnome-tweaks gnome-sushi gnome-multi-writer wdiff colordiff tint2 feh fswebcam dialog jq xtrlock mate-utils pavucontrol calendar whois bsdmainutils onboard pdfgrep numlockx lxappearance lxappearance-obconf vlc python3-pip mirage plank xserver-xorg-input-synaptics nodejs npm pandoc gnome-control-center mediainfo mp3info mpv openjdk-18-jre default-jre xdotool youtube-dl neofetch
 
 
-
-	Instalar pandoc: 
-		ver erros em: https://stackoverflow.com/questions/29240290/pandoc-for-windows-pdflatex-not-found
-		https://pandoc.org/installing.html
-	
+### 4.3 - Instalação de programas essenciais:
 	
 Para informações dos pacotes acima, dar comando:
 	sudo apt show ...
 
-
 (lxappearance-obconf = $ obconf)
 
 
-## Instalar e habilitar o scrcpy:
+#### scrcpy - instalação e habilitação:
 	ver scrcpy.txt
 
+[[Instalação de scrcpy]]
 
-## Instalar um módulo do python:
+
+#### Módulos do python:
 
 	sudo apt install python3-\[nome-do-módulo]
 	sudo apt install python3-pip		# para instalar módulos
 	
 	pip install python3-pyautogui		# instalar módulos para automação. Só aceita este formato de comando.
-		Se aparece a mensagem de erro: externally-managed-environment
+
+Se aparece a mensagem de erro: externally-managed-environment
+	
 			pip install --break-system-packages pyautogui
-		Fonte: https://stackoverflow.com/questions/75608323/how-do-i-solve-error-externally-managed-environment-every-time-i-use-pip-3
+
+Fonte: https://stackoverflow.com/questions/75608323/how-do-i-solve-error-externally-managed-environment-every-time-i-use-pip-3
 		
 	sudo apt install python3-pynput		# para obter posições do mouse na tela
 	sudo apt install python3-tk		# Necessário para pyautogui
@@ -128,33 +137,78 @@ Para informações dos pacotes acima, dar comando:
 	sudo apt install python3-dev
 	
 
-## Conky
+#### Conky
 
-   Instalação do conky
+Instalação do conky
    
-   	```bash
-	
-	# vá até o diretório conky da máquina:
+Vá até o diretório conky da máquina:
+
 		cd /etc/conky/
 	
-	# Baixe neste diretório os dois arquivos de configuração do conky:
+Baixe neste diretório os dois arquivos de configuração do conky:
+
 		wget https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/conky/conky_info
 		wget https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/conky/conky_shortcuts
-
 	
-	# Estes dois arquivos de configuração acima já são chamados dentro do autostart de openbox
+ Estes dois arquivos de configuração acima já são chamados dentro do autostart de openbox.
 
-	```
-   
-    
+#### VSCodium
 
-## Mudar o history para sem fim e mergeado:
+Não instalar mais o VS Code - Filtragem de dados pessoais.
+
+Fonte - https://vscodium.com/
+	
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg  | gpg --dearmor | \
+	'sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+		    
+Em seguida:
+
+echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
+		    | sudo tee /etc/apt/sources.list.d/vscodium.list
+		    
+E, por fim:		    
+
+sudo apt update && sudo apt install codium
+
+
+#### Libreoffice - versão mais nova:
+
+Se for preciso eliminar uma versão anterior instalada:
+Terminal:
+	sudo apt remove --purge Libreoffice*
+
+Em seguida, para instalar: 
+
+	1- Ir a https://pt-br.libreoffice.org/baixe-ja/libreoffice-novo/
+	2- Selecionar o sistema operacional = .deb
+	3- botão baixar
+	4- Baixar tb: Interface traduzida e ajuda.
+	5- Ir até a pasta que baixou
+	6- Comando no Terminal para descompactar: tar -xf nome.tar.gz
+	7- Abre pasta até onde está uma sub-pasta com os arquivos .deb
+	8- No Terminal: sudo dpkg -i *.deb
+
+Repetir os passos de 5 a 8 para os arquivos de ajuda e interface em português que foram baixados.
+
+Fonte: https://www.youtube.com/watch?v=9xM5zDM7HcQ
+
+#### pandoc: 
+		ver erros em: https://stackoverflow.com/questions/29240290/pandoc-for-windows-pdflatex-not-found
+		https://pandoc.org/installing.html
+	
+
+
+### 4.4 - Configuração do comando history:
+
+Mudar a configuração do comando **history** para sem fim e mergeado:
+
+COMO FAZER UM MERGE DOS HISTORIES DE TODOS OS TERMINAIS (INCLUSIVE DO TMUX):
+
+No arquivo ./bashrc procure as linhas abaixo e as edite desta forma:
+
+Código:
 
 ``` bash
-
-	# COMO FAZER UM MERGE DOS HISTORIES DE TODOS OS TERMINAIS (INCLUSIVE DO TMUX):
-
-	# No arquivo ./bashrc procure as linhas abaixo e as edite desta forma:
 
 	# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 	export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
@@ -169,17 +223,18 @@ Para informações dos pacotes acima, dar comando:
 	# Save and reload the history after each command finishes
 	export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-	# tente no terminal
-	# history -a ou -r e em seguida
-	# history
-
 ```
-	Fonte - https://github.com/HelioGiroto/Brincando-com-o-Terminal/blob/master/history%20ilimitado%20e%20fusionado.txt
+
+ Agora, tente no terminal:
+	 history -a ou -r  # e em seguida
+	 history
+
+Fonte - https://github.com/HelioGiroto/Brincando-com-o-Terminal/blob/master/history%20ilimitado%20e%20fusionado.txt
 
 
-## Habilitar os cliques no pad do touchpad (mouse) 
+### 4.5 - Habilitar os cliques no pad do touchpad (mouse) 
 
-	- Instalar 
+- Instalar 
 		sudo apt install xserver-xorg-input-synaptics
 	- Verificar se tem a pasta xorg.conf.d em (se não, criá-la): 
 		ls /usr/share/X11/
@@ -198,7 +253,7 @@ Para informações dos pacotes acima, dar comando:
 		```
 
 
-## Instalar fontes:
+### 4.6 - Instalar fontes:
 
  - Instruções em:
 https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/COMO-INSTALAR-FONTES.md
@@ -220,29 +275,8 @@ https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/CO
 	```
 
 
-## Instalar versão mais nova do Libreoffice
 
-Se for preciso eliminar uma versão anterior instalada:
-Terminal:
-	sudo apt remove --purge Libreoffice*
-
-Em seguida, para instalar: 
-
-	1- Ir a https://pt-br.libreoffice.org/baixe-ja/libreoffice-novo/
-	2- Selecionar o sistema operacional = .deb
-	3- botão baixar
-	4- Baixar tb: Interface traduzida e ajuda.
-	5- Ir até a pasta que baixou
-	6- Comando no Terminal para descompactar: tar -xf nome.tar.gz
-	7- Abre pasta até onde está uma sub-pasta com os arquivos .deb
-	8- No Terminal: sudo dpkg -i *.deb
-
-Repetir os passos de 5 a 8 para os arquivos de ajuda e interface em português que foram baixados.
-
-Fonte: https://www.youtube.com/watch?v=9xM5zDM7HcQ
-
-
-## Configurar a abertura de vídeos:
+### 4.7 - Configurar a abertura de vídeos no Thunar:
 	- Abre o Thunar
 	- Seleciona o video 
 	- Clic botão direito
@@ -250,27 +284,9 @@ Fonte: https://www.youtube.com/watch?v=9xM5zDM7HcQ
 	- Digita no espaço correspondente: mplayer %f
 
 
-## ~Instalar o VScode~
- 	 ~- Baixar via: https://code.visualstudio.com/docs/?dv=linux64_deb~
-	 ~- Terminal: sudo dpkg -i code-1.85.2-1705561292-amd64.deb~ 
-	 
-## Instalar o VSCodium
-	fonte - https://vscodium.com/
-	
-			wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
-		    | gpg --dearmor \
-		    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
-		    
-		    
-		    echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
-		    | sudo tee /etc/apt/sources.list.d/vscodium.list
-		    
-		    
-		    sudo apt update && sudo apt install codium
+  
 
-    
-
-## Arquivos de configuração
+### 4.8 - Path de Arquivos de configuração
 	ver documentação do Bunsenlabs 	- https://forums.bunsenlabs.org/viewtopic.php?id=6461
 					- https://gitlab.com/o9000/tint2/blob/master/doc/tint2.md#panel
 					- https://forums.bunsenlabs.org/viewtopic.php?id=254
@@ -295,14 +311,6 @@ Tint2:
 		https://github.com/ututogit/tint2-configs
 		ver !!! -> https://github.com/addy-dclxvi/tint2-theme-collections/tree/master/launchy
 
-
-Configurar os temas do rofi:
-	 - Salve o arquivo .rasi em usr/share/rofi/themes 
-	 - No Terminal abra: rofi-theme-selector
-	 - Escolha o theme com as fechas e pressionando ENTER
-	 - Para definir como tema atual pressione: Alt + A.
-	 - O padrão era o default
- 
  
 Lxappearance:
 
@@ -315,12 +323,19 @@ jgmenu:
 	https://arcolinux.com/adding-jgmenu-to-your-openbox-system/
 
 
-Slim:
+### 4.9 - Configurar os temas do rofi
+	 - Salve o arquivo .rasi em usr/share/rofi/themes 
+	 - No Terminal abra: rofi-theme-selector
+	 - Escolha o theme com as fechas e pressionando ENTER
+	 - Para definir como tema atual pressione: Alt + A.
+	 - O padrão era o default
+
+### 4.10 - Configurar Slim
 	sudo gedit /etc/slim.conf
 	cd /usr/share/slim/themes/default
 
 
-## Instalação de themas
+### 4.11 - Instalação de themes Openbox
 
 https://github.com/topics/openbox-theme
 https://github.com/zakuradev/openbox-themes
@@ -330,16 +345,13 @@ https://github.com/cath3ad/Openbox-Theme-Collections
 	git clone https://github.com/addy-dclxvi/openbox-theme-collections ~/.themes
 	git clone https://github.com/addy-dclxvi/Openbox-Theme-Collections ~/.themes
 
-
-
-
-## Configurações gerais:
+Configurações gerais:
 https://github.com/addy-dclxvi/conky-theme-collections
 https://github.com/addy-dclxvi/openbox-theme-collections
 https://github.com/addy-dclxvi/tint2-theme-collections
 
 
-## Vídeos: 
+Vídeos: 
 https://youtube.com/playlist?list=PLqFFYhp2jiyZDxOYBFEkc5oDNzrtlf7yi
 
 
@@ -348,7 +360,7 @@ ver - https://code.google.com/
  
 ===
 
-ERROS NA INSTALAÇÃO:
+## 5. ERROS NA INSTALAÇÃO:
 
 (NA BIOS F2 ou F12 estava como UEFI e não Legacy. Tive que mudar para Legacy)
 
