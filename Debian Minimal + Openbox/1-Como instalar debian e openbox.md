@@ -38,35 +38,73 @@ Telas da instalação:
 ![[localechooser_shortlist_0.png]]
 ![[localechooser_languagelist_0.png]]
 ![[keyboard-configuration_xkb-keymap_0.png]]
+
+
 - Conectando rede (ethernet ou wifi)
 ![[netcfg_choose_interface_0.png]]
+
 - Nome da máquina
+![[netcfg_get_hostname_0.png]]
 
 - Nome do dominio = vazio
 ![[netcfg_get_domain_0.png]]
-- Senha do root (opcional) *
+
+- Senha do root (opcional) 
+ *-Não colocando senha no Root, a senha do usuário que se cadastrará primeiro, será a mesma para root e não será necessário configurar o sudo su.
 ![[passwd_root-password_0.png]]
+
 - Nome do usuário
 ![[passwd_user-fullname_0.png]]
+
 - Senha do usuário
 ![[passwd_user-password_0.png]]
-- Estado do Brasil - para configuraçao de horário.
-- Particionar discos (Sim/Nao) = N
-- Particionar discos - Usar disco o inteiro
-- Escolhe o disco (NÃO o USB!!)
-- Todos os arquivos em uma partição
-- Finalizar o particionamento e escrever as mudanças no disco
-- Confirma a partição (formatação e criação do disco com Debian) = Sim
-- (Começa a instalação do sistema).
-- Configurar o gerenciador de pacotes = país (EEUU) + url + proxy (vazio)
-- Participar da pesquisa sobre pacotes = não
-- Seleção de software/interface gráficas - XFCE, etc... = somente utilitários de sistema padrão.
-- (Prossigue a instalação do sistema).
-- Grub: Instalar no disco primário? = Sim
-- Local do Grub = SSD
-- Finalizar instalação = Continuar (REMOVER O USB APÓS TELA PRETA DE REBOOT)
 
- *-Não colocando senha no Root, a senha do usuário que se cadastrará primeiro, será a mesma para root e não será necessário configurar o sudo su.
+- Estado do Brasil - para configuraçao de horário.
+![[time_zone_0.png]]
+
+
+- Particionar discos (Sim/Nao) = N
+![[partman-efi_non_efi_system_0.png]]
+
+- Particionar discos - Usar disco o inteiro
+![[partman-auto_init_automatically_partition_0.png]]
+
+- Escolhe o disco (NÃO o USB!!)
+![[partman-auto_select_disk_0.png]]
+
+- Todos os arquivos em uma partição
+![[partman-auto_choose_recipe_0.png]]
+
+- Finalizar o particionamento e escrever as mudanças no disco
+![[partman_choose_partition_0.png]]
+
+- Confirma a partição (formatação e criação do disco com Debian) = Sim
+![[partman_confirm_0.png]]
+(Começa a instalação do sistema).
+
+- Configurar o gerenciador de pacotes = país (EEUU) + url + proxy (vazio)
+![[mirror_http_countries_0.png]]
+![[mirror_http_mirror_0.png]]
+![[mirror_http_proxy_0.png]]
+
+
+- Participar da pesquisa sobre pacotes = não
+![[popularity-contest_participate_0.png]]
+
+- Seleção de software/interface gráficas - XFCE, etc... = somente utilitários de sistema padrão.
+![[tasksel_first_0.png]]
+(Prossegue a instalação do sistema)...
+
+
+- Grub: Instalar no disco primário? = Sim
+![[grub-installer_only_debian_0.png]]
+
+- Local do Grub = SSD
+![[grub-installer_choose_bootdev_0.png]]
+
+- Finalizar instalação = Continuar (REMOVER O USB APÓS TELA PRETA DE REBOOT)
+![[finish-install_reboot_in_progress_0.png]]
+
 
 
 ## 4. Pós-instalação
