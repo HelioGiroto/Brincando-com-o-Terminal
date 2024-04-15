@@ -28,9 +28,12 @@ Guia de passo a passo para instalação mínima do Linux Debian com Openbox:
 
 
 
-## 3. Instalar na máquina nova o Debian Minimal 
+## 3. Instalar o Debian Minimal na máquina nova: 
 
-Conectar cabo de rede
+- Verificar se a BIOS está configurada para iniciar o sistema desde o USB.
+- Conectar cabo de rede (Ethernet).
+- Conectar USB com a ISO do Debian na máquina e ligá-la.
+
 
 Telas da instalação:
 
@@ -105,7 +108,7 @@ Telas da instalação:
 - Finalizar instalação = Continuar (REMOVER O USB APÓS TELA PRETA DE REBOOT)
 ![](imgs/finish-install_reboot_in_progress_0.png)
 
-
+Próximo arquivo: **Pós-instalação**
 
 ## 4. Pós-instalação
 
@@ -119,36 +122,52 @@ Apaga todas as linhas comentadas.
 Comenta todas as linhas que começam com: deb-src http... (sobre pacotes de códigos fonte - desnecessários).
 \[Acrescenta a entre main e non-free-firmware: contrib non-free nas três linhas]
 
+O arquivo tem que estar assim:
+![](imgs/sources-list.png)
+
 - Salva e sai.
 
-- sudo apt update
+- Atualiza tudo:
+
+**sudo apt update**
 
 
 ### 4.2 - Instalando pacotes mínimos
 
+Para informações dos pacotes acima, dar comando:
+	sudo apt show ...
+
 FONTE: https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/openbox/como-instalar-openbox.md
 
-sudo apt install xorg xterm openbox obconf 
-startx
+Os pacotes indispensáveis para o funcionamento do Openbox são:
 
-sudo apt install openbox xinit aptitude slim lxterminal menu obconf nitrogen compton tint2 thunar arandr rofi git
+```bash
+sudo apt install xorg xinit openbox obconf lxterminal aptitude slim tint2 menu nitrogen compton thunar arandr rofi git xterm
+```
+
+Depois, comando:
+
+```bash
+startx
+```
 
 - No Terminal clonar o meu 
 	git clone https://github.com/HelioGiroto/Brincando-com-o-Terminal.git
 
 - Copiar as pastas de .config do repositório para .config da máquina
 
-- Ver: 
-vim tmux ranger gedit chromium simplescreenrecorder audacity gcc cheese conky bc gawk sed grep lynx curl wget html-xml-utils xclip googler ffmpeg imagemagick speedtest-cli youtube-dl nmap numix-icon-theme-circle espeak mbrola gnumeric galculator abiword shotwell htop mc mupdf mpack ssmtp mplayer alpine wkhtmltopdf gpick gnome-tweaks gnome-sushi gnome-multi-writer wdiff colordiff tint2 feh fswebcam dialog jq xtrlock mate-utils pavucontrol calendar whois bsdmainutils onboard pdfgrep numlockx lxappearance lxappearance-obconf vlc python3-pip mirage plank xserver-xorg-input-synaptics nodejs npm pandoc gnome-control-center mediainfo mp3info mpv openjdk-18-jre default-jre xdotool youtube-dl neofetch
+- Pacotes essenciais: 
+
+```bash
+sudo apt install vim tmux ranger gedit chromium simplescreenrecorder audacity gcc cheese conky bc gawk sed grep lynx curl wget html-xml-utils xclip googler ffmpeg imagemagick speedtest-cli youtube-dl nmap numix-icon-theme-circle espeak mbrola gnumeric galculator abiword shotwell htop mc mupdf mpack ssmtp mplayer alpine wkhtmltopdf gpick gnome-tweaks gnome-sushi gnome-multi-writer wdiff colordiff tint2 feh fswebcam dialog jq xtrlock mate-utils pavucontrol calendar whois bsdmainutils onboard pdfgrep numlockx lxappearance lxappearance-obconf vlc python3-pip mirage plank xserver-xorg-input-synaptics nodejs npm pandoc gnome-control-center mediainfo mp3info mpv openjdk-18-jre default-jre xdotool youtube-dl neofetch
+``
+
+
+(lxappearance-obconf = $ obconf)
 
 
 ### 4.3 - Instalação de programas essenciais:
 	
-Para informações dos pacotes acima, dar comando:
-	sudo apt show ...
-
-(lxappearance-obconf = $ obconf)
-
 
 #### scrcpy - instalação e habilitação:
 	ver scrcpy.txt
