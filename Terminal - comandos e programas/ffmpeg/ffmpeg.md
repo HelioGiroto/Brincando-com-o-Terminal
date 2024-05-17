@@ -1069,4 +1069,23 @@ Fonte:
 
 
 	ffmpeg -ss 01:23:45 -i input -frames:v 1 -q:v 2 output.jpg
+	
+	
+## Extrair todos os metadados de um video:
+
+### Ver metadados:
+ffprobe nome-video.mp4
+
+### limpar os metadados:
+ffmpeg -i oldfile.mp4 -codec copy -metadata title="" -metadata album="" -metadata year="" -metadata container="" -metadata artist="" -metadata comment="" newfile.mp4
+
+ffmpeg -i ok.mp4 -codec copy -metadata creation_time="" -metadata:s:a:0 handler_name="" -metadata:s:v:0 handler_name="" ok2.mp4
+
+ffmpeg -i in.mp4 -c copy -map_metadata 0 -metadata:s:v:0 rotate=0 -an out.mp4
+
+Fonte: https://superuser.com/questions/1092951/how-to-delete-a-single-metadata-item-from-an-mp4-file
+
+ffmpeg -i 100-Leccion\ Ingles.mp3 -metadata title=$prefixo -metadata track=$prefixo -metadata album="Assimil" -c copy 100.mp3
+
+
 
