@@ -1081,6 +1081,9 @@ ffmpeg -i oldfile.mp4 -codec copy -metadata title="" -metadata album="" -metadat
 
 ffmpeg -i ok.mp4 -codec copy -metadata creation_time="" -metadata:s:a:0 handler_name="" -metadata:s:v:0 handler_name="" ok2.mp4
 
+ffmpeg -i 9.mp4 -codec copy -metadata creation_time="" -metadata:s:a:0 handler_name="" -metadata:s:v:0 handler_name="" -metadata title="" -metadata comment="" -metadata date="" 09.mp4
+
+
 ffmpeg -i in.mp4 -c copy -map_metadata 0 -metadata:s:v:0 rotate=0 -an out.mp4
 
 Fonte: https://superuser.com/questions/1092951/how-to-delete-a-single-metadata-item-from-an-mp4-file
@@ -1088,4 +1091,4 @@ Fonte: https://superuser.com/questions/1092951/how-to-delete-a-single-metadata-i
 ffmpeg -i 100-Leccion\ Ingles.mp3 -metadata title=$prefixo -metadata track=$prefixo -metadata album="Assimil" -c copy 100.mp3
 
 
-
+ffplay 

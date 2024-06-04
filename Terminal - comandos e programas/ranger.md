@@ -2,7 +2,7 @@
 
 Espaço 	- Seleciona 1 ou mais arquivos
 R	- Open with...
-A	- Rename
+A	- Rename (ou F2)
 T	- Asterisco
 S	- Shell
 YY	- Copiar
