@@ -65,8 +65,7 @@ download(filtrados);
 
 // Código minificado (para ser colado na url do navegador na mesma janela onde está rodando o Web Whatspp):
 
-javascript:void(async () =>{function download(conteudo) {let nomearq = 'filtrados.csv'; let mimeType = 'text/csv;charset=utf-8;'; const a = document.createElement('a'); const blob = new Blob([conteudo], {type: mimeType}); const url = URL.createObjectURL(blob); a.setAttribute('href', url); a.setAttribute('download', nomearq); a.click();} let anterior = -1;
-let atual = 0; let contatos = []; while(atual > anterior){ anterior = atual; let lista = document.querySelectorAll('div._ak8o > div > div > span'); lista.forEach(a=>contatos.push(a.innerText)); document.querySelector('#pane-side').scrollTop += 200; atual = document.querySelector('#pane-side').scrollTop; await new Promise(resolve => setTimeout(resolve, 2500));} let filtrados = [...new Set(contatos)].sort(); let resultado = [...filtrados].join('\n'); download(resultado);})();
+javascript:void(async () =>{function download(conteudo) {let nomearq = 'filtrados.csv'; let mimeType = 'text/csv;charset=utf-8;'; const a = document.createElement('a'); const blob = new Blob([conteudo], {type: mimeType}); const url = URL.createObjectURL(blob); a.setAttribute('href', url); a.setAttribute('download', nomearq); a.click();} let anterior = -1; let atual = 0; let contatos = []; while(atual > anterior){ anterior = atual; let lista = document.querySelectorAll('div._ak8o > div > div > span'); lista.forEach(a=>contatos.push(a.innerText)); document.querySelector('#pane-side').scrollTop += 200; atual = document.querySelector('#pane-side').scrollTop; await new Promise(resolve => setTimeout(resolve, 2500));} let filtrados = [...new Set(contatos)].sort(); let resultado = [...filtrados].join('\n'); download(resultado);})();
 
 
 // 4. Adiciona um novo favorito (Navegador > Ctrl + D)
