@@ -1,0 +1,632 @@
+Dar focus a uma janela:
+
+# pega o nome completo da janela do OBS:
+wmctrl -l | grep 'OBS' | sed 's/ OBS/|OBS/'  | cut -d'|' -f2
+
+# OBS 29.0.2.1-1+b1 (linux) - Perfil: Sem nome - Cenas: Cenas-LIVE-William
+ 
+# pega o nome completo da janela do OBS e coloca numa variável:
+JANELA=$(wmctrl -l | grep 'OBS' | sed 's/ OBS/|OBS/'  | cut -d'|' -f2)
+ 
+# imprime em tela (teste):
+echo $JANELA
+
+# OBS 29.0.2.1-1+b1 (linux) - Perfil: Sem nome - Cenas: Cenas-LIVE-William
+ 
+# imprime nome do Window Manager que está sendo usado:
+wmctrl -m
+	Name: Openbox
+	Class: 
+	PID: N/A
+	Window manager's "showing the desktop" mode: OFF
+
+# Muda o nome da janela para outro:
+wmctrl -r $JANELA -N "OBS"
+
+# verifica
+wmctrl -l
+
+# Dá foco à esta janela:
+wmctrl -a $JANELA
+wmctrl -a OBS
+
+
+# espera 5 segundos (até usuário dar foco na janela desejada) e obtem nome dessa janela em foco (atual, em uso):
+sleep 5; xdotool getwindowfocus getwindowname
+
+
+============
+
+Fontes:
+
+https://duckduckgo.com/?q=bash+command+to+focus+a+window&ia=web
+https://unix.stackexchange.com/questions/689776/how-to-get-the-current-window-name-in-bash-inside-screen
+https://superuser.com/questions/84710/window-title-in-bash
+https://stackoverflow.com/questions/4226636/how-to-execute-a-command-in-a-bash-script-and-then-focus-the-appearing-window
+https://unix.stackexchange.com/questions/256713/how-to-execute-a-command-on-window-focus-unfocus
+https://askubuntu.com/questions/1227994/how-can-a-bash-script-running-in-a-window-raise-activate-its-window
+https://unix.stackexchange.com/questions/399753/how-to-get-a-list-of-active-windows-when-using-wayland
+
+https://sobrelinux.info/questions/11374/how-can-i-get-a-list-of-all-open-windows-in-the-command-line
+
+
+# espera 5 segundos (até usuário dar foco na janela desejada) e obtem nome dessa janela em foco (atual, em uso):
+sleep 5; xdotool getwindowfocus getwindowname
+
+
+xinput =  ?
+wmctrl
+
+
+
+Você pode usar wmctrl para obter uma lista de todas as janelas abertas.
+
+wmctrl -l
+
+0x0080006a -1 localhost panel
+0x0180007c  0 localhost Mozilla Firefox
+0x02600007  3 localhost user@localhost: /home/user - Shell - Konsole
+0x00600011  1 localhost KTorrent
+0x02200007  0 localhost user@localhost: /home/user - Shell - Konsole
+1           2 3         4
+As colunas:
+
+O ID da janela. Isso é usado para a opção [#i -i].
+O ID da área de trabalho. Começa a contagem em 0. -1 significa que a janela está em todos os desktops. Usado com [#d -d] e mais.
+A máquina do cliente
+O nome (título longo) da janela. Usado com [#r -r] principalmente e pode ser renomeado com [#N -N] e [#T -T].
+Mais exemplos: exemplos de wmctrl
+
+https://blog.spiralofhope.com/1042/wmctrl-user-documentation-examples.html
+
+
+xtoolwait =  ?
+ver - https://github.com/dlitz/xtoolwait
+
+=================
+
+
+Ver - https://blog.spiralofhope.com/1042/wmctrl-user-documentation-examples.html
+
+
+wmctrl + Documentation >
+
+A man page is not documentation!
+
+Since wmctrl didn't have quality documentation, I made it myself.
+
+
+These notes were created under wmctrl 1.07
+
+I did not record the distribution (or version) that I was running at the time. Perhaps Unity Linux or PCLinuxOS.
+wmctrl's changelog claims that 1.08 was released 2005-10-10, but it does not have a download link to that version.
+NOTE - The transition from one format to another might mean there are odd mistakes (missing spaces, incorrect characters) in this document.
+An early version of this was partially-mirrored at https://www.freedesktop.org/wiki/Software/wmctrl/ (with my permission)
+For the rant on users needing to create the documentation for the software they use, see:
+
+GNU Proofreaders shut down, and a rant on documentation.
+On user-contributed documentation
+Wikipedia is a tragedy
+
+https://archive.ph/9bYYK
+Table of Contents[hide]
+1 -m · Show information about the window manager and about the environment
+2 -l · List windows managed by the window manager
+3 -d · List desktops
+4 -s · Switch to the specified desktop
+5 -a · Activate a window
+6 -c · Close the window gracefully
+7 -R · Move the window to the current desktop and activate it
+8 -t · Move the window to the specified desktop
+9 -e · Resize and move the window around the desktop
+10 -b · Change the state of the window
+11 -N · Set the long title of the window
+12 -I · Set the short title of the window
+13 -T · Set both the long and short title of the window
+14 -k · Activate or deactivate the window manager's "showing the desktop" mode
+15 -o · Change the viewport for the current desktop
+16 -n · Change the number of desktops
+17 -g · Change the geometry of all desktops
+18 -h · Print help
+19 Options and misc.
+19.1 --version · Version
+19.2 -i · Interpret as a numerical window ID
+19.3 -p · Include PIDs in the window list
+19.4 -G · Include geometry in the window list
+19.5 -x · Include WM_CLASS in the window list or interpret as the WM_CLASS name
+19.6 -u · Override auto-detection and force UTF-8 mode
+19.7 -F · Match the full window title and be case-sensitive
+19.8 -v · Be verbose
+19.9 -w · Use a workaround
+19.10 -r · Specify long title
+19.10.1 -r :SELECT: · acting on a mouse-selected window
+19.10.2 -r :ACTIVE: · acting on the current window
+20 Real-world examples
+20.1 Force window dimensions when launching an app
+21 Issues
+21.1 1.07 Fullscreen Issue
+21.1.1 Proof that wmctrl usually works
+21.1.2 Proof of an issue when the app starts fullscreen
+21.2 Firefox is not visible in the list of managed windows
+-m · Show information about the window manager and about the environment 
+wmctrl -m
+Name: Blackbox
+Class: N/A
+PID: N/A
+Window manager's "showing the desktop" mode: N/A
+-l · List windows managed by the window manager 
+wmctrl -l
+0x0080006a -1 localhost panel
+0x0180007c  0 localhost Mozilla Firefox
+0x02600007  3 localhost user@localhost: /home/user - Shell - Konsole
+0x00600011  1 localhost KTorrent
+0x02200007  0 localhost user@localhost: /home/user - Shell - Konsole
+1           2 3         4
+The columns:
+
+The window ID. This is used for the -i · Interpret as a numerical window ID switch.
+The desktop ID. It begins counting at 0. -1 means that window is on all desktops. Used with -d · List desktops and more.
+The client machine
+The name (long title) of the window. Used with -r · Specify long title mostly, and can be renamed with -N · Set the long title of the window and -T · Set both the long and short title of the window.
+
+-d · List desktops 
+List desktops. The current desktop is marked with an asterisk.
+
+wmctrl -d
+ 0  * DG: 1920x1200  VP: 0,0  WA: 0,0 1920x1200
+ 1  - DG: 1920x1200  VP: N/A  WA: 0,0 1920x1200
+ 2  - DG: 1920x1200  VP: N/A  WA: 0,0 1920x1200
+ 3  - DG: 1920x1200  VP: N/A  WA: 0,0 1920x1200
+The five columns:
+
+1	2	3	4	5
+Desktop number	Geometry	Viewport	Workarea	Title
+0 *	DG: 1920x1200	VP: 0,0	WA: 0,0 1920x1200	 
+1 -	DG: 1920x1200	VP: N/A	WA: 0,0 1920x1200	 
+2 -	DG: 1920x1200	VP: N/A	WA: 0,0 1920x1200	 
+3 -	DG: 1920x1200	VP: N/A	WA: 0,0 1920x1200	 
+The desktop number begins counting at 0.
+
+* means it's the current desktop
+Geometry
+Viewport
+Workarea
+Title
+
+TODO - The man page describes this, but the command does not display this. File a bug report.
+-s · Switch to the specified desktop 
+# Create two desktops:
+wmctrl -N 1
+# Switch to desktop 1
+wmctrl -s 1
+Notes:
+
+-N · Set the long title of the window
+The programmer starts counting at 0. So 1 means the second desktop.
+Your window manager must be configured to provide multiple desktops for this to mean anything.
+
+-a · Activate a window 
+Activate the window by switching to its desktop and raising it.
+
+# Create two desktops:
+wmctrl -N 1
+# Switch to desktop 1:
+wmctrl -s 0
+# Move the window to another desktop:
+wmctrl -r "KTorrent" -t 1
+# Activate the window by switching to its desktop and raising it:
+wmctrl -a "KTorrent"
+Notes:
+
+-N · Set the long title of the window, -s · Switch to the specified desktop, -r · Specify long title, -t · Move the window to the specified desktop
+TODO: With a tray-enabled application like KTorrent, activating it while it's minimized as a tray icon is a Bad Idea and won't display it properly. You'd have to 'restore' it from its tray state - by right-clicking its tray icon and selecting 'restore'. Explore a wmctrl-only example.
+
+-c · Close the window gracefully 
+wmctrl -c -r "KTorrent"
+Notes:
+
+-r · Specify long title
+TODO: With a tray-enabled application like KTorrent, closing it will minimize it to the tray. If it's already in the tray, then -c won't do anything. wmctrl doesn't have an alternate close or a 'kill' command for this case. Request this feature.
+Does not work with mousepad.
+
+-R · Move the window to the current desktop and activate it 
+# Create two desktops:
+wmctrl -N 1
+# Switch to desktop 1:
+wmctrl -s 0
+# Move the window to another desktop:
+wmctrl -r "KTorrent" -t 1
+# Switch to that window's desktop and activate that window:
+wmctrl -R "KTorrent"
+Notes:
+
+-N · Set the long title of the window, -s · Switch to the specified desktop, -r · Specify long title
+With a tray-enabled application like KTorrent, activating it while it's minimized as a tray icon is a Bad Idea and won't display it properly. You'd have to 'restore' it from its tray state - by right-clicking its tray icon and selecting 'restore'.
+
+-t · Move the window to the specified desktop 
+# Create two desktops:
+wmctrl -N 1
+# Switch to desktop 1:
+wmctrl -s 0
+# Move the window to another desktop:
+wmctrl -r "KTorrent" -t 1
+Notes:
+
+-N · Set the long title of the window, -s · Switch to the specified desktop
+Tray-enabled applications like KTorrent won't go anywhere if they're minimized to the tray.
+
+-e · Resize and move the window around the desktop 
+wmctrl -r "KTorrent" -e 1,0,0,800,600
+                        1 2 3 4   5
+This example will move the window to the top-left of the screen (0,0) and resize it to 800x600 pixels. The five options are: "gravity,X,Y,width,height":
+
+gravity -- I'm not sure what this
+
+0 means 'default' and the coordinates of 0,0 will move the window up too high.
+1 seems to look good for me.
+X -- The X coordinates. How far from the left the window will begin. Use -1 to leave this value as-is.
+Y -- The Y coordinates. How far from the top the window will begin. Use -1 to leave this value as-is.
+width -- The new window width in pixels Use -1 to leave this value as-is.
+height -- The new window hight in pixels. Use -1 to leave this value as-is.
+
+Notes:
+
+-r · Specify long title
+"gravity,X,Y,width,height" follows the EWMH specification
+width and height are NOT like using the mouse to resize a window. With KTorrent, some of the elements are 'chopped off' because of the resize. A slight adjustment using the mouse corrects this.
+Tray-enabled applications like KTorrent won't go anywhere or do anything if they're minimized to the tray.
+
+The EWMH specification describes gravity thusly:
+
+win_gravity:      placed at the reference point
+
+StaticGravity     the left top corner of the client window
+NorthWestGravity  the left top corner of the frame window
+NorthGravity      the center of the frame window's top side
+NorthEastGravity  the right top corner of the frame window
+EastGravity       the center of the frame window's right side
+SouthEastGravity  the right bottom corner of the frame window
+SouthGravity      the center of the frame window's bottom side
+SouthWestGravity  the left bottom corner of the frame window
+WestGravity       the center of the frame window's left side
+CenterGravity     the center of the frame window
+But wmctrl doesn't seem to respect these. It expects an integer.
+
+-b · Change the state of the window 
+Change the state of the window. Using this option it's possible, for example, to make the window maximized, minimized or fullscreen.
+
+The EWMH specification defines a _NET_WM_STATE request. wmctrl supports these properties:
+
+modal -- doesn't seem to do anything, but I don't really understand it anyway.
+sticky -- doesn't work
+maximized_vert -- works
+maximized_horz -- works
+shaded -- works
+skip_taskbar -- works
+
+.. but I can't add it back. =/
+skip_pager -- works
+hidden -- does not work
+
+This really shouldn't work, since the 'minimize' action would be responsible for setting this.
+.. except wmctrl doesn't have 'minimize'. I asked the author about this but got no response. TODO - ask again
+fullscreen -- works. Removes the window title and border and forces fullscreen.
+
+1.07 Fullscreen Issue
+above -- works
+below -- works
+demands_attention is defined in the EWMH specs but was not listed in the wmctrl manual and does not appear to be supported.
+
+TODO Request it.
+Examples:
+
+wmctrl -r "KTorrent" -b add,shaded
+wmctrl -r "KTorrent" -b remove,shaded
+wmctrl -r "KTorrent" -b toggle,shaded
+Multiple commands at once are done like this:
+
+wmctrl -r "KTorrent" -b toggle,shaded,maximized_horz
+Notes:
+
+-r · Specify long title
+
+-N · Set the long title of the window 
+Set the name (long title) of the window.
+
+wmctrl -r "KTorrent" -N "something"
+wmctrl -r "something" -N "KTorrent"
+Notes:
+
+-r · Specify long title
+Changing it back doesn't seem to work.
+Warning: This influences the use of the -r · Specify long title switch!
+This is great for testing on an xterm shell if your environment automatically changes the title for you. Then you can just change directories to get things restored nicely.
+For KTorrent after the first time I use this wmctrl feature I have to minimize it to the tray and restore it to view the change.
+
+Their example shows Zenity but I prefer kdialog. In a terminal emulator window, do:
+
+title=`kdialog --title "Change window title" 
+  --inputbox "New window title"`; 
+  wmctrl -r :SELECT: -T "$title"
+complex stuff:
+
+It would be nice if I could have regular expressions which could match a title. I can partially understand how it could be done, but I don't want to bother implementing the feature myself. =/ Some nonsense like this:
+
+wmtrl -r `wmtrl -l | grep title | othergrep <first 10 characters>` -N "new title"
+Where the othergrep thing matches the 10 characters at the beginning of each line. I don't know how to do that though. Something like (^..........) or (^.{10}) I think.
+
+TODO - I could almost certainly do this now.
+
+-I · Set the short title of the window 
+Set the icon name (short title) of the window.
+
+wmctrl -r "KTorrent" -I "string"
+Notes:
+
+-r · Specify long title
+See -N · Set the long title of the window for more info.
+I'm not sure what this is supposed to do.
+
+-T · Set both the long and short title of the window 
+wmctrl -r "KTorrent" -T "string"
+Notes:
+
+-r · Specify long title
+See -N · Set the long title of the window for more info.
+I can't change the title back. This is the same problem as -N · Set the long title of the window.
+
+-k · Activate or deactivate the window manager's "showing the desktop" mode 
+Activate or deactivate window manager's "showing the desktop" mode. Many window managers do not implement this mode.
+
+wmctrl -k on
+wmctrl -k off
+Notes:
+
+This didn't work for me.
+
+-o · Change the viewport for the current desktop 
+Change the viewport for the current desktop. The X and Y values are separated with a comma. They define the top left corner of the viewport. The window manager may ignore the request.
+
+wmctrl -o 1024,768
+Notes:
+
+This is ignored.
+
+-n · Change the number of desktops 
+Change number of desktops. The window manager may ignore the request.
+
+Learn how many desktops you have:
+
+wmctrl -d
+0  * DG: 1920x1200  VP: 0,0  WA: 0,0 1920x1200
+1  - DG: 1920x1200  VP: N/A  WA: 0,0 1920x1200
+2  - DG: 1920x1200  VP: N/A  WA: 0,0 1920x1200
+3  - DG: 1920x1200  VP: N/A  WA: 0,0 1920x1200
+Create two desktops:
+
+wmctrl -n 1
+Now check again:
+
+wmctrl -d
+0  * DG: 1920x1200  VP: 0,0  WA: 0,0 1920x1200
+1  - DG: 1920x1200  VP: N/A  WA: 0,0 1920x1200
+Notes:
+
+-d · List desktops
+This programmer begins counting at 0. So '1' means '2 desktops'
+Blackbox 0.70.1 and bbkeys 0.9.0 won't really honour this. It'll set it so that -d displays the 'correct' number of desktops, but my hotkeys to change desktops will still work. So it looks like bbkeys doesn't respect wmctrl's setting or Blackbox isn't honouring wmctrl's setting.
+
+-g · Change the geometry of all desktops 
+Change geometry (common size) of all desktops. The window manager may ignore the request.
+
+wmctrl -g 1024,768
+Notes:
+
+Blackbox ignores this request.
+
+-h · Print help 
+wmctrl -h
+(basically prints the man page)
+
+Options and misc. 
+--version · Version 
+wmctrl --version
+-i · Interpret as a numerical window ID 
+The -i option may be used to interpret the argument as a numerical window ID
+
+wmctrl -l
+0x00600056 -1 localhost panel
+0x02000143  0 localhost Mozilla Firefox
+0x00400007  0 localhost user@localhost: /home/user - Shell - Konsole
+0x00e00011  0 localhost KTorrent
+wmctrl -i 0x00e00011 -b toggle,shaded
+A commenter corrects the above with:
+
+wmctrl -r 0x00e00011 -r -b toggle,shaded
+Notes:
+
+-l · List windows managed by the window manager, -b · Change the state of the window
+This is an alternate to using -r · Specify long title.
+Defaults to use a decimal number.
+If it starts with "0x", then it's assumed to be a hexadecimal number.
+TODO: <win> as a numerical window ID doesn't seem to work consistently. Perhaps not all options support it or something crazy is going on. It used to work very well for me. Re-test.
+
+-p · Include PIDs in the window list 
+Include PIDs in the window list. Very few X applications support this feature.
+
+wmctrl -l -p
+0x00600056 -1 4302   localhost panel
+0x02000143  0 5964   localhost Mozilla Firefox
+0x00400007  0 8639   localhost user@localhost: /home/user - Shell - Konsole
+0x00e00011  0 8706   localhost KTorrent
+Notes:
+
+-l · List windows managed by the window manager
+Blackbox supports this. =)
+
+-G · Include geometry in the window list 
+wmctrl -l -G
+0x00600056 -1 0    1174 1920 26   localhost panel
+0x02000143  0 649  25   1285 1147 localhost Mozilla Firefox
+0x00400007  0 43   59   1092 481  localhost user@localhost: /home/user - Shell - Konsole
+0x00e00011  0 51   653  904  509  localhost KTorrent
+Notes:
+
+-l · List windows managed by the window manager
+
+-x · Include WM_CLASS in the window list or interpret as the WM_CLASS name 
+wmctrl -l -x
+0x00600056 -1 panel.fbpanel         localhost panel
+0x02000143  0 Gecko.Mozilla-firefox-bin  localhost Mozilla Firefox
+0x00400007  0 Qt-subapplication.    localhost user@localhost: /home/user - Shell - Konsole
+0x00e00011  0 ktorrent.Ktorrent     localhost KTorrent
+Notes:
+
+-l · List windows managed by the window manager
+TODO: describe interpreting <win> as the WM_CLASS name. Useful for: -a · Activate a window, -c · Close the window gracefully, -r · Specify long title and -R · Move the window to the current desktop and activate it.
+
+-u · Override auto-detection and force UTF-8 mode 
+wmctrl -u <other switches>
+-F · Match the full window title and be case-sensitive 
+Modifies the behavior of the window title matching algorithm. It will match only the full window title instead of a substring, when this option is used. Furthermore it makes the matching case sensitive.
+
+wmctrl -F <other switches>
+-v · Be verbose 
+Be verbose. Useful for debugging.
+
+wmctrl -l
+0x00600056 -1 localhost panel
+0x02000143  0 localhost Mozilla Firefox
+0x00400007  0 localhost user@localhost: /home/user - Shell - Konsole
+0x00e00011  0 localhost KTorrent
+wmctrl -l -v
+envir_utf8: 1
+0x00600056 -1 localhost panel
+0x02000143  0 localhost Mozilla Firefox
+Invalid type of WM_NAME property.
+0x00400007  0 localhost user@localhost: /home/user - Shell - Konsole
+Invalid type of WM_NAME property.
+0x00e00011  0 localhost KTorrent
+Notes:
+
+-l · List windows managed by the window manager
+
+-w · Use a workaround 
+Use a workaround. The option may appear multiple times
+
+wmctrl -w DESKTOP_TITLES_INVALID_UTF8 (other switches)
+list of options as of 1.07
+
+DESKTOP_TITLES_INVALID_UTF8 -- Print non-ASCII desktop titles correctly when using Window Maker.
+
+-r · Specify long title 
+wmctrl -r is used to specify the window name (long title) to act on. It is used for a number of features:
+
+TODO
+
+-R · Move the window to the current desktop and activate it
+-e · Resize and move the window around the desktop
+-b · Change the state of the window
+-N · Set the long title of the window
+-I · Set the short title of the window
+-T · Set both the long and short title of the window
+
+Notes:
+
+It's interpreted as a string.
+It's matched against the window name (long title)
+Only the first matching window is used.
+The matching isn't case sensitive
+The string may appear in any position of the title.
+If you don't want to use the name of the window, then try the -i · Interpret as a numerical window ID switch.
+
+-r :SELECT: · acting on a mouse-selected window 
+Select the window by clicking on it.
+
+wmctrl -b toggle,shaded -r :SELECT:
+Notes:
+
+-b · Change the state of the window, -r · Specify long title
+
+-r :ACTIVE: · acting on the current window 
+Use the currently active window for the action.
+
+wmctrl -b toggle,shaded -r :ACTIVE:
+Notes:
+
+-b · Change the state of the window, -r · Specify long title
+
+Real-world examples 
+Force window dimensions when launching an app 
+A bbkeys hotkey can be set up to use xtoolwait and wmctrl to force a specific size. If a second occurrence is launched, I can relocate that one and resize it.
+
+[Execute] (Mod1-Control-F) {xtoolwait yourapp & wmpid=$! && wait $wmpid && wmctrl -F -r "yourapp title" -e 1,0,0,800,1148 && wmctrl -F -r "yourapp other title" -e 1,800,0,800,1148}
+It's not hard to have this as a simple script like this:
+
+xtoolwait yourapp & wmpid=$!
+wait $wmpid
+wmctrl -F -r "yourapp title" -e 1,0,0,800,1148
+TODO - I'd bet that anyone decent with bash could whip up something that's nice and reusable too.
+
+Also, I'm going to post a user addition here. I'm unable to do any real testing on it without wmctrl working.
+
+wmctrl -ir `wmctrl -lx | grep Pidgin.Pidgin | cut -d" " -f1` -e 0,1200,0,-1,-1
+I also just bumped into some patches for wmctrl. I haven't read any further and haven't tested them out.
+
+Removing decorations in Metacity
+Move and Hide
+
+Issues 
+1.07 Fullscreen Issue 
+This was reported to the author but I had no response. TODO - ask again
+
+Proof that wmctrl usually works 
+(Blackbox 0.70.1)
+
+1) Start xine windowed
+
+xine dvd://
+2) alt-tab back to your term
+
+3) Prove that wmctrl can communicate to xine and fullscreen works:
+
+wmctrl -r "xine" -b toggle,fullscreen
+(fullscreen now)
+
+4) alt-tab back to your term (you might need to do it twice)
+
+5) Prove that wmctrl can remove fullscreen:
+
+wmctrl -r "xine" -b toggle,fullscreen
+(windowed now)
+
+6) Another proof:
+
+wmctrl -r "xine" -b toggle,fullscreen
+(fullscreen now)
+
+wmctrl -r "xine" -b remove,fullscreen
+(windowed now)
+
+Proof of an issue when the app starts fullscreen 
+1) Start xine fullscreen
+
+xine -f dvd://
+2) Now alt-tab back out to your term. You might have to click on the xine window for alt-tab to work.
+
+3) try to remove fullscreen
+
+wmctrl -r "xine" -b remove,fullscreen
+This does not do anything.
+
+wmctrl -r "xine" -b toggle,fullscreen
+This does not do anything.
+
+Firefox is not visible in the list of managed windows 
+0x00c0001e 4294967295 localhost.localdomain panel
+0x01400033  1 localhost.localdomain 37. 3 Doors Down - The Better Life - Be Like That (4:25) - Audacious
+0x0140003a  1 localhost.localdomain Audacious Playlist Editor
+0x00800003  0 localhost.localdomain *compile.rb - /home/user/live/Projects/compiled-website/0.5.3/rb - Geany
+Where the hell is Firefox?
+
+Last updated 2024-05-14 at 03:17:14

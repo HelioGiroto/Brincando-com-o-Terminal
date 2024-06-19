@@ -742,6 +742,10 @@ Example with 4 files,
 ### Fontes:
 https://stackoverflow.com/questions/3255674/convert-audio-files-to-mp3-using-ffmpeg
 
+https://stackoverflow.com/questions/63664953/converting-mkv-to-mp4
+
+https://stackoverflow.com/questions/40077681/ffmpeg-converting-from-mkv-to-mp4-without-re-encoding
+
 ### Exemplos: 
 	wav to mp3
 	ffmpeg -i audio.wav -acodec libmp3lame audio.mp3
@@ -768,7 +772,12 @@ https://stackoverflow.com/questions/3255674/convert-audio-files-to-mp3-using-ffm
 		ffmpeg -i "$MP3" "${MP3%.*}.aac" 
 		done
 	
+	*Video:*
 	
+	ffmpeg -i filename.mkv -vcodec copy -acodec copy 1.mp4
+
+	ffmpeg -i "vid.mkv" -map 0 -c copy -c:a aac "MP4/vid.mp4"
+
 	
 	
 ## Cortando partes em silêncio no áudio
