@@ -1,0 +1,31 @@
+sudo... 
+
+poweroff
+shutdown -h now
+halt -p
+halt -h 
+
+ver tb - https://www.howtogeek.com/411925/how-to-reboot-or-shut-down-linux-using-the-command-line/
+
+
+Ok, I've worked my way all the way through this bug now, and I have to conclude this is behavior we can't/shouldn't change.
+
+The shutdown command has three options: -h (halt or power off), -H (halt), and -P (power off).
+The halt command maps to -H, by design.
+The poweroff command maps to -P, by design.
+The /etc/default/halt configuration *only* affects the behavior when neither -H nor -P has been specified.
+There is no way to make halt by itself map to poweroff, without making it impossible to do a real 'halt'.
+These are all standard options that shouldn't be changed.
+
+So I'm closing this bug report as 'wontfix'. The current behavior is inconsistent with previous upstart behavior, but that behavior was buggy. The current behavior is correct, and I'm afraid people will just have to learn that halt doesn't mean what you were led to believe it means.
+
+If you want the system to poweroff, you need to run either shutdown -h now, halt -p, or poweroff. All three commands work. halt -p is the shortest and probably the most compatible with existing muscle memory.
+
+From what I can tell, halt used to map to halt -h and would power off.
+
+It seems that halt was silently changed to halt -H which does not power off. Why someone would ever want to halt without powering off is beyond me, and I'm not the only one to point that out. Why it would be made the default is fucking stupid.
+
+So halt now becomes poweroff.
+
+
+https://blog.spiralofhope.com/3209/poweroff.html#more-3209
