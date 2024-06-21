@@ -1,0 +1,12 @@
+#!/bin/bash
+echo
+echo Ligando Wifi.....
+echo
+sudo rfkill unblock all
+
+# Salva este script en /bin
+# e dá acesso de execução:
+# sudo chmod 777 ligawifi
+
+
+# ver tb: https://unix.stackexchange.com/questions/127705/automatically-run-rfkill-unblock-on-startup

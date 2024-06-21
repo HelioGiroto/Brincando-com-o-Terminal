@@ -4,6 +4,8 @@ nitrogen --restore &
 compton &
 conky -p 2 -c /etc/conky/conky_info &
 conky -c /etc/conky/conky_shortcuts &
+# ligawifi
+organizapastas
 
 # Corrigir abaixo pq não funciona:
 #bash start_conky.sh &
