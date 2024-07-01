@@ -1,9 +1,9 @@
-<style> img{float: right; margin-left:5px;} </style>
+<style>img{float: right; margin-left:5px;} .vermelho{color:red;}</style>
 
 ![](bash.png)
-# BASH
+# BASH 
 
-A linguagem Bourne-Again Shell (Shell Nascido de Novo) foi lançada inicialmente em 1989. Desenvolvida por Brian Fox e Chet Ramey. É o Shell padrão nas várias distribuições Linux. 
+A linguagem Bourne-Again Shell (Shell Nascido de Novo) foi lançada inicialmente em 1989. Desenvolvida por Brian Fox e Chet Ramey. É o Shell padrão nas várias distribuições Linux...
 
 
 ## CLI OU GUI 
@@ -293,43 +293,265 @@ Duas condições (AND e OR):
 
 ```
 
-## LISTAS / ARRAYS E SEUS MÉTODOS/FUNÇÕES
-```bash
-	
+## LISTAS / ARRAYS
+As listas (arrays) em Bash são variáveis com mais de um valor, definidos entre parêntesis e separados por espaços. Caso sejam strings, devem estar (de preferência) entre áspas.
 
+```bash
+	IDADES=(34 30 59 40)
+	NOMES=("João da Silva" "Francisca Souza" "Mário Jr" "Paulo Bezerra")
+	SEXO=("M" "F" "M" "M")
 ```
+Ver tb [este site.](https://linuxsimply.com/bash-scripting-tutorial/loop/for-loop/for-array/)
+
+
 
 ## MANIPULAÇÃO DE LISTAS
+Em Bash o primeiro elemento (item) de um array é o nro 0.
+
+Para imprimir, adicionar, alterar ou deletar um item ao array:
+
+*(Ao usar echo, sempre colocar o nome do array entre **colchetes**.)*
+
 ```bash
+	# echo ${NOMES[*]}	# IMPRIME TODOS os elementos do array
+	# echo ${NOMES[@]}	# IMPRIME TODOS os elementos do array
+	# echo ${NOMES[2]}	# IMPRIME apenas o elemento nro. 2 do array
+	# echo ${NOMES[-1]}	# IMPRIME O ÚLTIMO elemento do array
 	
+	# NOMES+=("Chico")	# ADICIONA um elemento à ÚLTIMA posição ("append")
+	# NOMES[4]="Pedro"	# ADICIONA um elemento ao array na posição 4
+	
+	# NOMES[3]="Ana"	# ALTERA um elemento já existente do array
+	# NOMES[-1]="Laura"	# ALTERA O ÚLTIMO elemento do array
+	
+	# echo ${#NOMES[*]}	# imprime o TAMANHO do array
+	# echo ${#NOMES[@]}	# imprime o TAMANHO do array
+	
+	# unset NOMES[2]	# DELETA o item: NOMES[2]
+	# unset NOMES 		# DELETA todo o array NOMES
+```
+
+
+
+## LAÇOS - PERCORRER LISTA / ARQUIVOS
+
+### O laço FOR
+
+Em Bash se usa laços (loopings) tipo FOR principalmente Uso do FOR para percorrer o conteúdo de um arquivo ou array. Nos exemplos a seguir mostraremos como isso se pode ser feito. Porém, basicamente a sintaxe do FOR é esta:
+
+```bash
+	for VARIAVEL in ARQ/ARRAY
+	do
+		# comandos ....
+	done
+```
+
+Observe que o laço é delimitado em seu início e fim pelas palavras reservadas **`do`** e **`done`**. E tudo o que esteja entre estas duas palavras, são comandos que se realizarão em CADA elemento percorrido do arquivo ou array.
+
+Em um única linha, isso fica assim: `for VAR in LISTA; do comandos...; done`
+
+(Note que entre o `do` e o primeiro comando não existe o ponto-e-vírgula (;).
+
+
+### Uso do FOR para percorrer o conteúdo de UM arquivo:
+
+```bash
+	for CADA_ARQ in $(ls)
+	do
+		# comandos... 
+	done
+```
+
+Note que todo o comando Bash que for usado dentro de `for` deve estar entre dolar-parêntesis, ou seja `$(comando)`.
+
+Um exemplo muito simples:
+
+```bash
+	for CADA in $(ls)
+	do
+		echo "Nome do arquivo: $CADA"
+	done
+
+```
+Mas se ocorra algum erro em que os nomes não aparecem de forma correta o que aconteceu foi um...:
+
+<span id='erroIFS'></span>
+<u class='vermelho'>Provável **erro** de IFS</u>:
+
+Existe uma variável de sistema chamada IFS que define os delimitadores (em arrays por exemplo) nesta ordem: espaço, tab e enter. Ou seja, cada vez que se encontra um espaço num item de array ou num nome de arquivo, o sistema interpreta que é outro item (do array) ou outro arquivo! (Isso vem pré-configurado nas distribuições Debian).
+
+Sendo assim, se recomenda que antes de executar o script acima, se mude a variável IFS no Terminal desta forma:
+
+```
+$ IFS='		# digite: IFS=, áspas, e pressione ENTER.
+>'		# pressione áspas novamente e ENTER.
+```
+
+Contudo, todas as vezes que se reinicia a máquina o valor de IFS volta a ser como o padrão. Por tanto, para que se mude persistentemente o IFS, se recomenda que altere o valor da mesma no arquivo .bashrc, adicionando esta linha:
+
+**`IFS=$'\n'`**
+
+Caso contrário, se pode adicionar esta linha acima em cada script em que se use um `for` para percorrer nomes de arquivos, arrays, etc. O que seria muito mais trabalhoso.
+
+---
+
+Há muitos exemplos em que se usa o `for` para manipular arquivos em lote em nosso sistema. (Lembre-se que por segurança, se recomenda um backup dos arquivos antes de rodar algum script em lote). 
+
+Suponhamos que numa certa pasta há vários arquivos de vídeo com nomes semelhantes, por exemplo:
+
+	video 1(854p_30fps_H264-128kbit_AAC).mp4
+	video 2(854p_30fps_H264-128kbit_AAC).mp4
+	video 3(854p_30fps_H264-128kbit_AAC).mp4
+	
+Nesse caso, vamos retirar este "sufixo" (854p_30fps_H264-128kbit_AAC) do nome de cada arquivo. Para isso, usaremos este script a fim de **renomear arquivos em lote** (retirando parte do nome):
+
+```bash
+	for ARQ in $(ls *.mp4)
+	do
+		NOME_NOVO=$(echo $ARQ | sed 's/(854p_30fps_H264-128kbit_AAC).mp4/.mp4/')
+		# echo $ARQ $NOME_NOVO	# <-- testar antes de usar o mv (abaixo)
+		mv $ARQ $NOME_NOVO
+	done
+```
+
+Explicação do código: 
+ - Se percorreu todos os arquivos de extensão .mp4
+ - E para **cada** ARQ (arquivo), se fez:
+ - Se criou um novo nome do nome antigo (ARQ) usando o comando `sed` para fazer a substituição.
+ - Se renomeou o arquivo para um NOME_NOVO.
+
+O resultado esperado é que os arquivos agora estejam com estes nomes:
+
+	video 1.mp4
+	video 2.mp4
+	video 3.mp4
+
+
+### Uso do FOR para percorrer o conteúdo de UM array (lista):
+
+A forma mais tradicional de usar `for` para percorrer um array é esta:
+
+```bash
+	for CADA_ITEM in "${ARRAY[@]}"
+	do
+		echo $CADA_ITEM
+		#comandos...
+	done
+
+	# Em uma única linha:
+	# for ITEM in "${ARRAY[@]}"; do echo $ITEM; done
+```
+
+Atenção: No uso do array em FOR, **não funciona com ARRAY\[*]**, mas apenas com ARRAY\[@]. 
+
+
+**Porém, também se pode usar esta forma mais simples:**
+
+```bash
+	NOMES=("João da Silva" "Francisca Souza" "Mário Jr" "Paulo Bezerra")
+	for i in ${!NOMES[@]}
+	do 
+		echo "O nome nro. $i é: ${NOMES[$i]}."
+	done
+```
+
+
+Ou também uma forma com sequência númerica, que veremos a seguir:
+
+### Uso do FOR para percorrer uma sequência numérica:
+
+Para isso se usa o comando `seq`. 
+
+Vamos executar o laço por 10 vezes:
+
+```bash
+	for X in $(seq 10)
+	do
+		# comandos que se repetirão X vezes. 
+	done
+```
+
+Uso do laço `for` com o comando `seq` **para percorrer um único array (lista)**. Porém, lembre-se que um array começa com o elemento número zero (0):
+
+```bash
+	NOMES=("João da Silva" "Francisca Souza" "Mário Jr" "Paulo Bezerra")
+	for NRO in $(seq 0 3)
+	do
+		echo ${NOMES[NRO]}
+	done
+```
+
+Acima: Para automatizar o valor da sequência (que vai em `seq`) se pode usar este comando: `TAMANHO=$(( $(echo ${#NOMES[*]}) -1 ))` e em seguida: `for NRO in $(seq 0 $TAMANHO)`.
+
+
+Outro exemplo prático do uso de `for` com `seq`, é **quando se pretende percorrer duas ou mais listas** em que cada um de seus elementos são correspondentes entre si. Por exemplo:
+
+```bash
+	clear
+	NOMES=("João da Silva" "Francisca Souza" "Mário Jr" "Paulo Bezerra")
+	IDADES=(34 30 59 40)
+	SEXO=("M" "F" "M" "M")
+	
+	for NRO in $(seq 0 3)
+	do	
+		echo "Nro. do registro: $NRO"
+		echo "Nome: ${NOMES[NRO]}"
+		echo "Idade: ${IDADES[NRO]}"
+		echo "Sexo: ${SEXO[NRO]}"
+		echo
+	done
+	echo "Fim do Script."
+```
+
+Mas para o perfeito funciomento deste script acima é necessário que todas as listas (arrays) tenham o mesmo tamanho, ou seja, o mesmo número de elementos.
+
+Observe também que ao final do laço (logo abaixo do `done`), se executará uma mensagem de término do script, que só rodará uma única vez (já que está fora do laço).
+
+Exemplo simples em uma única linha:
+
+```bash
+	# percorre o(s) array(s):
+	# for X in $(seq 0 10); do echo ${PRODUTO[X]} - ${PRECO[X]}; done
+```
+
+
+### Uso do FOR para percorrer o conteúdo de VÁRIOS arquivos:
+Um exemplo mais complexo em que se percorrerá vários arquivos, com um mesmo número de linhas, em que cada linha de cada arquivo corresponde a um mesmo registro. 
+
+Certamente que poderíamos usar o comando `paste` para concatenar estes arquivos como se fosse um único com várias colunas, porém a intenção não é colocar os conteúdos lado-a-lado, mas um debaixo do outro.
+
+Assim, usaremos o `for` da seguinte maneira:
+
+```bash
+	QTAS_LINHAS=$(cat arq1.csv | wc -l)
+	for NRO_LINHA in $(seq $QTAS_LINHAS)
+	do
+		echo $(sed -n "$NROLINHA"p arq1.csv) >> arq_final.txt
+		echo $(sed -n "$NROLINHA"p arq2.csv) >> arq_final.txt
+		echo $(sed -n "$NROLINHA"p arq3.csv) >> arq_final.txt
+		echo "========" >> arq_final.txt
+	done
+```
+
+Explicação do código: 
+ - O laço se executará X vezes, 
+ - Sendo que X é o número de linhas que os arquivos possuem.
+ - A cada número de execução, ele extrairá a linha de mesmo número de cada arquivo e...
+ - Imiprimirá num arquivo a parte chamado arq_final.txt
+ - Se imprime a da iteração, um separador "======" 
+ 
+
+
+## WHILE
+
+```bash
+
 
 ```
 
-## LAÇOS - PERCORRER LISTA: FOR, MAP, WHILE
-```bash
-	
 
-```
 
 ## INCREMENTOS
-```bash
-	
-
-```
-
-## DICIONÁRIOS (CRIAR, LER/ACESSAR/OBTER, ESCREVER/ATUALIZAR, DELETAR)
-```bash
-	
-
-```
-
-## MATRIZES
-```bash
-	
-
-```
-
-## OBJETOS E PROPRIEDADES
 ```bash
 	
 
@@ -347,7 +569,7 @@ Duas condições (AND e OR):
 
 ```
 
-## MÓDULOS / BIBLIOTECAS PARA IMPORTAR: LER ARQ/WEB/XLS/DOC, ESCREVER PDF, ETC
+## MÓDULOS / BIBLIOTECAS PARA IMPORTAR: LER ARQ/WEB/XLS/DOC/JSON/XML, ESCREVER PDF, ETC
 ```bash
 	
 
@@ -365,11 +587,6 @@ Duas condições (AND e OR):
 
 ```
 
-## GRÁFICOS (BARRA, PIZZA, LINHA, ETC)
-```bash
-	
-
-```
 
 ## DATA, HORA
 ```bash
@@ -437,24 +654,10 @@ Duas condições (AND e OR):
 
 ```
 
-## GRID
-```bash
-	
-
-```
-
 ## BANCO DE DADOS (CRUD)
 ```bash
 	
 
 ```
-
-## CLASSES
-```bash
-	
-
-```
-
-
 
 
