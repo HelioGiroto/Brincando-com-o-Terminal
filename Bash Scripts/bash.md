@@ -5,6 +5,9 @@
 
 A linguagem Bourne-Again Shell (Shell Nascido de Novo) foi lançada inicialmente em 1989. Desenvolvida por Brian Fox e Chet Ramey. É o Shell padrão nas várias distribuições Linux...
 
+A documentação oficial da linguagem está em:
+https://www.gnu.org/software/bash/manual/bash.html
+
 
 ## CLI OU GUI 
 "Command-Line Interface" ou "Graphical User Interface"?
@@ -124,6 +127,7 @@ Também se pode realizar operações com números decimais utilizando o comando 
 ## EXPANSÃO
 
  ver https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expansion
+ 
 
 ## ENTRADA DE DADOS 2: Inputs (read / readline)
 
@@ -139,38 +143,209 @@ Também se pode realizar operações com números decimais utilizando o comando 
 ## ENTRADA DE DADOS 3: PARÂMETROS EM LINHA DESDE O TERMINAL
 Também é possível criar um script em que o usuário passa os parâmetros de entrada (argumentos) na própria linha de comando ao chamar o programa.
 
-Dessa forma, o script seria:
+Logo, todo conteúdo que venha após o nome do Bash Script é considerado parâmetros (entrada de dados). Sendo que:
 
-```bash
-	ARGUMENTO1=$1
-	ARGUMENTO2=$2
-	echo "O argumento 1 passado na linha de comando foi: $ARGUMENTO1"
-	echo "O argumento 2 passado na linha de comando foi: $ARGUMENTO2"
-	echo "O argumento 0 retorna a todos os argumentos: $0"
+```
+	$1 - é o primeiro argumento.
+	$2 - é o segundo... e assim sucessivamente.
+	$0 - é o nome do script.
+	$# - quantos argumentos foram passados.
+	#@ - todos os argumentos.
 ```
 
-E ao chamar o programa na linha de Terminal, por exemplo, o usuário digitaria:
+*Obs.:* Quando se usa *mais que 9 argumentos*, a partir do décimo, é preciso declará-lo entre colchetes: `${10}`.
 
-`$ bash produtos.sh Arroz 20,00`
 
-Ou quando cada argumento leva espaço ou algum caracter especial, se recomenda passar cada argumento entre áspas:
+Sendo assim, considere o script:
 
-`$ bash cadastro.sh "Manuel da Silva" "27/09/1990"`
+```bash
+#!/bin/bash
+if [[ $# -eq 0 ]]
+then
+	echo "Não foram passados parâmetros..."
+else
+	ARGUMENTO1=$1
+	ARGUMENTO2=$2
+	echo "O valor 0 retorna ao nome do arquivo: $0"
+	echo "O valor # retorna a quantos argumentos foram passados: $#"
+	echo "O argumento 1 passado na linha de comando foi: $ARGUMENTO1"
+	echo "O argumento 2 passado na linha de comando foi: $ARGUMENTO2"
+	echo "O valor @ retorna a todos os argumentos: $@"
+fi
+```
 
+E ao chamar o programa na linha de Terminal, por exemplo, se usuário digitasse:
+
+`$ bash script.sh`
+
+A resposta seria:
+`Não foram passados parâmetros...`
+
+Mas se o usuário passe argumentos, por exemplo:
+
+`$ bash script.sh A B C`
+
+O resultado será:
+```
+	O valor 0 retorna ao nome do arquivo: exemplo.sh
+	O valor # retorna a quantos argumentos foram passados: 3
+	O argumento 1 passado na linha de comando foi: A
+	O argumento 2 passado na linha de comando foi: B
+	O valor @ retorna a todos os argumentos: A B C
+```
+
+Quando cada argumento leva espaço ou algum caracter especial, se recomenda passar cada argumento entre áspas. Caso contrário, o interpretador Bash consideraria que cada espaço indicaria um novo argumento.
+
+Por isso, usaríamos entre áspas, desta forma:
+
+`$ bash aniversarios.sh "Manuel da Silva" "27/09/1990"`
+
+
+
+## TESTE DE CONDIÇÕES
+Toda linguagem de programação tem seu modo de realizar seu teste lógico com os dados que são obtidos ou passados. É mais comum que se use esse teste com os comandos `if`, `for` ou `while`.
+
+Em Bash, o teste é realizado com o uso de duplos-colchetes `([[ ]])`. Mas é muito provável que se encontre alguns exemplos com apenas um colchete `[ ]`, porém o uso de conchetes-duplos `[[ ]]` é mais recomendado e convencional por ser a opção mais moderna.
+
+Normalmente realizamos testes com arquivos ou variáveis e o Terminal nos devolve o resultado como `true` ou `false`. Ou seja, ele nos responde se o que "perguntamos" é verdadeiro ou falso. **Verdadeiro corresponde ao valor `0` e falso ao valor `1`.**
+
+Porém o Terminal não nos responde a menos que solicitemos sua resposta. E fazemos isso através da expressão `echo $?`. A "variável" `$?` contém a resposta que precisamos. 
+
+Observe o código a seguir:
+
+```bash
+	# passamos as variáveis:
+	a=1
+	b=5
+	
+	# realizamos um teste (uma "pergunta"): a é maior que b ?
+	[[ $a > $b ]]
+	
+	# Note que acima, usamos o "dolar" antes do nome da variável ($a)
+	# Já que para definir o valor da variável NÃO se usa o $,
+	# mas para usar ou testar esta variável, é obrigatório o $ antes.
+	
+	# solicitamos a resposta ao Terminal se o resultado é verdadeiro ou falso:
+	echo $?
+	
+	# A saída será esta:
+	1
+	# ou seja: falso, a NÃO é maior que b.
+
+```
+
+Para memorizar, podemos usar o seguinte exemplo no Terminal: Digite `true` ou `false` (tudo minúsculo) e depois solicite o resultado `$?`.
+
+```bash
+	$ true
+	$ echo $?
+	
+	# resultado será:
+	0
+	
+	# agora digite:
+	$ false
+	$ echo $?
+	
+	# resultado:
+	1
+	
+```
+
+### OPERADORES LÓGICOS DE COMPARAÇÃO
+Eles são:
+
+```bash
+	-eq	# igual
+	-ne	# diferente (not-equal)
+	-lt	# menor que (low than)	
+	-gt	# maior que (grow than)
+	-le	# menor ou igual
+	-ge	# maior ou igual
+	
+	-z $STRING1				- $STRING1 is empty
+	$STRING1 = $STRING2		- $STRING1 is equal to $STRING2
+	$STRING1 != $STRING2	- $STRING1 is not equal to $STRING2
+	
+```
+
+Scripts em Bash são usados muitas vezes para manipulação de arquivos, portanto, é comum que se necessite expressões próprias para comparar e testar. Como por exemplo:
+
+```bash
+	-e file		- FILE exists
+	-d file		- FILE exists and is a directory.
+	-f file		- FILE exists and is a regular file.
+	-L file		- FILE exists and is a soft link.
+	-s file 	- True if the file exists with a size of more than zero.
+	-r file 	- True if the file exists and the read permission is set.
+	-w file 	- True if the file exists and the write permission is set.
+	-x file 	- True if the file exists and the execute permission is set.
+
+```
+
+Uma lista mais extensa está em:
+https://www.gnu.org/software/bash/manual/bash.html#Bash-Conditional-Expressions
+
+
+
+### OPERADORES (LÓGICOS) DE COMPARAÇÃO: AND E OR 
+Os testes podem ser ainda mais complexos, pois se pode usar mais de uma condição a ser testada. Para isso, usamos `&&` e `||` que significa: `E` e `OU`, respectivamente.
+
+```bash
+	Ana="F"
+	Marta="F"
+	Pedro="M"
+	
+	[[ $Ana = "F" && $Pedro = "F" ]]
+	echo $?
+	
+	# resultado será:
+	1
+	# (false porque AS DUAS condições precisariam ser verdadeiras)
+	
+	# mas SE UMA DAS DUAS condições bastava para nosso teste, usaríamos o ||
+	# ou seja usaríamos o "ou" (ou uma coisa ou outra):
+	[[ $Ana = "F" || $Pedro = "F" ]]
+	echo $?
+	
+	# resultado:
+	0
+```
+
+
+## OPERADORES TERNÁRIOS
+Para realizarmos condições simples que **não vão implicar em blocos de código** dependendo do resultado do teste, se pode usar o modelo ternário (tipo lambdas, em Python) para aplicar uma condição no código.
+
+Sendo que:
+- O que o que vem após o `&&` é para resposta verdadeira do teste e...
+- O que o que vem após o `||` é para resposta falsa do teste.
+
+Por exemplo:
+
+```bash
+	a=1
+	
+	[[ $a -eq 1 ]] && echo "sim" || echo "nao"
+	# resultado: sim
+	
+	[[ $a -eq 2 ]] && echo "sim" || echo "nao"
+	# resultado: nao
+
+```
 
 ## CONDIÇÕES IF, ELIF, ELSE...
-Geralmente o comando "if" é acompanhado com duplos colchetes (\[[ ]]), que são na verdade, operadores de teste de uma condição. Algumas vezes se pode encontrar script com apenas colchetes-simples, porém, atualmente em Bash se recomenda o uso de duplos-colchetes para testes. 
+O comando `if` realizará um teste de condição, por tanto, sempre será acompanhado de duplos-colchetes `[[ ]]`, e conforme a resposta ou resultado do teste, executará um bloco de comandos. 
 
 O formato comum do "if" é este:
 
 ### IF SIMPLES (Teste para UMA condição):
+(A indentação **não** é obrigatória)
 
 ```bash
 	if [[ condição ]]
 	then
 		# comandos...
 	fi
-
 ```
 
 **Três observações importantes:**
@@ -228,55 +403,6 @@ Também como outra alternativa para if-elif-else, se pode usar o comando `case`,
 
 
 
-## OPERADORES DE COMPARAÇÃO (AND, OR, >, <, <=, >=, !=)
-Este são os operadores usados para fazer o teste das condições que são passadas dentro dos duplos-colchetes:
-
-```bash
-	-eq	# igual
-	-ne	# diferente (not-equal)
-	-lt	# menor que (low than)	
-	-gt	# maior que (grow than)
-	-le	# menor ou igual
-	-ge	# maior ou igual
-	
-	-z $STRING1		- $STRING1 is empty
-	$STRING1 = $STRING2	- $STRING1 is equal to $STRING2
-	$STRING1 != $STRING2	- $STRING1 is not equal to $STRING2
-	
-```
-
-Scripts em Bash são usados muitas vezes para manipulação de arquivos, portanto, é comum que se necessite expressões próprias para comparar e testar. Como por exemplo:
-
-```bash
-	-e file		- FILE exists
-	-d file		- FILE exists and is a directory.
-	-f file		- FILE exists and is a regular file.
-	-L file		- FILE exists and is a soft link.
-	-s file 	- True if the file exists with a size of more than zero.
-	-r file 	- True if the file exists and the read permission is set.
-	-w file 	- True if the file exists and the write permission is set.
-	-x file 	- True if the file exists and the execute permission is set.
-
-```
-
-Duas condições (AND e OR):
-
-```bash
-
-```
-
-
-## CONTINUE, BREAK
-```bash
-	
-
-```
-
-## TERNÁRIOS (tipo lambdas)
-```bash
-	
-
-```
 
 ## OPÇÕES EM CASOS (tipo switch):
 
@@ -310,7 +436,7 @@ Em Bash o primeiro elemento (item) de um array é o nro 0.
 
 Para imprimir, adicionar, alterar ou deletar um item ao array:
 
-*(Ao usar echo, sempre colocar o nome do array entre **colchetes**.)*
+*(Ao usar `echo`, sempre colocar o nome do array entre **colchetes**.)*
 
 ```bash
 	# echo ${NOMES[*]}	# IMPRIME TODOS os elementos do array
@@ -395,7 +521,9 @@ Caso contrário, se pode adicionar esta linha acima em cada script em que se use
 
 ---
 
-Há muitos exemplos em que se usa o `for` para manipular arquivos em lote em nosso sistema. (Lembre-se que por segurança, se recomenda um backup dos arquivos antes de rodar algum script em lote). 
+**Exemplo prático de `for` para manipulação de arquivos:** 
+
+Há muitos exemplos em que se usa o `for` para **manipular arquivos em lote** em nosso sistema. (Lembre-se que por segurança, se recomenda um backup dos arquivos antes de rodar algum script em lote). 
 
 Suponhamos que numa certa pasta há vários arquivos de vídeo com nomes semelhantes, por exemplo:
 
@@ -526,9 +654,9 @@ Assim, usaremos o `for` da seguinte maneira:
 	QTAS_LINHAS=$(cat arq1.csv | wc -l)
 	for NRO_LINHA in $(seq $QTAS_LINHAS)
 	do
-		echo $(sed -n "$NROLINHA"p arq1.csv) >> arq_final.txt
-		echo $(sed -n "$NROLINHA"p arq2.csv) >> arq_final.txt
-		echo $(sed -n "$NROLINHA"p arq3.csv) >> arq_final.txt
+		echo $(sed -n "$NRO_LINHA"p arq1.csv) >> arq_final.txt
+		echo $(sed -n "$NRO_LINHA"p arq2.csv) >> arq_final.txt
+		echo $(sed -n "$NRO_LINHA"p arq3.csv) >> arq_final.txt
 		echo "========" >> arq_final.txt
 	done
 ```
@@ -543,9 +671,49 @@ Explicação do código:
 
 
 ## WHILE
+Enquanto uma condição esteja sendo satisfeita (verdadeira), o código estará sendo executado.
 
 ```bash
+	while [[ condicao ]]
+	do
+		# comandos...
+	done
+```
 
+Tipo `while true`:
+
+Sintaxe:
+
+```bash
+	while true
+	do
+		# comandos...
+	done
+```
+
+Porém, também é válido usar o `:` ao invés da palavra reservada `true`. O que é até mais rápido na execução:
+
+```bash
+	while :
+	do
+		# comandos... 
+	done
+
+```
+
+Comprove com os dois exemplos abaixo o tempo de execução dessas duas sintaxes:
+
+```bash
+	i=0; time while true; do ((i++>100000)) && break; done
+	i=0; time while :; do ((i++>100000)) && break; done
+```
+
+
+## CONTINUE, BREAK
+Para que um código não caia num looping infinito (principalmente quando se usa o `while true`, é preciso estabelecer uma condição de 'escape' para que o código seja interrompido.
+
+```bash
+	
 
 ```
 
@@ -553,11 +721,18 @@ Explicação do código:
 
 ## INCREMENTOS
 ```bash
+	# incremento (3 opções):
+	((num++))
+	((n=n+1))
+	((n+=1))
 	
-
+	# decremento (3 opções):
+	((num--))
+	((n=n-1))
+	((n-=1))	
 ```
 
-## FUNÇÕES: CRIAR, MANIPULAR, RETORNAR, CHAMAR, BREAK, CONTINUE, ASSÍNCRONISMO.
+## FUNÇÕES: CRIAR, MANIPULAR, RETORNAR, CHAMAR, ASSÍNCRONISMO.
 ```bash
 	
 
