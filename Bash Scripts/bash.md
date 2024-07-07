@@ -3,7 +3,7 @@
 ![](bash.png)
 # BASH 
 
-A linguagem Bourne-Again Shell (Shell Nascido de Novo) foi lançada inicialmente em 1989. Desenvolvida por Brian Fox e Chet Ramey. É o Shell padrão nas várias distribuições Linux...
+A linguagem Bourne-Again Shell (Shell Nascido de Novo) foi lançada inicialmente em 1989. Desenvolvida por Brian Fox e Chet Ramey. É o Shell Script padrão nas várias distribuições Linux. **Resumindo: o Bash é a linguagem do Linux!**
 
 A documentação oficial da linguagem está em:
 https://www.gnu.org/software/bash/manual/bash.html
@@ -124,10 +124,152 @@ Também se pode realizar operações com números decimais utilizando o comando 
 
 ```
 
-## EXPANSÃO
+## CURINGAS E EXPANSÃO DE CHAVES
 
- ver https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expansion
- 
+### Curingas:
+
+São caracteres especiais (*, ?, \[ \], etc) que são usados para indicar um ou mais nomes de arquivos na execução de comandos do sistema (ls, cat, cp, mv, rm, etc).
+
+**Asterisco (*)**
+
+Por exemplo, vamos listar todos os arquivos (independente do nome) com a extensão .txt:
+
+```
+	ls *.txt
+```
+
+Outros exemplos:
+```
+	# lista todos os arquivos csv's que começam com 2024-:
+	ls 2024-*.csv
+	
+	# lista todos os que terminam com o nome 2024:
+	ls *2024.csv
+	
+	# lista todos os arquivos que contenham "linkedin" no nome:
+	ls *linkedin*
+```
+
+Agora, vamos listar todos os diretórios/ (sem os arquivos) da nossa home:
+
+```
+	ls -d */
+	
+	# resultado:
+	Desktop/  Documents/  Downloads/  Images/  Musics/  Videos/
+```
+
+Apenas pastas que começam com a letra D:
+
+```
+	ls -d D*/
+	
+	# resultado:
+	Desktop/  Documents/  Downloads/
+```
+
+**Curinga interrogação (?)**
+
+Indica um ou mais espaços (conforme o número de ?) que estão no nome de um arquivo.
+
+```
+	# lista csv's cujos nomes tenham exatos 4 caracteres em seguida de ano-:
+	ls ano-????.csv
+	
+	# lista independente do dia (com dois dígitos) de Dezembro:
+	ls ano 2023-12-??.csv
+	
+```
+
+
+**Colchetes [...]**
+
+Proporciona uma opção em que inclui todos arquivos que contenham os padrões dentro dos colchetes.
+
+Exemplo: Listemos todos os arquivos que comecem com a letra "o" **ou** "s" (os dois tipos). Isto é, todos que iniciam com "o" e todos os que iniciam com "s":
+
+```
+	# somente em letras minúsculas:
+	ls [os]*.*
+	
+	# maiúsculas ou minúsculas:
+	ls [oOsS]*.*
+
+	# lista todos os arquivos que contenham a palavra Whatsapp ou Youtube 	
+	ls *WhatsApp* *Youtube*
+	
+	#(não importando se comecem com maiúscula ou minúscula):
+	ls *[Ww]hatsApp* *[Yy]outube*
+
+```
+
+### Expansão de chaves:
+
+O uso da expansão de chaves no Bash facilita a impressão de strings ao definir um padrão ou sequência em que um termo será usado. 
+
+Basicamente o formato é `{inicio..fim}`. E com incremento: `{inicio..fim..incremento}`.
+
+Com o exemplo fica mais fácil:
+
+```bash
+	# imprime a sequência de números:
+	echo {1..10}
+	
+	# lista os arquivos que tenha essa mesma sequência em seus nomes:
+	ls pedido{1..10}.csv
+	
+	# imprime nros em órdem decrescente:
+	echo {10..0}
+	
+	# com incremento (que não seja 1 que é o padrão):
+	echo {0..21..3} 	# de 0 à 21, mas de 3 em 3.
+	
+	# imprime de 001 à 100:
+	echo {001..100}
+	
+	# ao invés de um ao lado do outro, um em cada linha:
+	echo "Nro: {000..010}" | tr ' ' '\n'
+	
+	# outro exemplo com incremento e datas:
+	ls chamadas-2023-Dez-{01..10}.csv
+	mv chamadas-2023-Dez-{01..10}.csv ./Arquivo-2023
+	
+	# funciona também com letras (minúsculas ou maiúsculas:
+	echo {a..z}
+	echo {A..Z}
+	
+	# letras de a-z, mas de 2 em 2:
+	echo {a..z..2}
+	
+	# ou numa lista de opções:
+	echo {g,r,p,m,f,b,ch,hi,j}ato
+	echo {,g,r,p,m,f,b,ch,hi,j}ato
+	
+	# lista de dias da semana por extenso (separados com vírgula):
+	echo {Segunda,Terça,Quarta,Quinta,Sexta}-feira,
+	
+	# imprimindo expressões com espaço:
+	# separadas com vírgula:
+	echo "Nro: "{01..10},
+	# ou cada uma numa linha:
+	echo "Nro: "{01..10} | sed 's/[0-9] /&\n/g'
+	
+	# formando frases:
+	echo "O nro: "{01..10}" já foi chamado."
+	echo "O nro: "{01..10}" já foi chamado." | sed "s/O /\nO /g"
+	
+	# plural ou singular:
+	echo arquivo{,s}
+
+	# combinações diversas (com mais de uma expansão):
+	ls arquivo{,s}{1..5}
+	
+	# combina uma variação de nomes e extensões:
+	ls foto-{001..003}.{png,jpg,webp}
+
+```
+Mais exemplos, ver tb https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expansion
+
 
 ## ENTRADA DE DADOS 2: Inputs (read / readline)
 
@@ -314,24 +456,46 @@ Os testes podem ser ainda mais complexos, pois se pode usar mais de uma condiç�
 
 
 ## OPERADORES TERNÁRIOS
-Para realizarmos condições simples que **não vão implicar em blocos de código** dependendo do resultado do teste, se pode usar o modelo ternário (tipo lambdas, em Python) para aplicar uma condição no código.
+Para realizarmos condições simples que dependendo do resultado do teste **não vão implicar tantos blocos de código***, se pode usar o modelo ternário (tipo lambdas, em Python) para aplicar uma condição no código.
 
 Sendo que:
+- O teste será feito entre colchetes: \[[ ... ]].
 - O que o que vem após o `&&` é para resposta verdadeira do teste e...
 - O que o que vem após o `||` é para resposta falsa do teste.
 
 Por exemplo:
 
 ```bash
+	# "a" recebe 1:
 	a=1
 	
+	# o valor de "a" é 1 ?:
 	[[ $a -eq 1 ]] && echo "sim" || echo "nao"
 	# resultado: sim
 	
+	# o valor de "a" é 2 ?:
 	[[ $a -eq 2 ]] && echo "sim" || echo "nao"
 	# resultado: nao
-
 ```
+
+\* Com operadores ternários também se pode usar também blocos de código usando chaves "{...}" (se temos de passar mais de um comando). 
+
+Dessa forma:
+
+```bash
+	[[ ...teste... ]] &&
+	{
+		# bloco de comandos em caso positivo
+	} ||
+	{
+		# bloco de comandos em caso negativo
+	}
+```
+
+**Acima:** *Atenção em onde se coloca os duplos-pipes* (||) *- na mesma linha do colchete que fecha o bloco anterior.*
+
+Um exemplo mais prático será mostrado mais à frente quando tratarmos do comando `case`.
+
 
 ## CONDIÇÕES IF, ELIF, ELSE...
 O comando `if` realizará um teste de condição, por tanto, sempre será acompanhado de duplos-colchetes `[[ ]]`, e conforme a resposta ou resultado do teste, executará um bloco de comandos. 
@@ -402,21 +566,106 @@ OBS.: Caso se use o `if-elif-else` **numa única linha**, é importante que não
 Também como outra alternativa para if-elif-else, se pode usar o comando `case`, que será visto a seguir.
 
 
-
-
 ## OPÇÕES EM CASOS (tipo switch):
 
 ```bash
-	
-	case "variable" in
+	case "$variable" in
 	"resposta1" )
 		Comandos … ;;
 	"resposta2" )
 		Comandos … ;;
 	"resposta3" )
 		Comandos … ;;
+	*)
+		comando ;;
 	esac
+```
 
+Particularidades de `case` no Bash:
+
+ - Note as palavras reservadas `case` e `in` ao início e final da `$variável`.
+ - A cada possível opção (entre áspas) existe um parêntesis.
+ - No último comando (de cada possível opção) fecha com ";;".
+ - O asterisco (*) executa o(s) comando(s) se a opção do usuário for nenhuma das anteriores.
+ - O `case` sempre tem que fechar com `esac` (case ao contrário).
+ 
+
+
+Exemplo prático de `case`:
+
+```bash
+echo "===================="
+echo "Selecione uma opção:"
+echo "===================="
+echo "1 - Para 1a. escolha"
+echo "2 - Para 2a. escolha"
+echo "3 - Para 3a. escolha"
+echo "4 - Para 4a. escolha"
+read OPCAO			# aqui está a variável que receberá o opção do usuário.
+
+case "$OPCAO" in
+	"1") echo "Você escolheu a 1a. opção";;
+	"2") echo "Você escolheu a 2a. opção";;
+	"3") echo "Você escolheu a 3a. opção";;
+	"4") echo "Você escolheu a 4a. opção";;
+	*)   echo "Opção não encontrada.";;
+esac
+
+echo
+```
+
+Outro exemplo de `case` com `while` e `break`, e com possibilidade do usuário digitar uma opção em maiúscula ou minúscula:
+
+```bash
+while :
+do
+	clear
+	echo "===================="
+	echo "Selecione uma opção:"
+	echo "===================="
+	echo "A - Para 1a. escolha"
+	echo "B - Para 2a. escolha"
+	echo "C - Para 3a. escolha"
+	echo "0 - Para Sair"
+	echo
+	read OPCAO
+	echo
+
+	case "$OPCAO" in
+	"a" | "A") 
+		echo "Você escolheu a opção A"
+		read;;
+	"b" | "B") 
+		echo "Você escolheu a opção B"
+		read;;
+	"c" | "C")  
+		echo "Você escolheu a opção C"
+		read;;
+	"0")
+		echo "Saindo..."
+		break;;
+	*)
+		echo "Opção desconhecida."
+		echo "Volte a escolher outra opção!"
+		read;;
+	esac
+	echo
+done
+```
+
+Outra sugestão para o uso de `case` é trabalhando junto com parâmetros passados na linha de comando ao chamar o script. Um exemplo prático:
+
+```bash
+	[[ $# -eq 0 ]] && echo "Faltou os parâmetros" || 
+	{
+	PARAMETRO=$1
+	case "$PARAMETRO" in
+		"-a") echo "Parâmetro 'a'";;
+		"-b") echo "Parâmetro 'b'";;
+		"-help") echo "Parâmetro 'help'";;
+		*)   echo "Parâmetro desconhecido";;
+	esac
+	}
 ```
 
 ## LISTAS / ARRAYS
@@ -521,9 +770,25 @@ Caso contrário, se pode adicionar esta linha acima em cada script em que se use
 
 ---
 
-**Exemplo prático de `for` para manipulação de arquivos:** 
+**Exemplos práticos de `for` para manipulação de arquivos:** 
 
 Há muitos exemplos em que se usa o `for` para **manipular arquivos em lote** em nosso sistema. (Lembre-se que por segurança, se recomenda um backup dos arquivos antes de rodar algum script em lote). 
+
+Vamos renomear todos os arquivos que contém letra maiúsculas para minúsculas:
+
+```bash
+	for ARQ in *
+	do
+		MINUSCULA=$(echo "$ARQ" | tr A-Z a-z)
+		mv "$ARQ" "$MINUSCULA"
+	done
+
+```
+
+Observe que na linha de `for`, ao invés de usarmos a instrução `$(ls)`, usamos apenas o asterisco `*`.
+
+
+**Outro exemplo prático para renomear arquivos em lote:**
 
 Suponhamos que numa certa pasta há vários arquivos de vídeo com nomes semelhantes, por exemplo:
 
@@ -597,6 +862,22 @@ Vamos executar o laço por 10 vezes:
 	do
 		# comandos que se repetirão X vezes. 
 	done
+```
+
+Opções do comando `seq`:
+
+```bash
+	seq nro						# sequência de 1 a nro
+	seq inicio fim				# sequência de inicio a fim
+	seq inicio incremento fim 	# sequência de inicio a fim com passo (incremento)
+	seq -s " " nro				# imprime de 1 à nro com separador espaço
+	seq -s "-" nro				# imprime de 1 à nro com separador "-"
+	
+	# Exemplos:
+	seq 0 2 20		# nros pares de 0 à 20.
+	seq 1 2 10		# nros ímpares de 1 à 10.
+	seq 0 10 100	# nros de 0 à 100 com passo 10.
+	
 ```
 
 Uso do laço `for` com o comando `seq` **para percorrer um único array (lista)**. Porém, lembre-se que um array começa com o elemento número zero (0):
