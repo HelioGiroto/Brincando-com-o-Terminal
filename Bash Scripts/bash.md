@@ -1,4 +1,5 @@
-<style>img{float: right; margin-left:5px;} .vermelho{color:red;}</style>
+<style>img{float: right; margin-left:5px;} .vermelho{color:red;} h2 { color: #A6FF00; background: #000000; padding-left: 0.5rem; padding-top: 3px;} 
+.direita{ display: block; text-align: right; }</style>
 
 ![](bash.png)
 # BASH 
@@ -244,6 +245,7 @@ Com o exemplo fica mais fácil:
 	# ou numa lista de opções:
 	echo {g,r,p,m,f,b,ch,hi,j}ato
 	echo {,g,r,p,m,f,b,ch,hi,j}ato
+	echo Program{o,as,a,amos,ais,am},
 	
 	# lista de dias da semana por extenso (separados com vírgula):
 	echo {Segunda,Terça,Quarta,Quinta,Sexta}-feira,
@@ -353,6 +355,8 @@ Normalmente realizamos testes com arquivos ou variáveis e o Terminal nos devolv
 
 Porém o Terminal não nos responde a menos que solicitemos sua resposta. E fazemos isso através da expressão `echo $?`. A "variável" `$?` contém a resposta que precisamos. 
 
+A variável `$?` retornará se o comando anterior foi bem sucedido (0) ou mal-sucedido (1).
+
 Observe o código a seguir:
 
 ```bash
@@ -394,6 +398,8 @@ Para memorizar, podemos usar o seguinte exemplo no Terminal: Digite `true` ou `f
 	
 ```
 
+
+
 ### OPERADORES LÓGICOS DE COMPARAÇÃO
 Eles são:
 
@@ -405,27 +411,61 @@ Eles são:
 	-le	# menor ou igual
 	-ge	# maior ou igual
 	
-	-z $STRING1				- $STRING1 is empty
-	$STRING1 = $STRING2		- $STRING1 is equal to $STRING2
-	$STRING1 != $STRING2	- $STRING1 is not equal to $STRING2
+	-z $VAR		# $VAR é vazia (Zero)
+	-n $VAR		# $VAR tem mais que 1 caracter.
+	$VAR1 = $VAR2	# $string1 é igual a $string2
+	$VAR2 != $VAR2	# $string1 é diferente de $string2
 	
 ```
 
 Scripts em Bash são usados muitas vezes para manipulação de arquivos, portanto, é comum que se necessite expressões próprias para comparar e testar. Como por exemplo:
 
 ```bash
-	-e file		- FILE exists
-	-d file		- FILE exists and is a directory.
-	-f file		- FILE exists and is a regular file.
-	-L file		- FILE exists and is a soft link.
-	-s file 	- True if the file exists with a size of more than zero.
-	-r file 	- True if the file exists and the read permission is set.
-	-w file 	- True if the file exists and the write permission is set.
-	-x file 	- True if the file exists and the execute permission is set.
+	-a arq	# Arquivo existe
+	-e arq	# Arquivo existe
+	-d arq	# Arquivo existe e é um diretório
+	-f arq	# Arquivo existe e é um arquivo regular (texto).
+	-h arq	# Arquivo existe e é um link simbólico
+	-L arq	# Arquivo existe e é um link simbólico (comando Ln)
+	-s arq	# Arquivo existe e tem tamanho (Size) (> zero).
+	-r arq	# Arquivo existe e tem permissão de leitura (read)
+	-w arq	# Arquivo existe e tem permissão de escrita (write)
+	-x arq	# Arquivo existe e for executável (+x)
+	-N arq	# Arquivo foi alterado na última vez que foi aberto (lido).
+	
+	arq1 -nt arq2	# o Aquivo1 é mais novo (New) que o Arquivo2
+	arq1 -ot arq2	# o Aquivo1 é mais velho (Old) que o Arquivo2
+	
+	! 	# negação da condição de teste.
+```
+
+Exemplos:
+
+```bash
+
+# cria um arq vazio:
+: > arq.txt
+
+# testa se tem tamanho (size) ou se está vazio:
+[[ -s arq.txt ]] 
+echo $?
+# resposta: 1 - negativo
+
+[[ ! -s arq.txt ]] 
+echo $?
+# resposta: 0 - positivo
+
+# cria um diretorio vazio:
+mkdir pastavazia
+
+# testa se a pasta está vazia:
+[[ -z $(ls pastavazia) ]] 
+echo $?
+# resposta: 0 - positivo
 
 ```
 
-Uma lista mais extensa está em:
+Uma lista mais extensa encontramos em:
 https://www.gnu.org/software/bash/manual/bash.html#Bash-Conditional-Expressions
 
 
@@ -495,6 +535,26 @@ Dessa forma:
 **Acima:** *Atenção em onde se coloca os duplos-pipes* (||) *- na mesma linha do colchete que fecha o bloco anterior.*
 
 Um exemplo mais prático será mostrado mais à frente quando tratarmos do comando `case`.
+
+**Exemplos para verificação de arquivos ou pastas:**
+
+```bash
+
+	# cria um arq vazio:
+	: > arq.txt
+
+	# testa se arq está vazio ou não:
+	[[ -s arq.txt ]] && echo "não vazio" || echo "Arq vazio"	# -size
+	[[ ! -s arq.txt ]] && echo "vazio" || echo "cheio"		# ! = negação
+
+	# cria um diretorio vazio:
+	mkdir pastavazia
+
+	# testa se a pasta está vazia:
+	[[ -z $(ls pastavazia) ]] && echo "pasta vazia" || echo "tem arquivos na pasta"
+	
+```
+
 
 
 ## CONDIÇÕES IF, ELIF, ELSE...
@@ -832,7 +892,7 @@ A forma mais tradicional de usar `for` para percorrer um array é esta:
 	done
 
 	# Em uma única linha:
-	# for ITEM in "${ARRAY[@]}"; do echo $ITEM; done
+	for ITEM in "${ARRAY[@]}"; do echo $ITEM; done
 ```
 
 Atenção: No uso do array em FOR, **não funciona com ARRAY\[*]**, mas apenas com ARRAY\[@]. 
@@ -920,7 +980,7 @@ Exemplo simples em uma única linha:
 
 ```bash
 	# percorre o(s) array(s):
-	# for X in $(seq 0 10); do echo ${PRODUTO[X]} - ${PRECO[X]}; done
+	for X in $(seq 0 10); do echo ${PRODUTO[X]} - ${PRECO[X]}; done
 ```
 
 
@@ -1013,10 +1073,94 @@ Para que um código não caia num looping infinito (principalmente quando se usa
 	((n-=1))	
 ```
 
-## FUNÇÕES: CRIAR, MANIPULAR, RETORNAR, CHAMAR, ASSÍNCRONISMO.
-```bash
-	
+## FUNÇÕES 
 
+Sintaxe das funções - Define apenas com o seu nome e parêntesis:
+
+```bash
+	funcao()	# cria a função
+	{
+		# comandos...
+	}	
+
+	funcao		# chama a função
+
+```
+
+Ou também se pode usar desta forma (com a palavra reservada **function**, mas **sem parêntesis**):
+
+```bash
+	function funcao
+	{
+		# comandos...
+	}	
+
+	funcao
+```
+
+### Funções assíncronas:
+
+Existe uma forma de que as funções se executem **assincronizadamente**, ou seja, que não tenham que esperar uma pelas outras, mas que rodem independentemente uma das outras. Para isso, basta acrescentar o caracter especial `&` ao chamá-las, desta forma no exemplo a seguir:
+
+```bash
+	function funcao1
+	{
+		echo "inicia funcao 1"
+		sleep 5
+		echo "Termina a funcao 1"
+	}
+
+
+	function funcao2
+	{
+		echo "inicia funcao 2"
+		echo "Termina a funcao 2"
+	}
+
+	funcao1 &
+	funcao2 &
+```
+
+Na execução deste script, a função 2 já é executada sem esperar que a função nro. 1 termine. 
+
+Numa linha de comando de Terminal, o uso do caracter `&` logo após chamar um comando ou um arquivo, faz que o Terminal fique liberado para executar outras tarefas. 
+
+Por exemplo:
+
+`chromium &`
+
+Abre o navegador sem deixar o Terminal "preso" ou "ocupado" até que ele se feche.
+
+
+### Variáveis locais e globais na função:
+
+Todas as variáveis são globais a menos que se use a palavra reservada `local` para definí-la como local, isto é, com seu valor distinto apenas enquanto está dentro da função:
+
+```bash
+	VAR1=1
+	echo "Valor de VAR1 antes de executar a função: $VAR1"
+
+	funcaoX () {
+	  local VAR1=20
+	  echo "Valor de VAR1 dentro da função: $VAR1."
+	}	
+
+	funcaoX
+	echo "Valor de VAR1 após de executar a função: $VAR1"
+```
+
+### Parâmetros de funções
+
+Também é possivel passar argumentos para serem processados dentro da função. Os parâmetros são definidos como $1 à $... Por exemplo:
+
+```bash
+	soma () {
+	  echo $(($1 + $2))
+	}
+
+	soma 5 2
+	
+	# resultado: 7
 ```
 
 ## TRATAMENTO DE ERROS: EXCEPT / TRY 
@@ -1031,86 +1175,8 @@ Para que um código não caia num looping infinito (principalmente quando se usa
 
 ```
 
-## IMPRIMIR PDF, ARQ, IMPRESSORA
-```bash
-	
-
-```
-
-## TABELAS
-```bash
-	
-
-```
-
 
 ## DATA, HORA
-```bash
-	
-
-```
-
-## GUI: ELEMENTOS/TAGS
-```bash
-	
-
-```
-
-## DESENHAR TELA / FORMULÁRIO - LABEL+CAMPO+BOTÃO...
-```bash
-	
-
-```
-
-## POSICIONAR ELEMENTO, ALINHAR, FLEXBOX, ETC
-```bash
-	
-
-```
-
-## DEFINIR (SETAR) ELEMENTO - ENCAPSULAR
-```bash
-	
-
-```
-
-## OBTER ELEMENTO
-```bash
-	
-
-```
-
-## IMPRIMIR ELEMENTO 
-```bash
-	
-
-```
-
-## INPUT DE ELEMENTO 
-```bash
-	
-
-```
-
-## EVENTOS E OUVIDORES (LISTENINGS)
-```bash
-	
-
-```
-
-## ESCUTA USUÁRIO: CLIC, FOCUS, SCROLL, MOUSE, TECLADO, TOUCH, ETC...
-```bash
-	
-
-```
-
-## CLICAR NO ELEMENTO/BOTÃO
-```bash
-	
-
-```
-
-## BANCO DE DADOS (CRUD)
 ```bash
 	
 
