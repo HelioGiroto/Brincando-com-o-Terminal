@@ -1,6 +1,3 @@
-<style>img{float: right; margin-left:5px;} .vermelho{color:red;} h2 { color: #A6FF00; background: #000000; padding-left: 0.5rem; padding-top: 3px;} 
-.direita{ display: block; text-align: right; }</style>
-
 ![](bash.png)
 # BASH 
 
@@ -1182,4 +1179,6 @@ Também é possivel passar argumentos para serem processados dentro da função.
 
 ```
 
+<style>img{float: right; margin-left:5px;} .vermelho{color:red;} h2 { color: #A6FF00; background: #000000; padding-left: 0.5rem; padding-top: 3px;} 
+.direita{ display: block; text-align: right; }</style>
 
