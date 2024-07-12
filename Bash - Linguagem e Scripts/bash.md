@@ -25,7 +25,7 @@ https://www.gnu.org/software/bash/manual/bash.html
 
 
 ## EXTENSÃO DO CÓDIGO
-Normalmente se salva um script Bash como `nome_arquivo.sh`, mas também se pode encontrar (raramente) a extensão `.bash`; ou até sem extensão (em casos de scripts salvos na pasta /bin que receberam permissão para serem executáveis (-x)).
+Normalmente se salva um script Bash como `nome_arquivo.sh`, mas também se pode encontrar (raramente) a extensão `.bash`; ou até sem extensão (em casos de scripts salvos na pasta /bin que receberam permissão para serem executáveis (`chmod -x arq`)).
 
 
 ## SINTAXE DE COMANDOS NO SCRIPT
@@ -42,10 +42,10 @@ Ou:
 `comando1; comando2; comando3`
 
 
-## ENTRADA DE DADOS 1: VARIÁVEIS
+## ENTRADA DE DADOS 1: Variáveis
 Para nomes de variáveis, como de costume, se evita caracteres alfanuméricos ou nomes que iniciem com números. Por convenção, eles aparecem em letras maiúsculas, porém não é regra.
 
-**Não** se aceita **espaço(s)** entre o nome da variável e o símbolo de atribuição **(=)**, tampouco entre esse e seu valor atribuido.
+**Não** se aceita **espaço(s)** entre o nome da variável e o símbolo de atribuição **(=)**, tampouco entre esse e seu valor atribuído.
 
 ```bash
 	VARIAVEL=1
@@ -89,13 +89,15 @@ Também se pode realizar operações com números decimais utilizando o comando 
 
 ```
 
-## IMPRIMIR NA TELA - FORMATAR IMPRESSÃO (PRINTF'S)
-(Alinhar, justificar, decimais, cores, peso, fonte, etc)
+## IMPRIMIR NA TELA
+
+Em Bash, há várias maneiras de se imprimir em tela uma mensagem. Desde as mais simples até as mais complexas:
+
+### Comando echo
 
 ```bash
-
 	echo "Olá mundo!"
-	echo 'Frase entre áspas simples ou duplas'
+	echo 'Frase entre aspas simples ou duplas'
 	echo 123
 	echo palavra
 	echo 	# (somente o comando = linha em branco)
@@ -103,13 +105,19 @@ Também se pode realizar operações com números decimais utilizando o comando 
 	echo "$MENSAGEM"
 	echo -n "Não tem quebra de linha após este echo..."
 	echo " fim."
-
 ```
+
+### printf
+
+### tput
+
+(Alinhar, justificar, decimais, cores, peso, fonte, etc)
+
 
 ## CONCATENAÇÃO
 
 ```bash
-	NOME='Helio'
+	NOME='José'
 	SOBRENOME='da Silva'
 	IDADE=30
 	BOASVINDAS="Seja bem-vindo $NOME $SOBRENOME! Feliz aniversário de $IDADE anos!"
@@ -270,7 +278,7 @@ Com o exemplo fica mais fácil:
 Mais exemplos, ver tb https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expansion
 
 
-## ENTRADA DE DADOS 2: Inputs (read / readline)
+## ENTRADA DE DADOS 2: Comando Read
 
 ```bash
 	ENTRADA="Por favor, digite com uma informação: "
@@ -281,7 +289,7 @@ Mais exemplos, ver tb https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expa
 	echo
 ```
 
-## ENTRADA DE DADOS 3: PARÂMETROS EM LINHA DESDE O TERMINAL
+## ENTRADA DE DADOS 3: Parâmetros em linha do Terminal 
 Também é possível criar um script em que o usuário passa os parâmetros de entrada (argumentos) na própria linha de comando ao chamar o programa.
 
 Logo, todo conteúdo que venha após o nome do Bash Script é considerado parâmetros (entrada de dados). Sendo que:
@@ -335,9 +343,9 @@ O resultado será:
 	O valor @ retorna a todos os argumentos: A B C
 ```
 
-Quando cada argumento leva espaço ou algum caracter especial, se recomenda passar cada argumento entre áspas. Caso contrário, o interpretador Bash consideraria que cada espaço indicaria um novo argumento.
+Quando cada argumento leva espaço ou algum caracter especial, se recomenda passar cada argumento entre aspas. Caso contrário, o interpretador Bash consideraria que cada espaço indicaria um novo argumento.
 
-Por isso, usaríamos entre áspas, desta forma:
+Por isso, usaríamos entre aspas, desta forma:
 
 `$ bash aniversarios.sh "Manuel da Silva" "27/09/1990"`
 
@@ -346,13 +354,13 @@ Por isso, usaríamos entre áspas, desta forma:
 ## TESTE DE CONDIÇÕES
 Toda linguagem de programação tem seu modo de realizar seu teste lógico com os dados que são obtidos ou passados. É mais comum que se use esse teste com os comandos `if`, `for` ou `while`.
 
-Em Bash, o teste é realizado com o uso de duplos-colchetes `([[ ]])`. Mas é muito provável que se encontre alguns exemplos com apenas um colchete `[ ]`, porém o uso de conchetes-duplos `[[ ]]` é mais recomendado e convencional por ser a opção mais moderna.
+Em Bash, o teste é realizado com o uso de duplos-colchetes `([[ ]])`. Mas é muito provável que se encontre alguns exemplos com apenas um colchete `[ ]`, porém o uso de colchetes-duplos `[[ ]]` é mais recomendado e convencional por ser a opção mais moderna.
 
 Normalmente realizamos testes com arquivos ou variáveis e o Terminal nos devolve o resultado como `true` ou `false`. Ou seja, ele nos responde se o que "perguntamos" é verdadeiro ou falso. **Verdadeiro corresponde ao valor `0` e falso ao valor `1`.**
 
 Porém o Terminal não nos responde a menos que solicitemos sua resposta. E fazemos isso através da expressão `echo $?`. A "variável" `$?` contém a resposta que precisamos. 
 
-A variável `$?` retornará se o comando anterior foi bem sucedido (0) ou mal-sucedido (1).
+A variável `$?` retornará se o comando anterior foi bem sucedido (0) ou malsucedido (1).
 
 Observe o código a seguir:
 
@@ -398,7 +406,7 @@ Para memorizar, podemos usar o seguinte exemplo no Terminal: Digite `true` ou `f
 
 
 ### OPERADORES LÓGICOS DE COMPARAÇÃO
-Eles são:
+São eles:
 
 ```bash
 	-eq	# igual
@@ -439,7 +447,6 @@ Scripts em Bash são usados muitas vezes para manipulação de arquivos, portant
 Exemplos:
 
 ```bash
-
 # cria um arq vazio:
 : > arq.txt
 
@@ -459,7 +466,6 @@ mkdir pastavazia
 [[ -z $(ls pastavazia) ]] 
 echo $?
 # resposta: 0 - positivo
-
 ```
 
 Uma lista mais extensa encontramos em:
@@ -497,8 +503,8 @@ Para realizarmos condições simples que dependendo do resultado do teste **não
 
 Sendo que:
 - O teste será feito entre colchetes: \[[ ... ]].
-- O que o que vem após o `&&` é para resposta verdadeira do teste e...
-- O que o que vem após o `||` é para resposta falsa do teste.
+- O que o que vem após o `&&` é para resposta verdadeira (positiva) do teste e...
+- O que o que vem após o `||` é para resposta falsa (negativa) do teste.
 
 Por exemplo:
 
@@ -623,7 +629,7 @@ OBS.: Caso se use o `if-elif-else` **numa única linha**, é importante que não
 Também como outra alternativa para if-elif-else, se pode usar o comando `case`, que será visto a seguir.
 
 
-## OPÇÕES EM CASOS (tipo switch):
+## OPÇÕES EM CASOS
 
 ```bash
 	case "$variable" in
@@ -641,7 +647,7 @@ Também como outra alternativa para if-elif-else, se pode usar o comando `case`,
 Particularidades de `case` no Bash:
 
  - Note as palavras reservadas `case` e `in` ao início e final da `$variável`.
- - A cada possível opção (entre áspas) existe um parêntesis.
+ - A cada possível opção (entre aspas) existe um parêntesis.
  - No último comando (de cada possível opção) fecha com ";;".
  - O asterisco (*) executa o(s) comando(s) se a opção do usuário for nenhuma das anteriores.
  - O `case` sempre tem que fechar com `esac` (case ao contrário).
@@ -726,7 +732,7 @@ Outra sugestão para o uso de `case` é trabalhando junto com parâmetros passad
 ```
 
 ## LISTAS / ARRAYS
-As listas (arrays) em Bash são variáveis com mais de um valor, definidos entre parêntesis e separados por espaços. Caso sejam strings, devem estar (de preferência) entre áspas.
+As listas (arrays) em Bash são variáveis com mais de um valor, definidos entre parêntesis e separados por espaços. Caso sejam strings, devem estar (de preferência) entre aspas.
 
 ```bash
 	IDADES=(34 30 59 40)
@@ -738,7 +744,7 @@ Ver tb [este site.](https://linuxsimply.com/bash-scripting-tutorial/loop/for-loo
 
 
 ## MANIPULAÇÃO DE LISTAS
-Em Bash o primeiro elemento (item) de um array é o nro 0.
+Em Bash o primeiro elemento (item) de um array é o número 0.
 
 Para imprimir, adicionar, alterar ou deletar um item ao array:
 
@@ -765,11 +771,13 @@ Para imprimir, adicionar, alterar ou deletar um item ao array:
 
 
 
-## LAÇOS - PERCORRER LISTA / ARQUIVOS
+## LAÇOS
 
 ### O laço FOR
 
-Em Bash se usa laços (loopings) tipo FOR principalmente Uso do FOR para percorrer o conteúdo de um arquivo ou array. Nos exemplos a seguir mostraremos como isso se pode ser feito. Porém, basicamente a sintaxe do FOR é esta:
+Em Bash se usa laços (loopings) tipo FOR principalmente para percorrer o conteúdo de um arquivo ou array. Nos exemplos a seguir mostraremos como isso pode ser feito. 
+
+Basicamente a sintaxe do FOR é esta:
 
 ```bash
 	for VARIAVEL in ARQ/ARRAY
@@ -810,20 +818,20 @@ Mas se ocorra algum erro em que os nomes não aparecem de forma correta o que ac
 <span id='erroIFS'></span>
 <u class='vermelho'>Provável **erro** de IFS</u>:
 
-Existe uma variável de sistema chamada IFS que define os delimitadores (em arrays por exemplo) nesta ordem: espaço, tab e enter. Ou seja, cada vez que se encontra um espaço num item de array ou num nome de arquivo, o sistema interpreta que é outro item (do array) ou outro arquivo! (Isso vem pré-configurado nas distribuições Debian).
+<span class='letraPeq'>Existe uma variável de sistema chamada IFS que define os delimitadores (em arrays por exemplo) nesta ordem: espaço, tab e enter. Ou seja, cada vez que se encontra um espaço num item de array ou num nome de arquivo, o sistema interpreta que é outro item (do array) ou outro arquivo! (Isso vem pré-configurado nas distribuições Debian).</span>
 
-Sendo assim, se recomenda que antes de executar o script acima, se mude a variável IFS no Terminal desta forma:
+<span class='letraPeq'>Sendo assim, se recomenda que antes de executar o script acima, se mude a variável IFS no Terminal desta forma:</span>
 
 ```
-$ IFS='		# digite: IFS=, áspas, e pressione ENTER.
->'		# pressione áspas novamente e ENTER.
+$ IFS='		# digite: IFS=, aspas, e pressione ENTER.
+>'		# pressione aspas novamente e ENTER.
 ```
 
-Contudo, todas as vezes que se reinicia a máquina o valor de IFS volta a ser como o padrão. Por tanto, para que se mude persistentemente o IFS, se recomenda que altere o valor da mesma no arquivo .bashrc, adicionando esta linha:
+<span class='letraPeq'>Contudo, todas as vezes que se reinicia a máquina o valor de IFS volta a ser como o padrão. Por tanto, para que se mude persistentemente o IFS, se recomenda que altere o valor da mesma no arquivo .bashrc, adicionando esta linha:</span>
 
 **`IFS=$'\n'`**
 
-Caso contrário, se pode adicionar esta linha acima em cada script em que se use um `for` para percorrer nomes de arquivos, arrays, etc. O que seria muito mais trabalhoso.
+<span class='letraPeq'>Caso contrário, se pode adicionar esta linha acima em cada script em que se use um `for` para percorrer nomes de arquivos, arrays, etc. O que seria muito mais trabalhoso.</span>
 
 ---
 
@@ -906,7 +914,7 @@ Atenção: No uso do array em FOR, **não funciona com ARRAY\[*]**, mas apenas c
 ```
 
 
-Ou também uma forma com sequência númerica, que veremos a seguir:
+Ou também uma forma com sequência numérica, que veremos a seguir:
 
 ### Uso do FOR para percorrer uma sequência numérica:
 
@@ -969,7 +977,7 @@ Outro exemplo prático do uso de `for` com `seq`, é **quando se pretende percor
 	echo "Fim do Script."
 ```
 
-Mas para o perfeito funciomento deste script acima é necessário que todas as listas (arrays) tenham o mesmo tamanho, ou seja, o mesmo número de elementos.
+Mas para o perfeito funcionamento deste script acima é necessário que todas as listas (arrays) tenham o mesmo tamanho, ou seja, o mesmo número de elementos.
 
 Observe também que ao final do laço (logo abaixo do `done`), se executará uma mensagem de término do script, que só rodará uma única vez (já que está fora do laço).
 
@@ -1003,7 +1011,7 @@ Explicação do código:
  - O laço se executará X vezes, 
  - Sendo que X é o número de linhas que os arquivos possuem.
  - A cada número de execução, ele extrairá a linha de mesmo número de cada arquivo e...
- - Imiprimirá num arquivo a parte chamado arq_final.txt
+ - Imprimirá num arquivo a parte chamado arq_final.txt
  - Se imprime a da iteração, um separador "======" 
  
 
@@ -1126,12 +1134,12 @@ Por exemplo:
 
 `chromium &`
 
-Abre o navegador sem deixar o Terminal "preso" ou "ocupado" até que ele se feche.
+Abre o navegador sem deixar o Terminal "preso" ou "ocupado" até que ele se feche (isso é importante quando desenvolvemos um script que envolva o navegador e outras ferramentas em conjunto).
 
 
 ### Variáveis locais e globais na função:
 
-Todas as variáveis são globais a menos que se use a palavra reservada `local` para definí-la como local, isto é, com seu valor distinto apenas enquanto está dentro da função:
+Todas as variáveis são globais a menos que se use a palavra reservada `local` para defini-la como local, isto é, com seu valor distinto apenas enquanto está dentro da função:
 
 ```bash
 	VAR1=1
@@ -1146,9 +1154,9 @@ Todas as variáveis são globais a menos que se use a palavra reservada `local` 
 	echo "Valor de VAR1 após de executar a função: $VAR1"
 ```
 
-### Parâmetros de funções
+### Funções que recebem parâmetros
 
-Também é possivel passar argumentos para serem processados dentro da função. Os parâmetros são definidos como $1 à $... Por exemplo:
+Também é possível passar argumentos para serem processados dentro da função. Os parâmetros são definidos como $1 à $... Por exemplo:
 
 ```bash
 	soma () {
@@ -1160,25 +1168,24 @@ Também é possivel passar argumentos para serem processados dentro da função.
 	# resultado: 7
 ```
 
+
 ## TRATAMENTO DE ERROS: EXCEPT / TRY 
 ```bash
 	
 
 ```
 
-## MÓDULOS / BIBLIOTECAS PARA IMPORTAR: LER ARQ/WEB/XLS/DOC/JSON/XML, ESCREVER PDF, ETC
+## MÓDULOS / BIBLIOTECAS PARA IMPORTAR: 
+
++ Ler arq/web/xls/doc/json/xml; 
++ Escrever txt,pdf, etc
++ Redirecionamentos
+
 ```bash
 	
 
 ```
 
 
-## DATA, HORA
-```bash
-	
-
-```
-
-<style>img{float: right; margin-left:5px;} .vermelho{color:red;} h2 { color: #A6FF00; background: #000000; padding-left: 0.5rem; padding-top: 3px;} 
-.direita{ display: block; text-align: right; }</style>
+<style> img {float: right; margin-left:5px;} h2 {color: #A6FF00; background: #000000; padding-left: 0.5rem; padding-top: 3px;} .vermelho{color:red;} .letraPeq {font-size: 0.7em;} .direita {display: block; text-align: right;}</style>
 
