@@ -79,11 +79,13 @@ Ou, em uma única linha:
 ## <a class="up" href="#topo">> ENTRADA DE DADOS 1: Variáveis <span id='variaveis'></span></a> 
 Toda linguagem de programação se utiliza de dados. Esses dados, podem ser pré-definidos no sistema, capturados pelo programa, ou definidos pelo usuário do programa. 
 
-A forma mais básica de uma linguagem usar dados é por meio das variáveis. Por meio delas, passamos os dados para o programa executar sua(s) função(ões). As variáveis definem qual serão os dados que serão usados, o tipo e qual será o nome deles. 
+Sem dados, um programa não funciona e nem precisaria existir! 
 
-Em Bash, se diz que "tudo é texto". E por ser uma linguagem não-tipada, não se define o tipo das variáveis. 
+E qual é a forma mais básica desses dados "chegarem" a um programa? Resposta: Por meio das variáveis. É por elas que passamos os dados para que um programa execute sua(s) função(ões), isto é, as variáveis realizam a entrada de dados para que um programa funcione. 
 
-Já para **nomes das variáveis**, como de costume, se evita caracteres alfanuméricos e nomes que iniciem com números. Porém, também se pode começar com um underline ( _ ).
+Variáveis definem qual serão os dados que serão usados, o tipo e qual será o nome deles. Em Bash, se diz que "tudo é texto". E por ser uma linguagem não-tipada, não se define o tipo das variáveis. 
+
+Para **nomes das variáveis**, como de costume, se evita caracteres alfanuméricos e nomes que iniciem com números. Porém, também se pode começar com um underline ( _ ).
 
 Por convenção, nomes de variáveis em Bash aparecem em letras maiúsculas, porém não é regra.
 
