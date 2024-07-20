@@ -6,6 +6,35 @@ A linguagem Bourne-Again Shell (Shell Nascido de Novo) foi lançada inicialmente
 A documentação oficial da linguagem está em:
 https://www.gnu.org/software/bash/manual/bash.html
 
+## Índice:
+	CLI ou GUI 
+	Shebang: Inicio do Programa
+	Comentários
+	Extensão do Código
+	Sintaxe de Comandos no Script
+	Entrada de Dados 1: Variáveis
+	Operações e Operadores Aritméticos
+	Imprimir na Tela
+	Concatenação
+	Manipulação de Strings / Regex
+	Curingas e Expansão de Chaves
+	Entrada de Dados 2: Comando Read
+	Entrada de Dados 3: Parâmetros Em Linha Do Terminal 
+	Teste de Condições
+	Operadores Ternários
+	Condições If, Elif, Else
+	Opções em Casos
+	Listas / Arrays
+	Manipulação de Listas
+	Laços
+	While
+	Continue - Break
+	Incrementos
+	Funções 
+	Tratamento de Erros: Except / Try 
+	Módulos / Bibliotecas para Importar
+
+
 
 ## CLI OU GUI 
 "Command-Line Interface" ou "Graphical User Interface"?
@@ -28,7 +57,7 @@ https://www.gnu.org/software/bash/manual/bash.html
 Normalmente se salva um script Bash como `nome_arquivo.sh`, mas também se pode encontrar (raramente) a extensão `.bash`; ou até sem extensão (em casos de scripts salvos na pasta /bin que receberam permissão para serem executáveis (`chmod -x arq`)).
 
 
-## SINTAXE DE COMANDOS NO SCRIPT
+## SINTAXE de COMANDOS NO SCRIPT
 Dentro do script os comandos estarão cada um em uma linha, sem a necessidade obrigatória de indentação em caso de funções e/ou laços, ou mesmo todos os comandos podem estar **numa única linha** separados por ponto-e-vírgula (**;**).
 
 ```bash
@@ -42,10 +71,11 @@ Ou:
 `comando1; comando2; comando3`
 
 
-## ENTRADA DE DADOS 1: Variáveis
+## ENTRADA de DADOS 1: Variáveis
 Para nomes de variáveis, como de costume, se evita caracteres alfanuméricos ou nomes que iniciem com números. Por convenção, eles aparecem em letras maiúsculas, porém não é regra.
 
 **Não** se aceita **espaço(s)** entre o nome da variável e o símbolo de atribuição **(=)**, tampouco entre esse e seu valor atribuído.
+
 
 ```bash
 	VARIAVEL=1
@@ -54,7 +84,10 @@ Para nomes de variáveis, como de costume, se evita caracteres alfanuméricos ou
 	NOMECOMPLETO="Maria da Silva"
 	IDADE=40
 	COMANDO=$(ls *.jpg)
+	DATA_NASC="01/07/2003"
 ```
+
+Até se pode usar o underline ( _ ) para nomes de variáveis, mas nunca o hífen (-).
 
 ## OPERAÇÕES E OPERADORES ARITMÉTICOS
 ```bash
@@ -124,13 +157,133 @@ Em Bash, há várias maneiras de se imprimir em tela uma mensagem. Desde as mais
 	echo $BOASVINDAS
 ```
 
-## MANIPULAÇÃO DE STRINGS / REGEX
+## MANIPULAÇÃO de STRINGS / REGEX
+
+**Fatiando uma string**
+
+É possível manipular um string, ou seja, uma variável que tenha conteúdo de string, fatiando-a para obter apenas um pedaço da mesma. A sintaxe é:
+
+`echo ${VARIAVEL:i:qtde}`
+
+Sendo que:
+ - É obrigatório o uso de colchetes ( { } ) depois de dolar ($).
+ - i: é o início da string. A primeira letra que será impressa.
+ - qtde: a quantidade de letras que serão impressas.
+
+Exemplo:
+
 ```bash
+	# cria uma variável:
+	PROX_NATAL="25122024"
 	
+	# imprime o dia de PROX_NATAL:
+	echo ${PROX_NATAL:0:2}
+	
+	# imprime o mês de PROX_NATAL:
+	echo ${PROX_NATAL:2:2}
+
+	# imprime o ano de PROX_NATAL:
+	echo ${PROX_NATAL:4:4}
+```
+
+Se usa os colchetes antes do início do nome da variável, já que o Bash interpreta que uma variável também é um array, ou seja, uma lista, ou conjunto de caracteres. Mais adiante, no tema de "Arrays" veremos isso mais claramente. O importante é não esquecer de usar os colchetes antes do nome da variável ao manipular (fatiar) strings, quando for preciso.
+
+
+**Obtendo o número em que aparece uma ocorrência na string**
+
+Se pode também obter em que lugar na string aparece a primeira ocorrência de uma expressão, utilizando o comando `expr index`. Observe o exemplo:
+
+```
+	# cria uma string:
+	LETRAS="ABCDEFGHIJLMNOPQRSTUVXZ"
+	
+	# obtem em que ordem está a letra A:
+	expr index $LETRAS "A"
+	# resultado = 1
+
+	expr index $LETRAS H
+	# resultado = 8
 
 ```
 
-## CURINGAS E EXPANSÃO DE CHAVES
+*CUIDADO:* Perceba, porém, que o número retornado (como resultado) **não é do índice**, porque senão começaria do zero (0), e A estaria no índice 0. 
+
+Logo, para imprimir a letra "A" da variável LETRAS, teríamos que considerar que só a partir da posição 0, imprimiríamos um carácter: `echo ${LETRAS:0:1}`.
+
+
+**Substituindo trechos numa string**
+
+Podemos igualmente, substituir o conteúdo de uma string, muito parecidamente com o comando `sed`. Sintaxe:
+
+`echo ${VARIAVEL/antes/depois}`
+
+Onde:
+ - antes: é o valor (conteúdo) que se quer alterar por:
+ - depois: que é o conteúdo que será colocado em lugar de "antes".
+ 
+Observe nessa sintaxe, novamente, o uso dos colchetes antes do nome da variável.
+
+Exemplos de uso:
+
+```bash
+	# definimos uma string:
+	NOME="Ana Solteira"
+	echo ${NOME/Solteira/Casada}
+	
+	# ou:
+	NOME_CASADA=$(echo ${NOME/Solteira/Casada})
+	echo $NOME_CASADA 
+	
+	# outro bom exemplo:
+	FRASE="Minha terra tem palmeiras onde canta o Sabiá."
+	
+	# substituimos o conteúdo:
+	echo ${FRASE/palmeiras/o Palmeiras}
+```
+
+
+**Convertendo para maiúsculas ou minúsculas o conteúdo de uma string**
+
+Exemplos práticos:
+
+```bash
+	## MAIÚSCULAS = ^ ou ^^ ##
+	
+	# Convertendo a PRIMEIRA letra para MAIÚSCULA:
+	PAIS="brasil"
+	echo ${PAIS^}
+	# resultado = Brasil
+
+	# Convertendo TODAS as letras para MAIÚSCULAS:
+	echo ${PAIS^^}
+	# resultado = BRASIL
+	
+	# Convertendo ALGUMAS letras para MAIÚSCULAS:
+	CIDADE="são paulo - sp"
+	echo ${CIDADE^^[sp]}
+	# resultado = São Paulo - SP
+	
+	
+	## minúsculas = , ou ,, ##
+	
+	# Convertendo a PRIMEIRA letra PARA minúscula:
+	PALAVRA="Deuses"
+	echo ${PALAVRA,}
+	# resultado = deuses
+
+	# Convertendo TODAS as letras PARA minúsculas:
+	PALAVRA="POR FAVOR..."
+	echo ${PALAVRA,,}
+	# resultado = por favor...
+	
+	# Convertendo ALGUMAS as letras PARA minúsculas:
+	HORA="São 10 Horas e 15 Minutos."
+	echo ${HORA,,[HM]}
+	# resultado = São 10 horas e 15 minutos.
+```
+
+
+## CURINGAS E EXPANSÃO de CHAVES
 
 ### Curingas:
 
@@ -278,7 +431,7 @@ Com o exemplo fica mais fácil:
 Mais exemplos, ver tb https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expansion
 
 
-## ENTRADA DE DADOS 2: Comando Read
+## ENTRADA de DADOS 2: Comando Read
 
 ```bash
 	ENTRADA="Por favor, digite com uma informação: "
@@ -289,7 +442,7 @@ Mais exemplos, ver tb https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expa
 	echo
 ```
 
-## ENTRADA DE DADOS 3: Parâmetros em linha do Terminal 
+## ENTRADA de DADOS 3: Parâmetros em linha do Terminal 
 Também é possível criar um script em que o usuário passa os parâmetros de entrada (argumentos) na própria linha de comando ao chamar o programa.
 
 Logo, todo conteúdo que venha após o nome do Bash Script é considerado parâmetros (entrada de dados). Sendo que:
@@ -351,7 +504,7 @@ Por isso, usaríamos entre aspas, desta forma:
 
 
 
-## TESTE DE CONDIÇÕES
+## TESTE de CONDIÇÕES
 Toda linguagem de programação tem seu modo de realizar seu teste lógico com os dados que são obtidos ou passados. É mais comum que se use esse teste com os comandos `if`, `for` ou `while`.
 
 Em Bash, o teste é realizado com o uso de duplos-colchetes `([[ ]])`. Mas é muito provável que se encontre alguns exemplos com apenas um colchete `[ ]`, porém o uso de colchetes-duplos `[[ ]]` é mais recomendado e convencional por ser a opção mais moderna.
@@ -405,7 +558,7 @@ Para memorizar, podemos usar o seguinte exemplo no Terminal: Digite `true` ou `f
 
 
 
-### OPERADORES LÓGICOS DE COMPARAÇÃO
+### OPERADORES LÓGICOS de COMPARAÇÃO
 São eles:
 
 ```bash
@@ -473,7 +626,7 @@ https://www.gnu.org/software/bash/manual/bash.html#Bash-Conditional-Expressions
 
 
 
-### OPERADORES (LÓGICOS) DE COMPARAÇÃO: AND E OR 
+### OPERADORES (LÓGICOS) de COMPARAÇÃO: AND E OR 
 Os testes podem ser ainda mais complexos, pois se pode usar mais de uma condição a ser testada. Para isso, usamos `&&` e `||` que significa: `E` e `OU`, respectivamente.
 
 ```bash
@@ -732,7 +885,7 @@ Outra sugestão para o uso de `case` é trabalhando junto com parâmetros passad
 ```
 
 ## LISTAS / ARRAYS
-As listas (arrays) em Bash são variáveis com mais de um valor, definidos entre parêntesis e separados por espaços. Caso sejam strings, devem estar (de preferência) entre aspas.
+As listas (arrays ou vetores) em Bash são variáveis com mais de um valor, definidos entre parêntesis e separados por espaços. Caso sejam strings, devem estar (de preferência) entre aspas.
 
 ```bash
 	IDADES=(34 30 59 40)
@@ -741,9 +894,37 @@ As listas (arrays) em Bash são variáveis com mais de um valor, definidos entre
 ```
 Ver tb [este site.](https://linuxsimply.com/bash-scripting-tutorial/loop/for-loop/for-array/)
 
+**Vetores associativos**
+
+Existe também, embora quase nunca usado, os "arrays" associativos, ou melhor dito: os vetores associativos, que usa nomes em lugar de números, para definir a posição (índice) do elemento num array. 
+
+Não abordaremos por não ser muito usual, porém seu formato seria:
+
+```bash
+	# criamos um array associativo de nome CARROS:
+	declare -A CARROS
+	
+	# Definimos uma placa para o carro criado:
+	CARROS[fusca]=XYZ0007
+	
+	# Outro exemplo:
+	CARROS[ferrari]=ABC7777
+	
+	# outro exemplo (com aspas devido o espaço no meio da string):
+	CARROS[audi]="QWE 1212"
+	
+	# imprime apenas a placa de UM dos carros (da Ferrari):
+	echo ${CARROS[ferrari]}
+
+	# imprime o valor (placa) de cada/TODOS chave (carro)
+	echo ${CARROS[@]}
+		
+	# imprime apenas a chave (o nome) de cada/TODOS os carros:
+	echo ${!CARROS[@]}
+```
 
 
-## MANIPULAÇÃO DE LISTAS
+## MANIPULAÇÃO de LISTAS
 Em Bash o primeiro elemento (item) de um array é o número 0.
 
 Para imprimir, adicionar, alterar ou deletar um item ao array:
@@ -769,6 +950,36 @@ Para imprimir, adicionar, alterar ou deletar um item ao array:
 	# unset NOMES 		# DELETA todo o array NOMES
 ```
 
+**Fatiando um array**
+
+Podemos, igualmente, tal como nas strings, manipular quais elementos de um array serão selecionados e impressos, como um fatiamento (slice), usando esta sintaxe:
+
+`echo ${ARRAY[@]:a_partir:total_de_elementos}`
+
+Sendo que:
+ - a_partir: é o número do primeiro elemento do array que será impresso.
+ - total_de_elementos: a quantidade total de elementos do array que se espera ser impressa.
+
+*Convém lembrar que o **primeiro elemento** de um array em Bash sempre é de **número zero (0)**.*
+
+Exemplos práticos:
+
+```bash
+	# Array NROS:
+	NROS=(00 10 20 30 40 50 60 70 80 90)
+
+	# Imprime a partir do elemento 0, três elementos no total:
+	echo ${NROS[@]:0:3}
+	# Resultado = 00 10 20
+
+	# Imprime a partir do elemento 2, quatro itens no total:
+	echo ${NROS[@]:2:4}
+	# Resultado = 20 30 40 50
+
+	# Imprime do 3o. ao último (se omite a quantidade total):
+	echo ${NROS[@]:3}
+	# Resultado = 30 40 50 60 70 80 90
+```
 
 
 ## LAÇOS
@@ -1055,15 +1266,60 @@ Comprove com os dois exemplos abaixo o tempo de execução dessas duas sintaxes:
 ```
 
 
-## CONTINUE, BREAK
-Para que um código não caia num looping infinito (principalmente quando se usa o `while true`, é preciso estabelecer uma condição de 'escape' para que o código seja interrompido.
+## CONTINUE - BREAK
+Para que um código não caia num looping infinito (principalmente quando se usa o `while true`, é preciso estabelecer uma condição de 'escape' para que o código seja interrompido. Como também formas de que se possa executar o fluxo, saltar para um próximo elemento do looping sem executar uma função em certo elemento ou simplesmente "quebrar" o fluxo.
+
+Observe o código, para exemplos de `continue` e `break`:
 
 ```bash
-	
-
+	for NRO in 1 2 3 4 5 6 7
+	do
+		if [[ $NRO -eq 3 ]]
+		then
+			echo "Pulando o três..."
+			continue
+		fi
+	echo $NRO
+	done
 ```
 
+O pequeno exemplo acima, percorre uma lista (observe o formato também válido en `for`) e se coloca uma condição que ao chegar o 3o. item, se pule e não imprima seu valor na tela. Porém, não se interrompe o fluxo, porém segue executando os comandos para os demais da lista (fila).
 
+Agora temos um exemplo de `break` em que o laço termina, interrompe, "quebra":
+
+```bash
+	for LETRA in "A" "B" "C" "D" 5 "F" "G"
+	do
+		if [[ $LETRA =~ [0-9] ]]
+		then
+			echo "Chegamos a um elemento inválido. Interrompendo o laço..."
+			break
+		fi
+		echo $LETRA
+	done
+```
+
+Acima, enquanto o código percorria cada elemento, se verificava qual continha números (\[0-9]), porque cumprindo essa condição, o laço seria completamente interrompido com o comando `break`. (Note que para comparar expressões regulares, se usa o `=~` dentro do test do if).
+
+**Analogia para entender o funcionamento de `continue` e `break`**
+
+Para memorizar melhor a relação entre os laços e `continue` e `break` podemos ter em mente a seguinte analogia:
+
+Suponhamos que você administra a entrada de um evento em que há uma fila com pessoas com ingressos para entrar no local. A condição para entrar é ter o boleto de ingresso e você verifica um a um se cumpre com essa condição.
+
+De repente, chega a vez de um indivíduo que tem algum problema com seu boleto. Então, o que você faz? Ao ver que não cumpre com as condições, não pode interromper todo o resto da fila por causa dele, logo, coloca ele de lado, e diz: "Próximo!" e a fila **continua**. Ou seja, com isso, você não interrompeu o fluxo da fila, mas com um comando (ordem) fez que a fila continuasse. Isso é o que faz o comando `continue`. Ao ser encontrado, ele sem interromper o fluxo do laço, faz com que continue o próximo da fila (lista, array, vetor, etc). Em termos mais técnicos, o `continue` coloca a execução na linha seguinte de `while` ou de `for`, etc..., ou seja, uma linha após o `do` sem terminar (sair, interromper) o laço.
+
+Voltando à analogia, suponha que você continua verificando a fila e agora nota que chegou a sua hora do almoço. **É hora do seu break!** de interromper seu trabalho porque chegou uma condição de parar para o almoço. Você então interrompe o trabalho e já não vai mais executar aquela tarefa repetitiva, senão outra: A de almoçar.
+
+Isso é o que faz o comando `break` num código! Ele simplesmente, ao deparar-se com certa condição (situação), ele para tudo. Ele já **não continua** aquela tarefa repetitiva (ou seja, aquele laço). Mas sai dele. Em termos técnicos, o `break` vai para uma linha após o `done`.
+
+```
+	continue => Vai para a linha abaixo do comando "do" 
+	(Não sai do laço, mas continua o próximo item).
+
+	break 	 => Vai para a linha abaixo do comando "done" 
+	(Sai do laço de repetição).
+```
 
 ## INCREMENTOS
 ```bash
@@ -1102,6 +1358,7 @@ Ou também se pode usar desta forma (com a palavra reservada **function**, mas *
 
 	funcao
 ```
+
 
 ### Funções assíncronas:
 
@@ -1169,7 +1426,7 @@ Também é possível passar argumentos para serem processados dentro da função
 ```
 
 
-## TRATAMENTO DE ERROS: EXCEPT / TRY 
+## TRATAMENTO de ERROS: EXCEPT / TRY 
 ```bash
 	
 
