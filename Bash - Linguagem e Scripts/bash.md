@@ -1,7 +1,7 @@
 ![](bash.png)
 # BASH <span id='topo'></span>
 
-A linguagem Bourne-Again Shell (Shell Nascido de Novo) foi lançada inicialmente em 1989. Desenvolvida por Brian Fox e Chet Ramey. É o Shell Script padrão nas várias distribuições Linux. **Resumindo: o Bash é a linguagem do Linux!**
+A linguagem Bourne-Again Shell (Shell Nascido de Novo) foi lançada inicialmente em 1989. Desenvolvida por Brian Fox e Chet Ramey. É o Shell Script padrão nos derivados de UNIX e nas várias distribuições Linux. **Resumindo: o Bash é a linguagem do Linux!**
 
 A documentação oficial da linguagem está em:
 https://www.gnu.org/software/bash/manual/bash.html
@@ -208,9 +208,17 @@ Exemplo:
 
 	# imprime o ano de PROX_NATAL:
 	echo ${PROX_NATAL:4:4}
+	
+	# se pode criar uma nova variável para armazenar o conteúdo de dia:
+	DIA_DE_NATAL=$(echo ${PROX_NATAL:0:2})
+	
+	# agora testamos ao imprimir seu valor:
+	echo $DIA_DE_NATAL
+	
+	# saída na tela = 25
 ```
 
-Se usa os colchetes antes do início do nome da variável, já que o Bash interpreta que uma variável também é um array, ou seja, uma lista, ou conjunto de caracteres. Mais adiante, no tema de "Arrays" veremos isso mais claramente. O importante é não esquecer de usar os colchetes antes do nome da variável ao manipular (fatiar) strings, quando for preciso.
+*Não esquecer*: Ao manipular o conteúdo de uma variável, se usa **sempre os colchetes antes** do início do nome da variável, já que o Bash interpreta que uma variável também é um array, ou seja, uma lista, ou conjunto de caracteres. Mais adiante, no tema de "Arrays" veremos isso mais claramente. 
 
 
 **Obtendo o número em que aparece uma ocorrência na string**
