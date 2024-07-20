@@ -434,7 +434,7 @@ Mais exemplos, ver tb https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expa
 ## ENTRADA de DADOS 2: Comando Read
 
 ```bash
-	ENTRADA="Por favor, digite com uma informação: "
+	echo "Por favor, digite com uma informação: "
 	read ENTRADA
 	echo
 	echo "Obrigado!"
