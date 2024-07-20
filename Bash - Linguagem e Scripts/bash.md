@@ -1,63 +1,68 @@
 ![](bash.png)
-# BASH 
+# BASH <span id='topo'></span>
 
 A linguagem Bourne-Again Shell (Shell Nascido de Novo) foi lançada inicialmente em 1989. Desenvolvida por Brian Fox e Chet Ramey. É o Shell Script padrão nas várias distribuições Linux. **Resumindo: o Bash é a linguagem do Linux!**
 
 A documentação oficial da linguagem está em:
 https://www.gnu.org/software/bash/manual/bash.html
 
-## Índice:
-	CLI ou GUI 
-	Shebang: Inicio do Programa
-	Comentários
-	Extensão do Código
-	Sintaxe de Comandos no Script
-	Entrada de Dados 1: Variáveis
-	Operações e Operadores Aritméticos
-	Imprimir na Tela
-	Concatenação
-	Manipulação de Strings / Regex
-	Curingas e Expansão de Chaves
-	Entrada de Dados 2: Comando Read
-	Entrada de Dados 3: Parâmetros Em Linha Do Terminal 
-	Teste de Condições
-	Operadores Ternários
-	Condições If, Elif, Else
-	Opções em Casos
-	Listas / Arrays
-	Manipulação de Listas
-	Laços
-	While
-	Continue - Break
-	Incrementos
-	Funções 
-	Tratamento de Erros: Except / Try 
-	Módulos / Bibliotecas para Importar
+## > Índice:
+- [CLI ou GUI](#cli)
+- [Shebang: Inicio do Programa](#shebang)
+- [Comentários](#comentarios)
+- [Extensão dos Arquivos Bash](#extensao)
+- [Sintaxe de Comandos no Script](#sintaxe)
+- [Entrada de Dados 1: Variáveis](#variaveis)
+- [Operações e Operadores Aritméticos](#operadores)
+- [Imprimir na Tela](#imprimir)
+- [Concatenação](#concatenacao)
+- [Manipulação de Strings](#strings)
+- [Curingas e Expansão de Chaves](#curingas)
+- [Entrada de Dados 2: Comando Read](#read)
+- [Entrada de Dados 3: Parâmetros Em Linha Do Terminal](#parametros)
+- [Teste de Condições](#teste)
+- [Operadores Ternários](#ternarios)
+- [Condições If, Elif, Else](#if)
+- [Opções em Casos](#casos)
+- [Listas / Arrays](#listas)
+- [Manipulação de Listas](#manipulacao)
+- [Laços](#lacos)
+- [While](#while)
+- [Continue - Break](#continue)
+- [Incrementos](#incrementos)
+- [Funções](#funcoes)
+- [Tratamento de Erros: Except / Try](# )
+- [Módulos / Bibliotecas para Importar](# )
 
 
+(Ao clicar sobre o nome de um dos temas abaixo retornará ao topo).
 
-## CLI OU GUI 
+
+## <a class="up" href="#topo">> CLI OU GUI <span id='cli'></span></a> 
 "Command-Line Interface" ou "Graphical User Interface"?
  
-- Quase sempre os scripts em Bash são CLI.
-- Mas há opções de GUI, como: Dialog, ...
+Quase sempre os scripts em Bash são para desenvolvimento de programas CLI.
+
+Mas há opções em GUI, especialmente as que requerem muitos menus, para isso se usa ferramentas como: Dialog, ou Zenity, ou Whiptail, etc.
 
 
-## SHEBANG: INICIO DO PROGRAMA
+## <a class="up" href="#topo">> SHEBANG: INICIO DO PROGRAMA <span id='shebang'></span></a> 
 ```bash
 	#!/bin/bash
 ```
 
-## COMENTÁRIOS
+## <a class="up" href="#topo">> COMENTÁRIOS <span id='comentarios'></span></a> 
+Comentários depois do símbolo: #.
 
-`# comentários depois do símbolo: #`
+```bash
+	# comentário... 
+```
+
+## <a class="up" href="#topo">> EXTENSÃO DOS ARQUIVOS BASH<span id='extensao'></span></a> 
+Normalmente se salva um script Bash com a extensão `.sh`, como por exemplo: `nome_arquivo.sh`. Mas também se pode encontrar (raramente) a extensão `.bash`; ou até sem extensão (em casos de scripts salvos na pasta /bin que receberam permissão para serem executáveis (`chmod -x arq`)).
 
 
-## EXTENSÃO DO CÓDIGO
-Normalmente se salva um script Bash como `nome_arquivo.sh`, mas também se pode encontrar (raramente) a extensão `.bash`; ou até sem extensão (em casos de scripts salvos na pasta /bin que receberam permissão para serem executáveis (`chmod -x arq`)).
-
-
-## SINTAXE de COMANDOS NO SCRIPT
+## <a class="up" href="#topo">> SINTAXE DE COMANDOS NO SCRIPT  <span id='sintaxe'></span></a> 
 Dentro do script os comandos estarão cada um em uma linha, sem a necessidade obrigatória de indentação em caso de funções e/ou laços, ou mesmo todos os comandos podem estar **numa única linha** separados por ponto-e-vírgula (**;**).
 
 ```bash
@@ -66,13 +71,21 @@ Dentro do script os comandos estarão cada um em uma linha, sem a necessidade ob
 	comando3
 ```
 
-Ou: 
+Ou, em uma única linha: 
 
 `comando1; comando2; comando3`
 
 
-## ENTRADA de DADOS 1: Variáveis
-Para nomes de variáveis, como de costume, se evita caracteres alfanuméricos ou nomes que iniciem com números. Por convenção, eles aparecem em letras maiúsculas, porém não é regra.
+## <a class="up" href="#topo">> ENTRADA DE DADOS 1: Variáveis <span id='variaveis'></span></a> 
+Toda linguagem de programação se utiliza de dados. Esses dados, podem ser pré-definidos no sistema, capturados pelo programa, ou definidos pelo usuário do programa. 
+
+A forma mais básica de uma linguagem usar dados é por meio das variáveis. Por meio delas, passamos os dados para o programa executar sua(s) função(ões). As variáveis definem qual serão os dados que serão usados, o tipo e qual será o nome deles. 
+
+Em Bash, se diz que "tudo é texto". E por ser uma linguagem não-tipada, não se define o tipo das variáveis. 
+
+Já para **nomes das variáveis**, como de costume, se evita caracteres alfanuméricos e nomes que iniciem com números. Porém, também se pode começar com um underline ( _ ).
+
+Por convenção, nomes de variáveis em Bash aparecem em letras maiúsculas, porém não é regra.
 
 **Não** se aceita **espaço(s)** entre o nome da variável e o símbolo de atribuição **(=)**, tampouco entre esse e seu valor atribuído.
 
@@ -89,7 +102,11 @@ Para nomes de variáveis, como de costume, se evita caracteres alfanuméricos ou
 
 Até se pode usar o underline ( _ ) para nomes de variáveis, mas nunca o hífen (-).
 
-## OPERAÇÕES E OPERADORES ARITMÉTICOS
+Se o valor (conteúdo) que uma variável recebe tenha espaço(s); por exemplo: seja uma frase, nome completo, etc; é preciso colocar esse conteúdo dentro de aspas. Caso contrário, a variável armazena apenas a primeira palavra (ou número) antes do primeiro espaço.
+
+
+
+## <a class="up" href="#topo">> OPERAÇÕES E OPERADORES ARITMÉTICOS <span id='operadores'></span></a> 
 ```bash
 	# soma:
 	echo $((1+1))
@@ -122,7 +139,7 @@ Também se pode realizar operações com números decimais utilizando o comando 
 
 ```
 
-## IMPRIMIR NA TELA
+## <a class="up" href="#topo">> IMPRIMIR NA TELA <span id='imprimir'></span></a> 
 
 Em Bash, há várias maneiras de se imprimir em tela uma mensagem. Desde as mais simples até as mais complexas:
 
@@ -140,14 +157,15 @@ Em Bash, há várias maneiras de se imprimir em tela uma mensagem. Desde as mais
 	echo " fim."
 ```
 
-### printf
+### Comando printf
 
-### tput
+### Comando tput
 
 (Alinhar, justificar, decimais, cores, peso, fonte, etc)
 
 
-## CONCATENAÇÃO
+## <a class="up" href="#topo">> CONCATENAÇÃO <span id='concatenacao'></span></a> 
+Ao usar o valor de uma variável junto com um texto, se recomenda colocar ambos entre aspas duplas ("...").
 
 ```bash
 	NOME='José'
@@ -157,18 +175,22 @@ Em Bash, há várias maneiras de se imprimir em tela uma mensagem. Desde as mais
 	echo $BOASVINDAS
 ```
 
-## MANIPULAÇÃO de STRINGS / REGEX
+## <a class="up" href="#topo">> MANIPULAÇÃO DE STRINGS<span id='strings'></span></a> 
 
-**Fatiando uma string**
+Recursos do Bash para manipulação de strings.
+
+### Fatiando uma string
 
 É possível manipular um string, ou seja, uma variável que tenha conteúdo de string, fatiando-a para obter apenas um pedaço da mesma. A sintaxe é:
 
-`echo ${VARIAVEL:i:qtde}`
+`echo ${VARIAVEL:início:qtde}`
 
 Sendo que:
  - É obrigatório o uso de colchetes ( { } ) depois de dolar ($).
- - i: é o início da string. A primeira letra que será impressa.
- - qtde: a quantidade de letras que serão impressas.
+ - *início*: é o início da string. A primeira letra que será impressa.
+ - *qtde*: a quantidade de letras que serão impressas.
+ 
+Obs.: O parâmetro *qtde* **não** é o último índice, mas a **quantidade** dos elementos que se deseja fatiar.
 
 Exemplo:
 
@@ -211,15 +233,15 @@ Se pode também obter em que lugar na string aparece a primeira ocorrência de u
 Logo, para imprimir a letra "A" da variável LETRAS, teríamos que considerar que só a partir da posição 0, imprimiríamos um carácter: `echo ${LETRAS:0:1}`.
 
 
-**Substituindo trechos numa string**
+### Substituindo trechos numa string 
 
 Podemos igualmente, substituir o conteúdo de uma string, muito parecidamente com o comando `sed`. Sintaxe:
 
 `echo ${VARIAVEL/antes/depois}`
 
 Onde:
- - antes: é o valor (conteúdo) que se quer alterar por:
- - depois: que é o conteúdo que será colocado em lugar de "antes".
+ - *antes*: é o valor (conteúdo) que se quer alterar por:
+ - *depois*: que é o conteúdo que será colocado em lugar de "antes".
  
 Observe nessa sintaxe, novamente, o uso dos colchetes antes do nome da variável.
 
@@ -242,7 +264,7 @@ Exemplos de uso:
 ```
 
 
-**Convertendo para maiúsculas ou minúsculas o conteúdo de uma string**
+### Convertendo o conteúdo de uma string para maiúsculas ou minúsculas
 
 Exemplos práticos:
 
@@ -264,7 +286,7 @@ Exemplos práticos:
 	# resultado = São Paulo - SP
 	
 	
-	## minúsculas = , ou ,, ##
+	## minúsculas = , ou ,, ##  
 	
 	# Convertendo a PRIMEIRA letra PARA minúscula:
 	PALAVRA="Deuses"
@@ -283,7 +305,7 @@ Exemplos práticos:
 ```
 
 
-## CURINGAS E EXPANSÃO de CHAVES
+## <a class="up" href="#topo">> CURINGAS E EXPANSÃO DE CHAVES <span id='curingas'></span></a> 
 
 ### Curingas:
 
@@ -431,7 +453,7 @@ Com o exemplo fica mais fácil:
 Mais exemplos, ver tb https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expansion
 
 
-## ENTRADA de DADOS 2: Comando Read
+## <a class="up" href="#topo">> ENTRADA DE DADOS 2: Comando Read <span id='read'></span></a> 
 
 ```bash
 	echo "Por favor, digite com uma informação: "
@@ -442,7 +464,7 @@ Mais exemplos, ver tb https://en.wikipedia.org/wiki/Bash_(Unix_shell)#Brace_expa
 	echo
 ```
 
-## ENTRADA de DADOS 3: Parâmetros em linha do Terminal 
+## <a class="up" href="#topo">> ENTRADA DE DADOS 3: Parâmetros em linha do Terminal  <span id='parametros'></span></a> 
 Também é possível criar um script em que o usuário passa os parâmetros de entrada (argumentos) na própria linha de comando ao chamar o programa.
 
 Logo, todo conteúdo que venha após o nome do Bash Script é considerado parâmetros (entrada de dados). Sendo que:
@@ -504,7 +526,7 @@ Por isso, usaríamos entre aspas, desta forma:
 
 
 
-## TESTE de CONDIÇÕES
+## <a class="up" href="#topo">> TESTE DE CONDIÇÕES <span id='teste'></span></a> 
 Toda linguagem de programação tem seu modo de realizar seu teste lógico com os dados que são obtidos ou passados. É mais comum que se use esse teste com os comandos `if`, `for` ou `while`.
 
 Em Bash, o teste é realizado com o uso de duplos-colchetes `([[ ]])`. Mas é muito provável que se encontre alguns exemplos com apenas um colchete `[ ]`, porém o uso de colchetes-duplos `[[ ]]` é mais recomendado e convencional por ser a opção mais moderna.
@@ -556,9 +578,7 @@ Para memorizar, podemos usar o seguinte exemplo no Terminal: Digite `true` ou `f
 	
 ```
 
-
-
-### OPERADORES LÓGICOS de COMPARAÇÃO
+### OPERADORES LÓGICOS DE COMPARAÇÃO
 São eles:
 
 ```bash
@@ -626,7 +646,7 @@ https://www.gnu.org/software/bash/manual/bash.html#Bash-Conditional-Expressions
 
 
 
-### OPERADORES (LÓGICOS) de COMPARAÇÃO: AND E OR 
+### OPERADORES (LÓGICOS) DE COMPARAÇÃO: AND E OR 
 Os testes podem ser ainda mais complexos, pois se pode usar mais de uma condição a ser testada. Para isso, usamos `&&` e `||` que significa: `E` e `OU`, respectivamente.
 
 ```bash
@@ -651,7 +671,7 @@ Os testes podem ser ainda mais complexos, pois se pode usar mais de uma condiç�
 ```
 
 
-## OPERADORES TERNÁRIOS
+## <a class="up" href="#topo">> OPERADORES TERNÁRIOS <span id='ternarios'></span></a> 
 Para realizarmos condições simples que dependendo do resultado do teste **não vão implicar tantos blocos de código***, se pode usar o modelo ternário (tipo lambdas, em Python) para aplicar uma condição no código.
 
 Sendo que:
@@ -713,7 +733,7 @@ Um exemplo mais prático será mostrado mais à frente quando tratarmos do coman
 
 
 
-## CONDIÇÕES IF, ELIF, ELSE...
+## <a class="up" href="#topo">> CONDIÇÕES IF, ELIF, ELSE... <span id='if'></span></a> 
 O comando `if` realizará um teste de condição, por tanto, sempre será acompanhado de duplos-colchetes `[[ ]]`, e conforme a resposta ou resultado do teste, executará um bloco de comandos. 
 
 O formato comum do "if" é este:
@@ -782,7 +802,7 @@ OBS.: Caso se use o `if-elif-else` **numa única linha**, é importante que não
 Também como outra alternativa para if-elif-else, se pode usar o comando `case`, que será visto a seguir.
 
 
-## OPÇÕES EM CASOS
+## <a class="up" href="#topo">> OPÇÕES EM CASOS <span id='casos'></span></a> 
 
 ```bash
 	case "$variable" in
@@ -884,7 +904,7 @@ Outra sugestão para o uso de `case` é trabalhando junto com parâmetros passad
 	}
 ```
 
-## LISTAS / ARRAYS
+## <a class="up" href="#topo">> LISTAS / ARRAYS <span id='listas'></span></a> 
 As listas (arrays ou vetores) em Bash são variáveis com mais de um valor, definidos entre parêntesis e separados por espaços. Caso sejam strings, devem estar (de preferência) entre aspas.
 
 ```bash
@@ -894,7 +914,8 @@ As listas (arrays ou vetores) em Bash são variáveis com mais de um valor, defi
 ```
 Ver tb [este site.](https://linuxsimply.com/bash-scripting-tutorial/loop/for-loop/for-array/)
 
-**Vetores associativos**
+
+### Vetores associativos
 
 Existe também, embora quase nunca usado, os "arrays" associativos, ou melhor dito: os vetores associativos, que usa nomes em lugar de números, para definir a posição (índice) do elemento num array. 
 
@@ -924,7 +945,7 @@ Não abordaremos por não ser muito usual, porém seu formato seria:
 ```
 
 
-## MANIPULAÇÃO de LISTAS
+## <a class="up" href="#topo">> MANIPULAÇÃO DE LISTAS <span id='manipulacao'></span></a> 
 Em Bash o primeiro elemento (item) de um array é o número 0.
 
 Para imprimir, adicionar, alterar ou deletar um item ao array:
@@ -950,7 +971,7 @@ Para imprimir, adicionar, alterar ou deletar um item ao array:
 	# unset NOMES 		# DELETA todo o array NOMES
 ```
 
-**Fatiando um array**
+### Fatiando um array
 
 Podemos, igualmente, tal como nas strings, manipular quais elementos de um array serão selecionados e impressos, como um fatiamento (slice), usando esta sintaxe:
 
@@ -982,7 +1003,7 @@ Exemplos práticos:
 ```
 
 
-## LAÇOS
+## <a class="up" href="#topo">> LAÇOS <span id='lacos'></span></a> 
 
 ### O laço FOR
 
@@ -1027,7 +1048,7 @@ Um exemplo muito simples:
 Mas se ocorra algum erro em que os nomes não aparecem de forma correta o que aconteceu foi um...:
 
 <span id='erroIFS'></span>
-<u class='vermelho'>Provável **erro** de IFS</u>:
+<u class='vermelho'>Provável erro de IFS</u>:
 
 <span class='letraPeq'>Existe uma variável de sistema chamada IFS que define os delimitadores (em arrays por exemplo) nesta ordem: espaço, tab e enter. Ou seja, cada vez que se encontra um espaço num item de array ou num nome de arquivo, o sistema interpreta que é outro item (do array) ou outro arquivo! (Isso vem pré-configurado nas distribuições Debian).</span>
 
@@ -1227,7 +1248,7 @@ Explicação do código:
  
 
 
-## WHILE
+## <a class="up" href="#topo">> WHILE <span id='while'></span></a> 
 Enquanto uma condição esteja sendo satisfeita (verdadeira), o código estará sendo executado.
 
 ```bash
@@ -1266,7 +1287,7 @@ Comprove com os dois exemplos abaixo o tempo de execução dessas duas sintaxes:
 ```
 
 
-## CONTINUE - BREAK
+## <a class="up" href="#topo">> CONTINUE - BREAK <span id='continue'></span></a> 
 Para que um código não caia num looping infinito (principalmente quando se usa o `while true`, é preciso estabelecer uma condição de 'escape' para que o código seja interrompido. Como também formas de que se possa executar o fluxo, saltar para um próximo elemento do looping sem executar uma função em certo elemento ou simplesmente "quebrar" o fluxo.
 
 Observe o código, para exemplos de `continue` e `break`:
@@ -1321,7 +1342,7 @@ Isso é o que faz o comando `break` num código! Ele simplesmente, ao deparar-se
 	(Sai do laço de repetição).
 ```
 
-## INCREMENTOS
+## <a class="up" href="#topo">> INCREMENTOS <span id='incrementos'></span></a> 
 ```bash
 	# incremento (3 opções):
 	((num++))
@@ -1334,7 +1355,7 @@ Isso é o que faz o comando `break` num código! Ele simplesmente, ao deparar-se
 	((n-=1))	
 ```
 
-## FUNÇÕES 
+## <a class="up" href="#topo">> FUNÇÕES <span id='funcoes'></span></a></a>
 
 Sintaxe das funções - Define apenas com o seu nome e parêntesis:
 
@@ -1426,13 +1447,13 @@ Também é possível passar argumentos para serem processados dentro da função
 ```
 
 
-## TRATAMENTO de ERROS: EXCEPT / TRY 
+## <a class="up" href="#topo">> TRATAMENTO DE ERROS: EXCEPT / TRY <span id='__'></span></a> 
 ```bash
 	
 
 ```
 
-## MÓDULOS / BIBLIOTECAS PARA IMPORTAR: 
+## <a class="up" href="#topo">> MÓDULOS / BIBLIOTECAS PARA IMPORTAR:  <span id='____'></span></a> 
 
 + Ler arq/web/xls/doc/json/xml; 
 + Escrever txt,pdf, etc
@@ -1443,6 +1464,16 @@ Também é possível passar argumentos para serem processados dentro da função
 
 ```
 
+---
 
-<style> img {float: right; margin-left:5px;} h2 {color: #A6FF00; background: #000000; padding-left: 0.5rem; padding-top: 3px;} .vermelho{color:red;} .letraPeq {font-size: 0.7em;} .direita {display: block; text-align: right;}</style>
+
+<style> 
+/*CSS do documento:*/
+img {float: right; margin-left:5px;} 
+h2 {color: #A6FF00; background: #000000; padding-left: 0.5rem; padding-top: 3px;} 
+a.up{text-decoration: none !important; color: #A6FF00;}
+.vermelho{color: red;} 
+.letraPeq {font-size: 0.7em;} 
+.direita {display: block; text-align: right;}
+</style>
 
