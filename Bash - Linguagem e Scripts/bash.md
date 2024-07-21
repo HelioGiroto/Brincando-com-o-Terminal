@@ -31,8 +31,10 @@ https://www.gnu.org/software/bash/manual/bash.html
 - [Continue - Break](#continue)
 - [Incrementos](#incrementos)
 - [Funções](#funcoes)
-- [Tratamento de Erros: Except / Try](# )
-- [Módulos / Bibliotecas para Importar](# )
+- [Tratamento de Erros](#erros)
+- [Módulos / Bibliotecas para Importar](#modulos)
+- [Lendo e Escrevendo Arquivos](#arquivos)
+- [Redirecionamentos](#redirecionamentos)
 
 
 (Ao clicar sobre o nome de um dos temas abaixo retornará ao topo).
@@ -1457,22 +1459,391 @@ Também é possível passar argumentos para serem processados dentro da função
 ```
 
 
-## <a class="up" href="#topo">> TRATAMENTO DE ERROS: EXCEPT / TRY <span id='__'></span></a> 
+## <a class="up" href="#topo">> TRATAMENTO DE ERROS <span id='erros'></span></a>
+Algo tipo try/catch do Javascript ou try/except em Python ???
+ 
 ```bash
 	
 
 ```
 
-## <a class="up" href="#topo">> MÓDULOS / BIBLIOTECAS PARA IMPORTAR:  <span id='____'></span></a> 
+## <a class="up" href="#topo">> MÓDULOS / BIBLIOTECAS PARA IMPORTAR<span id='modulos'></span></a> 
 
-+ Ler arq/web/xls/doc/json/xml; 
-+ Escrever txt,pdf, etc
-+ Redirecionamentos
++ Comando Source - (ver Linux Cabal)
+
+
+
+## <a class="up" href="#topo">> LENDO E ESCREVENDO ARQUIVOS <span id='arquivos'></span></a>
+Uma das grandes vantagens da linguagem Bash é a facilidade de ler arquivos texto e escrevê-los sem necessidade de importar qualquer módulo ou biblioteca como ocorre nas demais linguagens.
+
+### Arquivos texto
+
+**Lendo arquivos texto**
+
+Os arquivos texto são abertos por qualquer editor como Nano, Vim, Gedit, VSCodium, etc. São arquivos texto, os com extensão: .txt, .md, .csv, etc. São facilmente lidos pelo sistema com o uso do comando `cat`:
+
+`cat arquivo.txt`
+
+Ou sem rolar todo o seu conteúdo: 
+
+`cat arquivo.csv | less`
+
+Exibir todo o conteúdo de um arquivo com o número de cada linha dele:
+
+`cat -n arquivo`
+
+Lendo apenas a linha 23 do arquivo:
+
+`sed -n 23p arquivo`
+
+Também se pode ler apenas as primeiras (20) linhas dele:
+
+`cat arquivo.md | head -n20`
+
+Omitindo a flag `-n20`, se imprimiria o padrão: 10 linhas.
+
+Lendo as 10 últimas linhas de um arquivo:
+
+`cat arquivo | tail`
+
+Lendo as linhas de 15 à 30 do arquivo texto:
+
+`sed -n 15,30p arquivo`
+
+
+**Script para ler cada linha de um arquivo**
+
+Um simples exemplo se precisamos ler um arquivo linha por linha, para abrirmos os URLs de páginas web contidos nele:
 
 ```bash
+	for LINK in $(cat urls.txt)
+	do
+		chromium --new-tab $LINK &
+		# ou: 
+		# firefox --new-tab $LINK &
+	done
+```
+
+São inúmeras as possibilidades de usar o `cat` dentro de um laço a fim de ler cada linha de um arquivo.
+
+**Comandos de edição de arquivos**
+
+O Bash tem a facilidade de em uma linha de comando executar rapidamente coisas que levaria tempo e muitas linhas de código em outras linguagens! Os comandos que geralmente se usa para fazer estas edições são: grep, sed, awk, paste, cut, sort, etc...
+
+Exemplos:
+
+```bash
+	# captura apenas as linhas com "certa mensagem" de um arquivo para outro:
+	grep "Certa Mensagem" origem.txt > novo_arquivo.txt
+	
+	# muda nas linhas que contenham "alguma coisa" para "outra coisa"...
+	# gerando um novo_arquivo:
+	sed 's/alguma coisa/outra coisa/g' origem.txt > novo_arquivo.txt
+	
+	# ou mudando e salvando as mudanças no mesmo arquivo:
+	sed -i 's/alguma coisa/outra coisa/g' origem.txt
+
+	# Para adicionar uma "coluna" a uma planilha CSV gerando uma nova:
+	paste -d";" origem.csv coluna.csv > novo_arq.csv
+	
+	# deleta a linha que contenha a expressão "OMITIR":
+	sed -i /OMITIR/d arquivo.txt
+	
+	# ordena um arquivo:
+	sort arquivo > novo_arquivo
+	
+	# retira do arquivo as linhas duplicadas:
+	sort desordenado.txt | uniq > ordenado.txt
+	sort -u desordenado.txt > ordenado.txt
+		
+	# ordena uma planilha CSV pela 3a coluna:
+	sort -t";" -k3 planilha.csv > novo.csv
+	
+	# se pode usar as flags -h e/ou -n para ordenar números:
+	sort -t";" -k3 -n -h planilha.csv > novo.csv
+	
+	# ordenar em ordem reversa:
+	sort -r lista.csv > reversa.csv
+	
+	# também se pode DES-ordenar:
+	sort -R ordenados.txt > embaralhados.txt
+	
+	# Da planilha CSV extrai apenas a coluna 2 (delimitador = ;):
+	cut -d";" -f2 planilha.csv > coluna2.csv
+	# outro exemplo com delimitador = ",":
+	cut -d"," -f1 planilha.csv > nomes.csv
+```
+
+**Escrevendo em arquivos texto**
+
+Mais adiante, no tema de *Redirecionamentos* vamos tratar com muitos detalhes sobre este tema, porém é muito fácil "escrever" em arquivos textos:
+
+`echo "Escrevo uma linha" >> arquivo.txt`
+
+No exemplo acima, adicionamos a frase na última linha. Já que usamos o caracter de redirecionamento ">>".
+
+Se fossemos criar um arquivo já escrevendo algo nele, ou recebendo o conteúdo de uma variável ou de outro(s) arquivo(s) usaríamos o caracter ">, como no exemplo:
+
+`echo "blablabla" > arquivo_novo.txt`
+
+ATENÇÃO: Caso o arquivo exista, por usarmos o caracter ">", ele seria **sobrescrito**, isto é, todo **seu conteúdo anterior seria apagado** e agora assumiria este novo!
+
+```bash
+	# criando um novo arquivo com uma frase:
+	echo "ola mundo" > arquivo_novo
+	
+	# novo arquivo recebendo o conteúdo de uma variável:
+	echo $VARIAVEL > arquivo.txt
+	
+	# novo arquivo recebendo o conteúdo (linhas de 10 a 20) de outro:
+	sed -n 10,20p arq1.csv > arq2.csv
+
+	# novo arquivo recebendo todo o conteúdo de outro:
+	cat arqAntigo.txt > arqNovo.txt
+	
+	# fazendo uma fusão de arquivos (um "merge"):
+	cat arq1 arq2 arq3 > arqTotal
+```
+
+**Criando um arquivo vazio**
+
+Para criar um arquivo vazio, a fim de, posteriormente, receber algum conteúdo, se pode utilizar qualquer um destes comandos abaixo:
+
+```bash
+	touch arquivoVazio.txt
+	
+	:> arquivoVazio.txt
+	
+	cat > arquivoVazio.txt
+	
+	echo > arquivoVazio.txt
+```
+
+### Arquivos de outros formatos
+
+Quanto a arquivos de outros formatos, como JSON, DOC, XML, etc., o próprio Linux conta com inúmeros comandos que abrem, leem ou mesmo convertem estes arquivos de forma que podemos acessar tais dados sem problemas.
+
+Apesar que o Bash não é tão usado para manipular arquivos desse gênero, porém,  é possível fazer muita coisa útil com eles. Vejamos alguns exemplos:
+
+**Arquivos do Libre Office, DOC, XLS**
+
+```bash
+	# Para abrir um arquivo doc:
+	libreoffice7.6 --writer nome.doc
+	
+	# Abrir em modo leitura:
+	libreoffice7.6 --view nome.odt
+	
+	# Abre um documento e já imprime:
+	libreoffice7.6 --writer -p nome.doc
+	
+	# Abre uma planilha de Libreoffice:
+	libreoffice7.6 --calc nome.odf
+	
+	# abre uma apresentação já em modo visual (show):
+	libreoffice7.6 --impress --show -invisible arq.odp
+	
+	# converte todos os arquivos doc para pdf (sem abrir o programa):
+	libreoffice7.6 --headless --convert-to pdf *.doc 
+	
+	# converte uma planilha em arquivo csv:
+	libreoffice7.6 --calc --convert-to csv nome.xls
+	
+	# converte um arquivo doc para txt:
+	libreoffice7.6 --headless --convert-to "txt:Text (encoded):UTF8" arq.doc 
+	
+	# fechar o libreoffice:
+	killall soffice.bin
+```
+
+**Arquivos JSON**
+
+` `
+
+**Arquivos XML**
+
+` `
+
+**Arquivos PDF**
+
+` `
+
+**Abrindo a qualquer que seja o arquivo ou URL:**
+
+`xdg-open file-or-url`
+
+
+### Possibilidades infinitas em Bash
+
+A capacidade do Bash manipular arquivos vai além do que normalmente se usa e imagina, já que existem muitos comandos capazes de manipulação de imagens por meio de scripts, edição e criação de vídeos ou áudio, automação do sistema e das janelas, mineração de dados da web, extração de arquivos da web, etc. Enfim, todo tipo de arquivo em que seu programa pode ser aberto via Terminal do Linux com opções de flags (parâmetros) que realizam funções sem o usuário ter que "clicar" ou digitar manualmente é possível de ser manipulado por um script feito em Bash! 
+
+Resumindo: Todo programa de computador tem seu modo de operar via CLI (Command-Line Interface), e portanto, é possível manipulá-lo usando a linguagem Bash.
+
+Recomendamos que se estude os comandos a seguir com suas flags (basta digitar no seu Terminal `man` seguido do nome deles) ou seu nome seguido de `--help` para ver as suas possibilidades.
+
+Além de outras infinitas usabilidades que esta poderosa linguagem oferece:
+
+- ffmpeg
+- imagemagick
+- curl
+- wget
+- html-xml-utils (https://www.w3.org/Tools/HTML-XML-utils/README)
+- mariadb
+- xdotool
+- wmctrl 
+- xclip
+- pandoc
+- pdfgrep, pdfunite, pdfseparate
+- crontab (manipulação de horários de execução de scripts ou programas)
+- Manipulação completa de todos os arquivos do sistema
+- Monitoramento da máquina, da rede ou de tráfego de um site
+- Gestão de servidores e de redes (99.99% dos servidores são Linux/Unix)
+- Uso para sistemas embarcados e dispositivos de IoT (Internet das coisas)
+- Scripts para OSINT (Inteligência de código aberto)
+- Scripts para segurança da informação
+
+etc...
+
+## <a class="up" href="#topo">> REDIRECIONAMENTOS <span id='redirecionamentos'></span></a> 
+
+Quase todos os comandos têm uma entrada de dados, uma saída de dados e uma saída de erro (caso exista). Nos comandos e scripts do Shell, assim temos:
+
+ - A "Entrada Padrão" é o teclado. Tecnicamente chamada de "stdin" com **valor 0**.
+ - A "Saída Padrão" é a tela. Tecnicamente chamada de "stdout" com **valor 1**.
+ - A "Saída de Erro". Tecnicamente chamada de "stderr" com **valor 2**.
+ 
+Porém, se pode modificar a entrada e saída padrões para que ao invés de obedecerem o padrão (standard), receberá ou enviará para arquivo, variável ou outro comando, etc. Esta modificação se chama **redirecionamento**.
+
+Geralmente a entrada é simbolizada pelo caracter `<` e a saída por `>`. E a sintaxe desta forma:
+
+`comando < entrada` ou `comando > saída`.
+
+Exemplo:
+
+Abra seu Terminal e digite o seguinte comando:
+
+`ls`
+
+O que ocorrerá?
+
+Certamente na tela do seu computador aparecerá todos os arquivos contidos no diretório atual em uso. O resultado do comando sai na tela, porque o "stdout" é o padrão: a tela. Porém, vamos mudar isso para:
+
+`ls > arquivos.txt`
+
+Agora, ao invés de aparecer a saída do comando na tela, sairá para um arquivo de nome 'arquivos.txt' (que poderia ter outra extensão ou nenhuma).
+
+Esse foi um exemplo mais básico de redirecionamento.
+
+**Importante:** Note que o comando não deixa de ser executado mesmo que tenhamos modificado sua saída. Ele só não deixa aparecer seu resultado na tela.
+
+
+**Lista de Redirecionamentos de Saída**
+
+| **Caracter** | **Redirecionamento** |
+|----------|------------------|
+|    >     | Modifica / Redireciona a saída do comando ou do programa (script) para um arquivo novo que se criará. Cada vez que for executado, cria um novo arquivo. |
+|    >>    | Modifica / Redireciona a saída do comando ou do programa para anexar (append) ao final de um arquivo já existe. Não cria novo arquivo, nem apaga o existente, mas **adiciona** após a última linha. |
+|    2>    | Modifica / Redireciona a saída da mensagem de **erro** para um arquivo e não para a tela. Mesmo que não tenha erro, será criado um arquivo de erro que ficará vazio. Note que o número 2 é justamente o valor de "stderr". O valor de saída (1) é omitido, mas `>` seria o mesmo que `1>`. |
+|    &>    | Faz com que tanto a saída do comando como a saída de erro sejam redirecionadas para um arquivo. Ou seja, não aparecerá na tela nem a saída do comando, nem o erro (se houver) para o monitor, mas para um arquivo escolhido. |
+|   \|    | O "pipe" é usado para que a saída do comando ou script continue sendo processada pelo comando a seguir. Tudo o que foi resultado do comando será agora processado pelo comando à direita de pipe. Por ex.: `cat lista.csv \| head -n15`, em que todo o conteúdo do arquivo "lista.csv" que deveria aparecer na tela, antes seja processado para o comando "head" que filtra para imprimir apenas as 15 primeiras linhas. |
+|   tee   | O comando "tee" permite que tenhamos duas saídas: Tanto a tela (saída padrão) como um arquivo (uma saída extra). Ele é usado como segundo comando (depois de pipe), como ex.: `ls \| tee meusArqs.txx`. *OBS*.: Esse comando cria novo arquivo, porém se pretendemos anexar ao final de um arquivo já com conteúdo (apenas adicionando mais dados), usamos a flag `-a` (append). Ex.: `echo "Mais uma linha" \| tee -a linhas.dat`, em que a frase aparece em tela e também é salva ao final do arquivo. | 
+
+Outros exemplos:
+
+```bash
+
+	... 2> /dev/null 
+	# A mensagem de erro (`2>`) é redirecionada não para arquivo, 
+	# mas para o "buraco negro" do Linux: /dev/null 
+	# um diretório que tudo que é jogado lá, deixa de existir.
+	
+	
 	
 
 ```
+
+
+**Lista de Redirecionamentos de Entrada**
+
+| **Caracter** | **Redirecionamento** |
+|----------|------------------|
+|    <     | A entrada padrão é modificada já não sendo mais o teclado, mas um arquivo ou texto. |
+|   <<     | A entrada padrão é modificada igualmente, delimitando um início e fim de expressões (strings) que serão colocadas dentro de um arquivo (muitas vezes encontraremos o nome "EOF" *(End Of File)* em exemplos pela internet). A seguir mostramos exemplos de seu uso. | 
+|   <<<    | Substitui o pipe, mas neste caso, o que está à direita de <<< será a entrada do que o comando executará. Ver em outros exemplos como é usado. Vantagem: O processamento de "<<<" é mais rápido que usar comandos separados por "pipe"! | 
+
+
+Outros exemplos:
+
+```bash
+
+
+```
+
+**Scripts criadores de programas ou de outros scripts!**
+
+Desde seu Terminal digite:
+
+```bash
+	## Rodar comandos do Python usando o redirecionamento com `<<`:
+	python3 << EOF
+	> print("Estou no Python!")
+	> exit()
+	> EOF
+```
+
+O resultado será: `Estou no Python`.
+
+Ou seja, você executou um comando do Python dentro do Bash! Isso pode com outras linguagens? Sim! pode.
+
+Considere no exemplo acima que, a palavra "EOF", poderia ser qualquer outra (com minúsculas ou maiúsculas, mas sem espaço) e indica que tudo o que virá em seguida, até o momento que a palavra apareça novamente, será executado.
+
+É importante lembrar que o que está entre as palavras EOF são comandos ou instruções não do Bash, mas do comando anterior a `<<`!
+
+É possível, inclusive, passar usuário e senha ao fazer um `git push` utilizando deste formato de redirecionamento! Exemplo:
+
+```bash
+	git push << FIM
+	> usuario_github senha_github
+	FIM
+```
+
+Além disso, é possível usar este formato dentro de um script. Suponhamos que o em script.sh temos, como também criar novos arquivos:
+
+```bash
+	#!/bin/sh
+	cat << FINAL > arquivo.txt
+	bla bla bla
+	FINAL
+```
+
+Se criará um arquivo.txt cujo conteúdo será "bla bla bla".
+
+Agora observe este outro exemplo em que criaremos um arquivo HTML desde um script Bash!! Pense nas muitas possibilidades que isso nos oferece:
+
+```bash
+	# se criou, gerou ou obteve esta variável Bash:
+	VARIAVEL="1234567"
+	
+	# agora se cria um arquivo html que conterá uma tag h1 ...
+	# ... com o valor da variável acima:
+	cat << FIM > index.html
+	<h1>$VARIAVEL</h1>
+	FIM
+	
+	# note que no arquivo html estará o VALOR de $VARIAVEL (=1234567)!
+	
+	# abriremos o arquivo:
+	chromium index.html
+```
+
+O script acima, pode ser salvo num arquivo\.sh e executado sempre que necessite, inclusive dentro de um servidor que através da função `crontab` ele é executado de tempos em tempos para atualizar o conteúdo de uma página ou até de um arquivo JSON (utilizando o comando `jq` por exemplo) gerando assim sua API por meio da linguagem Bash!
+
+Se pode também criar um outro script Bash usando esse mesmo formato, ou fazer uma query SQL, um script em R, em Lua, etc...
+
+
+
+
+
 
 ---
 

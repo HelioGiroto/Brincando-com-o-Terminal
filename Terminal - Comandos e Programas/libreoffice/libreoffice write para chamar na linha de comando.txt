@@ -1,0 +1,7 @@
+<command>libreoffice7.6 --writer</command> 
+
+
+Para abrir um arquivo:
+libreoffice7.6 --writer nome.doc
+
+

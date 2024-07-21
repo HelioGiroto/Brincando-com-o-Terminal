@@ -1,1 +1,0 @@
-<command>libreoffice7.6 --writer</command> 
