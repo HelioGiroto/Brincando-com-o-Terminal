@@ -32,9 +32,10 @@ https://www.gnu.org/software/bash/manual/bash.html
 - [Incrementos](#incrementos)
 - [Funções](#funcoes)
 - [Tratamento de Erros](#erros)
-- [Módulos / Bibliotecas para Importar](#modulos)
+- [Importando Outros Arquivos](#importando)
 - [Lendo e Escrevendo Arquivos](#arquivos)
 - [Redirecionamentos](#redirecionamentos)
+- [Integração Com Outras Linguagens](#integracao)
 
 
 (Ao clicar sobre o nome de um dos temas abaixo retornará ao topo).
@@ -987,11 +988,11 @@ Para imprimir, adicionar, alterar ou deletar um item ao array:
 
 Podemos, igualmente, tal como nas strings, manipular quais elementos de um array serão selecionados e impressos, como um fatiamento (slice), usando esta sintaxe:
 
-`echo ${ARRAY[@]:a_partir:total_de_elementos}`
+`echo ${ARRAY[@]:inicio:total}`
 
 Sendo que:
- - a_partir: é o número do primeiro elemento do array que será impresso.
- - total_de_elementos: a quantidade total de elementos do array que se espera ser impressa.
+ - *inicio*: é o índice do primeiro elemento do array que será impresso.
+ - *total*: a quantidade total de elementos do array que se espera ser impressa.
 
 *Convém lembrar que o **primeiro elemento** de um array em Bash sempre é de **número zero (0)**.*
 
@@ -1467,10 +1468,61 @@ Algo tipo try/catch do Javascript ou try/except em Python ???
 
 ```
 
-## <a class="up" href="#topo">> MÓDULOS / BIBLIOTECAS PARA IMPORTAR<span id='modulos'></span></a> 
+## <a class="up" href="#topo">> IMPORTANDO OUTROS ARQUIVOS<span id='importando'></span></a> 
 
-+ Comando Source - (ver Linux Cabal)
+Tal como na maioria das linguagens de programação, em Bash também podemos realizar o procedimento de importar valores de outros scripts. Para isso, usamos o comando `source`. Tal comando nos ajuda a manter um projeto mais organizado se dividimos todas as funções em partes distintas e as chamamos dentro de um script "mestre". Isso também facilita na depuração e correção de erros.
 
+Suponhamos que temos um arquivo fonte de dados chamado `Biblioteca` (poderia chamar de qualquer nome e pode ou não ter extensão), seu conteúdo é:
+
+```
+	USUARIO="José Silva"
+	SENHA="12345678"
+	SITE="facebook.com"
+```
+
+Agora, dentro de nosso script em Bash, vamos importar essas informações para processá-las:
+
+```bash
+	#!/bin/bash
+
+	source Biblioteca
+
+	echo "Imprimindo valores importados do arquivo fonte"
+	echo "----------------------------------------------"
+	echo $USUARIO
+	echo $SENHA
+	echo $SITE
+	echo
+```
+
+Ao executarmos este script acima, notaremos que ele trouxe todas as informações de nosso arquivo fonte para dentro dele e executou o que tinha que fazer.
+
+Mas poderíamos também ter no arquivo fonte uma função, ou mesmo comando Bash. E ao ser importado seu conteúdo, o executaria exatamente na linha onde está o comando `source`. 
+
+Vejamos o exemplo do arquivo `Soma` que tem apenas um comando de limpar a tela e uma função de somar dois números.
+
+```
+	clear
+	soma () {
+		  echo $(($1 + $2))
+	}
+
+```
+
+Agora temos um script que em algum momento chamará aquela função:
+
+```bash
+	#!/bin/bash
+	echo "++++++"
+	# só agora se chamará e executará o conteúdo do arquivo-fonte:
+	source Soma
+	echo -n "Realizando a soma de 10 + 30: "
+	soma 10 30
+```
+
+OBS.: É importante lembrar ao usar um projeto como este:
+ - O comando `source` deve ser usado dentro do script Bash
+ - No arquivo a ser importado, **não** se usa o Shebang (`#!/bin/bash`).
 
 
 ## <a class="up" href="#topo">> LENDO E ESCREVENDO ARQUIVOS <span id='arquivos'></span></a>
@@ -1700,11 +1752,11 @@ Além de outras infinitas usabilidades que esta poderosa linguagem oferece:
 - Gestão de servidores e de redes (99.99% dos servidores são Linux/Unix)
 - Uso para sistemas embarcados e dispositivos de IoT (Internet das coisas)
 - Scripts para OSINT (Inteligência de código aberto)
-- Scripts para segurança da informação
+- Scripts para segurança da informação (ou hacking ético e preventivo)
 
 etc...
 
-## <a class="up" href="#topo">> REDIRECIONAMENTOS <span id='redirecionamentos'></span></a> 
+## <a class="up" href="#topo">> REDIRECIONAMENTOS<span id='redirecionamentos'></span></a> 
 
 Quase todos os comandos têm uma entrada de dados, uma saída de dados e uma saída de erro (caso exista). Nos comandos e scripts do Shell, assim temos:
 
@@ -1734,10 +1786,14 @@ Agora, ao invés de aparecer a saída do comando na tela, sairá para um arquivo
 
 Esse foi um exemplo mais básico de redirecionamento.
 
-**Importante:** Note que o comando não deixa de ser executado mesmo que tenhamos modificado sua saída. Ele só não deixa aparecer seu resultado na tela.
+**Importante:** Note que o comando não deixa de ser executado mesmo que tenhamos modificado sua saída. Ele só não vai aparecer o resultado na tela. Mas caso necessite que o resultado apareça em duas saídas: tela e arquivo, usamos o comando `tee`:
+
+`ls | tee lista_arquivos.txt`
 
 
-**Lista de Redirecionamentos de Saída**
+### Lista de Redirecionamentos de Saída e de Erros
+
+Abaixo os caracteres especiais para redirecionar saída de dados ou de erro de um comando:
 
 | **Caracter** | **Redirecionamento** |
 |----------|------------------|
@@ -1746,7 +1802,7 @@ Esse foi um exemplo mais básico de redirecionamento.
 |    2>    | Modifica / Redireciona a saída da mensagem de **erro** para um arquivo e não para a tela. Mesmo que não tenha erro, será criado um arquivo de erro que ficará vazio. Note que o número 2 é justamente o valor de "stderr". O valor de saída (1) é omitido, mas `>` seria o mesmo que `1>`. |
 |    &>    | Faz com que tanto a saída do comando como a saída de erro sejam redirecionadas para um arquivo. Ou seja, não aparecerá na tela nem a saída do comando, nem o erro (se houver) para o monitor, mas para um arquivo escolhido. |
 |   \|    | O "pipe" é usado para que a saída do comando ou script continue sendo processada pelo comando a seguir. Tudo o que foi resultado do comando será agora processado pelo comando à direita de pipe. Por ex.: `cat lista.csv \| head -n15`, em que todo o conteúdo do arquivo "lista.csv" que deveria aparecer na tela, antes seja processado para o comando "head" que filtra para imprimir apenas as 15 primeiras linhas. |
-|   tee   | O comando "tee" permite que tenhamos duas saídas: Tanto a tela (saída padrão) como um arquivo (uma saída extra). Ele é usado como segundo comando (depois de pipe), como ex.: `ls \| tee meusArqs.txx`. *OBS*.: Esse comando cria novo arquivo, porém se pretendemos anexar ao final de um arquivo já com conteúdo (apenas adicionando mais dados), usamos a flag `-a` (append). Ex.: `echo "Mais uma linha" \| tee -a linhas.dat`, em que a frase aparece em tela e também é salva ao final do arquivo. | 
+|   tee   | O comando "tee" permite que tenhamos duas saídas: Tanto a tela (saída padrão) como um arquivo (uma saída extra). Ele é usado como segundo comando (depois de pipe), como ex.: `ls \| tee meusArqs.txt`. *OBS*.: Esse comando cria novo arquivo, porém se pretendemos anexar ao final de um arquivo já com conteúdo (apenas adicionando mais dados), usamos a flag `-a` (append). Ex.: `echo "Mais uma linha" \| tee -a linhas.dat`, em que a frase aparece em tela e também é salva ao final de um arquivo já existente. | 
 
 Outros exemplos:
 
@@ -1756,19 +1812,17 @@ Outros exemplos:
 	# A mensagem de erro (`2>`) é redirecionada não para arquivo, 
 	# mas para o "buraco negro" do Linux: /dev/null 
 	# um diretório que tudo que é jogado lá, deixa de existir.
-	
-	
-	
 
 ```
 
+### Lista de Redirecionamentos de Entrada
 
-**Lista de Redirecionamentos de Entrada**
+Uma lista dos caracteres especiais para redirecionamento de entrada de dados a um comando ou script: 
 
 | **Caracter** | **Redirecionamento** |
 |----------|------------------|
 |    <     | A entrada padrão é modificada já não sendo mais o teclado, mas um arquivo ou texto. |
-|   <<     | A entrada padrão é modificada igualmente, delimitando um início e fim de expressões (strings) que serão colocadas dentro de um arquivo (muitas vezes encontraremos o nome "EOF" *(End Of File)* em exemplos pela internet). A seguir mostramos exemplos de seu uso. | 
+|   <<     | A entrada padrão é modificada igualmente, delimitando um início e fim de expressões (strings) que serão colocadas dentro de um arquivo (muitas vezes encontraremos o nome "EOF" *(End Of File)* em exemplos pela internet). No seguinte tópico trataremos de seu uso. | 
 |   <<<    | Substitui o pipe, mas neste caso, o que está à direita de <<< será a entrada do que o comando executará. Ver em outros exemplos como é usado. Vantagem: O processamento de "<<<" é mais rápido que usar comandos separados por "pipe"! | 
 
 
@@ -1779,9 +1833,15 @@ Outros exemplos:
 
 ```
 
-**Scripts criadores de programas ou de outros scripts!**
+## <a class="up" href="#topo">> INTEGRAÇÃO COM OUTRAS LINGUAGENS<span id='integracao'></span></a> 
 
-Desde seu Terminal digite:
+### Rodando outras linguagens de programação dentro de um script Bash
+
+O Bash, por ser uma linguagem que roda sobre o Sistema Operacional Linux/Unix de uma máquina, tem uma capacidade incrível de integrar-se com outras linguagens de programação tanto para obter dados, como para saída de dados, incluindo a possibilidade de criar scripts de/para outras linguagens! 
+
+Isso é possível através o caracter de redirecionamento `<<`.
+
+Desde o seu Terminal digite:
 
 ```bash
 	## Rodar comandos do Python usando o redirecionamento com `<<`:
@@ -1791,23 +1851,15 @@ Desde seu Terminal digite:
 	> EOF
 ```
 
-O resultado será: `Estou no Python`.
+O resultado na tela será: `Estou no Python`.
 
-Ou seja, você executou um comando do Python dentro do Bash! Isso pode com outras linguagens? Sim! pode.
+Ou seja, você executou um comando do Python dentro do Bash! Isso pode ser feito com outras linguagens? Sim! pode.
 
-Considere no exemplo acima que, a palavra "EOF", poderia ser qualquer outra (com minúsculas ou maiúsculas, mas sem espaço) e indica que tudo o que virá em seguida, até o momento que a palavra apareça novamente, será executado.
+No exemplo acima que, a palavra "EOF" poderia ser qualquer outra (com minúsculas ou maiúsculas, mas sem espaço) e indica que tudo o que virá em seguida, até o momento que a palavra apareça novamente, será executado.
 
 É importante lembrar que o que está entre as palavras EOF são comandos ou instruções não do Bash, mas do comando anterior a `<<`!
 
-É possível, inclusive, passar usuário e senha ao fazer um `git push` utilizando deste formato de redirecionamento! Exemplo:
-
-```bash
-	git push << FIM
-	> usuario_github senha_github
-	FIM
-```
-
-Além disso, é possível usar este formato dentro de um script. Suponhamos que o em script.sh temos, como também criar novos arquivos:
+Mas a saída do resultado deste script pode ser redirecionada para um arquivo, e não apenas para a tela. Além disso, se pode colocar tudo isso dentro de um script. Exemplo:
 
 ```bash
 	#!/bin/sh
@@ -1816,29 +1868,61 @@ Além disso, é possível usar este formato dentro de um script. Suponhamos que 
 	FINAL
 ```
 
-Se criará um arquivo.txt cujo conteúdo será "bla bla bla".
+Nesse exemplo, criamos um script que ao ser executado criará um arquivo de nome `arquivo.txt` cujo conteúdo é "bla bla bla". 
+
+Porém este arquivo txt criado desde este script poderia ser um arquivo Python, Javascript, HTML, PHP, script em R, Lua, etc...
+
+
+### Retornando dados de outra linguagem para o Bash através um script
+
+Se pode rodar um script de outra linguagem dentro de um script Bash e obter os resultados em uma variável.
+
+Por exemplo: Vamos criar um script em Bash para que se execute algum código em NodeJS que retornará uma saída para ser usada por esse mesmo script!
+
+```bash
+
+	#!/bin/bash
+	# Rodaremos comandos do NodeJS e
+	# se guardará tudo em uma variável:
+	VARIAVEL=$(node << FINAL
+		process.env.TZ = "America/Sao_Paulo";
+		let hora = new Date().toString();
+		console.log(hora);
+	FINAL
+	)	# <= Erro se fechar o parêntesis ao lado da palavra FINAL
+
+	# imprimimos o resultado tanto em tela como salvamos num arquivo:
+	echo "O NodeJS retornou este valor: $VARIAVEL." | tee -a resultados.csv
+
+```
+
+A seguir, mostraremos algo mais interessante: criaremos um arquivo HTML desde um script em Bash:
+
+
+### Scripts Bash que criam programas para outras linguagens!
 
 Agora observe este outro exemplo em que criaremos um arquivo HTML desde um script Bash!! Pense nas muitas possibilidades que isso nos oferece:
 
 ```bash
-	# se criou, gerou ou obteve esta variável Bash:
+	# se criou, gerou ou obteve esta variável:
 	VARIAVEL="1234567"
 	
 	# agora se cria um arquivo html que conterá uma tag h1 ...
 	# ... com o valor da variável acima:
 	cat << FIM > index.html
-	<h1>$VARIAVEL</h1>
+		<h1>$VARIAVEL</h1>
 	FIM
 	
-	# note que no arquivo html estará o VALOR de $VARIAVEL (=1234567)!
+	# abriremos o arquivo para ver o resultado:
+	chromium index.html &
+
+	# note que no arquivo html estará o VALOR renderizado de $VARIAVEL (ou seja, 1234567)!
 	
-	# abriremos o arquivo:
-	chromium index.html
 ```
 
 O script acima, pode ser salvo num arquivo\.sh e executado sempre que necessite, inclusive dentro de um servidor que através da função `crontab` ele é executado de tempos em tempos para atualizar o conteúdo de uma página ou até de um arquivo JSON (utilizando o comando `jq` por exemplo) gerando assim sua API por meio da linguagem Bash!
 
-Se pode também criar um outro script Bash usando esse mesmo formato, ou fazer uma query SQL, um script em R, em Lua, etc...
+Usando esse mesmo formato se pode também criar um outro script Bash, ou fazer uma query SQL, um script em R, em Lua, etc...
 
 
 

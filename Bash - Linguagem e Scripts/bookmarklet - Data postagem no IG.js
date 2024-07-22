@@ -1,1 +1,0 @@
-javascript:{let usuario = document.querySelectorAll('main')[0].innerText.split('\n')[0]; let link = window.location.href; let dataHora = document.querySelector('a span time').dateTime.split('T'); let msg = `O usuário "@${usuario}"\n\nFez essa postagem\nNo dia: ${dataHora[0]}\nHorário: ${dataHora[1]}\n\nURL:\n${link}`; alert(msg);}
