@@ -126,7 +126,7 @@ Se o valor (conteúdo) que uma variável recebe tenha espaço(s); por exemplo: s
 	# exponenciação:
 	echo $((2**3))
 	# raiz quadrada:
-	# ...
+	echo "sqrt(9)" | bc
 	# também funciona com variáveis:
 	# (o dolar só aparece antes dos dois parêntesis de abertura):
 	echo $(( num1 * num2 ))
@@ -141,8 +141,44 @@ Se o valor (conteúdo) que uma variável recebe tenha espaço(s); por exemplo: s
 Também se pode realizar operações com números decimais utilizando o comando `bc`:
 
 ```bash 
+	# conta simples:
+	echo "10+2" | bc
+	# exponenciação:
+	echo "3^2" | bc
+	# raiz quadrada:
+	echo "sqrt(81)" | bc
+	# com variáveis:
+	echo "x=1; x+=2; x" | bc
+	# cálculo com decimais:
+	echo "20.55 * 3.14" | bc
+	echo "20.55 * 3.14" | bc -l
+	# resultado com decimais:
+	echo "10/3" | bc -l
+	# retorna com resultado em decimais:
+	echo 'scale = 2; 14 / 5' | bc
+```
+
+Todos estes exemplos acima, podem assumir outra sintaxe. Ao invés de `echo "1+1" | bc`, pode-se usar: 
+
+`bc <<< "1+1"` (sem o pipe e sem comando `echo`).
+
+Agora, considere que o arquivo "contas.txt", possui os seguintes dados:
 
 ```
+1500+300
+200/5
+2000*1.25
+30-12
+```
+
+Podemos usar o comando `bc` para calcular cada linha do arquivo: `cat contas.txt | bc`,
+
+Ou mesmo: `bc < contas.txt`.
+
+Mas também podemos redirecionar o resultado destas operações para um segundo arquivo:
+
+`bc < contas.txt > resultados.txt`.
+
 
 ## <a class="up" href="#topo">> IMPRIMIR NA TELA <span id='imprimir'></span></a> 
 
@@ -1461,12 +1497,9 @@ Também é possível passar argumentos para serem processados dentro da função
 
 
 ## <a class="up" href="#topo">> TRATAMENTO DE ERROS <span id='erros'></span></a>
-Algo tipo try/catch do Javascript ou try/except em Python ???
- 
-```bash
-	
 
-```
+Ver [Redirecionamentos de Saída de Erros em Bash](#lista-de-redirecionamentos-de-sa%C3%ADda-e-de-erros)
+
 
 ## <a class="up" href="#topo">> IMPORTANDO OUTROS ARQUIVOS<span id='importando'></span></a> 
 
@@ -1807,13 +1840,55 @@ Abaixo os caracteres especiais para redirecionar saída de dados ou de erro de u
 Outros exemplos:
 
 ```bash
+	# O ffmpeg, o curl e outros são comandos muito verbosos.
+	# Mas podemos evitar que apareçam tantas informações na tela...
 
-	... 2> /dev/null 
+	ffmpeg -i video.mp4 video.mkv 2> /dev/null 
 	# A mensagem de erro (`2>`) é redirecionada não para arquivo, 
 	# mas para o "buraco negro" do Linux: /dev/null 
 	# um diretório que tudo que é jogado lá, deixa de existir.
 
+	curl https://raw.githubusercontent.com/exemplo.py > arq.py 2> erro.txt
+	# Acima: Duas saídas:
+	# Para o arquivo arq.py - faz o download
+	# Para o arquivo erro.txt - os erros e saída de processamento do comando.
+	
+	rm arquivo &> /dev/null
+	# seria o mesmo que:
+	rm arquivo > /dev/null 2> /dev/null
+	# ou:
+	rm arquivo 1> /dev/null 2> /dev/null
+	# mudamos a saída do comando...
+	# para que não saia na tela seu processamento (stdout - 1> ou somente >)
+	# como qualquer erro para o "buraco negro" (stderr - 2>)
 ```
+
+**Criando um script com tratamento de erros**
+
+Suponhamos que se necessite criar um script em que o usuário receberia uma mensagem caso o programa executasse corretamente, e outra diferente, caso ocorresse algum erro. Para isso, poderíamos fazer um script deste tipo:
+
+```bash
+	#!/bin/bash
+	# se não passe parâmetros:
+	if [[ $# -eq 0 ]]
+	then
+		echo "Não foram passados parâmetros..."
+		echo "Saída com erro para o arquivo" &> arq.err
+		exit 1
+	else
+		:> arq.err
+		echo "Saída Normal na Tela"
+		echo "Parametro = $1"
+	fi
+```
+
+O comando `exit 1` retorna para a variável `$?` o valor 1, que corresponde a erro (ver [Teste de Condições](#teste)) caso o usuário não passe parâmetros. Caso contrário a mensagem será executada normalmente.
+
+Para executar este script, digitamos: `bash nome.sh`, sem parâmetros e veja o resultado na tela, como também no arquivo "arq.err". Porém, logo após sua execução, digite, `echo $?` e veja o resultado "1", tal como programamos em `exit 1`.
+
+Se, porém, passamos algum parâmetro, o arquivo de mensagem de erro fica vazio e a variável `$1` tem seu valor "0", confirmando que tudo saiu bem.
+
+
 
 ### Lista de Redirecionamentos de Entrada
 
@@ -1821,16 +1896,22 @@ Uma lista dos caracteres especiais para redirecionamento de entrada de dados a u
 
 | **Caracter** | **Redirecionamento** |
 |----------|------------------|
-|    <     | A entrada padrão é modificada já não sendo mais o teclado, mas um arquivo ou texto. |
-|   <<     | A entrada padrão é modificada igualmente, delimitando um início e fim de expressões (strings) que serão colocadas dentro de um arquivo (muitas vezes encontraremos o nome "EOF" *(End Of File)* em exemplos pela internet). No seguinte tópico trataremos de seu uso. | 
-|   <<<    | Substitui o pipe, mas neste caso, o que está à direita de <<< será a entrada do que o comando executará. Ver em outros exemplos como é usado. Vantagem: O processamento de "<<<" é mais rápido que usar comandos separados por "pipe"! | 
+|    <     | A entrada padrão é modificada já não sendo mais o teclado, mas \[o nome de] **um arquivo**. |
+|   <<     | *Here-documents*. A entrada padrão é modificada igualmente, delimitando um início e fim de expressões (strings) que serão colocadas dentro de um arquivo (muitas vezes encontraremos o nome **"EOF"** (End Of File) em exemplos pela internet). Dentro desses delimitadores, se colocará normalmente o **escopo de expressões** de uma linguagem ou comando. No seguinte tópico trataremos de seu uso. | 
+|   <<<    | *Here-strings*. Substitui o pipe, mas neste caso, o que está à direita de <<< será a entrada em **um comando, variável ou expressão** do que o comando à esquerda executará. Ver em outros exemplos como é usado. Vantagem: O processamento de "<<<" é mais rápido que usar comandos separados por "pipe"! | 
 
 
 Outros exemplos:
 
 ```bash
-
-
+wc -l < arq		# (só nome do arq sem comando) o mesmo que: cat arq | wc -l
+wc -l <<< cat arq	# mesmo efeito que o de cima (mas observe o comando cat)
+bc <<< 4*3 		# o mesmo que: echo 4*3 | bc (mas sem echo)
+tr '[a-z]' '[A-Z]' <<< "blablabla"		# here-string com expressão
+tr '[a-z]' '[A-Z]' <<< $VAR			# here-string com variável
+tr " " "\n" <<< ${LISTA[@]}			# here-string com array
+sed "s/ /\n/g" <<< $(echo {a..z})		# here-string com comando
+sed "s/ /\n/g" <<< $(echo {a..z}) | cat -n	# combinando com três comandos
 ```
 
 ## <a class="up" href="#topo">> INTEGRAÇÃO COM OUTRAS LINGUAGENS<span id='integracao'></span></a> 
@@ -1841,13 +1922,15 @@ O Bash, por ser uma linguagem que roda sobre o Sistema Operacional Linux/Unix de
 
 Isso é possível através o caracter de redirecionamento `<<`.
 
+Tal recurso é conhecido tecnicamente como "here-documents" ou "heredocs".
+
 Desde o seu Terminal digite:
 
 ```bash
 	## Rodar comandos do Python usando o redirecionamento com `<<`:
+	
 	python3 << EOF
 	> print("Estou no Python!")
-	> exit()
 	> EOF
 ```
 
@@ -1870,10 +1953,10 @@ Mas a saída do resultado deste script pode ser redirecionada para um arquivo, e
 
 Nesse exemplo, criamos um script que ao ser executado criará um arquivo de nome `arquivo.txt` cujo conteúdo é "bla bla bla". 
 
-Porém este arquivo txt criado desde este script poderia ser um arquivo Python, Javascript, HTML, PHP, script em R, Lua, etc...
+Porém este arquivo txt foi criado desde este script, mas poderia ser um arquivo de Python, Javascript, HTML, PHP, Script em R, Lua, JSON, etc...
 
 
-### Retornando dados de outra linguagem para o Bash através um script
+### Obtendo dados de outra linguagem para o Bash através um script
 
 Se pode rodar um script de outra linguagem dentro de um script Bash e obter os resultados em uma variável.
 
@@ -1881,27 +1964,50 @@ Por exemplo: Vamos criar um script em Bash para que se execute algum código em 
 
 ```bash
 
-	#!/bin/bash
-	# Rodaremos comandos do NodeJS e
-	# se guardará tudo em uma variável:
-	VARIAVEL=$(node << FINAL
-		process.env.TZ = "America/Sao_Paulo";
-		let hora = new Date().toString();
-		console.log(hora);
-	FINAL
-	)	# <= Erro se fechar o parêntesis ao lado da palavra FINAL
+#!/bin/bash
+# Rodaremos comandos do NodeJS e
+# se guardará tudo em uma variável:
+VARIAVEL=$(node << FINAL
+	process.env.TZ = "America/Sao_Paulo";
+	let hora = new Date().toString();
+	console.log(hora);
+FINAL
+)	# <= Erro se fechar o parêntesis ao lado da palavra FINAL
 
-	# imprimimos o resultado tanto em tela como salvamos num arquivo:
-	echo "O NodeJS retornou este valor: $VARIAVEL." | tee -a resultados.csv
+# imprimimos o resultado tanto em tela como salvamos num arquivo:
+echo "O NodeJS retornou este valor: $VARIAVEL." | tee -a resultados.csv
 
 ```
 
-A seguir, mostraremos algo mais interessante: criaremos um arquivo HTML desde um script em Bash:
+OBS.: Para funcionamento de um Heredoc em Bash com algum Script de outra linguagem, é necessário um comando dessa linguagem que imprima o resultado na tela, pois mesmo que se execute e chame uma função a VARIAVEL do Bash não receberia valor. Por exemplo:
+
+```bash
+	#!/bin/bash
+	VARIAVEL=$(node <<- FIM
+		function ok(){
+			let d = new Date();
+			let ano = d.getFullYear();
+			return ano;
+		}
+		ok();			// aqui nada é passado para VARIAVEL.
+		console.log(ok());	// aqui VARIAVEL sim recebe.
+	FIM
+	)
+
+	# Nosso script Bash imprime o valor de VARIAVEL obtido do NodeJS:
+	echo "O NodeJS retornou este valor: $VARIAVEL."
+```
+
+Perceba que é preciso o console.log, caso contrário, a VARIAVEL do Bash não recebe o valor da função do NodeJS.
+
+Outra observação é que acima, acrescentou-se um hífen "-" antes da palavra delimitadora FIM: `node <<- FIM`, que indica ao Bash que ignore a tabulação de indentação (recuo) que se encontre na palavra final "FIM" que fecha o heredoc. Para evitar possíveis erros, é recomendável usar sempre "<<-".
 
 
 ### Scripts Bash que criam programas para outras linguagens!
 
-Agora observe este outro exemplo em que criaremos um arquivo HTML desde um script Bash!! Pense nas muitas possibilidades que isso nos oferece:
+Agora observe este próximo exemplo em que criaremos um arquivo HTML desde um script Bash! Mas não é só isso, podemos inclusive, colocar variáveis já renderizadas dentro deste HTML.
+
+Pense nas muitas possibilidades que isso nos oferece!
 
 ```bash
 	# se criou, gerou ou obteve esta variável:
@@ -1913,18 +2019,27 @@ Agora observe este outro exemplo em que criaremos um arquivo HTML desde um scrip
 		<h1>$VARIAVEL</h1>
 	FIM
 	
-	# abriremos o arquivo para ver o resultado:
+	# vamos abrir o arquivo para ver o resultado:
 	chromium index.html &
 
-	# note que no arquivo html estará o VALOR renderizado de $VARIAVEL (ou seja, 1234567)!
-	
+	# e note que o arquivo html trará o VALOR já renderizado de $VARIAVEL (ou seja, 1234567)!
 ```
 
-O script acima, pode ser salvo num arquivo\.sh e executado sempre que necessite, inclusive dentro de um servidor que através da função `crontab` ele é executado de tempos em tempos para atualizar o conteúdo de uma página ou até de um arquivo JSON (utilizando o comando `jq` por exemplo) gerando assim sua API por meio da linguagem Bash!
+Perceba que, ao executar este script, dentro da tag `<h1>` do arquivo html, será colocado o valor renderizado de VARIAVEL, ou seja, 1234567 e não a expressão "$VARIAVEL" (que poderia acontecer se a palavra delimitadora do heredoc acima estivesse entre aspas!! Ou seja, estivesse assim: `cat << "FIM"`).
 
-Usando esse mesmo formato se pode também criar um outro script Bash, ou fazer uma query SQL, um script em R, em Lua, etc...
+Um script heredoc, como acima, pode ser salvo num arquivo\.sh e executado sempre que necessite, inclusive dentro de um servidor que através da função `crontab` o executará de tempos em tempos para atualizar seu conteúdo para uma página ou até de um arquivo JSON (utilizando o comando `jq` por exemplo) gerando assim sua API por meio da linguagem Bash!
 
+Usando esse mesmo formato se pode também criar um outro script Bash, ou fazer uma query SQL, PHP e muito mais...
 
+Os here-documents também executam comandos do Bash diretamente no escopo do arquivo que está sendo criado:
+
+```bash
+	cat <<- FINAL > variaveis.js
+		let usuarioMaquina = "$(whoami)";
+		let tempoServidorLigado = "$(uptime | cut -d"," -f1)";
+		let nomeSistema = "$(uname -a)";
+	FINAL
+```
 
 
 
