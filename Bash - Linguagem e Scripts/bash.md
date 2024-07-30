@@ -200,6 +200,143 @@ Em Bash, há várias maneiras de se imprimir em tela uma mensagem. Desde as mais
 
 ### Comando printf
 
+Com o comando `printf` é possível imprimir na tela com mais formatação. É como o comando `echo` com "super-poderes"!
+
+A sintaxe é esta:
+
+`printf "formato" "argumento"`
+
+Onde:
+
+- *Formato* é justamente o padrão que "argumento" será impresso na tela. 
+- *Argumento* é o conteúdo que se imprimirá na tela.
+
+OBS.: *Formato* sempre vem precedido do caracter especial %.
+
+Os tipos de formato mais básicos e usuais são:
+
+|Letra	|Efeito	|
+|-------|-------|
+|%c	|Simples caracter.	|
+|%d	|Número decimal.	|
+|%f	|Número com ponto decimal.|
+|%s	|Cadeia de caracteres (string).	|
+
+Além dessas letras que dão formato, existe a "sequência de escape" que define o que segue *após* a impressão do argumento. Vêm seguidas de barra invertida (\). E elas são:
+
+| Sequência | Efeito |
+|-------|-------|
+| \n	| Após imprimir, salta para a linha seguinte. |
+| \t	| Após imprimir, dá um "tab". |
+| \b	| Após imprimir, dá um "backspace". |
+
+Exemplos:
+
+```bash
+# imprime uma frase:
+printf "%s" "Uma frase."
+
+# imprime uma frase e quebra a linha:
+printf "%s\n" "Uma frase."
+
+# imprime uma frase e quebra duas linhas:
+printf "%s\n\n" "Uma frase."
+
+# imprime uma frase dentro de um espaço de 20 caracteres (sem quebra de linha):
+printf "%20s" "Uma frase."
+
+# O mesmo mas com os espaços em branco à direita:
+printf "%-20s" "Uma frase."
+
+# imprime duas frases (dentro de espaços de 20) e no final dá quebra de linha:
+printf "%20s" "Uma frase."; printf "%20s\n" "Outra frase."
+
+# o printf tb trabalha com mais de um argumento! Veja isto:
+printf "%s | %s | %s |\n" "1a. Coluna" "2a. Coluna" "3a. Coluna"
+printf "| %s | %s | %s |\n" "1a. Coluna" "2a. Coluna" "3a. Coluna" # + bonito ?
+
+# imprime uma frase e dá um/dois Tab em seguida:
+printf "%s\t" "Uma frase."
+printf "%s\t\t" "Uma frase."
+
+# imprime um número (sem ponto flutuante):
+printf "%d" "123"
+printf "%s" "123" 	# mesmo efeito
+
+# imprime um número dentro de um espaço de 20 caracteres e preenchidos com # à esquerda:
+printf "%20d" "123" | tr " " "#"
+printf "%20s" "123" | tr " " "#"	# mesmo resultado
+
+# o mesmo de cima com a quebra de linha:
+printf "%20d\n" "123" | tr " " "#"
+
+# o mesmo, mas com os espaços (#) à direita do número:
+printf "%-20d\n" "123" | tr " " "#"
+
+# imprime um número num espaço de 10 caracteres com zeros à esquerda:
+printf "%010d" "12"
+
+# imprime apenas os 5 primeiros caracteres de uma frase:
+printf "%.5s" "Uma frase."
+
+# imprime um número decimal (por padrão 6 números após a vírgula):
+printf "%f" "3,14"
+
+# para usar um número com ponto decimal (com 2 números após a vírgula):
+printf "%.2f" "1250,50"
+printf "%.2f" "1250,5"		# mesmo resultado
+
+# número decimal com 4 casas:
+printf "%.4f" "3,1415"
+printf "%.4f" "3,14"
+
+# imprimir o mesmo valor dentro de um espaço de 20 caracteres:
+printf "%20.2f\n" "1250,50" | tr ' ' '*'	# (preenchido com * à esquerda)
+printf "%-20.2f\n" "1250,50" | tr ' ' '*'	# (preenchido com * à direita)
+
+# ainda usando mais de um argumento, observe isto:
+printf "%20s | %20s | %20s |\n" "1a. Coluna" "2a. Coluna" "3a. Coluna"	# alinhado à esquerda
+printf "%-20s | %-20s | %-20s |\n" "1a. Coluna" "2a. Coluna" "3a. Coluna"	# alinhado à direita
+
+# o printf tb pode ser usado com $variáveis:
+VARIAVEL=10,25
+printf "%10.2f" $VARIAVEL
+printf "%10.2f\n" $VARIAVEL | tr ' ' '#'	# outro jeito
+
+
+# Vamos formar uma pequena tabela com estes valores...
+# primeiro as variáveis:s
+VALOR1=300
+VALOR2=500
+TOTAL=$((VALOR1 + VALOR2))
+
+# agora tente estes exemplos (do mais simples ao mais complexo):
+printf "%d %d %d \n" $VALOR1 $VALOR2 $TOTAL
+printf "%.2f %.2f %.2f \n" $VALOR1 $VALOR2 $TOTAL
+printf "%10.2f %10.2f %10.2f \n" $VALOR1 $VALOR2 $TOTAL
+printf "%.2f + %.2f = %.2f \n" $VALOR1 $VALOR2 $TOTAL
+printf "%-10.2f %-10.2f %-10.2f \n" $VALOR1 $VALOR2 $TOTAL
+
+
+# podemos variar com expansão de chaves:
+printf "%10s\n" {0..10}
+printf "%10s\n" {00..10}
+
+# Ou concatenando com mais texto:
+printf "Item: %s - \n" {00..10}
+printf "Item: %s - \n" {00..10} > tabela.csv
+
+# exemplo interessante:
+printf "Dia %s - \n" {01..31}
+
+# tente este tb!:
+printf "Dia %s/Maio\n" {01..31}
+printf "Dia %s/Maio\n" {01..31} > meses.csv
+
+```
+
+
+
 ### Comando tput
 
 (Alinhar, justificar, decimais, cores, peso, fonte, etc)
