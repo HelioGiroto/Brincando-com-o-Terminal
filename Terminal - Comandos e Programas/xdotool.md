@@ -1,5 +1,10 @@
 xdotools
 
+## Pega a posição na tela:
+	watch -n0.3 -t xdotool getmouselocation --shell
+	xdotool getmouselocation --shell
+	 xdotool search --onlyvisible . behave %@ mouse-enter getmouselocation
+
 
 
 # ver - https://jualabs.com/2015/07/06/utilizando-o-xdotool-para-manipular-arquivos/

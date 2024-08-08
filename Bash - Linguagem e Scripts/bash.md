@@ -11,6 +11,7 @@ https://www.gnu.org/software/bash/manual/bash.html
 - [Shebang: Inicio do Programa](#shebang)
 - [Comentários](#comentarios)
 - [Extensão dos Arquivos Bash](#extensao)
+- [Executando um script](#executando)
 - [Sintaxe de Comandos no Script](#sintaxe)
 - [Entrada de Dados 1: Variáveis](#variaveis)
 - [Operações e Operadores Aritméticos](#operadores)
@@ -63,6 +64,15 @@ Comentários depois do símbolo: #.
 
 ## <a class="up" href="#topo">> EXTENSÃO DOS ARQUIVOS BASH<span id='extensao'></span></a> 
 Normalmente se salva um script Bash com a extensão `.sh`, como por exemplo: `nome_arquivo.sh`. Mas também se pode encontrar (raramente) a extensão `.bash`; ou até sem extensão (em casos de scripts salvos na pasta /bin que receberam permissão para serem executáveis (`chmod -x arq`)).
+
+
+## <a class="up" href="#topo">> EXECUTANDO UM SCRIPT   <span id='executando'></span></a> 
+
+A maneira mais simples para rodar um script em Bash, é na linha de comando digitar o seguinte comando:
+
+`bash script.sh`
+
+Onde `script.sh` é o nome do script.
 
 
 ## <a class="up" href="#topo">> SINTAXE DE COMANDOS NO SCRIPT  <span id='sintaxe'></span></a> 
