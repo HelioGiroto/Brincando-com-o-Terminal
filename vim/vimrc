@@ -1,0 +1,136 @@
+" CONFIGURAÇOES DO VUNDLE PARA USO DE PLUGINS NO VIM:
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" Comandos para Plugins:
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" :PluginUpdate     - atualizar os plugins instalados.
+
+" fonte - https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L255-L265
+
+" MEUS PLUGINS
+Plugin 'itchyny/lightline.vim'
+
+
+
+" CONFIGURAÇÕES PESSOAIS PARA USO DO VIM
+" Habilita syntax highlight
+syntax on
+
+" Define o encoding para ler os arquivos
+set encoding=utf-8
+
+" Ativa numeros das linhas
+set number
+
+" Ativa o unnamed register (permite que o conteúdo do clipboard seja usado em outros programas)
+set clipboard=unnamedplus
+" Destaca os caracteres correspondentes á medida que você os digita durante uma busca.
+set incsearch
+
+" Ignora letras maiúsculas durante a busca.
+set ignorecase
+
+" Sobrescreve a opção ignorecase se estiver buscando por letras maiúsculas.
+" Isso permitirá que você procure especificamente por letras maiúsculas.
+set smartcase
+
+" Utiliza destaque durante uma pesquisa.
+set hlsearch
+
+" Indenta a próxima linha automaticamente ao pressionar Enter
+set autoindent
+
+set laststatus=2
+
+set showmatch
+" Ativa as cores especiais
+set termguicolors
+
+" Tema
+colorscheme desert-night
+
+
+"move linha para cima ou para baixo ao pressionar ALT + setas:
+"inoremap <A-up> <esc>V y<esc>ddkPi
+"inoremap <A-down> <esc>V y<esc>ddpi
+"nnoremap <A-up> <esc>V y<esc>ddkP
+"nnoremap <A-down> <esc>V y<esc>ddp
+
+" inoremap <A-up> <esc>d2kp
+" inoremap <A-down> <esc>ddp
+" innoremap <A-up> dd2kp
+" innoremap <A-down> ddp
+
+"ola
+" inoremap <A-j> <esc>:m +1<CR>gi
+" inoremap <A-up> <esc>:m -2<CR>gi
+" nnoremap <A-up> :m -2<CR>
+" nnoremap <A-j> :m +1<CR>
+"   
+
+inoremap <A-up> <esc>:m -2<CR>gi
+inoremap <A-down> <esc>:m +1<CR>gi
+nnoremap <A-up> :m -2<CR>
+nnoremap <A-down> :m +1<CR>
+vnoremap <A-up> :m -2<CR>gv=gv
+vnoremap <A-down> :m'>+<CR>gv=gv  
+
+" barra mais enter: Apaga a última busca e highlight que ela deixou
+nnoremap /<CR> :noh<CR>
+
+
+" Abreviações para arquivos Javascript:
+" :autocmd FileType html,javascript :iabbrev doc? document.
+" :autocmd FileType html,javascript :iabbrev qs? document.querySelector('')<esc>hi
+" :autocmd FileType html,javascript :iabbrev qa? document.querySelectorAll('')<esc>hi
+" :autocmd FileType html,javascript :iabbrev con? console.log('')<esc>hi
+" :autocmd FileType html,javascript :iabbrev inn? innerText
+" :autocmd FileType html,javascript :iabbrev add? .addEventListener('', )<esc>Bi
+" :autocmd FileType html,javascript :iabbrev try? try { } catch (e) { };<esc>5Bi<CR><CR><esc>$Bi<CR><CR><esc>3ki
+" :autocmd FileType html,javascript :iabbrev rep? replace('', '')<esc>5hi
+" :autocmd FileType html,javascript :imap doc? document.
+" :autocmd FileType html,javascript :imap qs? document.querySelector('')<esc>hi
+" :autocmd FileType html,javascript :imap qa? document.querySelectorAll('')<esc>hi
+" :autocmd FileType html,javascript :imap con? console.log('')<esc>hi
+" :autocmd FileType html,javascript :imap inn? innerText
+" :autocmd FileType html,javascript :imap add? .addEventListener('', )<esc>Bi
+" :autocmd FileType html,javascript :imap rep? replace ('', '')<esc>5hi
+
+:autocmd FileType html,javascript :imap <C-z>d document.
+:autocmd FileType html,javascript :imap <C-z>do document.
+:autocmd FileType html,javascript :imap <C-z>q querySelector('')<esc>hi
+:autocmd FileType html,javascript :imap <C-z>qq querySelectorAll('')<esc>hi
+:autocmd FileType html,javascript :imap <C-z>co console.log('')<esc>hi
+:autocmd FileType html,javascript :imap <C-z>ad addEventListener('', )<esc>3hi
+:autocmd FileType html,javascript :imap <C-z>re replace('', '')<esc>5hi
+:autocmd FileType html,javascript :imap <C-z>sp split("")[]<esc>3hi
+:autocmd FileType html,javascript :imap <C-z>in innerText
+:autocmd FileType html,javascript :imap <C-z>pa parentNode.
+:autocmd FileType html,javascript :imap <C-z>cl click();
+:autocmd FileType html,javascript :imap <C-z>ch childNode[]<esc>i
+:autocmd FileType html,javascript :imap <C-z>le lenght
+:autocmd FileType html,javascript :imap <C-z>pu push()<esc>i
+:autocmd FileType html,javascript :imap <C-z>ma map(a=>{<CR><CR>});<esc>ki<tab>
+:autocmd FileType html,javascript :imap <C-z>fe forEach(el=>{<CR><CR>});<esc>ki<tab>
+
+
+
+
+
+
+

@@ -27,7 +27,7 @@ Fonte: https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt
 ### 4. Para instalar um plugin
 - Basta acrescentar no arquivo .vimrc o comando `Plugin 'nomePlugin'`, conforme o site Vim Awesome, por exemplo.
 - Em seguida, os comandos:
-    
+     
 ```
         :source %
         :PluginInstall
