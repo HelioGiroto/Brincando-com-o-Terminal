@@ -4,47 +4,73 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+
+" filetype plugin indent on    " required
+
+" Habilite a detecção de tipo de arquivo:
+filetype on
+
+" Habilite plug-ins e carregue-os conforme o tipo de arquivo detectado
+filetype plugin on
+
+" Carregue um arquivo de recuo conforme o tipo de arquivo detectado.
+filetype indent on
+
+
+" MEUS PLUGINS
 call vundle#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim' 		" let Vundle manage Vundle, required:
+Plugin 'itchyny/lightline.vim'		" barra inferior com hora, tipo de arq...
+Plugin 'chun-yang/auto-pairs'			" Fecha [ { ( ...
+Plugin 'sheerun/vim-polyglot'			" verificador de sintaxe de código
+Plugin 'scrooloose/nerdtree'			" File explorer
+Plugin 'yggdroot/indentline' 			" faz marcações nas indentações
+Plugin 'preservim/nerdcommenter'	" Comentador
+Plugin 'ryanoasis/vim-devicons'		" icones para NERDTree
+Plugin 'bling/vim-bufferline'			" mostra os buffers no rodapé
+Plugin 'mattn/emmet-vim'					" instala emmets de html
+" Plugin 'jimf/javascriptcomplete'
+
+
+	" Comandos para Plugins:
+	" :PluginList       - lists configured plugins
+	" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+	" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+	" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+	" :PluginUpdate     - atualizar os plugins instalados.
+	" fonte - https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L255-L265
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Comandos para Plugins:
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" :PluginUpdate     - atualizar os plugins instalados.
-
-" fonte - https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L255-L265
-
-" MEUS PLUGINS
-Plugin 'itchyny/lightline.vim'
 
 
+" muda a tecla leader (\) para (,)
+" Vim waits for 1000 milliseconds after the <Leader> key has been pressed
+let mapleader = "," 
 
-" CONFIGURAÇÕES PESSOAIS PARA USO DO VIM
+
 " Habilita syntax highlight
 syntax on
 
 " Define o encoding para ler os arquivos
-set encoding=utf-8
+set encoding=UTF-8
+" set encoding=utf8
 
 " Ativa numeros das linhas
 set number
 
+"ativa o mouse para selecionar e posicionar a linha atual 
+set mouse=a
+
 " Ativa o unnamed register (permite que o conteúdo do clipboard seja usado em outros programas)
 set clipboard=unnamedplus
-" Destaca os caracteres correspondentes á medida que você os digita durante uma busca.
+
+" Destaca os caracteres correspondentes à medida que você os digita durante uma busca.
 set incsearch
 
 " Ignora letras maiúsculas durante a busca.
 set ignorecase
-
 " Sobrescreve a opção ignorecase se estiver buscando por letras maiúsculas.
 " Isso permitirá que você procure especificamente por letras maiúsculas.
 set smartcase
@@ -55,15 +81,36 @@ set hlsearch
 " Indenta a próxima linha automaticamente ao pressionar Enter
 set autoindent
 
+" linha em que se encontra o cursor destacada
+set cursorline
+" :highlight Cursorline cterm=bold ctermbg=black
+:highlight Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
+
+" evita a quebra de linhas
+set nowrap
+" ou: set wrap! para toggle - ver :help :_!
+" tecla leader (,) + w = wrap toggle:
+nmap <leader>w :set wrap!<CR>
+
+
+" No modo Comando, dá opções de comandos ao pressionar TAB:
+set wildmenu
+" set wildmode=list:longest - define lista longa como o do bash ??
+
+"Mostra o status na penúltima linha.
 set laststatus=2
 
+"Mostrar palavras correspondentes durante uma pesquisa.
 set showmatch
+
 " Ativa as cores especiais
 set termguicolors
 
+" define a fonte para vim e icones do nerdTree:
+set guifont=Symbols\ Nerd\ Font\ Mono:h12
+
 " Tema
 colorscheme desert-night
-
 
 "move linha para cima ou para baixo ao pressionar ALT + setas:
 "inoremap <A-up> <esc>V y<esc>ddkPi
@@ -71,18 +118,7 @@ colorscheme desert-night
 "nnoremap <A-up> <esc>V y<esc>ddkP
 "nnoremap <A-down> <esc>V y<esc>ddp
 
-" inoremap <A-up> <esc>d2kp
-" inoremap <A-down> <esc>ddp
-" innoremap <A-up> dd2kp
-" innoremap <A-down> ddp
-
-"ola
-" inoremap <A-j> <esc>:m +1<CR>gi
-" inoremap <A-up> <esc>:m -2<CR>gi
-" nnoremap <A-up> :m -2<CR>
-" nnoremap <A-j> :m +1<CR>
-"   
-
+" No Linux há dificuldade de configurar ALT + letra
 inoremap <A-up> <esc>:m -2<CR>gi
 inoremap <A-down> <esc>:m +1<CR>gi
 nnoremap <A-up> :m -2<CR>
@@ -90,47 +126,95 @@ nnoremap <A-down> :m +1<CR>
 vnoremap <A-up> :m -2<CR>gv=gv
 vnoremap <A-down> :m'>+<CR>gv=gv  
 
-" barra mais enter: Apaga a última busca e highlight que ela deixou
-nnoremap /<CR> :noh<CR>
+" Ctrl + / = Apaga a última busca e highlight que ela deixou
+"			 para saber quais sao as teclas de caracteres especiais, basta digitar no
+"			 Terminal o seguinte comando:
+"			 sed -n l
+" nnoremap <C-/> :noh<CR>
+nmap <C-_> :noh<CR>
+nnoremap <C-_> :noh<CR>
+
+
+" navega entre as janelas do split:
+" para navegar mais facil = Control + w (varias vezes)
+nnoremap <C-j> <c-w>j
+nnoremap <C-k> <c-w>k
+nnoremap <C-h> <c-w>h
+nnoremap <C-l> <c-w>l
+
+" REDIMENCIONA AS JANELAS DE SPLIT
+" O problema de usar ESC em lugar de Alt é que pode haver conflito qdo usa a própria tecla ESC e depois as de movimento. 
+" nnoremap <ESC>j :resize -2<CR>
+" nnoremap <ESC>k :resize +2<CR>
+" nnoremap <ESC>h :vertical resize -2<CR>
+" nnoremap <ESC>l :vertical resize +2<CR>
+nnoremap <C-up> <c-w>-
+nnoremap <C-down> <c-w>+
+nnoremap <C-left> <c-w><
+nnoremap <C-right> <c-w>>
+
+
+" Tab next: (somente no gVim)
+" nnoremap <C-TAB> 		:tabNext<CR>				" gt 
+" nnoremap <C-S-TAB>	:tabprevious<CR>		" gT 
+
+
+" F3 = Abre/fecha NERDTree
+" nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <F3> :NERDTreeToggle<cr>
+
+
+" F5 ou <, + t> = Abre um terminal no rodapé:
+nnoremap <F5> :belowright terminal<CR>
+nnoremap <leader>t :belowright terminal<CR>
+
+
+" comentarios - tecla de atalho = cc
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+nmap cc <Plug>NERDCommenterInvert
+vmap cc <Plug>NERDCommenterInvert
+
+
+" Configura emmet para funcionar apenas em arquivos html e css
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+" configurar emmet de html para tag + tab:
+let g:user_emmet_expandabbr_key='<Tab>'
+autocmd FileType html, css imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+
+" SpellCheck
+set spelllang=pt-BR
+autocmd FileType md,markdown,txt,text, setlocal spell spelllang=pt,en
 
 
 " Abreviações para arquivos Javascript:
-" :autocmd FileType html,javascript :iabbrev doc? document.
-" :autocmd FileType html,javascript :iabbrev qs? document.querySelector('')<esc>hi
-" :autocmd FileType html,javascript :iabbrev qa? document.querySelectorAll('')<esc>hi
-" :autocmd FileType html,javascript :iabbrev con? console.log('')<esc>hi
-" :autocmd FileType html,javascript :iabbrev inn? innerText
-" :autocmd FileType html,javascript :iabbrev add? .addEventListener('', )<esc>Bi
-" :autocmd FileType html,javascript :iabbrev try? try { } catch (e) { };<esc>5Bi<CR><CR><esc>$Bi<CR><CR><esc>3ki
-" :autocmd FileType html,javascript :iabbrev rep? replace('', '')<esc>5hi
-" :autocmd FileType html,javascript :imap doc? document.
-" :autocmd FileType html,javascript :imap qs? document.querySelector('')<esc>hi
-" :autocmd FileType html,javascript :imap qa? document.querySelectorAll('')<esc>hi
-" :autocmd FileType html,javascript :imap con? console.log('')<esc>hi
-" :autocmd FileType html,javascript :imap inn? innerText
-" :autocmd FileType html,javascript :imap add? .addEventListener('', )<esc>Bi
-" :autocmd FileType html,javascript :imap rep? replace ('', '')<esc>5hi
-
-:autocmd FileType html,javascript :imap <C-z>d document.
-:autocmd FileType html,javascript :imap <C-z>do document.
-:autocmd FileType html,javascript :imap <C-z>q querySelector('')<esc>hi
-:autocmd FileType html,javascript :imap <C-z>qq querySelectorAll('')<esc>hi
-:autocmd FileType html,javascript :imap <C-z>co console.log('')<esc>hi
-:autocmd FileType html,javascript :imap <C-z>ad addEventListener('', )<esc>3hi
-:autocmd FileType html,javascript :imap <C-z>re replace('', '')<esc>5hi
-:autocmd FileType html,javascript :imap <C-z>sp split("")[]<esc>3hi
-:autocmd FileType html,javascript :imap <C-z>in innerText
-:autocmd FileType html,javascript :imap <C-z>pa parentNode.
-:autocmd FileType html,javascript :imap <C-z>cl click();
-:autocmd FileType html,javascript :imap <C-z>ch childNode[]<esc>i
-:autocmd FileType html,javascript :imap <C-z>le lenght
-:autocmd FileType html,javascript :imap <C-z>pu push()<esc>i
-:autocmd FileType html,javascript :imap <C-z>ma map(a=>{<CR><CR>});<esc>ki<tab>
-:autocmd FileType html,javascript :imap <C-z>fe forEach(el=>{<CR><CR>});<esc>ki<tab>
+:autocmd FileType html,javascript :imap <C-x>do document.
+:autocmd FileType html,javascript :imap <C-x>qs querySelector('')<esc>hi
+:autocmd FileType html,javascript :imap <C-x>qa querySelectorAll('')<esc>hi
+:autocmd FileType html,javascript :imap <C-x>co console.log('')<esc>hi
+:autocmd FileType html,javascript :imap <C-x>ad ad('', )<esc>3hi
+:autocmd FileType html,javascript :imap <C-x>re replace('', '')<esc>5hi
+:autocmd FileType html,javascript :imap <C-x>sp split("")[]<esc>3hi
+:autocmd FileType html,javascript :imap <C-x>in innerText
+:autocmd FileType html,javascript :imap <C-x>pa parentNode.
+:autocmd FileType html,javascript :imap <C-x>cl click();
+:autocmd FileType html,javascript :imap <C-x>ch childNode[]<esc>hi
+:autocmd FileType html,javascript :imap <C-x>le lenght
+:autocmd FileType html,javascript :imap <C-x>pu push()<esc>hi
+:autocmd FileType html,javascript :imap <C-x>ma map(a=>{<CR><CR>});<esc>ki<tab>
+:autocmd FileType html,javascript :imap <C-x>fe forEach(el=>{<CR><CR>});<esc>ki<tab>
+:autocmd FileType html,javascript :imap <C-x>try try {<CR><CR>}<CR>catch (e){<CR><CR>};<CR><esc>5ki
 
 
 
 
 
-
-
+" Ver tb:
+" https://stackovercoder.com/programming/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
+" https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
+" https://stackoverflow.com/questions/49052619/any-mapping-in-vimrc-with-alt-isnt-working
+" https://vi.stackexchange.com/questions/38848/how-can-i-map-ctrl-alt-letter-mappings-in-vim
+" https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/

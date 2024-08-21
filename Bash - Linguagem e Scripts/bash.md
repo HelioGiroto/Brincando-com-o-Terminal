@@ -1313,6 +1313,24 @@ O resultado esperado é que os arquivos agora estejam com estes nomes:
 	video 3.mp4
 
 
+**Outro exemplo prático:**
+
+Movendo todos os arquivos dos diretórios para a diretório pai, supondo que você baixou vários vídeos que cada um veio dentro de uma pasta própria e agora é preciso mover cada vídeo destas pastas para uma única:
+
+```bash
+	for FOLDER in $(ls -d *)
+	do 
+		mv $FOLDER/* .
+	done
+```
+
+Ou em só uma linha:
+
+`for FOLDER in $(ls -d *); do mv $FOLDER/* .; done`
+
+
+
+
 ### Uso do FOR para percorrer o conteúdo de UM array (lista):
 
 A forma mais tradicional de usar `for` para percorrer um array é esta:

@@ -1,6 +1,5 @@
 # Vim configurações
 
-
 ## COMO INSTALAR PLUGINS NO VIM
 
 ### 1.Clona repositório do Vundle:
@@ -12,6 +11,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 - Pode comentar (com ") todos as linhas que iniciam com "Plugin" exceto:
     Plugin 'VundleVim/Vundle.vim'
 - Salva e sai
+- Resumindo: Copia o arquivo `vimrc` deste repositório para a home da sua máquina.
 
 
 ### 3. Reabra o vim e execute o seguinte comando:
@@ -40,6 +40,7 @@ https://vimawesome.com/plugin/nerdtree-red
 https://vimawesome.com/plugin/lightline-vim
 
 
+
 ## COMO INSTALAR UM TEMA NO VIM
 - Encontre e baixe o tema para seu computador. (Geralmente é um arquivo .vim)
 - Vá até a pasta `~/.vim/colors/` e copie o arquivo dentro dela.
@@ -52,8 +53,9 @@ https://vimawesome.com/plugin/lightline-vim
 
 
 
+## Problemas com o register do Linux/Mac:
 
-### Não aparece o registro + de clipboard (de transferir para outros programas)
+**Não aparece o registro + de clipboard (de transferir para outros programas)**
 *(O registro + é o unnamed register)*
 
 (No Mac OS é o "*)
