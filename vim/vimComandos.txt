@@ -65,5 +65,37 @@ MAPEAR TECLAS (Redefinir Teclas):
 	ESC :nmap <C-a> ggVG - Muda as teclas control + a para selecionar todo conteudo do arquivo.
 
 
+Posiciona o cursor sobre um link e digita o comando:
+(ver mais em :help gf)
+	gf	- abre o arq no vim (mas 1º tem que salvar o arq atual)
+	gx	- abre o link no navegador
+	gt	- tabnext
+	gT	- tabprevious
+
+	:tabnew arq 	- abre arq em nova tab
+	:e[dit] arq	- abre o arq num novo buffer
+	:vert new arq	- abre arq na mesma janela (mas dividida)
+	:vsplit arq	- o mesmo do de cima
+	
+	(somente navega se o arq do buffer atual estiver salvo)
+	:bn	- proximo buffer 
+	:bp	- anterior buffer
+	:b1	- vai ao buffer #1 (pode ser qquer nro)
+	:bd	- fecha o buffer atual
+
+
+- Navegar entre os buffers:
+https://stackoverflow.com/questions/24902724/how-do-i-navigate-buffers-in-vim
+
+
+
+
+- Abrir o arq.md em NerdTree no navegador ?
+(nerdtree how open a html file on browser ? )
+
+	https://stackoverflow.com/questions/6467634/create-a-command-shortcut-for-nerdtree-in-vim-editor
+	https://superuser.com/questions/127431/how-to-remap-a-nerdtree-shortcut-in-vim/197977#197977
+
+
 
 

@@ -1,0 +1,423 @@
+- Seu marcador ou posição 16 | Adicionado: terça-feira, 13 de agosto de 2024 21:42:51
+
+
+==========
+
+For example, the :help command can be abbreviated :h.
+==========
+
+:set cp? If the answer is nocompatible then you are good.
+==========
+
+:list
+==========
+
+use the normal cursor motion keys: h, j, k, l.
+==========
+
+use the standard Vim command to close a file: ZZ.
+==========
+
+The way the delete command works is you type a d, followed by a cursor motion command.
+==========
+
+to delete three words you type d3w.
+==========
+
+For example to find out what the d command does in visual mode, enter the command :help v_d.
+==========
+
+:help visual.
+==========
+
+To open a new window simply enter the command :split {file} where {file} is the name of the other file you want to edit.
+==========
+
+To move to the bottom window use the command CTRL-Wj.
+==========
+
+To go back to the top window use the command CTRL-Wk
+==========
+
+To close a window use the normal Vim exit command ZZ (or :q!
+==========
+
+To close a window use the normal Vim exit command ZZ (or :q! if you want to close the window and discard any changes.)
+==========
+
+The command :e {filename} tells Vim to start editing a file.
+==========
+
+To edit the next file on the list use the :next command.
+==========
+
+:e, except you can give it more than one file name.
+==========
+
+:next Go to the next file on the list :prev Go to the previous file on the list :first Go to the first file on the list :last Go to the last file on the list
+==========
+
+:args (With no argument) Show the list.
+==========
+
+To turn on automatic spell checking enter the command :set spell.
+==========
+
+put the cursor on the bad word and execute the command z=.
+==========
+
+put the cursor on the bad word and execute the command z=.  Vim displays a suggested list
+==========
+
+all you have to do is type the first part of a word, press CTRL-P and Vim will complete it for you.
+==========
+
+use the named registers a through z.
+==========
+
+:args {file-list}  Set the file list and start editing the first one.
+==========
+
+:edit {file-name}  Edit the file.
+==========
+
+:args  Display the file list.
+==========
+
+vimdiff
+==========
+
+type zo (open fold).
+==========
+
+To move the cursor into the left window, press ctrl-w h. To move it into the right window, press ctrl-w l.
+==========
+
+do (diff obtain).
+==========
+
+I like to use in conjunction with diff mode is: :set patchmode=.b4
+==========
+
+I like to use in conjunction with diff mode is: :set patchmode=.b4 This tells Vim to backup the original file using the original filename name and the extension b4.
+==========
+
+Now we start line visual mode (V) and move to the end of the {} section:
+==========
+
+Now tell Vim to fold the text with the zf command.  Vim now hides the horrible stuff
+==========
+
+we can open the fold by positioning the cursor on the fold line and executing the command zo.
+==========
+
+execute the command zfi{.
+==========
+
+i{ which stands for “inside {} block”.
+==========
+- Sua nota ou posição 419 | Adicionado: terça-feira, 13 de agosto de 2024 22:31:05
+
+Pode-se usar fold em h1 de md files??
+==========
+- Sua nota ou posição 419 | Adicionado: terça-feira, 13 de agosto de 2024 22:32:23
+
+- Pode-se usar fold em h1 de md files??
+- ele faz isso automaticamente em cada bloco ou paragrafo ??
+--
+
+'hlsearch'   When set, tells Vim to highlight search strings.
+==========
+
+:nohlsearch   Hide the search highlighting until the next search.
+==========
+
+v_zf   Fold the visual selection.
+==========
+- Sua nota ou posição 483 | Adicionado: terça-feira, 13 de agosto de 2024 22:38:48
+
+Underline é espaço
+==========
+
+:abbreviate @jb Jack Benny, start of stage, screen and radio Now when we type the word @ab, Vim will insert Jack Benny, start of stage, screen and radio.
+==========
+
+remove any whitespace at the end of the line, use the command: :%s/\s*$// This tell Vim to apply the :substitute (:s) command over the entire file (%).
+==========
+
+The command is to find lines which contain a whitespace character (\s)
+==========
+
+Sorting Lines Visually Using :sort
+==========
+
+Position the cursor on the start or end of the group of lines you wish to sort. Press V to enter Visual Line Mode. Move the cursor to the other end of the group of lines being sorted. Enter the command :sort.
+==========
+
+Type the command ma to set the mark named “a”.
+==========
+
+:'a,.sort This command tells Vim: Starting with the line marked by mark a ('a) and go into to the current line (. [dot]) perform a sort command (:sort).
+==========
+
+Sorting a whole file To sort an entire file, simply use the command: :%sort
+==========
+
+Removing duplicate lines can be done with a couple of different Vim commands.  The most obvious is: :%s/^\(.*\)$\n\1/\1/
+==========
+
+Fun with cut and paste (Vim terms delete and put)
+==========
+
+:abbreviate  List the abbreviations.
+==========
+- Sua nota ou posição 887 | Adicionado: terça-feira, 13 de agosto de 2024 23:03:13
+
+Usar certas abreviacoes em JS files, p. ex
+==========
+
+ma  Mark a. (Place the mark named “a” at the current cursor location for future reference.) 'a  Jump to mark a.
+==========
+
+(  Move to beginning of sentence )  Move to end of sentence
+==========
+
+Using 'hlserach' to highlight the search
+==========
+
+The command :nohlsearch turns off the highlighting until the next search command.
+==========
+
+You could use the search command (/), but that's a lot of typing.  It's easier to use the Vim quick  search command (*).
+==========
+
+(*).  This command searches forward for the word under the cursor.
+==========
+- Sua nota ou posição 967 | Adicionado: terça-feira, 13 de agosto de 2024 23:08:36
+
+Mostra onde reaparece a variavel
+==========
+
+The quick search backward (#) command does the same thing only searches in reverse.
+==========
+
+Need to see what your search history is: enter the command q/.
+==========
+
+CTRL-C cancels the process.
+==========
+
+The q: command does the same thing, only for the colon command (:) history.
+==========
+
+:match
+==========
+
+'ignorecase'
+==========
+
+execute the command :X to set the encryption key.
+==========
+
+To start editing this file in encrypted mode, use the command: $ gvim -x secret.txt
+==========
+
+The actual encryption key is stored in the option 'key'.
+==========
+
+list'  Option to display invisible characters 'listchars'  Option that controls how tab and other invisible characters are displayed.
+==========
+
+:autocmd  Define a command that will execute when an event (such as file load) occurs.
+==========
+
+vim *.c   edits all the c files in the current directory.
+==========
+
+fgrep -lrw iCustomer .  This tells Linux to run the fgrep command, print a list of file (-l), do a recursive search (-r) for the word specified (-w).
+==========
+- Seu marcador ou posição 1466 | Adicionado: terça-feira, 13 de agosto de 2024 23:26:30
+
+
+==========
+
+vim `fgrep -lrw iCustomer
+==========
+- Sua nota ou posição 1477 | Adicionado: terça-feira, 13 de agosto de 2024 23:27:47
+
+vim $( grep Fulano *.csv )
+==========
+
+For example, to change the argument list to all .c files in the current directory use the command: :args *.c But what if you want all .c file in the current directory and all sub-directories?  For that use the command: :args **/*.c The
+==========
+
+For example, to change the argument list to all .c files in the current directory use the command: :args *.c But what if you want all .c file in the current directory and all sub-directories?  For that use the command: :args **/*.c
+==========
+
+:args `fgrep -lwr iCustomerNumber .` Then making the change can be done with a single command: :argdo %s/\<iCustomerNumber\>/lCustomerNumber/g
+==========
+- Sua nota ou posição 1507 | Adicionado: terça-feira, 13 de agosto de 2024 23:33:36
+
+1. Definiu a lista de arq a ser modificado em lote.
+2. Executa o argdo que faz um comando em toda a lista.
+--
+
+:set autowrite :argdo %s/\<iCustomerNumber\>/lCustomerNumber/g
+==========
+- Sua nota ou posição 1507 | Adicionado: terça-feira, 13 de agosto de 2024 23:34:34
+
+1. Definiu a lista de arq a ser modificado em lote.
+2. Executa o argdo que faz um comando em toda a lista.
+--
+
+Note: Please backup your files before trying this for the first time.
+==========
+
+:set textwidth=72
+==========
+
+to the next paragraph boundary.
+==========
+
+The } command tells Vim to move to the next paragraph boundary.
+==========
+
+to reformat the paragraph using the gq command.
+==========
+
+Go to the start of the paragraph and enter the command gq}.
+==========
+
+Go to the start of the paragraph and enter the command gq}.  The gq command tells Vim to format the text from the current cursor position to the place where the cursor lands after next command moves it.  The } command tells Vim to move to the next paragraph boundary.
+==========
+
+The command gqap reformats the entire paragraph containing the cursor.  The gq command does the format, and ap selects the current paragraph.
+==========
+- Sua nota ou posição 1559 | Adicionado: terça-feira, 13 de agosto de 2024 23:44:34
+
+ap = an paragraph
+==========
+- Sua nota ou posição 1559 | Adicionado: terça-feira, 13 de agosto de 2024 23:45:17
+
+ap = an paragraph
+
+--
+
+Vim does have an option to  highlight a specific column: 'columncolor' option.  For example, to highlight column 60 use the command: :set columncolor=60
+==========
+
+:set formatoptions+=a
+==========
+
+reformat your paragraphs automatically.
+==========
+
+:set autoindent
+==========
+
+But you have to tell it to recognize and deal with numbered lists using the command: :set formatoptions+=n
+==========
+
+We need to tell Vim to break lines at sane places using the command :set linebreak
+==========
+
+Vim has a spell checker.  To turn it on, execute the command: :set spell
+==========
+
+in your .vimrc file: :autocmd BufNewFile,BufRead *.txt setlocal spell This command tells Vim to automatically execute a command (:autocmd) when a file is read or created (BufNewFile,BufRead) for all files that match the file name *.txt.  The command is :setlocal spell, which tells Vim to turn on spelling for the local buffer only.
+==========
+
+when you encounter a misspelled word Vim will highlight it.
+==========
+
+To correct an error  put the cursor on the word and execute z=.
+==========
+
+the zg command. This command adds “good” file (default is ~/.vim/spell/en.utf-8.add).
+==========
+
+{count}i{text}<Esc>  Insert {count} copies of the {text}.
+==========
+
+}  Go to end of paragraph.
+==========
+
+<number>G  Go to a give line.
+==========
+- Sua nota ou posição 1780 | Adicionado: quarta-feira, 14 de agosto de 2024 00:08:14
+
+:nro
+==========
+
+'formatoptions'  Formatting options: a – Autoformat paragraphs as they are indented.
+==========
+
+n – Recognize numbered lists.
+==========
+
+J{motion}  Join lines for the line with the cursor on it to the line the cursor will be on after {motion}.
+==========
+
+:join  Join the specified lines.
+==========
+
+linebreak
+==========
+
+:autocmd  Perform commands automatically in response to specified events.
+==========
+
+(:abbreviate or :ab)
+==========
+
+:tabnew  Open new tab.
+==========
+
+:imap   Perform a mapping for insert mode only.
+==========
+
+you wish to run cpplint.py,
+==========
+
+:map <F3> :!cpplint *.cpp<CR>
+==========
+
+You could use the Vim command: :!cpplint *.cpp
+==========
+
+First we define a mapping that only works in normal mode: :nmap <F3> :write<CR>\|:!cpplint *.cpp<CR>
+==========
+
+Now let's take care of visual mode and select mode. :vmap
+==========
+
+using, :nmenu, :vmenu, :imenu, :cmenu, and :omenu.
+==========
+- Sua nota ou posição 2538 | Adicionado: quarta-feira, 14 de agosto de 2024 00:32:20
+
+Tem no vim ou somente no gvim??
+==========
+
+“all menu” or :amenu
+==========
+
+:set laststatus=2
+==========
+
+set statusline=%<%f%h%m%r%=%{Weather()}\ %{&ff}\ %l,%c%V\ %P
+==========
+
+:!{command}  Run external command.
+==========
+
+:!{command}  Run external command. :write  Write out the current file,
+==========
+
+GUI's
+==========
+
+:highlight  Define a highlighting color.
+==========
+
+DejaVu Sans Mono
+==========

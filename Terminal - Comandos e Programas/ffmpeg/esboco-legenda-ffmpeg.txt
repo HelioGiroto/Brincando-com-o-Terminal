@@ -1,0 +1,17 @@
+	*Colocar um texto entre os segundos a e b:*
+
+ffmpeg -i video.mp4 -vf "drawtext=text='JESUS 24 HORAS TV':fontcolor=white:fontsize=24:box=1:boxcolor=black@0.5:boxborderw=5:x=(w-text_w)/2:y=(h-text_h)/2:enable='between(t,5,10)'" -codec:a copy output2-com-tempo.mp4
+	
+	
+	ffmpeg -i ok.mp4 -vf "drawtext=text='www.faculdadebetel.edu.br':fontsize=20:fontcolor=yellow:x=250:y=315:shadowcolor=black:shadowx=5:shadowy=-5" -c:a copy leg.mp4
+
+	*Cor na borda / contorno das letras:*	
+	ffmpeg -i ok.mp4 -vf "drawtext=text='www.faculdadebetel.edu.br':fontsize=20:fontcolor=yellow:x=250:y=315:bordercolor=black:borderw=5" -c:a copy leg3.mp4
+
+bordercolor=blue:borderw=5
+
+	*Colocar um texto com bordas coloridas e entre dois intervalos no vídeo:*
+	ffmpeg -i vejam-clip-reduced.mp4 -vf "drawtext=text='www.faculdadebetel.edu.br':fontsize=20:fontcolor=yellow:x=250:y=315:bordercolor=black:borderw=5:enable='between(t,114,153)+between(t,177,224)'" -codec:a copy leg-tot.mp4
+
+
+
