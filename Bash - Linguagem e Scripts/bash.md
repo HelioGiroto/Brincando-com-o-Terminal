@@ -192,7 +192,7 @@ Mas também podemos redirecionar o resultado destas operações para um segundo 
 
 ## <a class="up" href="#topo">> IMPRIMIR NA TELA <span id='imprimir'></span></a> 
 
-Em Bash, há várias maneiras de se imprimir em tela uma mensagem. Desde as mais simples até as mais complexas:
+Em Bash, há duas maneiras de se imprimir uma mensagem em tela: São elas com os comandos `echo` e `printf`.
 
 ### Comando echo
 
@@ -345,11 +345,79 @@ printf "Dia %s/Maio\n" {01..31} > meses.csv
 
 ```
 
+### Mudando o cursor com o comando tput
+
+O comando `tput` é responsável de mudar o cursor do Terminal (tanto sua cor, modo e posição) de uma maneira simples.
+
+Após mudar a cor, modo ou posição do cursor, tudo o que for impresso com o comando `echo` ou `printf` sairá daquela cor, modo ou posição na tela do Terminal. 
+
+Exemplos:
+
+```bash
+	# parametro para posicionar o cursor em determinada linha e coluna da janela do Terminal:
+	tput cup $LINHA $COL	# onde as variáveis são o nro da linha/coluna
+
+	# parametro que posiciona na linha/coluna 0,0
+	tput home
+
+	# caracteres em negrito
+	tput bold
+
+    # caracteres sublinhados
+    tput smul
+    
+	# modo reverso
+	tput rev
+
+	# restaura a modo normal 
+	tput sgr0
+
+	# altera a cor da fonte:
+	tput setaf $NRO		# onde $NRO é o número da cor (de 0 a 255)
+
+	# altera a cor do fundo:
+	tput setab $NRO		# onde $NRO é o número da cor (de 0 a 255)
+
+	# número de linhas 
+	tput lines
+
+    # número de colunas
+    tput cols
+
+    # deixa o cursor invisível
+    tput civis
+
+    # volta a aparecer o cursor
+    tput cnorm
+ 
+    # dá um flash na tela
+    tput flash
+```
+
+Exemplos de scripts:
+```bash
+	# todas as cores das letras: 
+	for COR in $(seq 0 255); do tput setaf $COR; echo "Nro. da cor: $COR."; done
+
+	# cores de fundo:
+	for COR in $(seq 0 255); do tput setab $COR; echo "Nro. da cor: $COR."; done
+
+	# ou:
+	for COR in $(seq 0 25); do tput setab $COR; printf "%10s" "$COR"; tput sgr0; echo ""; done
+	for COR in $(seq 0 255); do tput setab $COR; printf "%10s" "$COR"; tput sgr0; done
 
 
-### Comando tput
+	# alterando o modo da fonte:
+	BOLD=$(tput bold)
+	SUBL=$(tput smul)
+	NORM=$(tput sgr0)
+	AZUL=$(tput setaf 12)
+	echo "Esta é uma frase com palavras em $BOLD negrito $NORM e $SUBL sublinhadas e em $AZUL letras azuis $NORM."
+	# pode ser melhor assim:
+	echo "Esta é uma frase com palavras em ${BOLD}negrito${NORM} e ${SUBL}sublinhadas${NORM} e em ${AZUL}letras azuis${NORM}."
 
-(Alinhar, justificar, decimais, cores, peso, fonte, etc)
+```
+
 
 
 ## <a class="up" href="#topo">> CONCATENAÇÃO <span id='concatenacao'></span></a> 
@@ -616,13 +684,16 @@ Com o exemplo fica mais fácil:
 	echo {A..Z}
 	
 	# letras de a-z, mas de 2 em 2:
-	echo {a..z..2}
+	echo {}}me}metro a..z..2}
 	
 	# ou numa lista de opções:
 	echo {g,r,p,m,f,b,ch,hi,j}ato
 	echo {,g,r,p,m,f,b,ch,hi,j}ato
 	echo Program{o,as,a,amos,ais,am},
 	
+	# um exemplo simples e prático para listar arquivos de duas extensões diferentes:
+	ls *.{csv,txt}
+
 	# lista de dias da semana por extenso (separados com vírgula):
 	echo {Segunda,Terça,Quarta,Quinta,Sexta}-feira,
 	
