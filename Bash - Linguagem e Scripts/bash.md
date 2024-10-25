@@ -1054,7 +1054,8 @@ Quando se pode ter mais que uma resposta para o teste de condição (e não apen
 	if [[ condição ]]
 	then
 		# comandos...
-	elif
+	elif [[ condição 2 ]]
+	then
 		# comandos...
 	else
 		# comandos...
@@ -1063,7 +1064,7 @@ Quando se pode ter mais que uma resposta para o teste de condição (e não apen
 
 OBS.: Caso se use o `if-elif-else` **numa única linha**, é importante que não se coloque ponto-e-vírgula depois das palavras reservadas `them`, `elif` e `else`. Como no exemplo:
 
-`if [[ condição ]]; then comando1; comando2; elif comandos; else comando1; fi`
+`if [[ condição ]]; then comando1; comando2; elif [[ condição 2 ]]; then comandos; else comando1; fi`
 
 
 Também como outra alternativa para if-elif-else, se pode usar o comando `case`, que será visto a seguir.
