@@ -1390,7 +1390,7 @@ O resultado esperado é que os arquivos agora estejam com estes nomes:
 Movendo todos os arquivos dos diretórios para a diretório pai, supondo que você baixou vários vídeos que cada um veio dentro de uma pasta própria e agora é preciso mover cada vídeo destas pastas para uma única:
 
 ```bash
-	for FOLDER in $(ls -d *)
+	for FOLDER in $(ls -d */)
 	do 
 		mv $FOLDER/* .
 	done
