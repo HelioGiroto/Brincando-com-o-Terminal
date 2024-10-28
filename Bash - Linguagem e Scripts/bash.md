@@ -1398,7 +1398,7 @@ Movendo todos os arquivos dos diretórios para a diretório pai, supondo que voc
 
 Ou em só uma linha:
 
-`for FOLDER in $(ls -d *); do mv $FOLDER/* .; done`
+`for FOLDER in $(ls -d */); do mv $FOLDER/* .; done`
 
 
 
