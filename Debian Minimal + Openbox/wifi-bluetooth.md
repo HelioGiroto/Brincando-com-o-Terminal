@@ -2,6 +2,85 @@
 
 ## WIFI
 
+### Comando para conectar-se com um roteador wifi:
+
+- Encontre wifi´s por perto, escolha e digite a senha:
+
+`nmtui-connect`
+
+- Para editar a senha já salva de uma wifi: 
+
+`nmtui-edit`
+
+ou:
+
+`nmtui`
+
+
+### Para ligar/desligar o wifi/bluetooth do seu computador:
+
+- Para ativar/desativar o wifi (pode colocar em tecla de atalho!):
+`wifi toggle`
+
+- Para ativar/desativar o bluetooth (pode colocar em tecla de atalho!)
+`bluetooth toggle`
+
+
+### Para verificar em que Wifi está conectado:
+
+- Comando: 
+`nmcli connection show --active`
+
+- Para ver as mais próximas (via linha de comando):
+`nmcli connection show`
+
+- Mais especificações da conexão ativa:
+`sudo nmcli device show`
+
+	*Fonte: https://computingforgeeks.com/install-and-use-networkmanager-nmcli-on-ubuntu-debian/*
+
+
+### Para ativar o Wifi do seu computador sempre que inicie:
+
+_(Não é necessário caso na instalação do Debian foi colocada a senha do wifi)_
+
+**Comando TLP**
+
+Este comando controla recursos do computador como wifi, bluetooth, etc...
+Servirá para habilitar o wifi sempre quando inicie o computador.
+
+- Para instalar
+
+`sudo apt install tlp tlp-rdw`
+
+- Para ver todos os recursos que ele controla:
+
+`sudo tlp-stat`
+
+- Em seguida, configure o arquivo de configuração do TLP...:
+
+`sudo gedit /etc/tlp.conf`
+
+- **Des**-comente a linha:
+
+`DEVICES_TO_ENABLE_ON_STARTUP="bluetooth wifi wwan"`
+
+(Pode aparecer assim:)
+
+`DEVICES_TO_ENABLE_ON_STARTUP="bluetooth nfc wifi wwan"`
+
+
+*Fontes:*
+- https://linuxconfig.org/how-to-optimize-laptop-battery-life-with-tlp-on-linux
+- https://linrunner.de/tlp/usage/tlp-stat.html
+- https://linrunner.de/tlp/usage/radio.html
+- https://unix.stackexchange.com/questions/127705/automatically-run-rfkill-unblock-on-startup
+
+
+---
+
+## ANTIGO:
+
 ### Instalar gerenciadores de Wifi (para encontrar roteadores, etc): (???)
 `sudo apt install network-manager-gnome`
 
@@ -23,18 +102,6 @@ Agora: Com o cabo Ethernet plugado, verifica se a senha está correta...
 `sudo systemctl enable NetworkManager.service`
 
 
-
-### Comando para conectar-se com roteador wifi:
-
-- Encontre wifi´s por perto:
-`nmtui-connect`
-
-- ou: 
-`nmtui-edit`
-
-`nmtui`
-
-
 ### Para ligar o wifi do seu computador:
 (Caso apresente o erro de *não aparecer os wifis*, entre com os comandos)
 
@@ -48,52 +115,9 @@ Agora: Com o cabo Ethernet plugado, verifica se a senha está correta...
 `sudo rfkill block all`
 
 
-### Para verificar em que Wifi está conectado:
-`nmcli connection show --active`
-
-- Para ver as mais próximas (via linha de comando):
-`nmcli connection show`
-
-- Mais especificações da conexão ativa:
-`sudo nmcli device show`
-
-	*Fonte: https://computingforgeeks.com/install-and-use-networkmanager-nmcli-on-ubuntu-debian/*
-
-
-### Para ativar o Wifi do seu computador sempre que inicie:
-- Comando TLP
-
-Este comando controla recursos do computador como wifi, bluetooth, etc...
-Servirá para habilitar o wifi sempre quando inicie o computador.
-
-- Para instalar
-sudo apt install tlp tlp-rdw
-
-- Para ver todos os recursos que ele controla:
-sudo tlp-stat 
-
-- Em seguida, configure o arquivo de configuração do TLP...:
-sudo gedit /etc/tlp.conf
-
-- Descomente a linha:
-DEVICES_TO_ENABLE_ON_STARTUP="bluetooth wifi wwan"
-
-- Para ativar/desativar o wifi (para colocar em tecla de atalho!):
-wifi toggle 
-
-- Para ativar/desativar o bluetooth (para colocar em tecla de atalho!)
-bluetooth toggle
-
-
-*Fontes:*
-- https://linuxconfig.org/how-to-optimize-laptop-battery-life-with-tlp-on-linux
-- https://linrunner.de/tlp/usage/tlp-stat.html
-- https://linrunner.de/tlp/usage/radio.html
-- https://unix.stackexchange.com/questions/127705/automatically-run-rfkill-unblock-on-startup
-
 ---
 
-# BLUETOOTH
+## BLUETOOTH
 
 - Liga o bluetooth da máquina:
 `bluetooth toggle`
@@ -151,6 +175,7 @@ https://www.facebook.com/bpwiliamoliveira
 
 
 ---
+### ANTIGO
 
 - Criei o script executável (ligawifi) em /bin que executa o comando:
 
@@ -186,8 +211,7 @@ ver solução para problema de *não aparecer a wifi* quando roda o comando nmtu
 
 ############################################
 
-**ANTIGO**
-
+**MAIS ANTIGO**
 
 ## Instala o wpasuplicant:
 sudo apt install wpasupplicant 
@@ -245,3 +269,22 @@ __sudo dhclient wlp3s0__ 	# não é necessário.
 ---
 
 **Fonte: https://www.youtube.com/watch?v=dGHo1TeDi88**
+
+
+
+---
+
+wifi
+
+https://www.howtogeek.com/devops/how-to-manage-linux-wi-fi-networks-with-nmtui/
+
+https://packages.debian.org/source/oldstable/network-manager
+
+Para instalar:
+sudo apt install network-manager
+
+Para abrir o wireless manager gui:
+nmtui
+
+
+

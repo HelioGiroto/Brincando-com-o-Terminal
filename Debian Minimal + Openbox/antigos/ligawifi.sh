@@ -4,6 +4,9 @@ echo Ligando Wifi.....
 echo
 sudo rfkill unblock all
 
+# anteriormente este script era chamado no Openbox no autostart
+# mas agora não usamos mais.
+
 # para bloquear:
 # sudo rfkill block all
 

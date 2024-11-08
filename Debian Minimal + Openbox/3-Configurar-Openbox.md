@@ -28,10 +28,45 @@ Section "InputClass"
 	Option "TapButton2" "3"
 ```
 
+## 2- Configuração do Wifi:
+
+(Mais informações no arquivo: [wifi-bluetooth](wifi-bluetooth.md))
+
+### Para ativar o Wifi do seu computador sempre que inicie:
+
+_(Não é necessário caso na instalação do Debian foi colocada a senha do wifi)_
+
+**Comando TLP**
+
+Este comando controla recursos do computador como wifi, bluetooth, etc...
+Servirá para habilitar o wifi sempre quando inicie o computador.
+
+- Em seguida, configure o arquivo de configuração do TLP...:
+
+`sudo gedit /etc/tlp.conf`
+
+- **Des**-comente a linha:
+
+`DEVICES_TO_ENABLE_ON_STARTUP="bluetooth wifi wwan"`
+
+
+### Comando para conectar-se com um roteador wifi:
+
+- Encontre wifi´s por perto, escolha e digite a senha:
+
+`nmtui-connect`
+
+- Para editar a senha já salva de uma wifi: 
+
+`nmtui-edit`
+
+ou:
+
+`nmtui`
 
 
 
-## 2- Configuração do comando history:
+## 3- Configuração do comando history:
 
 Mudar a configuração do comando **history** para sem fim e mergeado:
 
@@ -68,7 +103,7 @@ history
 Fonte - https://github.com/HelioGiroto/Brincando-com-o-Terminal/blob/master/history%20ilimitado%20e%20fusionado.txt
 
 
-## 3- Configurar o ambiente do Openbox
+## 4- Configurar o ambiente do Openbox
 
 Neste ponto serão configurados o ambiente gráfico do Openbox, ou seja, os comandos: conky, tint2, lxterminal, ...
 
@@ -101,7 +136,7 @@ E rode o seguinte comando no Terminal:
  
 
 
-## 4- Configurar Slim:
+## 5- Configurar Slim:
 ```bash
 	sudo gedit /etc/slim.conf
 	cd /usr/share/slim/themes/default
@@ -109,7 +144,7 @@ E rode o seguinte comando no Terminal:
 
 
 
-## 5- Configurar os temas do rofi:
+## 6- Configurar os temas do rofi:
  - Salve o arquivo .rasi em usr/share/rofi/themes 
  - No Terminal abra: rofi-theme-selector
  - Escolha o theme com as fechas e pressionando ENTER
@@ -118,7 +153,7 @@ E rode o seguinte comando no Terminal:
 
 
 
-## 6- Instalar fontes:
+## 7- Instalar fontes:
 
  - Instruções em:
 https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/COMO-INSTALAR-FONTES.md
@@ -145,7 +180,7 @@ sudo fc-cache -fv
 ```
 
 
-## 7- Módulos do python:
+## 8- Módulos do python:
 
 Tentar primeiramente isto:
 ```bash
@@ -186,11 +221,20 @@ Listar os módulos instalados (no Terminal - fora do Python):
 	pip list
 ```
 
-
-
 **Módulo ScreenCopy - scrcpy - Instalação e Habilitação:**
 
 ver: [Instalação de scrcpy](Instalação de scrcpy.md)
+
+
+
+## 9- Instale e ative o firewall
+
+Deixe ativada o estado de firewall da sua máquina:
+
+`sudo gufw`
+
+Para configurar e mais informações de comandos para segurança, ver em: 
+"Terminal - Comandos e Programas" o arquivo: "comandos-para-seguranca.md"
 
 ---
 

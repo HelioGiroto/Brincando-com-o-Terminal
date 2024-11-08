@@ -7,8 +7,12 @@ Programas para detectar alguma irregularidade:
 - gufw
     - Ativa o firewall de sua máquina.
 
-- rkhunter
-    - sudo rkhunter --check
+Executa como root: `sudo gufw`
+
+
+- rkhunter (apenas como root)
+
+`sudo rkhunter --check`
 
     Caso apresente um Warning no comando /usr/bin/lwp-request é porque o rkhunter precisa saber qual gerenciador de pacotes você está usando.
     Solução: 
@@ -19,7 +23,11 @@ Programas para detectar alguma irregularidade:
     Dessa forma, o rkhunter saberá esperar que esses executáveis sejam scripts e não sinalizará o falso positivo.
     Isso garantirá que, se os arquivos forem adulterados, um novo resultado positivo será exibido.
 
-- chkrootkit
+- chkrootkit (somente como root)
+
+`sudo chkrootkit`
+
+(Por ser muito verboso, se recomenda direcionar saida para um arquivo txt)
     
 
 
