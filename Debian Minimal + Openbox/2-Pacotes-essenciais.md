@@ -82,6 +82,6 @@ OBS.: Falta: Configurar lxappearance e obconf (?)
 
 ---
 
-**Próximo passo: [3 - Configurar sistema](3-Configurar-Openbox.md)**
+**Próximo passo: [3 - Configurar Openbox](3-Configurar-Openbox.md)**
 
 

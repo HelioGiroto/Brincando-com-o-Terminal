@@ -4,31 +4,20 @@ A seguir algumas configurações necessárias para o funcionamento do sistema:
 
 ## 1- Habilitar os cliques no pad do touchpad (mouse) 
 
-- Instalar se não foi feito:
-```bash
-sudo apt install xserver-xorg-input-synaptics
-```
+- Instalar se não foi feito: `sudo apt install xserver-xorg-input-synaptics`
 
-- Crie um diretório (verificar se já não existe) de nome: *xorg.cof.d* dentro de /usr/share/X11/ - para verificar:
+- Vá atá a pasta seguinte: `cd /usr/share/X11/`
 
-```bash 
-ls /usr/share/X11/xorg.conf.d/
-```
+- Crie um diretório (verificar se já não existe) de nome: *xorg.cof.d*: `mkdir xorg.cof.d`
 
+(Se quiser verificar antes: `ls /usr/share/X11/xorg.conf.d/`)
 
-- Copiar o arquivo 70-synaptics... a sua pasta de usuário, com o seguinte comando:
-```bash
-sudo cp /usr/share/X11/xorg.conf.d/70-synaptics.conf /etc/X11/xorg.conf.d/
-```
+- Copiar o arquivo 70-synaptics... para a sua pasta correta, com o seguinte comando: `sudo cp /usr/share/X11/xorg.conf.d/70-synaptics.conf /etc/X11/xorg.conf.d/`
 
 
-- Editar o arquivo 70-synaptics:
-```bash
-sudo gedit /etc/X11/xorg.conf.d/70-synaptics.conf
-```
+- Editar o arquivo 70-synaptics: `sudo gedit /etc/X11/xorg.conf.d/70-synaptics.conf`
 
-
-- Acrescenta as linhas (Option "TapButton1"... etc) para que esteja desta forma as primeiras linhas:
+- Acrescenta aí as linhas (Option "TapButton1"... etc) para que esteja desta forma as linhas:
 
 ```bash
 Section "InputClass"
@@ -48,7 +37,7 @@ Mudar a configuração do comando **history** para sem fim e mergeado:
 
 (Como fazer um merge dos histories de todos os terminais (inclusive do tmux))
 
-No arquivo **./bashrc** procure as linhas abaixo e as edite desta forma:
+No arquivo **.bashrc** procure as linhas abaixo e as edite desta forma:
 
 Código:
 
@@ -87,11 +76,36 @@ Duas opções: Por script ou manualmente:
 
 **Instalar via script:**
 
+Se recomenda já ter clonado o repositório "Brincando com o Terminal" do Github na própria máquina, na pasta "home" ou equivalente.
+
+`git clone https://github.com/HelioGiroto/Brincando-com-o-Terminal.git`
+
+E rode o seguinte comando no Terminal:
+
+`curl https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/refs/heads/master/Debian%20Minimal%20%2B%20Openbox/arquivos_de_configuracao/configura_openbox.sh | bash`
+
 
 **Instalar "manualmente":**
 
+ - Vá até a pasta dos arquivos de configuração, no repositório:
+`cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/arquivos-de-configuracao`
+
+ - Em cada pasta copie todo seu conteúdo para as pastas correspondentes da máquina. A saber:
+
+ - Conky: ~/etc/conky
+ - LxTerminal:  ~/.config/lxterminal
+ - Openbox: ~/.config/openbox
+ - Rofi: ~/.config/rofi
+ - Thunar: ~/.config/Thunar
+ - Tint2: ~/.config/tint2
+ 
 
 
+## 4- Configurar Slim:
+```bash
+	sudo gedit /etc/slim.conf
+	cd /usr/share/slim/themes/default
+```
 
 
 
@@ -103,30 +117,8 @@ Duas opções: Por script ou manualmente:
  - O padrão era o default
 
 
-## 6- Configurar Slim:
-```bash
-	sudo gedit /etc/slim.conf
-	cd /usr/share/slim/themes/default
-```
 
-
-## 7- Baixar (wget) os arquivos de configuração deste repositório:
-	para Lxterminal, Thunar, Conky, etc...
-
-
-
-
-## scrcpy - Instalação e Habilitação:
-
-ver:
-
-[Instalação de scrcpy](Instalação\ de\ scrcpy.md)
-
-
-
-
-
-## 3- Instalar fontes:
+## 6- Instalar fontes:
 
  - Instruções em:
 https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/COMO-INSTALAR-FONTES.md
@@ -153,12 +145,12 @@ sudo fc-cache -fv
 ```
 
 
-## 4- Módulos do python:
+## 7- Módulos do python:
 
 Tentar primeiramente isto:
 ```bash
 	sudo apt install python3-\[nome-do-módulo]
-	sudo apt install python3-pip	# para instalar módulos
+	sudo apt install python3-pip	# para instalar pip
 ```
 
 Instalar módulos para automação. Só aceita este formato de comando:
@@ -180,13 +172,14 @@ Módulos essenciais:
 	pip install --break-system-packages pyautogui python3-pynput python3-tk python3-dev 
 ```
 
-Descrição dos módulos:		
-	- Para obter posições do mouse na tela:
-	sudo apt install python3-pynput		
-	- Necessário para pyautogui:
-	sudo apt install python3-tk		
-	-  
-	sudo apt install python3-dev
+Descrição dos módulos:
+
+- Para obter posições do mouse na tela: `sudo apt install python3-pynput`
+
+- Necessário para pyautogui: `sudo apt install python3-tk`
+
+- Ver tb: `sudo apt install python3-dev`
+
 
 Listar os módulos instalados (no Terminal - fora do Python):
 ```bash
@@ -195,32 +188,14 @@ Listar os módulos instalados (no Terminal - fora do Python):
 
 
 
+**Módulo ScreenCopy - scrcpy - Instalação e Habilitação:**
 
+ver: [Instalação de scrcpy](Instalação de scrcpy.md)
 
-
-
-
-
+---
 
 
 **Próximo passo: [4 - Instalar programas]()**
-
-
-
-
-
-
-
-
-
-- No Terminal clonar o repositorio (??) 
-	git clone https://github.com/HelioGiroto/Brincando-com-o-Terminal.git
-
-- Copiar as pastas de .config do repositório para .config da máquina
-
-
-
-
 
 
 
