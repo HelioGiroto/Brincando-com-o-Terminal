@@ -28,8 +28,13 @@ sudo apt update
 
 Para informações dos pacotes a seguir, dar comando:
 ```bash
-	sudo apt show ...
+sudo apt show ...
 ```
+
+Pode a principio instalar apenas o comando `curl` e, em seguida, rodar o seguinte comando desde o Terminal:
+
+`curl https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/tput_play.sh | bash`
+
 
 FONTE: https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/openbox/como-instalar-openbox.md
 
@@ -45,25 +50,20 @@ Depois, comando:
 startx
 ```
 
-- No Terminal clonar o repositorio (??) 
-	git clone https://github.com/HelioGiroto/Brincando-com-o-Terminal.git
 
-- Copiar as pastas de .config do repositório para .config da máquina
-
-- Pacotes essenciais: 
+- Pacotes essenciais a serem instalados: 
 
 ```bash
-sudo apt install vim tmux ranger gedit chromium simplescreenrecorder audacity gcc cheese conky bc gawk sed grep lynx curl wget html-xml-utils xclip googler ffmpeg imagemagick speedtest-cli youtube-dl nmap numix-icon-theme-circle espeak mbrola gnumeric galculator abiword shotwell htop mc mupdf mpack ssmtp mplayer alpine wkhtmltopdf gpick gnome-tweaks gnome-sushi gnome-multi-writer wdiff colordiff tint2 feh fswebcam dialog jq xtrlock mate-utils pavucontrol calendar whois bsdmainutils onboard pdfgrep numlockx lxappearance vlc python3-pip mirage plank xserver-xorg-input-synaptics nodejs npm pandoc gnome-control-center mediainfo mp3info mpv xdotool youtube-dl neofetch default-jre detox obs-studio network-manager tlp tlp-rdw rfkill wmctrl detox obconf jpmenu
+sudo apt install vim tmux ranger gedit chromium simplescreenrecorder audacity gcc cheese conky bc gawk sed grep lynx curl wget html-xml-utils xclip googler ffmpeg imagemagick speedtest-cli youtube-dl nmap numix-icon-theme-circle espeak mbrola gnumeric galculator abiword shotwell htop mc mupdf mpack ssmtp mplayer alpine wkhtmltopdf gpick gnome-tweaks gnome-sushi gnome-multi-writer wdiff colordiff tint2 feh fswebcam dialog jq xtrlock mate-utils pavucontrol calendar whois bsdmainutils onboard pdfgrep numlockx lxappearance vlc python3-pip mirage plank xserver-xorg-input-synaptics nodejs npm pandoc texlive-luatex texlive-latex-extra gnome-control-center mediainfo mp3info mpv xdotool youtube-dl neofetch default-jre detox obs-studio network-manager tlp tlp-rdw rfkill wmctrl detox obconf jgmenu
 
-``
+```
 
-
-# openjdk-18-jre    # JDonwloader: não aceita instalar via apt
 
 Pronto!
 
 OBS.: Configurar: lxappearance e obconf (?)
 
 
-Próximo passo: ![3 - Configurar sistema](3-Configurar-Openbox.md)
+Próximo passo: [3 - Configurar sistema](3-Configurar-Openbox.md)
+
 

@@ -168,8 +168,20 @@ Listar os módulos instalados (no Terminal - fora do Python):
 
 
 ## scrcpy - Instalação e Habilitação:
-	ver:
-	![Instalação de scrcpy](Instalação de scrcpy.md)
 
-**Próximo passo: ![4 - Instalar programas]()**
+ver:
+
+[Instalação de scrcpy](Instalação\ de\ scrcpy.md)
+
+
+**Próximo passo: [4 - Instalar programas]()**
+
+
+
+
+- No Terminal clonar o repositorio (??) 
+	git clone https://github.com/HelioGiroto/Brincando-com-o-Terminal.git
+
+- Copiar as pastas de .config do repositório para .config da máquina
+
 

@@ -112,6 +112,6 @@ Telas da instalação:
 - Finalizar instalação = Continuar (REMOVER O USB APÓS TELA PRETA DE REBOOT)
 ![](imgs/finish-install_reboot_in_progress_0.png)
 
-Próximo passo: ![2 - Instalar pacotes essenciais para o Openbox](2-Pacotes-essenciais.md)
+Próximo passo: [2 - Instalar pacotes essenciais para o Openbox](2-Pacotes-essenciais.md)
 
 
