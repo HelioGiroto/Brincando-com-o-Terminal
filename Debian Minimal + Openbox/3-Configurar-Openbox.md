@@ -41,6 +41,11 @@ _(Não é necessário caso na instalação do Debian foi colocada a senha do wif
 Este comando controla recursos do computador como wifi, bluetooth, etc...
 Servirá para habilitar o wifi sempre quando inicie o computador.
 
+- Para instalar
+
+`sudo apt install tlp tlp-rdw`
+
+
 - Em seguida, configure o arquivo de configuração do TLP...:
 
 `sudo gedit /etc/tlp.conf`
