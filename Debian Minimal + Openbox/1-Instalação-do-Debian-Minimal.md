@@ -26,6 +26,10 @@ Guia de passo a passo para instalação mínima do Linux Debian com Openbox:
 	- Clica no ícone de abrir pasta
 	- Escolhe a imagem ISO baixada de Debian para que seja copiada no pendrive.
 
+Caso não se autorize acessar o pendrive, chamar o programa como root:
+
+`sudo gnome-multi-writer`
+
 
 
 ## 3. Instalar o Debian Minimal na máquina nova: 
