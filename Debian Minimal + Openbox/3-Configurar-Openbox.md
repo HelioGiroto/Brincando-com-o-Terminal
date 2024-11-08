@@ -2,7 +2,47 @@
 
 A seguir algumas configurações necessárias para o funcionamento do sistema:
 
-## 1- Configuração do comando history:
+## 1- Habilitar os cliques no pad do touchpad (mouse) 
+
+- Instalar se não foi feito:
+```bash
+sudo apt install xserver-xorg-input-synaptics
+```
+
+- Crie um diretório (verificar se já não existe) de nome: *xorg.cof.d* dentro de /usr/share/X11/ - para verificar:
+
+```bash 
+ls /usr/share/X11/xorg.conf.d/
+```
+
+
+- Copiar o arquivo 70-synaptics... a sua pasta de usuário, com o seguinte comando:
+```bash
+sudo cp /usr/share/X11/xorg.conf.d/70-synaptics.conf /etc/X11/xorg.conf.d/
+```
+
+
+- Editar o arquivo 70-synaptics:
+```bash
+sudo gedit /etc/X11/xorg.conf.d/70-synaptics.conf
+```
+
+
+- Acrescenta as linhas (Option "TapButton1"... etc) para que esteja desta forma as primeiras linhas:
+
+```bash
+Section "InputClass"
+	Identifier "touchpad catchall"
+	Driver "synaptics"
+	MatchIsTouchpad "on"
+	Option "TapButton1" "1"
+	Option "TapButton2" "3"
+```
+
+
+
+
+## 2- Configuração do comando history:
 
 Mudar a configuração do comando **history** para sem fim e mergeado:
 
@@ -39,43 +79,51 @@ history
 Fonte - https://github.com/HelioGiroto/Brincando-com-o-Terminal/blob/master/history%20ilimitado%20e%20fusionado.txt
 
 
+## 3- Configurar o ambiente do Openbox
 
-## 2- Habilitar os cliques no pad do touchpad (mouse) 
+Neste ponto serão configurados o ambiente gráfico do Openbox, ou seja, os comandos: conky, tint2, lxterminal, ...
 
-- Instalar se não foi feito:
+Duas opções: Por script ou manualmente:
+
+**Instalar via script:**
+
+
+**Instalar "manualmente":**
+
+
+
+
+
+
+## 5- Configurar os temas do rofi:
+ - Salve o arquivo .rasi em usr/share/rofi/themes 
+ - No Terminal abra: rofi-theme-selector
+ - Escolha o theme com as fechas e pressionando ENTER
+ - Para definir como tema atual pressione: Alt + A.
+ - O padrão era o default
+
+
+## 6- Configurar Slim:
 ```bash
-sudo apt install xserver-xorg-input-synaptics
-```
-
-- Crie um diretório (verificar se já não existe) de nome: *xorg.cof.d* dentro de /usr/share/X11/ - para verificar:
-
-```bash 
-ls /usr/share/X11/xorg.conf.d/
+	sudo gedit /etc/slim.conf
+	cd /usr/share/slim/themes/default
 ```
 
 
-- Copiar o arquivo 70-synaptics... a sua pasta de usuário, com o seguinte comando:
-```bash
-sudo cp /usr/share/X11/xorg.conf.d/70-synaptics.conf /etc/X11/xorg.conf.d/
-```
+## 7- Baixar (wget) os arquivos de configuração deste repositório:
+	para Lxterminal, Thunar, Conky, etc...
 
 
-- Editar o arquivo 70-synaptics:
-```bash
-sudo gedit /etc/X11/xorg.conf.d/70-synaptics.conf
-```
 
 
-- Acrescenta as linhas (Option "TapButton1"... etc) para que esteja desta forma as primeiras linhas:
+## scrcpy - Instalação e Habilitação:
 
-```bash
-Section "InputClass"
-	Identifier "touchpad catchall"
-	Driver "synaptics"
-	MatchIsTouchpad "on"
-	Option "TapButton1" "1"
-	Option "TapButton2" "3"
-```
+ver:
+
+[Instalação de scrcpy](Instalação\ de\ scrcpy.md)
+
+
+
 
 
 ## 3- Instalar fontes:
@@ -146,35 +194,21 @@ Listar os módulos instalados (no Terminal - fora do Python):
 ```
 
 
-## 5- Configurar os temas do rofi:
- - Salve o arquivo .rasi em usr/share/rofi/themes 
- - No Terminal abra: rofi-theme-selector
- - Escolha o theme com as fechas e pressionando ENTER
- - Para definir como tema atual pressione: Alt + A.
- - O padrão era o default
-
-
-## 6- Configurar Slim:
-```bash
-	sudo gedit /etc/slim.conf
-	cd /usr/share/slim/themes/default
-```
-
-
-## 7- Baixar (wget) os arquivos de configuração deste repositório:
-	para Lxterminal, Thunar, Conky, etc...
 
 
 
 
-## scrcpy - Instalação e Habilitação:
 
-ver:
 
-[Instalação de scrcpy](Instalação\ de\ scrcpy.md)
+
 
 
 **Próximo passo: [4 - Instalar programas]()**
+
+
+
+
+
 
 
 
@@ -183,5 +217,10 @@ ver:
 	git clone https://github.com/HelioGiroto/Brincando-com-o-Terminal.git
 
 - Copiar as pastas de .config do repositório para .config da máquina
+
+
+
+
+
 
 
