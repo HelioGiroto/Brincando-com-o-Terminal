@@ -1,0 +1,4 @@
+# Comando uniq
+
+
+-c, --count

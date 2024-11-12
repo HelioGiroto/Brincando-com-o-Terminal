@@ -53,3 +53,6 @@ git push
 Para ver a lista de todos os commits que foram feitos ultimamente, usar o comando:
 git log
 Tenham o hábito de diariamente atualizar o seu repositório.
+
+
+git show --summary  # para ver dados do último commit

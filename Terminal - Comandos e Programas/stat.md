@@ -1,0 +1,3 @@
+# Comando stat
+
+stat .
