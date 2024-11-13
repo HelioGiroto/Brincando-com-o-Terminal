@@ -1401,8 +1401,6 @@ Ou em só uma linha:
 `for FOLDER in $(ls -d */); do mv $FOLDER/* .; done`
 
 
-
-
 ### Uso do FOR para percorrer o conteúdo de UM array (lista):
 
 A forma mais tradicional de usar `for` para percorrer um array é esta:
@@ -1474,6 +1472,9 @@ Uso do laço `for` com o comando `seq` **para percorrer um único array (lista)*
 ```
 
 Acima: Para automatizar o valor da sequência (que vai em `seq`) se pode usar este comando: `TAMANHO=$(( $(echo ${#NOMES[*]}) -1 ))` e em seguida: `for NRO in $(seq 0 $TAMANHO)`.
+
+
+### Uso do FOR para percorrer o conteúdo de DOIS arrays (listas):
 
 
 Outro exemplo prático do uso de `for` com `seq`, é **quando se pretende percorrer duas ou mais listas** em que cada um de seus elementos são correspondentes entre si. Por exemplo:
