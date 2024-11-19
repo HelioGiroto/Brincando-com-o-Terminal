@@ -120,7 +120,7 @@ Agora: Com o cabo Ethernet plugado, verifica se a senha está correta...
 ## BLUETOOTH
 
 - Liga o bluetooth da máquina:
-`bluetooth toggle`
+`	`
 
 - Liga o controlador:
 `bluetoothctl power on`
