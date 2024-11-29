@@ -1,0 +1,315 @@
+" CONFIGURAÇOES DO VUNDLE PARA USO DE PLUGINS NO VIM:
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+
+" filetype plugin indent on    " required
+
+" Habilite a detecção de tipo de arquivo:
+filetype on
+
+" Habilite plug-ins e carregue-os conforme o tipo de arquivo detectado
+filetype plugin on
+
+" Carregue um arquivo de recuo conforme o tipo de arquivo detectado.
+filetype indent on
+
+
+" MEUS PLUGINS
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim' 		" let Vundle manage Vundle, required:
+Plugin 'itchyny/lightline.vim'		" barra inferior com hora, tipo de arq...
+Plugin 'chun-yang/auto-pairs'		" Fecha [ { ( ...
+Plugin 'sheerun/vim-polyglot'		" verificador de sintaxe de código
+Plugin 'scrooloose/nerdtree'		" File explorer
+Plugin 'yggdroot/indentline' 		" faz marcações nas indentações
+Plugin 'preservim/nerdcommenter'	" Comentador
+Plugin 'ryanoasis/vim-devicons'		" icones para NERDTree
+Plugin 'bling/vim-bufferline'		" mostra os buffers no rodapé
+Plugin 'mattn/emmet-vim'			" instala emmets de html
+Plugin 'mateusbraga/vim-spell-pt-br'	" dicionário em português
+Plugin 'tpope/vim-surround'				" muda ao redor de uma seleção ou palavra
+Plugin 'bradford-smith94/vim-autolist'	" autonumera listas
+
+
+
+" Plugin 'jimf/javascriptcomplete'
+
+	" Comandos para Plugins:
+	" :PluginList       - lists configured plugins
+	" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+	" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+	" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+	" :PluginUpdate     - atualizar os plugins instalados.
+	" fonte - https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L255-L265
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+
+" muda a tecla leader (\) para (,)
+" Vim waits for 1000 milliseconds after the <Leader> key has been pressed
+let mapleader = "," 
+
+
+" Habilita syntax highlight
+syntax on
+
+" Define o encoding para ler os arquivos
+set encoding=UTF-8
+
+" Ativa numeros das linhas
+set number
+
+"ativa o mouse para selecionar e posicionar a linha atual 
+set mouse=a
+
+
+" Ativa o unnamed register (permite que o conteúdo do clipboard seja usado em outros programas)
+set clipboard+=unnamedplus
+set clipboard+=unnamed
+" set clipboard=unnamedplus
+
+" No Wayland funcionou isso:
+" https://stackoverflow.com/questions/61379318/how-to-copy-from-vim-to-system-clipboard-using-wayland-and-without-compiled-vim#61379319
+" Install wl-clipboard
+" Add following to .vimrc:
+autocmd TextYankPost * call job_start('wl-copy ' .. getreg('0'))
+" nnoremap <silent> cp :r !wl-paste<CR>
+
+" NADA :
+" xnoremap <silent> <leader>y y:call system("wl-copy --trim-newline", @*)<cr>:call system("wl-copy -p --trim-newline", @*)<cr>
+
+" Funcionou melhor:
+" Copy with Wayland
+xnoremap <silent> y :w !wl-copy<CR><CR>
+" Paste from Wayland
+noremap <silent> p :r !wl-paste<CR><CR>
+" Fonte : https://stackoverflow.com/questions/61379318/how-to-copy-from-vim-to-system-clipboard-using-wayland-and-without-compiled-vim
+
+" set clipboard=unnamed,unnamedplus
+" configurar tecla com o comando xclip
+" https://pt.linux-console.net/?p=31492
+" https://stackoverflow.com/questions/61379318/how-to-copy-from-vim-to-system-clipboard-using-wayland-and-without-compiled-vim#61379319
+
+" Destaca os caracteres correspondentes à medida que você os digita durante uma busca.
+set incsearch
+
+" Ignora letras maiúsculas durante a busca.
+set ignorecase
+" Sobrescreve a opção ignorecase se estiver buscando por letras maiúsculas.
+" Isso permitirá que você procure especificamente por letras maiúsculas.
+set smartcase
+
+" Utiliza destaque durante uma pesquisa.
+set hlsearch
+
+" Configura a indentação
+set autoindent
+set tabstop=4
+set shiftwidth=4
+
+" linha em que se encontra o cursor destacada
+set cursorline
+" :highlight Cursorline cterm=bold ctermbg=black
+highlight Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
+
+" Se arq.md muda a visualização conforme modo (inserção ou não):
+" au InsertEnter *.md :set norelativenumber
+" au InsertLeave *.md :set relativenumber
+
+au InsertEnter *.md :set filetype=text
+au InsertLeave *.md :set filetype=markdown
+
+" evita a quebra de linhas
+" set nowrap
+set wrap
+" ou: set wrap! para toggle - ver :help :_!
+" tecla leader (,) + w = wrap toggle:
+nmap <leader>w :set wrap!<CR>
+
+
+" quebra as linhas sem quebrar palavras
+set linebreak
+
+" No modo Comando, dá opções de comandos ao pressionar TAB:
+set wildmenu
+" set wildmode=list:longest - define lista longa como o do bash ??
+
+"Mostra o status na penúltima linha.
+set laststatus=2
+
+"Mostrar palavras correspondentes durante uma pesquisa.
+set showmatch
+
+" conta quantas ocorrências da busca aparecem no texto 
+set shortmess-=S
+
+
+" Ativa as cores especiais
+set termguicolors
+
+" define a fonte para vim e icones do nerdTree:
+set guifont=Symbols\ Nerd\ Font\ Mono:h12
+
+" Tema
+colorscheme desert-night
+
+"move linha para cima ou para baixo ao pressionar ALT + setas:
+"inoremap <A-up> <esc>V y<esc>ddkPi
+"inoremap <A-down> <esc>V y<esc>ddpi
+"nnoremap <A-up> <esc>V y<esc>ddkP
+"nnoremap <A-down> <esc>V y<esc>ddp
+
+" No Linux há dificuldade de configurar ALT + letra
+inoremap <A-up> <esc>:m -2<CR>gi
+inoremap <A-down> <esc>:m +1<CR>gi
+nnoremap <A-up> :m -2<CR>
+nnoremap <A-down> :m +1<CR>
+vnoremap <A-up> :m -2<CR>gv=gv
+vnoremap <A-down> :m'>+<CR>gv=gv  
+
+" Ctrl + / = Apaga a última busca e highlight que ela deixou
+"			 para saber quais sao as teclas de caracteres especiais, basta digitar no
+"			 Terminal o seguinte comando:
+"			 sed -n l
+" nnoremap <C-/> :noh<CR>
+nmap <C-_> :noh<CR>
+nnoremap <C-_> :noh<CR>
+
+
+" navega entre as janelas do split:
+" para navegar mais facil = Control + w (varias vezes)
+nnoremap <C-j> <c-w>j
+nnoremap <C-k> <c-w>k
+nnoremap <C-h> <c-w>h
+nnoremap <C-l> <c-w>l
+
+" REDIMENSIONA AS JANELAS DE SPLIT
+" O problema de usar ESC em lugar de Alt é que pode haver conflito qdo usa a própria tecla ESC e depois as de movimento. 
+" nnoremap <ESC>j :resize -2<CR>
+" nnoremap <ESC>k :resize +2<CR>
+" nnoremap <ESC>h :vertical resize -2<CR>
+" nnoremap <ESC>l :vertical resize +2<CR>
+nnoremap <C-up> <c-w>-
+nnoremap <C-down> <c-w>+
+nnoremap <C-left> <c-w><
+nnoremap <C-right> <c-w>>
+
+" Tab next: (somente no gVim)
+" nnoremap <C-TAB> 		:tabNext<CR>			" gt 
+" nnoremap <C-S-TAB>	:tabprevious<CR>		" gT 
+
+" Navega entre as tabs (leader + tabs):
+nmap <leader><Tab> 		:tabnext<CR>
+nmap <leader><s-Tab> 	:tabprevious<CR>
+nmap <leader>t 			:tabnext<CR>
+
+" Abre novo arquivo vazio em nova tab:
+nmap <C-n>				:tabnew <CR>
+
+" Abre um link md:
+" - na tab para editar
+" - no navegador
+" - 
+
+" Abre link markdown numa nova tab para editar no vim:
+" Ctrl + space (Ctrl + @):
+map <C-@> :w<CR>vi(y:tabnew<c-r>0<CR>
+
+" Abre link markdown no navegador:
+"
+map <leader>c :w<CR>vi(y:exe 'silent !chromium <c-r>0 &'<CR>
+
+
+" Abre aberto/atual arquivo (html, md) no navegador:
+nmap <F5> :exe 'silent !chromium % &'<CR>
+
+
+" Navega entre os buffers:
+" nmap <C-b> :bn<CR>
+nmap <leader>b :bn<CR>
+
+" F3 = Abre/fecha NERDTree
+" nnoremap <C-n> :NERDTreeToggle<CR>
+nmap <F3> :NERDTreeToggle<cr>
+
+" Ctrl + t ou  <, + t> = Abre um terminal no rodapé:
+nmap <C-t> :belowright terminal<CR>
+
+
+" C+a = executa o comando bash e coloca com saida no texto atual
+" map <C-a> <ESC>:.!sh<CR>
+
+" Control + h = substitui o texto onde o cursor está sobre
+nmap <C-h> :%s/<c-r>=expand("<cword>")<cr>/
+
+
+" comentarios - tecla de atalho = cc
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+nmap cc <Plug>NERDCommenterInvert
+vmap cc <Plug>NERDCommenterInvert
+
+
+" Configura emmet para funcionar apenas em arquivos html e css
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+" configurar emmet de html para tag + tab:
+let g:user_emmet_expandabbr_key='<Tab>'
+autocmd FileType html, css imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+
+" SpellCheck
+" set spell spelllang=pt-BR
+" nnoremap <F2> :setlocal spell! spelllang=pt-BR
+" set spelllang=pt-BR
+" https://vi.stackexchange.com/questions/3060/suppress-output-from-a-vim-autocomand
+" https://vi.stackexchange.com/questions/1942/how-to-execute-shell-commands-silently
+" https://stackoverflow.com/questions/20302796/how-can-i-force-a-vim-command-to-run-silently
+autocmd FileType md,markdown,txt,text, silent! setlocal spell spelllang=pt_BR
+nnoremap <F2> z=
+
+" Teclas para corrigir:
+" z= 	- sugestões
+" ]s	- pula para próxima palavra incorreta
+" [s	- pula para anterior palavra incorreta
+" zg	- para adicionar uma nova palavra
+
+" ver diretorio de dicionários de várias linguas:
+" https://ftp.nluug.nl/pub/vim/runtime/spell/
+
+
+
+" Abreviações para arquivos Javascript:
+autocmd FileType html,javascript :imap <C-x>do document.
+autocmd FileType html,javascript :imap <C-x>qs querySelector('')<esc>hi
+autocmd FileType html,javascript :imap <C-x>qa querySelectorAll('')<esc>hi
+autocmd FileType html,javascript :imap <C-x>co console.log('')<esc>hi
+autocmd FileType html,javascript :imap <C-x>ad ad('', )<esc>3hi
+autocmd FileType html,javascript :imap <C-x>re replace('', '')<esc>5hi
+autocmd FileType html,javascript :imap <C-x>sp split("")[]<esc>3hi
+autocmd FileType html,javascript :imap <C-x>in innerText
+autocmd FileType html,javascript :imap <C-x>pa parentNode.
+autocmd FileType html,javascript :imap <C-x>cl click();
+autocmd FileType html,javascript :imap <C-x>ch childNode[]<esc>hi
+autocmd FileType html,javascript :imap <C-x>le lenght
+autocmd FileType html,javascript :imap <C-x>pu push()<esc>hi
+autocmd FileType html,javascript :imap <C-x>ma map(a=>{<CR><CR>});<esc>ki<tab>
+autocmd FileType html,javascript :imap <C-x>fe forEach(el=>{<CR><CR>});<esc>ki<tab>
+autocmd FileType html,javascript :imap <C-x>try try {<CR><CR>}<CR>catch (e){<CR><CR>};<CR><esc>5ki
+
+
+
+
+
+" Ver tb:
+" https://stackovercoder.com/programming/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
+" https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
+" https://stackoverflow.com/questions/49052619/any-mapping-in-vimrct-with-alt-isnt-working
+" https://vi.stackexchange.com/questions/38848/how-can-i-map-ctrl-alt-letter-mappings-in-vim
+" https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/
