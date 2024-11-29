@@ -2,7 +2,7 @@
 
 A seguir algumas configurações necessárias para o funcionamento do sistema:
 
-## 1- Habilitar os cliques no pad do touchpad (mouse) 
+## 1 - Habilitar os cliques no pad do touchpad (mouse) 
 
 - Instalar se não foi feito: `sudo apt install xserver-xorg-input-synaptics`
 
@@ -28,7 +28,7 @@ Section "InputClass"
 	Option "TapButton2" "3"
 ```
 
-## 2- Configuração do Wifi:
+## 2 - Configuração do Wifi:
 
 (Mais informações no arquivo: [wifi-bluetooth](wifi-bluetooth.md))
 
@@ -71,7 +71,7 @@ ou:
 
 
 
-## 3- Configuração do comando history:
+## 3 - Configuração do comando history:
 
 Mudar a configuração do comando **history** para sem fim e mergeado:
 
@@ -108,7 +108,17 @@ history
 Fonte - https://github.com/HelioGiroto/Brincando-com-o-Terminal/blob/master/history%20ilimitado%20e%20fusionado.txt
 
 
-## 4- Configurar o ambiente do Openbox
+## 4 - Alterando a variável IFS
+
+Para que o sistema adote a quebra de linha como principal delimitador, ao invés de interpretar espaços. 
+
+Para isso, é preciso editar o arquivo **.bashrc** acrescentando a seguinte linha ao final:
+
+`IFS=$'\n'` 
+
+
+
+## 5 - Configurar o ambiente do Openbox
 
 Neste ponto serão configurados o ambiente gráfico do Openbox, ou seja, os comandos: conky, tint2, lxterminal, ...
 
@@ -141,7 +151,7 @@ E rode o seguinte comando no Terminal:
  
 
 
-## 5- Configurar Slim:
+## 6 - Configurar Slim:
 ```bash
 	sudo gedit /etc/slim.conf
 	cd /usr/share/slim/themes/default
@@ -149,7 +159,7 @@ E rode o seguinte comando no Terminal:
 
 
 
-## 6- Configurar os temas do rofi:
+## 7 - Configurar os temas do rofi:
  - Salve o arquivo .rasi em usr/share/rofi/themes 
  - No Terminal abra: rofi-theme-selector
  - Escolha o theme com as fechas e pressionando ENTER
@@ -158,7 +168,7 @@ E rode o seguinte comando no Terminal:
 
 
 
-## 7- Instalar fontes:
+## 8 - Instalar fontes:
 
  - Instruções em:
 https://raw.githubusercontent.com/HelioGiroto/Brincando-com-o-Terminal/master/COMO-INSTALAR-FONTES.md
@@ -185,7 +195,7 @@ sudo fc-cache -fv
 ```
 
 
-## 8- Módulos do python:
+## 9 - Módulos do python:
 
 Tentar primeiramente isto:
 ```bash
@@ -232,7 +242,7 @@ ver: [Instalação de scrcpy](Instalação de scrcpy.md)
 
 
 
-## 9- Instale e ative o firewall
+## 10 - Instale e ative o firewall
 
 Deixe ativada o estado de firewall da sua máquina:
 
