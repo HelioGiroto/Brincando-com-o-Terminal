@@ -858,6 +858,7 @@ São eles:
 	
 	-z $VAR		# $VAR é vazia (Zero)
 	-n $VAR		# $VAR tem mais que 1 caracter.
+	! -n $VAR	# $VAR é vazia
 	$VAR1 = $VAR2	# $string1 é igual a $string2
 	$VAR2 != $VAR2	# $string1 é diferente de $string2
 	
