@@ -137,11 +137,33 @@ identify -ping -format '%w %h \n' bash.jpg
 
 ## CRIANDO IMAGENS E ADICINANDO TEXTO:
 
-	# (ref.:  https://www.imagemagick.org/Usage/fonts/)
+**Criando uma imagem vazia:**
 
+https://stackoverflow.com/questions/39504522/create-blank-image-in-imagemagick#39504523
+
+```bash
+    convert -size 800x800 xc:white white.png
+    convert -size 800x800 canvas:white white.jpg
 ```
 
- convert -size 1200X800 canvas:orange abelha.png -gravity west -composite gato.png -gravity east -composite zz.png #OK
+
+**Exemplo para imprimir texto em imagem 1080x1080:**
+
+```
+    convert origem.jpg \ 
+    -pointsize 60 -fill black -family "Lato"  \
+    -weight 500 -annotate +490+330 "$ 1,00 =" \
+    -weight 800 -annotate +720+330 "R$ 6,028" \
+    output.jpg
+```
+
+Ref.:  https://www.imagemagick.org/Usage/fonts/
+
+
+**Mais exemplos:**
+
+```
+convert -size 1200X800 canvas:orange abelha.png -gravity west -composite gato.png -gravity east -composite zz.png #OK
  convert -size 1200X800 canvas:orange abelha.png -composite zz.png #OK
  convert -size 1200X800 canvas:orange zz.png #OK
  convert -size 1200X800 canvas:orange -gravity west abelha.png -composite -gravity east gato.png -composite zz.png #OK
@@ -160,12 +182,56 @@ convert -size 700X200 canvas:darkgreen cachorro.png -geometry +60+20 -composite 
 ```
 
 
+### Imprimir um texto centralizado
+
+Centraliza um texto numa imagem de 1080x1080 (para post de Instagram e outras redes sociais).
+
+No caso abaixo, somente configura o eixo Y (-358) com valor negativo, já que y:0 é o centro vertical.
+
+```bash
+	# cria uma variável com um texto (a data atual, p.ex.):
+	DATA=$(date "+%^A, %d DE %^B DE %Y")
+
+	# cria uma imagem vazia cor negro
+	convert -size 1080x1080 xc:black origem.jpg
+
+	# imprime a frase com o texto acima de forma centralizada: 
+	convert origem.jpg \
+		-pointsize 25 -fill white -family "Lato" -weight 500 \
+		-gravity center -annotate +0-358 "$DATA" \
+	resultado.jpg
+```
+
+Ver: 
+
+https://www.imagemagick.org/discourse-server/viewtopic.php?t=21350
+
+https://www.imagemagick.org/discourse-server/viewtopic.php?t=32859
+
+https://github.com/ImageMagick/ImageMagick/discussions/2854
+
+
+```
+magick rose: -resize 240x240! \( -size 240x30 -background white -gravity center label:"very very very long long string" \) -alpha off -append rose_text1.png
+
+magick rose: -resize 240x240! \( -size 240x30 xc:white -pointsize 20 -gravity west -annotate +0+0 "very very very long long string" \) -alpha off -append rose_text2.png
+
+```
+
+P.S. there should be no spaces in *.jpg or 240x240!+0+0. You command above has extraneous spaces which should keep it from working properly. Probably a typo.
+
+
+
 ## Redimensionar imagens:
-convert imagem-original -resize 60% nova-imagem 
 
+```
+convert imagem-original -resize 60% nova-imagem
 
+# Em lote: converte para mini-thumbnail:
+for IMG in *.png; do convert -resize 50% $IMG capa-$IMG;  done
+```
 
-### MONTAGE & APPEND IMAGES
+## MONTAGE & APPEND IMAGES
 
 Junta duas imagens mantendo (keeping) o tamanho original:
 ``` 
