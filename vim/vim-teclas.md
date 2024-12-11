@@ -1,7 +1,8 @@
 # COMANDOS DO VIM
 
+ver - https://dev.to/prodopsio/vim-a-to-z-literally-1ia
 
-[feiticaria](./feiticaria.md)
+[assunto](./assunto.md)
 [google](https://google.com)
 
 

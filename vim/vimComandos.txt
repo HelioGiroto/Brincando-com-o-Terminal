@@ -98,4 +98,23 @@ https://stackoverflow.com/questions/24902724/how-do-i-navigate-buffers-in-vim
 
 
 
+- Apagar todas as linhas que contenha uma certa frase:
+:%s/.*frase.*//
+
+- Apagar todas as linhas vazias (em branco):
+:g/^$/d
+
+:g will execute a command on lines which match a regex. The regex is 'blank line' and the command is :d (delete)
+
+g/^\s*$/d
+Source: Power of g at vim wikia
+
+:[range]g/pattern/cmd
+
+Brief explanation of :g
+This acts on the specified [range] (default whole file), by executing the Ex command cmd for each line matching pattern (an Ex command is one starting with a colon such as :d for delete). Before executing cmd, "." is set to the current line.
+
+
+
+
 
