@@ -593,6 +593,9 @@ Outros exemplos:
 	
 	# lista todos os arquivos que contenham "linkedin" no nome:
 	ls *linkedin*
+
+	# lista arquivos que terminam com '-(nro)' - geralmente os baixados duplicadamente:
+	ls *-[0-9].png
 ```
 
 Agora, vamos listar todos os diretórios/ (sem os arquivos) da nossa home:
