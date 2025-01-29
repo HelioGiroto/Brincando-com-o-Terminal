@@ -46,8 +46,10 @@ CORTA COPIA E PASTE:
 	yy: copia toda linha
 	nro yy: copia nro de linhas daqui para baixo para clipboard 
 
-	d: deleta o que foi selecionado com v (cortando)
-	dd: deleta a linh que o cursor esteja posicionado. (cortando)
+	d: deleta o que foi selecionado com v (cortando) - porém não fica no clipboard.
+	dd: deleta a linha que o cursor esteja posicionado. (cortando)
+	
+	Substituto do Control X (corta + deleta) no Gedit ???? 
 
 	p: paste
 
