@@ -1,27 +1,36 @@
 # Teclas de atalho para navegadores
 
-## Chrome
-
-### Abre nova aba
+## CHROME
 
 Ctrl + t	= Abre nova aba
 Ctrl + n	= Abre nova janela
-Ctrl + N	= Abre janela anônima (n maiúsculo)
+Ctrl + N	= Abre janela anônima (N maiúsculo)
 Ctrl + T	= Reabre as abas fechadas
-Ctrl + l	= Foco na barra de URL (L minúsculo)
-Ctrl + I	= Abre o Inspector (i maiúsculo)
-Ctrl + C	= Inspector para selecionar elementos (c maiúsculo)
 Ctrl + f	= Procura texto na página (Find)
-
-Ctrl + J 	= Abre Downloads
-Ctrl + h	= Abre histórico
+Ctrl + l	= Foco na barra de URL (L minúsculo)
 
 Ctrl + Shift + Del	= Apaga cookies, cache e histórico
 
+Ctrl + h		= Abre histórico
+Alt + setas (dir,esq)	= Se move no histórico
+
+
+Ctrl + j 	= Abre Downloads (j minúsculo)
+Ctrl + o	= Abre Favoritos (Bookmarks)
+Ctrl + d / D	= Adiciona site atual ao favoritos
+Ctrl + B	= Exibe/Oculta barras de favoritos (B maiúsculo)
+
+
 Ctrl + Tab 		= Muda as abas avançando
 Ctrl + Shift + Tab 	= Muda as abas retrocedendo
-Ctrl + 1 		= Aba 1
-Alt  + 1 		= Aba 1
+Ctrl + 1 / 2 / 3 ...	= Vai para a aba 1, ou 2, ou 3...
+Alt  + 1 / 2 / 3 ...	= Vai para a aba 1, ou 2, ou 3...
+
+
+
+Ctrl + I	= Abre o Inspector (i maiúsculo)
+Ctrl + C	= Inspector para selecionar elementos (c maiúsculo)
+Ctrl + Shift + J	= Abre Console do Navegador (J maiúsculo)
 
 
 ## Firefox
