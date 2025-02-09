@@ -53,6 +53,8 @@ https://help.libreoffice.org/latest/pt-BR/text/scalc/guide/line_fix.html
 
 
 
+## Obter dados de outra planilha (arquivo ou aba)
 
+Fonte: https://maisgeek.com/como-fazer-referencia-cruzada-de-celulas-entre-planilhas-do-microsoft-excel/
 
 

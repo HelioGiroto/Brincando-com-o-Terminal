@@ -46,7 +46,7 @@ Converte imagem a um texto:
 A um pdf:
 `tesseract image.png new pdf`
 
- - Digitalizando uma imagem de uoutro idioma:
+ - Digitalizando uma imagem de outro idioma:
  
 `tesseract image.png new -l ell`
 
