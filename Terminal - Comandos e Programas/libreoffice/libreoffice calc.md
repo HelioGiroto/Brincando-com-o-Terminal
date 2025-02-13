@@ -58,3 +58,18 @@ https://help.libreoffice.org/latest/pt-BR/text/scalc/guide/line_fix.html
 Fonte: https://maisgeek.com/como-fazer-referencia-cruzada-de-celulas-entre-planilhas-do-microsoft-excel/
 
 
+- Basta deixar abertas as duas planilhas (origem e destino).
+- Na planilha destino, na célula em que será inserido o valor, digitar '='
+- Simplesmente vá até a planilha origem e clique (ou marque) sobre a célula que contém o valor desejado.
+- De volta à planilha destino pressione enter. 
+
+O resultado será algo assim:
+
+```
+='file:///home/mkt/Downloads/plan1.ods'#$PL1.B1
+```
+
+Para refrescar basta pressinar: "Crtl + Shift + F9"
+
+
+

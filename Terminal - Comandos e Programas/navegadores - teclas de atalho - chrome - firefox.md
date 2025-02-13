@@ -21,11 +21,11 @@ Ctrl + d / D	= Adiciona site atual ao favoritos
 Ctrl + B	= Exibe/Oculta barras de favoritos (B maiúsculo)
 
 
-Ctrl + Tab 		= Muda as abas avançando
-Ctrl + Shift + Tab 	= Muda as abas retrocedendo
-Ctrl + 1 / 2 / 3 ...	= Vai para a aba 1, ou 2, ou 3...
-Alt  + 1 / 2 / 3 ...	= Vai para a aba 1, ou 2, ou 3...
-
+Ctrl + Tab 			= Muda as abas avançando
+Ctrl + Shift + Tab 		= Muda as abas retrocedendo
+Ctrl + 1 / 2 / 3 ...		= Vai para a aba 1, ou 2, ou 3...
+Alt  + 1 / 2 / 3 ...		= Vai para a aba 1, ou 2, ou 3...
+Ctrl + Shift + PgUp/PgDn	= Move as abas para direita ou para a esquerda, reordenando.
 
 
 Ctrl + I	= Abre o Inspector (i maiúsculo)
