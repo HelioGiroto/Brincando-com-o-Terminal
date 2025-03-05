@@ -1,6 +1,8 @@
 # AWK
 
-AWK não é um comando do Bash, mas uma linguagem de programação que opera em **cada linha** de um arquivo, normalmente CSV. É utilizada frequentemente por desenvolvedores para processar textos e manipular arquivos.
+AWK é mais do que um comando do Bash, na verdade é uma linguagem de programação que opera em **cada linha** de um arquivo, normalmente CSV. É utilizada frequentemente por desenvolvedores para processar textos e manipular arquivos.
+
+O uso de AWK se adapta perfeitamente para as necessidades de Análise de Dados e da grande demanda do Big Data. Devido sua velocidade de processamento, facilidade de programação e do pouco uso de recursos de memória, o AWK pode superar qualquer outra ferramenta, seja o Python, o Power Bi, e muitos outros. 
 
 A linguagem de programação AWK foi criada em 1977 pelos cientistas Alfred Aho, Peter J. Weinberger e Brian Kernighan no laboratório Bell Labs. A palavra AWK é uma abreviatura das iniciais dos sobrenomes dos criadores da linguagem (**A**ho, **W**einberger e **K**ernighan).
 
