@@ -10,7 +10,9 @@ Trabalha com variáveis, laços, condicionais, comandos de impressão e outros.
 
 O que você quer realizar linha por linha em um arquivo? O AWK realiza isso muito bem! Ele lê cada linha e faz um certo processamento que você define, seja um cálculo, uma ordenação, uma soma de algumas/todas as colunas da linha (soma horizontalmente) ou soma de "células" de uma coluna (soma verticalmente), tudo isso, dependendo ou não de condições pré-estabelecidas, etc...
 
-A vantagem do AWK é que ele trabalha "tranquilamente" com arquivos de um grande número de linhas. Ao contrário de um Excel, por exemplo, que travaria por completo se [tentasse] abrir uma planilha ou CSV com mais de 20.000 linhas, o AWK processa milhares de linhas usando pouquíssima memória.
+A vantagem do AWK é que ele trabalha "tranquilamente" com arquivos de um grande número de linhas. Ao contrário de um Excel, por exemplo, que travaria se (tentasse) abrir uma planilha ou CSV com mais de 20.000 linhas, o AWK processa milhares de linhas usando pouquíssima memória.
+
+(No Excel, o tamanho máximo comportado para uma planilha é de 1.048.576 linhas por 16.384 colunas. )
 
 
 ## 1 - Sintaxe básica:

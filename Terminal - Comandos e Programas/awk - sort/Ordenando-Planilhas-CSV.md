@@ -89,9 +89,9 @@ IMPORTANTE: O Comando SORT somente ordenará uma lista de números decimais se o
 Note que nos 2 últimos exemplos acima, foi necessário converter o ponto para vírgula para que o SORT ordenasse corretamente (no caso do Sistema esteja em Português/BR)
 
 ## Outros detalhes das sintaxes acima:
-- SORT -T:  Serve para definir o Tabulador (delimitador)
-- SORT -Kn: Esse Kn seria o número do (K)ampo - ou para memorizar (K)oluna!!!
-- CAT -N:   Apenas para estética! Coloca um Número de linhas.
+- SORT -t:  Serve para definir o Tabulador (delimitador)
+- SORT -kn: Esse Kn seria o número do (K)ampo - ou para memorizar (K)oluna!!!
+- CAT -n:   Apenas para estética! Coloca um Número de linhas.
 
 
 
