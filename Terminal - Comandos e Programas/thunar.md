@@ -16,3 +16,7 @@ No Menú:
  - Comando: lxterminal
  - Ícone: utilities terminal
  - Tecla de atalho: Ctrl + Alt + T
+ 
+
+## Selecionar vários arquivos de uma pasta sem ter que clicar um por um 
+- Pressione Ctrl + s e digite o padrão regex de nomes de arquivos que serão selecionados
