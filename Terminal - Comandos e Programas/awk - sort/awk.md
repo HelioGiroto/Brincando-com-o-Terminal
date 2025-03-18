@@ -404,3 +404,8 @@ erro ao tentar gerar varias colunas na ultima linha e apendar medias:
 awk -F';' '{ for (col=1;col<=NF;col++) total += $col; row++; print total/row }' valores_semanais.csv 
 
 
+
+- Converte para minúscula a primeira coluna de um arquivo:
+awk -F';' '{$1 = tolower($1)}' logins.csv
+awk -F';' '{$1 = tolower($1); print $0}' logins.csv
+
