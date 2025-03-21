@@ -1,5 +1,7 @@
 # Teclas de atalho para navegadores
 
+**https://support.google.com/chrome/answer/157179**
+
 ## CHROME
 
 Ctrl + t	= Abre nova aba
