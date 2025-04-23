@@ -1,13 +1,18 @@
 # COMO [DES]COMPACTAR ARQUIVOS/PASTAS:
 
+Para instalar: 
+
+`sudo apt install zip`
+
 ## Para compactar:
-`zip nome.zip pasta/* `
+`zip arquivo.zip *`
 
 	- nome.zip	: Arquivo de saída
-	- pasta/*	: Origem
-
+	- *		: Arquivos origem
+	
+	
 Exemplo:
-`zip projetos.zip Projetos`
+`zip projetos.zip *.pdf`
 
 Porém, para incluir os diretórios recursivos, que por padrão não são incluidos, adicionamos a flag -r:
 
