@@ -1,6 +1,6 @@
 # Themes Collection for Rofi Launcher
 
-## What is Rofi?
+## What is Rofi ?
 
 Rofi is A window switcher, Application launcher and dmenu replacement.
 Rofi started as a clone of simpleswitcher and It has been extended with extra features,

@@ -2,7 +2,7 @@
 
 **https://support.google.com/chrome/answer/157179**
 
-## CHROME
+## CHROME 
 
 Ctrl + t	= Abre nova aba
 Ctrl + n	= Abre nova janela

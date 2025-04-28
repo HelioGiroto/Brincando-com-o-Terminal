@@ -20,6 +20,7 @@ Para mostrar e ocultar:
 	`Ctrl + F9`
 
 
+
 ## Teclas de atalho
 
 https://help.gnome.org/users/gedit/stable/gedit-shortcut-keys.html.en

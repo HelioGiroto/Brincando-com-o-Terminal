@@ -64,4 +64,7 @@ ver tb:
 `grep -vc 'termo' *.txt`
 
 
+- Filtra os emails de um texto/web:
+` lynx --nolist --dump "https://stripo.email/pt/blog/samples-of-business-emails/" | grep --color -hoE "[[:graph:]]+@[[:graph:]]+" `
+
 
