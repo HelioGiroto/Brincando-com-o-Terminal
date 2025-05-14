@@ -1,6 +1,5 @@
 # Como instalar e usar o tesseract
 
-
 ## No Terminal:
 sudo apt install tesseract-ocr imagemagick -y
 
@@ -66,11 +65,26 @@ A um pdf:
 
 `pdftoppm -png arquivo.pdf arquivo`
 
+(acima: não colocar a extensão .png em arquivo)
+
 *A flag -png converterá primeiramente o pdf em png e depois para texto:*
 
 `tesseract arquivo.png arquivo`
 
+**Para fazer um laço e fazer o OCR de pdf:**
 
+Em caso do pdf ter várias páginas:
+
+```bash 
+# passa o pdftoppm para gerar várias imagens png, uma para cada página do pdf
+pdftoppm -png "arquivo.pdf" arquivopng 	# não por extensão .png no final
+
+# converte cada png em txt:
+for ARQ in arquivopng*; do tesseract "$ARQ" "$ARQ".txt; done
+
+# une todos os txt em um único:
+cat arquivopng*.txt > unico.txt
+```
 
 
 ---
