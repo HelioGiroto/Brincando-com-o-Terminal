@@ -409,3 +409,34 @@ awk -F';' '{ for (col=1;col<=NF;col++) total += $col; row++; print total/row }' 
 awk -F';' '{$1 = tolower($1)}' logins.csv
 awk -F';' '{$1 = tolower($1); print $0}' logins.csv
 
+
+
+
+```
+
+# https://www.geeksforgeeks.org/awk-command-unixlinux-examples/:
+
+	# Built-In Variables In Awk
+	
+	Awk's built-in variables include the field variables—$1, $2, $3, and so on ($0 is the entire line) — that break a line of text into individual words or pieces called fields. 
+
+		NR: NR command keeps a current count of the number of input records. Remember that records are usually lines. Awk command performs the pattern/action statements once for each record in a file. 
+		NF: NF command keeps a count of the number of fields within the current input record. 
+		FS: FS command contains the field separator character which is used to divide fields on the input line. The default is "white space", meaning space and tab characters. FS can be reassigned to another character (typically in BEGIN) to change the field separator. 
+		RS: RS command stores the current record separator character. Since, by default, an input line is the input record, the default record separator character is a newline. 
+		OFS: OFS command stores the output field separator, which separates the fields when Awk prints them. The default is a blank space. Whenever print has several parameters separated with commas, it will print the value of OFS in between each parameter. 
+		ORS: ORS command stores the output record separator, which separates the output lines when Awk prints them. The default is a newline character. print automatically outputs the contents of ORS at the end of whatever it is given to print. 
+		
+		
+	# SEPARADORES DE SAÍDA:
+ 	# ver diferença entre:
+ 	awk -F';' '{print $1 $4 $5}' todos.csv | head
+ 	awk -F';' '{print $1, $4, $5}' todos.csv | head 	# igual ao de cima
+ 	
+ 	# e (mais ok):
+ 	awk -F';' 'BEGIN{OFS=FS}{print $1, $4, $5}' todos.csv | head
+ 	awk -F';' -v OFS=';' '{print $1, $4, $5}' todos.csv | head 	# igual ao de cima
+ 	
+ 	
+
+```
