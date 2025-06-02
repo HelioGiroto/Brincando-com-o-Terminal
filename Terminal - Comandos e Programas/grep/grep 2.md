@@ -6,7 +6,6 @@
 - Imprime apenas o nome dos arquivos que contem as duas ocorrências, [de modo colorido nas duas ocorrências]:
 ` grep -ls --color=always -e "termo1" -e 'termo2' * `
 
-
 Sendo:
  -l: Mostra apenas o nome dos arquivos que trazem a ocorrência.
  -s: Silence - omite os arquivos com erro [que não aparece ocorrência]
@@ -15,12 +14,27 @@ Sendo:
 
 --color=always ou auto: Ativa as cores nas duas ocorrências.
 
+---
+
+Este exemplo acima, na verdade mostra ocorrências que tenham o termo1 **OU** o termo2. Por tanto, mostra mais ocorrências porque qualquer linha que tenha *um dos* termos aparecerá.
+
+Mas em caso que se requeira que apareça as linhas que tenham os dois termos, ou seja, termo1 **E** termo (termo1 + termo2), será preciso esta sintaxe:
+
+` grep termo1 arquivo | grep termo2 `
+
+Assim, só aparecerão as linhas que *tenham os dois* termos e não um dos dois.
+
+Porém, os dois termos *não* aparacerão coloridos. 
+
+
+
 
 
 ## Varre todos os arquivos txt em busca do termo, excepto de history.txt
 `grep 'termo' *.txt --exclude history.txt`
 
 grep -ircl --exclude=*.{png,jpg} "termo" *
+
 =======
 - Imprime 2 pula uma até o fim:
 `seq 12 | sed 'n;n;d'`
