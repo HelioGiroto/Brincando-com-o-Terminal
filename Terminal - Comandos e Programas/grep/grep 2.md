@@ -77,6 +77,9 @@ ver tb:
 - Mostra o número de linhas que NÃO aparece o termo:
 `grep -vc 'termo' *.txt`
 
+- Oculta o(s) nome(s) do(s) arquivo(s), quando se busca um termo em múltiplos arquivos:
+` grep -ih '123456' *cnpjs.csv `
+
 
 - Filtra os emails de um texto/web:
 ` lynx --nolist --dump "https://stripo.email/pt/blog/samples-of-business-emails/" | grep --color -hoE "[[:graph:]]+@[[:graph:]]+" `
