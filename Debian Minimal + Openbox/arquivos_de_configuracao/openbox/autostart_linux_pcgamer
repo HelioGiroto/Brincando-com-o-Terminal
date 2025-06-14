@@ -1,0 +1,17 @@
+sleep 1
+xrandr --output DisplayPort-0 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-0 --off --output DVI-1 --off --output VGA-1-1 --mode 1600x900 --pos 1920x0 --rotate normal --output HDMI-1-1 --off
+
+nitrogen --restore &
+
+# tint2 &	# tira barra tint2
+
+compton &
+
+conky -p 2 -c /etc/conky/conky_info &
+conky -c /etc/conky/conky_shortcuts &
+
+# ligawifi
+# organizapastas
+
+# Corrigir abaixo pq não funciona:
+# bash start_conky.sh &
