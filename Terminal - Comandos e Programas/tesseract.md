@@ -30,7 +30,6 @@ tesseract-ocr-script-hebr
 sudo apt install tesseract-ocr-por
 
 
-
 ## Para executar o comando:
 
  - Sintaxe:
