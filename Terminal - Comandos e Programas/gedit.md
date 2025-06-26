@@ -1,5 +1,8 @@
 # GEDIT
 
+(outros recursos - https://pt.linux-console.net/?p=17725)
+
+
 ## Como abrir o Terminal dentro do Gedit:
 
 **fonte: https://cs50.stackexchange.com/questions/2026/how-do-i-open-a-terminal-window-in-gedit**
