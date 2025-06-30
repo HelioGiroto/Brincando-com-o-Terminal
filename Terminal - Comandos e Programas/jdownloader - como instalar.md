@@ -4,8 +4,8 @@
 - Link: Linux
 - Clica em Download Installer
 - Abre o MEGA > botão: "Fazer Download"
-- Executa o script.sh = JDownloader2Setup_unix_nojre.sh
-- Next + Next... 
+- Execute o script.sh -> bash JDownloader2Setup_unix_nojre.sh
+- Next + Next... (podendo escolher a pasta onde ficará o programa como oculta: .jd2)
 
 - Contribua: https://my.jdownloader.org/contribute
 
@@ -16,6 +16,28 @@
 
 ` java -jar ~/.jd2/JDownloader.jar &  `
 ` java -jar ~/.jd2/JDownloader.jar --help `
+
+
+
+## Para fazer login em conta de Youtube - caso peça porque suspeita ser um bot:
+_(A mensagem aparece no jDonwloader quando se tenta baixar muitos videos ou srt de uma só vez)_
+
+- Instruções:
+https://support.jdownloader.org/en/knowledgebase/article/account-cookie-login-instructions
+
+- Instale a Extensão 'Flag Cookies' no Chrome:
+https://chromewebstore.google.com/detail/flag-cookies/phcaemipbgodliopfijmcmlbdhpkbndb
+https://addons.mozilla.org/pt-BR/firefox/addon/flag-cookies/
+
+- Abra o youtube no canal (que quase não usa). Clica na extensão > Preferences > Export cookies to clipboard
+
+- Depois abre o jDownloader:
+ 	- Configurações 
+ 	- Gerenciador de Contas
+ 	- Adicionar (botão no rodapé da tela)
+ 	- Youtube
+ 	- Cola o nome do seu canal do youtube (com o @...)
+ 	- Cola o cookie copiado pela extensão do navegador
 
 
 
@@ -52,23 +74,4 @@
 ```
 
 
-
-
-## Para fazer login em conta de Youtube - caso peça porque suspeita ser um bot:
-_(A mensagem aparece no jDonwloader quando se tenta baixar muitos videos ou srt de uma só vez)_
-
-- Instruções:
-https://support.jdownloader.org/en/knowledgebase/article/account-cookie-login-instructions
-
-- Instale a Extensão 'Flag Cookies' no Chrome:
-https://chromewebstore.google.com/detail/flag-cookies/phcaemipbgodliopfijmcmlbdhpkbndb
-
-- Abra o youtube no canal (que quase não usa). Clica na extensão > Preferences > Export cookies to clipboard
-
-- Depois abre o jDownloader:
- 	- Configurações 
- 	- Gerenciador de Contas
- 	- Adicionar (botão no rodapé da tela)
- 	- Youtube
- 	- Cola o cookie copiado pela extensão do navegador
 
