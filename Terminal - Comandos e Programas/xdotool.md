@@ -1,4 +1,4 @@
-xdotools
+# xdotools
 
 ## Pega a posição na tela:
 	watch -n0.3 -t xdotool getmouselocation --shell
@@ -6,8 +6,10 @@ xdotools
 	 xdotool search --onlyvisible . behave %@ mouse-enter getmouselocation
 
 
+(Para descobrir as coordenadas da tela, use: `watch -t -n 0.0001 xdotool getmouselocation `)
 
 # ver - https://jualabs.com/2015/07/06/utilizando-o-xdotool-para-manipular-arquivos/
+# https://stackoverflow.com/questions/8480073/how-would-i-get-the-current-mouse-coordinates-in-bash#13907499
 # https://pt.linux-console.net/?p=16675
 
  #abrir o libreoffice  
