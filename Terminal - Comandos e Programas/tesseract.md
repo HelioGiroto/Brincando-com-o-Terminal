@@ -54,7 +54,9 @@ A um pdf:
 
  - Digitalizando várias imagens:
  
-`for i in img*.png; do tesseract "$i" "text-$i" -l eng; done;`
+` for i in *.png; do tesseract "$i" "ocr-$i"; done; `
+` for i in img*.png; do tesseract "$i" "ocr-$i" -l eng; done; `
+
 
  - ver
  
