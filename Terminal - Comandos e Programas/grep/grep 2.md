@@ -85,3 +85,11 @@ ver tb:
 ` lynx --nolist --dump "https://stripo.email/pt/blog/samples-of-business-emails/" | grep --color -hoE "[[:graph:]]+@[[:graph:]]+" `
 
 
+- Obtem apenas as partes sublinhadas de um texto markdown:
+` grep -o --color '\*.*\*' arq.md  | sed 's/.$/&\n/' `
+	Melhor (qualquer coisa que não seja * entre asteriscos:
+` grep -oP --color '\*[^*]+\*' arq.md ` 
+
+
+
+

@@ -1,5 +1,4 @@
-
-desmembrar um pdf.
+desmembrar um pdf
 unmerge
 split 
 
