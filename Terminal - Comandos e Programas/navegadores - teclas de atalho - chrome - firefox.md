@@ -2,6 +2,9 @@
 
 **https://support.google.com/chrome/answer/157179**
 
+tb: https://tecnoblog.net/responde/todos-os-atalhos-de-teclado-do-chrome-shortcuts/
+
+
 ## CHROME 
 
 Ctrl + t	= Abre nova aba
