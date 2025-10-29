@@ -1,14 +1,14 @@
-# Como instalar e usar o tesseract
+# TESSERACT
 
-## No Terminal:
+## Como instalar e usar o tesseract
 sudo apt install tesseract-ocr imagemagick -y
 
 
-## Agora lista as linguagens disponíveis:
+### Agora lista as linguagens disponíveis:
 tesseract --list-langs
 
 
-## Procura o tesseract do idioma preferido:
+### Procura o tesseract do idioma preferido:
 apt-cache search tesseract-ocr
 
 
@@ -26,11 +26,11 @@ tesseract-ocr-script-grek
 tesseract-ocr-script-hebr
 
 
-## Instalando o tesseract do português, por ex.:
+### Instalando o tesseract do português, por ex.:
 sudo apt install tesseract-ocr-por
 
 
-## Para executar o comando:
+## Para executar o comando - Digitalizando uma imagem png:
 
  - Sintaxe:
  
@@ -77,14 +77,14 @@ A um pdf:
 Em caso do pdf ter várias páginas:
 
 ```bash 
-# passa o pdftoppm para gerar várias imagens png, uma para cada página do pdf
-pdftoppm -png "arquivo.pdf" arquivopng 	# não por extensão .png no final
+	# passa o pdftoppm para gerar várias imagens png, uma para cada página do pdf:
+	pdftoppm -png "arquivo.pdf" arquivopng 	# não colocar/digitar extensão .png no final
 
-# converte cada png em txt:
-for ARQ in arquivopng*; do tesseract "$ARQ" "$ARQ".txt; done
+	# converte cada png em txt:
+	for ARQ in arquivopng*; do tesseract "$ARQ" "$ARQ".txt; done
 
-# une todos os txt em um único:
-cat arquivopng*.txt > unico.txt
+	# une todos os txt em um único:
+	cat arquivopng*.txt > unico.txt
 ```
 
 
