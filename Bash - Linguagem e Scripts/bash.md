@@ -1539,6 +1539,23 @@ Explicação do código:
  
 
 
+### Uso do FOR para percorrer uma lista com pausa aleatória (número randômico):
+
+A vantagem deste exemplo abaixo é que se usa uma pausa com tempo aleatório antes de continuar a iteração. No caso a seguir, se percorrerá uma lista de domínios e imprime qual o provedor de hospedagem de cada site:
+
+```bash
+	for SITE in $(cat lista_sites.txt)
+	do
+		URL=$(echo $SITE | sed 's/https:\/\///')
+		PROV=$(whois $URL | grep -im1 nserver | sed 's/  */ /g; s/ /\n/' | tail -n1)
+		echo "O servidor do site: $URL é: $PROV" | tee -a provedores.csv
+		# sorteia nro de segundos para pausa:
+		PAUSA=$( shuf -i 5-42 -n 1 )
+		sleep $PAUSA
+	done
+```
+
+
 ## <a class="up" href="#topo">> WHILE <span id='while'></span></a> 
 Enquanto uma condição esteja sendo satisfeita (verdadeira), o código estará sendo executado.
 
