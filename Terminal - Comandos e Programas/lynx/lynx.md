@@ -1,5 +1,11 @@
 # LYNX
 
+lynx -dump -listonly https://site.com.br
+
+lynx -dump -nolist https://site.com.br
+
+
+
 
 ## Extracting a List of Links from a Web Page
 
