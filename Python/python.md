@@ -67,6 +67,14 @@ Tkinter, PyQt, PySide, Kivy, WxPython e outras.
 ## <a class="up" href="#topo"> SHEBANG: INICIO DO PROGRAMA </a> 
 
 ```python
+# funciona em qualquer sistema porque procura onde o interpretador está:
+#!/usr/bin/env python3
+
+# No caso de estar o interpretador num diretório que se sabe o path:
+#!/usr/bin/python3
+
+# para uma versão específica:
+#!/usr/bin/env python3.11
 ```
 
 
@@ -106,7 +114,7 @@ Onde `script.py` é o nome do script.
 
 ## <a class="up" href="#topo"> SINTAXE DE COMANDOS NO SCRIPT  </a> 
 
-Dentro do script em Python é obrigatório o uso de indentação em caso de funções e/ou laços.
+Dentro do script em Python é obrigatório o uso de indentação em caso de funções e/ou laços para demarcar o bloco de comandos.
 
 
 
@@ -224,8 +232,7 @@ nro*=2	# multiplica por 2
 nro/=2	# divide por 2
 
 # pode ser um incremento de várias strings:
-for reposta in 
-string_total_texto += resposta
+for reposta in string_total_texto += resposta
 ```
 
 ## <a class="up" href="#topo"> IMPRIMIR NA TELA </a> 
@@ -295,6 +302,29 @@ print(f'Essa foi a sua pergunta: {pergunta}')		# Formatação com f-string
 
 
 ## <a class="up" href="#topo"> ENTRADA DE DADOS 3: Parâmetros em linha do Terminal  </a>
+
+É possível em Python passar parâmetros a fim de que a entrada de dados seja por meio de dados fornecidos desde a linha de comando quando o script é chamado:
+
+Exemplo de como chama o `programa.py` onde se passa dois parâmetros:
+
+`python3 programa.py Maria 25`
+
+O `programa.py` contém o seguinte código:
+
+```python
+import sys
+
+if len(sys.argv) < 3:
+    print("Passe dois parâmetros separados por espaço e use áspas duplas caso seja uma string com mais de uma palavra")
+    sys.exit(1)
+
+nome = sys.argv[1]
+idade = int(sys.argv[2])
+
+print(f"Olá, {nome}! Você tem {idade} anos.")
+
+```
+
 
 
 ## <a class="up" href="#topo"> MANIPULAÇÃO DE STRINGS</a> 
@@ -1537,14 +1567,207 @@ https://www.w3schools.com/python/python_ref_file.asp
 
 
 
+##  <a class="up" href="#topo"> BIBLIOTECAS </a>
+
+No Python, uma biblioteca (ou módulo) é um conjunto de códigos prontos criados por outras pessoas para resolver tarefas específicas — como ler arquivos, criar gráficos, fazer cálculos, conectar-se à internet, manipular planilhas, entre muitas outras coisas.
+
+Em vez de escrever tudo do zero, você pode importar uma biblioteca e reaproveitar funções e ferramentas que já foram testadas e otimizadas.
+
+Isso torna o trabalho muito mais rápido, seguro e eficiente.
+
+Há uma diferença entre bibliotecas em Python: As nativas e as não-nativas.
+
+O Python vem com centenas de bibliotecas nativas (também chamadas de módulos padrão) — ou seja, elas já estão instaladas automaticamente junto com o Python. Você pode usá-las imediatamente, sem precisar baixar nada.
+
+Já as bibliotecas não nativas (ou externas) são criadas pela comunidade e precisam ser instaladas manualmente antes de serem usadas. E será necessário instalá-las por meio de um comando no Terminal:
+
+`pip install nome_da_biblioteca`
+
+A seguir, temos exemplos de algumas poucas, úteis e mais conhecidas bibliotecas entre as milhões que existem. Para consultá-las acesse: https://pypi.org/.
+
+---
+
+### 🧭 📂 Manipulação de Arquivos e Pastas (Diretórios)
+
+Bibliotecas nativas:
+
+| Biblioteca  | Descrição / Uso principal                                                      |
+| ----------- | ------------------------------------------------------------------------------ |
+| **os**      | Caminhos, criação, exclusão e movimentação de arquivos e pastas.               |
+| **shutil**  | Copiar, mover, apagar e comprimir diretórios inteiros.                         |
+| **pathlib** | Manipular caminhos de forma orientada a objetos (`Path("pasta/arquivo.txt")`). |
+| **glob**    | Buscar arquivos por padrão (`*.pdf`, `dados_*.csv`, etc.).                     |
+
+---
+
+### 📄 Leitura e Escrita de Arquivos PDF
+
+| Biblioteca         | Descrição                                                       |
+| ------------------ | --------------------------------------------------------------- |
+| **PyPDF2**         | Ler, dividir, unir e extrair texto de PDFs.                     |
+| **pdfplumber**     | Extrair texto e tabelas estruturadas (excelente para OCR leve). |
+| **fitz (PyMuPDF)** | Leitura, edição, imagens, anotações e OCR embutido.             |
+| **pdfminer.six**   | Extração detalhada de texto (baixo nível, mas preciso).         |
+| **reportlab**      | Criar e gerar PDFs do zero (relatórios, notas fiscais, etc.).   |
+
+---
+
+### 📊 Arquivos Excel e Planilhas
+
+| Biblioteca     | Descrição                                                             |
+| -------------- | --------------------------------------------------------------------- |
+| **openpyxl**   | Ler, editar e criar arquivos `.xlsx`. (muito usada)                   |
+| **pandas**     | Ler e escrever Excel, CSV, JSON e bancos de dados em formato tabular. |
+| **xlrd**       | Leitura de planilhas antigas `.xls`.                                  |
+| **xlsxwriter** | Criar planilhas com formatação avançada (cores, gráficos).            |
+| **pyexcel**    | Interface unificada para vários formatos (CSV, ODS, XLSX).            |
+
+---
+
+### 🧾 Textos, DOC, DOCX, TXT e PDFs
+
+| Biblioteca                       | Descrição                                          |
+| -------------------------------- | -------------------------------------------------- |
+| **python-docx**                  | Ler e gerar arquivos `.docx` (Word).               |
+| **docx2txt**                     | Extrair texto puro de `.docx`.                     |
+| **pypandoc**                     | Converter entre `.doc`, `.pdf`, `.md`, `.txt` etc. |
+| **chardet / charset-normalizer** | Detectar codificação de texto.                     |
+| **re (regex)**                   | Buscar e substituir padrões em texto. Nativa.      |
+
+---
+
+### 💾 Banco de Dados e SQL
+
+| Biblioteca                            | Descrição                                               |
+| ------------------------------------- | ------------------------------------------------------- |
+| **sqlite3**                           | Banco de dados embutido no Python (sem instalação).  Nativa.    |
+| **SQLAlchemy**                        | ORM poderoso para bancos SQL (MySQL, PostgreSQL, etc.). |
+| **pandas**                            | Lê e grava direto em SQL com `to_sql()` e `read_sql()`. |
+| **mysql-connector-python / psycopg2** | Conexões diretas com MySQL e PostgreSQL.                |
+| **duckdb**                            | Banco colunar rápido, ótimo para análise local.         |
+
+---
+
+### ⚙️ XML e JSON
+
+| Biblioteca                | Descrição                                    |
+| ------------------------- | -------------------------------------------- |
+| **xml.etree.ElementTree** | Leitura e criação de XML (padrão do Python). Nativa. |
+| **lxml**                  | Manipulação rápida e robusta de XML e HTML.  |
+| **json**                  | Leitura e escrita de arquivos JSON. Nativa.  |
+| **xmltodict**             | Converter XML ↔ dicionário Python.           |
+
+---
+
+### 📈 Criação de Dashboards e Gráficos
+
+| Biblioteca             | Descrição                                                      |
+| ---------------------- | -------------------------------------------------------------- |
+| **matplotlib**         | Gráficos básicos e científicos.                                |
+| **seaborn**            | Visualização estatística com estilo moderno.                   |
+| **plotly**             | Gráficos interativos para web e dashboards.                    |
+| **dash (Plotly Dash)** | Criação de dashboards web interativos em Python.               |
+| **streamlit**          | Criação rápida de apps e dashboards sem precisar de front-end. |
+| **bokeh**              | Visualizações web com interatividade via navegador.            |
+
+---
+
+### 🖼️ Reconhecimento e Manipulação de Imagens
+
+| Biblioteca                  | Descrição                                           |
+| --------------------------- | --------------------------------------------------- |
+| **Pillow (PIL)**            | Edição de imagens (cortar, redimensionar, filtros). |
+| **opencv-python (cv2)**     | Processamento de imagem e visão computacional.      |
+| **scikit-image**            | Algoritmos científicos de análise de imagem.        |
+| **tesseract / pytesseract** | OCR (reconhecimento de texto em imagens).           |
+| **face_recognition**        | Reconhecimento facial (baseado em dlib).            |
+
+---
+
+### ⌨️🖱️ Controle de Teclado e Mouse (Automação)
+
+| Biblioteca    | Descrição                                                  |
+| ------------- | ---------------------------------------------------------- |
+| **pyautogui** | Controlar mouse, teclado e telas (automação de interface). |
+| **keyboard**  | Detectar e simular teclas pressionadas.                    |
+| **mouse**     | Controlar movimentos e cliques do mouse.                   |
+| **pynput**    | Leitura e controle avançado de teclado e mouse.            |
+
+---
+
+### 🎤🔊 Reconhecimento de Fala e Text-to-Speech
+
+| Biblioteca                | Descrição                                          |
+| ------------------------- | -------------------------------------------------- |
+| **speech_recognition**    | Converter fala em texto (Google, Sphinx, etc.).    |
+| **pyttsx3**               | Síntese de voz (text-to-speech) offline.           |
+| **gTTS**                  | Text-to-Speech via Google (gera MP3).              |
+| **whisper (OpenAI)**      | Reconhecimento de fala com IA (offline e preciso). |
+| **pyaudio / sounddevice** | Captura e reprodução de áudio.                     |
+
+---
+
+### 📧 Envio de E-mails e Comunicação
+
+| Biblioteca           | Descrição                                       |
+| -------------------- | ----------------------------------------------- |
+| **smtplib**          | Envio de e-mails via SMTP (nativo). Nativa.     |
+| **email**            | Construção de mensagens MIME e anexos. Nativa.  |
+| **imaplib / poplib** | Leitura de e-mails por IMAP/POP3. Nativa.       |
+| **yagmail**          | Envio simples via Gmail com autenticação OAuth. |
+
+---
+
+### 🌐 Web Scraping e Automação Web
+
+| Biblioteca                               | Descrição                                           |
+| ---------------------------------------- | --------------------------------------------------- |
+| **requests**                             | Requisições HTTP simples e poderosas.               |
+| **beautifulsoup4 (bs4)**                 | Extração de dados HTML.                             |
+| **lxml**                                 | Parser rápido e robusto (HTML/XML).                 |
+| **selenium**                             | Automação de navegadores (clica, digita, interage). |
+| **playwright / undetected-chromedriver** | Automação moderna (rápida e menos bloqueada).       |
+| **scrapy**                               | Framework completo para scraping e crawlers.        |
+
+---
+
+### 🧠 Inteligência Artificial, Machine Learning e NLP
+
+| Biblioteca                       | Descrição                                                            |
+| -------------------------------- | -------------------------------------------------------------------- |
+| **numpy**                        | Base para cálculos matriciais e vetoriais.                           |
+| **pandas**                       | Análise e manipulação de dados tabulares.                            |
+| **scikit-learn**                 | Machine Learning tradicional (classificação, regressão, clustering). |
+| **tensorflow / keras / pytorch** | Deep Learning e redes neurais.                                       |
+| **spacy / nltk**                 | Processamento de linguagem natural (NLP).                            |
+| **transformers (HuggingFace)**   | Modelos de IA prontos (BERT, GPT, Whisper, etc).                     |
+| **LangChain**   		   | Frameworks mais populares para construir aplicações com modelos de LLMs). |
+| **LangGraph**   		   | Framework para sistemas de agentes mais complexos, interações entre agentes, etc. |
+| **CrewAI**   | Framework leve para criação de agentes autônomos em Python, com foco em simplicidade e “crews” de agentes colaborando. |
+| **Agno**   | Framework open-source em Python para a construção de agentes de inteligência artificial (AI). |
+
+---
+
+### 🧰 Outras Ferramentas e Utilidades
+
+| Biblioteca                   | Descrição                                          |
+| ---------------------------- | -------------------------------------------------- |
+| **argparse / typer / click** | Criar CLIs (programas com parâmetros no terminal). |
+| **schedule / apscheduler**   | Agendar tarefas automáticas.                       |
+| **dotenv / os.environ**      | Gerenciar variáveis de ambiente.                   |
+| **logging / rich**           | Logs coloridos e monitoramento no terminal.        |
+| **fastapi / flask**          | Criação de APIs e microserviços.                   |
+
+---
+
 
 ## <a class="up" href="#topo"> INTEGRAÇÃO COM OUTRAS LINGUAGENS</a> 
 
 
 ## MAIS:
-kwargs
+kwargs:
 
-https://www.w3schools.com/python/pandas/default.asp
+pandas: https://www.w3schools.com/python/pandas/default.asp
 
 
 ## LINKS
