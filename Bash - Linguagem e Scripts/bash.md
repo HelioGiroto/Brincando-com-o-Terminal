@@ -687,7 +687,11 @@ Com o exemplo fica mais fácil:
 	echo {A..Z}
 	
 	# letras de a-z, mas de 2 em 2:
-	echo {}}me}metro a..z..2}
+	echo {a..z..2}
+	
+	# nros de 1 a 21, de 3 em 3:
+	echo {1..21..3}
+
 	
 	# ou numa lista de opções:
 	echo {g,r,p,m,f,b,ch,hi,j}ato

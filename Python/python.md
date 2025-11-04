@@ -1765,15 +1765,14 @@ Bibliotecas nativas:
 
 
 ## MAIS:
-kwargs:
 
+kwargs:
 pandas: https://www.w3schools.com/python/pandas/default.asp
 
 
 ## LINKS
 
 [Link para o curso da ASIMOV](https://hub.asimov.academy/curso/atividade/criando-seu-primeiro-chatbot/)
-
 [Link para meu Colab de exemplos](https://colab.research.google.com/drive/1RkWH8Uh01Bm2QxjuetvI1RLnVH6o2H1u#scrollTo=yB_phJv4ycer)
 
 ---
