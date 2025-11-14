@@ -292,6 +292,7 @@ numero = int(input('Digite um número: '))
 # a forma mais simples - usando o +:
 nome = "Helio"
 print('Bem-vindo ' + nome + ' ao nosso ChatBot!')
+print('Bem-vindo', nome, 'ao nosso ChatBot!')
 
 # forma mais recente no Python:
 pergunta = input(f'Olá, {nome}. O que você gostaria de saber? ')	# Formatação com f-string
@@ -835,7 +836,52 @@ print(texto)
 Observe que a sintaxe deste método é diferente de todos os demais vistos até agora, que seguiam este modelo: `lista.metodo()`, porém com o `join()` é diferente, já que o nome da lista está dentro dos parêntesis, isso porque `join` não é um método de/para listas, mas de strings. Por isso ele segue este formato: `string.join(lista)`.
 
 
-[Incluir mais métodos de lista](https://www.w3schools.com/python/python_lists_methods.asp)
+
+**Removendo todos os elementos de uma lista**
+
+` lista.clear() `
+
+
+
+**Conta o número de ocorrências de um elemento de uma lista**
+
+Conta quantos elementos aparecem na lista.
+
+```python
+lista = ['sim', 'não', 'sim', 'sim', 'sim', 'não', 'não']
+lista.count('sim')
+# resultado: 4
+```
+
+
+
+**Imprime a ordem reversa dos elementos de uma lista**
+
+```python
+lista = [0, 1, 2, 3, 4, 5, 6, 7]
+lista.reverse()
+# resultado: [7, 6, 5, 4, 3, 2, 1, 0]
+```
+
+
+**Faz uma cópia de uma lista - duplica**
+
+```python 
+lista = [0, 1, 2, 3, 4, 5, 6, 7]
+lista2 = lista.copy()
+print(lista2)
+# resultado: [0, 1, 2, 3, 4, 5, 6, 7]
+```
+
+
+**Juntanto duas listas - fusinando listas**
+
+```python 
+list1 = ["a", "b" , "c"]
+list2 = [1, 2, 3]
+list1.extend(list2)
+print(list1) 	# ['a', 'b', 'c', 1, 2, 3]
+```
 
 
 
@@ -931,6 +977,35 @@ print(mensagens)
 
 Para percorrer uma lista de dicionários, ir até: "Percorrendo lista de dicionários", em Laços (FOR).
  
+Outro exemplo de uso de dicinoários:
+
+```python 
+# imprime um cabeçalho e prepara lista para obter lista de dicionários:
+print("Preencha os dados dos clientes")
+print("==============================")
+lista = []
+
+# laço enquanto não digitar x/X:
+while True:
+	nome = input("Informe o nome do cliente (X para sair): ")
+	if nome.lower() == 'x':
+		break
+	# cria um dicionário:
+	cliente = {
+	    'nome': nome,
+	    'doc': input('Informe o documento do cliente: '),
+	    'nasc': input('Informe a data de nascimento do cliente: ')
+	}
+	
+	# imprime dicionário e adiciona na lista:
+	print(cliente)
+	lista.append(cliente)
+	print()
+
+# ao sair do laço, imprime toda a lista de dicionários 
+print(lista)
+```
+
 
 
 
