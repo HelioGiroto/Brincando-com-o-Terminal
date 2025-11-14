@@ -980,6 +980,9 @@ Para percorrer uma lista de dicionários, ir até: "Percorrendo lista de dicion�
 Outro exemplo de uso de dicinoários:
 
 ```python 
+# importa módulo para criar arquivo json:
+import json
+
 # imprime um cabeçalho e prepara lista para obter lista de dicionários:
 print("Preencha os dados dos clientes")
 print("==============================")
@@ -1004,6 +1007,12 @@ while True:
 
 # ao sair do laço, imprime toda a lista de dicionários 
 print(lista)
+
+# Se quiser gravar no arquivo clientes.json
+with open("clientes.json", "w", encoding="utf-8") as arquivo:
+    json.dump(lista, arquivo, indent=4, ensure_ascii=False)
+
+print("Arquivo JSON criado com sucesso!")
 ```
 
 
