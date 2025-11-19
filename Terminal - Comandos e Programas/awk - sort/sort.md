@@ -32,3 +32,7 @@ sort -R arq.csv
 ```
 
 (ver também comando `shuf`)
+
+
+- Ordena eliminando os duplicados (uniq):
+` sort -u arq.csv `

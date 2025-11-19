@@ -49,6 +49,11 @@ Sendo assim, todos os comandos que podemos executar ou testar em Python, ao inv�
 >>> print("Hello World!")
 ```
 
+Para sair do modo interativo e voltar ao terminal, basta digitar:
+
+`exit()`
+
+
 Também se pode fazer testes usando o navegador e alguma plataforma que roda uma IDE de Python de maneira "online" (playground), como:
  - https://www.online-python.com
  - https://www.programiz.com/python-programming/online-compiler
@@ -394,8 +399,6 @@ else:
   print('continuar')
 ```
 
-#### Usando operadores lógicos (and, or e not):
-
 Exemplo para evitar que o usuário responda com caixa alta e dê erro:
 
 ```python
@@ -406,7 +409,8 @@ else:
   print('continuar')
 ```
 
-**Outros operadores lógicos:**
+
+#### Usando operadores lógicos (and, or e not):
 
 - `and`: Retorna True se todas as condições forem verdadeiras.
 - `or`: Retorna True se pelo menos uma das condições for verdadeira.
@@ -442,6 +446,22 @@ True
 False
 ```
 
+
+#### Usando Comparação encadeada (Chained comparison)
+
+Uma forma mais abreviada de, ao invés de usar o operador `and` numa condicional:
+
+```python
+# testamos se a variável 'numero' está entre 1 e 30
+# ou seja, se é maior que 1 e menor que 30
+numero = 5
+if 1 < numero < 30:
+	print("está na faixa")
+``` 
+
+
+
+
 ### If, elif, else
 
 Às vezes, são necessárias mais que uma condição para serem testadas, assim, se usa a instrução `elif` (que precisa trazer consigo uma outra condição:
@@ -453,6 +473,22 @@ elif x > y:
     print('x é maior que y')
 else:
     print('x e y são iguais')
+```
+
+## <a class="up" href="#topo"> CONDIÇÕES COM OPERADORES TERNÁRIOS </a> 
+
+Operadores ternários são uma forma mais abreviada de escrever código em Python quando o assunto é condições **e não existe um bloco de código** que se executa ao cumprir uma condição. Por exemplo:
+
+```python
+# define idade:
+idade = 18
+# operador ternário em if:
+resultado = "Entrada permitida" if idade >= 18 else "Acesso negado"
+# imprime resultado:
+print(resultado)
+
+# ou poderia ser apenas: 
+print('pode entrar') if idade >= 18 else 'não pode'
 ```
 
 
@@ -571,7 +607,8 @@ lista[3][1]
 
 Veremos agora os métodos (funções) que se pode usar para manipular listas. Lembrando que listas, diferentemente de variáveis strings, são alteráveis. 
 
-**len() - Obtendo o tamanho da lista**
+
+### len() - Obtendo o tamanho da lista
 
 ```python
 lista = [1,2,3,4,5]
@@ -580,7 +617,7 @@ print(len(lista))
 ```
 
 
-**Fatiando uma lista**
+### Fatiando uma lista
 
 Formato se baseia em nome da lista, colchetes, dois números separados por ":", sendo o primeiro a posição (em índice) do primeiro elemento até o segundo número o elemento em ordem da lista:
 
@@ -610,7 +647,7 @@ lista4 = lista[0:-2]
 
 
 
-**Adicionando valores a uma lista**
+### Adicionando valores a uma lista
 
 No Python é possível concatenar valores ou listas à própria lista, "appendar" ou inserir itens, conforme estes exemplos abaixo:
 
@@ -657,7 +694,7 @@ while resposta != 0:
 
 ```
 
-**Substituindo valores de uma lista**
+### Substituindo valores de uma lista
 
 ```python
 lista = [0,1,2,3,4,5]
@@ -668,7 +705,7 @@ print(lista) 	# [0,1,2,"outra coisa",4,5]
 ```
 
 
-**Removendo valores de uma lista**
+### Removendo valores de uma lista
 
 ```python
 # deleta o primeiro elemento da lista
@@ -734,7 +771,7 @@ print(novalista)
 ```
 
 
-**Consultando se um valor está na lista**
+### Consultando se um valor está na lista
 
 Utilizamos para isso os operadores `in` ou `not in` e se obtem apenas a resposta positiva (True) ou negativa (False). (Pode-se usar isso em um `if`, por exemplo.)
 
@@ -756,7 +793,7 @@ nro in lista
 ```
 
 
-Uso com `if`:
+Com uso com `if`:
 
 ```python
 convidados = ['Mateus', 'Marcos', 'Lucas', 'João', 'Paulo']
@@ -768,7 +805,7 @@ else:
 ```
 
 
-**Obtendo a posição que um valor se encontra numa lista**
+### Obtendo a posição que um valor se encontra numa lista
 
 ```python
 lista = [0,1,2,3,4,5]
@@ -787,7 +824,7 @@ print(posicoes)
 ```
 
 
-**Ordenando uma lista**
+### Ordenando uma lista
 
 ```python
 lista = [4,2,5,7,0,1]
@@ -813,7 +850,7 @@ lista.sort(key=str.lower, reverse=True)
 
 ```
 
-**Convertendo uma lista em string (texto)**
+### Convertendo uma lista em string (texto)
 
 Com a função `join(lista)` é possível juntar uma lista formando uma única string, escolhendo, inclusive o delimitador desejado: ',', ' ', '-' ou '\n', por exemplo. 
 
@@ -837,13 +874,13 @@ Observe que a sintaxe deste método é diferente de todos os demais vistos até 
 
 
 
-**Removendo todos os elementos de uma lista**
+### Removendo todos os elementos de uma lista
 
 ` lista.clear() `
 
 
 
-**Conta o número de ocorrências de um elemento de uma lista**
+### Conta o número de ocorrências de um elemento de uma lista
 
 Conta quantos elementos aparecem na lista.
 
@@ -855,7 +892,7 @@ lista.count('sim')
 
 
 
-**Imprime a ordem reversa dos elementos de uma lista**
+### Imprime a ordem reversa dos elementos de uma lista
 
 ```python
 lista = [0, 1, 2, 3, 4, 5, 6, 7]
@@ -864,7 +901,7 @@ lista.reverse()
 ```
 
 
-**Faz uma cópia de uma lista - duplica**
+### Faz uma cópia de uma lista - duplica
 
 ```python 
 lista = [0, 1, 2, 3, 4, 5, 6, 7]
@@ -874,13 +911,59 @@ print(lista2)
 ```
 
 
-**Juntanto duas listas - fusinando listas**
+### Juntanto duas listas - fusinando listas
 
 ```python 
 list1 = ["a", "b" , "c"]
 list2 = [1, 2, 3]
 list1.extend(list2)
 print(list1) 	# ['a', 'b', 'c', 1, 2, 3]
+```
+
+### Filtrando uma lista
+
+(Estes tópicos serão abordados de uma forma melhor em laços de repetição `for` e funções (`lambda`)
+
+**Usando `for` e 'List Comprehension' (em português: Compreensão de Lista)**
+
+```python
+nomes = ["Ana", "Bruno", "Carla", "Caio", "Paulo", "Miguel"]
+# nomes que comecem com 'C':
+filtrados = [n for n in nomes if n.startswith("C")]
+# que tenham a letra 'P'
+filtrados = [n for n in nomes if "p" in n.lower()]
+# cujo nro de letras seja maior que 4:
+filtrados = [n for n in nomes if len(n) > 4]
+# cuja letra final seja 'A' ou 'L':
+letras = ['a', 'l']
+filtrados = [n for n in nomes if n[-1].lower() in letras]
+```
+
+
+**Usando o método filter() - com ou sem função lambda:**
+
+```python
+# usando função e método filter():
+numeros = [4, 11, 20, 3]
+def maior_que_10(x):
+    return x > 10
+filtrados = list(filter(maior_que_10, numeros))
+
+
+# filtrando uma lista de strings - usando lambda:
+nomes = ["Ana", "Bruno", "Alice", "Caio"]
+filtrados = list(filter(lambda n: n.startswith("A"), nomes))
+
+
+# filtrando uma lista de dicionários - usando lambda:
+clientes = [
+    {"nome": "Ana", "idade": 30},
+    {"nome": "Bruno", "idade": 25},
+    {"nome": "Carla", "idade": 40}
+]
+filtrados = list(filter(lambda c: c["idade"] > 30, clientes))
+
+
 ```
 
 
@@ -943,6 +1026,22 @@ print(lista_convertida)
 
 ## <a class="up" href="#topo"> DICIONÁRIOS </a> 
 
+Um dicionário em Python é uma estrutura que guarda informações organizadas em pares (de chave e valor).
+
+Imagine que cliente é uma ficha, e dentro dessa ficha você tem campos (as chaves) e os dados preenchidos nesses campos (os valores). Ex.:
+
+```python
+cliente = { 
+	"nome": "Ana", 
+	"idade": 30, 
+	"cidade": "Maceió" 
+}
+```
+Sendo assim, em Python "cliente" é um **dicionário** nesse formato. "nome", "idade", "cidade" são **chaves** desse dicionário, com seus respectivos **valores**: "Ana", 30, "Maceió".
+
+Lembre-se: Dicionários estão envolvidos com chaves "{}", e entre as chaves e seus valores, usamos ":" (dois pontos).
+
+
 ```python
 # criando um novo dicionário:
 pessoa = {'nome': 'Paulo', 'profissao': 'médico', 'idade': 28}
@@ -950,13 +1049,40 @@ pessoa = {'nome': 'Paulo', 'profissao': 'médico', 'idade': 28}
 # imprimindo todo o dicionário
 print(pessoa)
 
-# imprimindo o valor de 'Ana':
-print(pessoa['nome'])
+# imprimindo o valor da chave 'nome':
+print(pessoa['nome'])	# Paulo
 
 # deletando um dos itens do dicionário:
 del pessoa['idade']
 ```
 
+### Métodos usados para dicionários
+
+Existem três métodos básicos que retornam a uma lista de dados relacionados aos dicionários:
+
+- keys(), values(), items().
+
+Exemplo:
+
+```python
+idades = {'Ana':30, 'Bruno":25, 'Carlos':40}
+
+# usando os 3 métodos:
+nomes = idades.keys()
+qtos_anos = idades.values()
+cada_elemento = idades.items()
+
+# imprimindo 
+for nome in nomes:
+	print(nome)
+
+for ano in qtos_anos:
+	print(ano)
+
+for el in cada_elemento:
+	print(el)
+# nesse caso acima, items() iterado retorna a uma tupla de cada elemento
+```
 
 Criando uma lista de dicionários: 
 
@@ -974,10 +1100,8 @@ while True:
 print('\nMuito obrigado por utilizar o nosso Bot! O histórico completo da conversa foi:')
 print(mensagens)
 ```
-
-Para percorrer uma lista de dicionários, ir até: "Percorrendo lista de dicionários", em Laços (FOR).
  
-Outro exemplo de uso de dicinoários:
+Outro exemplo de uso de dicionários:
 
 ```python 
 # importa módulo para criar arquivo json:
@@ -1016,13 +1140,70 @@ print("Arquivo JSON criado com sucesso!")
 ```
 
 
+### Ordenando os itens dos dicionários:
+
+- Ver também "Ordenando uma lista" no sub-título "Manipução de Listas"
+
+```python
+# ordenando por (nome da) chave:
+preco_moveis={'mesa':750, 'sofa':800, 'cama':1500}
+ordenado = dict(sorted(preco_moveis.items()))
+# dict(): é porque a saída será em dicionário (sem dict() sairia como lista)
+print(ordenado)
+# resultado: {'cama': 1500, 'mesa': 750, 'sofa': 800}
 
 
-## <a class="up" href="#topo"> LAÇOS </a> 
+# ordenando por valor:
+ordenado = dict(sorted(preco_moveis.items(), key=lambda x: x[1]))
+# dict(): é porque a saída será em dicionário (sem dict() sairia como lista)
+# key - define o que escolhe para ordenar: chave = [0] e valor = [1] 
+print(ordenado)
+# resultado: {'mesa': 750, 'sofa': 800, 'cama': 1500}
+
+
+### OUTRO EXEMPLO:
+
+# ordenando (nomes das) chaves de forma crescente e decrescente - reverse = True:
+dicionario = {'a': 1, 'f': 2, 'b': 6, 'z': 3, 'p': 0}
+ordem_crescente = dict(sorted(dicionario.items()))
+ordem_decrescente = dict(sorted(dicionario.items(), reverse=True))
+
+# ordenando o valor das chaves de forma crescente e decrescente - reverse = True:
+dicionario = {'a': 1, 'f': 2, 'b': 6, 'z': 3, 'p': 0}
+ordem_crescente = dict(sorted(dicionario.items(), key = lambda x: x[1]))
+ordem_decrescente = dict(sorted(dicionario.items(), key = lambda x: x[1], reverse=True))
+```
+
+### Lista de dicionários
+
+Observe a lista a seguir:
+
+```python
+clientes = [
+    {"nome": "Ana", "idade": 30, "cidade": "Maceió"},
+    {"nome": "Bruno", "idade": 25, "cidade": "Recife"},
+    {"nome": "Carla", "idade": 40, "cidade": "Salvador"}
+]
+```
+
+Aqui:
+
+- 'clientes' é uma lista
+- Cada elemento da lista é um dicionário
+- Cada dicionário representa um registro individual
+
+Para acessar o primeiro dicionário: `print(clientes[0])`
+Para acessar o nome do primeiro cliente: `print(clientes[0]['nome'])`
+Para acessar a idade do primeiro cliente: `print(clientes[0]['idade'])`
+
+
+
+Para percorrer uma lista de dicionários, ir até: "Percorrendo lista de dicionários", em Laços (FOR).
+
+
+## <a class="up" href="#topo"> LAÇOS DE REPETIÇÃO - FOR</a> 
 
 Os laços são instruções que farão um bloco de comandos se repetir até encontrar uma condição ou atingir o número de vezes definido, ou acabar de percorrer todos os elementos de uma lista.
-
-### FOR
 
 **1) Executando até um número de vezes:**
 
@@ -1103,7 +1284,7 @@ Os exemplos:
 frutas = ["maça", "banana", "kiwi", "manga"]
 novalista = [x for x in frutas if "a" in x]
 print(novalista)
-
+# (mais exemplos abaixo)
 
 # Criar uma lista de números pares de 0 a 10
 pares = [num for num in range(11) if num % 2 == 0]
@@ -1114,7 +1295,7 @@ print(pares)
 print([x for x in range(1,11)])
 ```
 
-**5) Loops aninhados**
+**5) Loops/Laços aninhados**
 
 Em algum momento será necessário usar um laço dentro de outro quando se tem que percorrer duas listas que têm categorias em conexão ou quando se tenha listas dentro de listas.
 
@@ -1163,9 +1344,26 @@ for cada_lista in listas:
 print('FIM')
 ```
 
-**6) Percorrendo lista de dicionários**
+**6) Percorrendo uma lista de dicionários**
 
-Veremos agora as funções `items()`, `keys()` e `values()` usadas para percorrer uma lista de dicionários
+
+Um exemplo simples:
+
+```python
+clientes = [
+	{"nome": "Ana", "idade": 30, "cidade": "Maceió"},
+	{"nome": "Bruno", "idade": 25, "cidade": "Recife"},
+	{"nome": "Carla", "idade": 40, "cidade": "Salvador"}
+]
+
+for cliente in clientes:
+    print(cliente["nome"], "mora em", cliente["cidade"])
+    # ou:
+    print(f'O cliente {cliente["nome"]} mora em: {cliente["cidade"]}')
+```
+    
+
+Veremos agora com as funções `items()`, `keys()` e `values()`:
 
 - Items() para retornar chave e valor de cada dicionário da lista:
 
@@ -1184,6 +1382,12 @@ tabela_de_precos = {'Arroz': 8.50, 'Feijão': 15.00, 'Café': 50.00}
 
 for k,v in tabela_de_precos.items():
 	print(f'O preço de {k} é R$ {v}.')
+	
+# resultado:
+# O preço de Arroz é R$ 8.5.
+# O preço de Feijão é R$ 15.0.
+# O preço de Café é R$ 50.0.
+
 ```
 
 **7) Iterando dicionários para obter apenas o nome da chave ou apenas o valor:**
@@ -1217,12 +1421,10 @@ for k in tabela_de_precos:
 	print(f'O valor da chave é {tabela_de_precos[k]}.')
 ```
 
-
 Em cada laço se obteve apenas ou o nome ou o valor de cada dicionário contida na lista. 
 
 
-
-## <a class="up" href="#topo"> WHILE </a> 
+## <a class="up" href="#topo"> LAÇOS DE REPETIÇÃO - WHILE </a> 
 
 O `while` é uma laço, mas que difere do `for`, porque este roda o laço indefinidamente até encontrar uma condição que "quebre" (`break`) o laço, sendo que aquele itera o laço algumas vezes definidamente (conforme o número de elementos de uma lista, etc).
 
@@ -1297,11 +1499,16 @@ for x in [0, 1, 2]:
 
 Funções são pedaços de código são um conjunto de comandos agrupados dentro de um bloco que podem ser executados todas as vezes que são chamados em qualquer parte do programa, quantas vezes for necessário. 
 
+Elas podem retornar um valor após executarem uma operação ou mesmo não retornarem, porém realizarem uma tarefa sempre que chamadas no código.
+
 As funções ajudam a organizar o código, tornando-o mais legível e fácil de depurar. Elas evitam repetição, permitindo alterações em um único lugar. Facilitam a depuração ao dividir o programa em partes menores e independentes. Além disso, funções bem feitas podem ser reutilizadas em outros programas, economizando tempo e esforço.
+
+O importante é que as funções sejam primeiro criadas antes de serem chamadas a fim de evitar erros.
+
+### Funções que retornam um valor:
 
 ```python 
 # Para criar, utilizamos a palavra reservada "def":
-
 def nova_funcao(parametros):
 	# comandos...
 	# variavel_saida = comando...
@@ -1317,7 +1524,7 @@ resultado = nova_funcao(argumento1, argumento 2)
 
 Enquanto os parâmetros de uma função (valor(es)) que se esperam vir entre os parêntesis do nome da função quando ela é chamada são as informações de entrada, o `return` define o as informações de saída quando esta função é chamada. 
 
-A instrução `return` só pode devolver *um* valor, ou seja, uma variável, podendo ser esta uma lista, tupla ou dicionário criado por essa função.
+A instrução `return` só pode devolver *um* valor, ou seja, uma variável, podendo ser também uma lista, tupla ou dicionário criado por essa função.
 
 Exemplos:
 ```python 
@@ -1332,37 +1539,6 @@ print(soma(250,120)) 	# agora imprime
 # também imprime resultado da função:
 tot = soma(250,120)
 print(tot)
-```
-
-Na definição `def` da função, os valores entre parêntesis são chamados parâmetros; ao ser chamada (invocada) os valores entre parêntesis já levam o nome de argumentos. Porém, o número de argumentos passados deve ser sempre igual ao número de parâmetros estabelecidos. Exemplo:
-
-```python
-def funcao_nova(a,b,c,d):
-  print(a)
-  print(b)
-  print(c)
-  print(d)
-  return 'Tudo ok!'
-
-# tente isto:
-funcao_nova(1,2,3) 	#erro
-
-# agora isto:
-funcao_nova(1,2,3,4) 	# ok
-funcao_nova(1,2,'',4) 	# ok
-```
-
-É legal para uma função chamar outra; também é legal para uma função chamar a si própria. Uma função que chama a si mesma é dita recursiva; o processo para executá-la é a recursividade. Por exemplo:
-
-```python
-def contagem_regressiva(n):
-    if n <= 0:
-        print('FIM!')
-    else:
-        print(n)
-        contagem_regressiva(n-1)
-
-contagem_regressiva(4)
 ```
 
 
@@ -1385,8 +1561,169 @@ True
 
 def eh_divisivel(x, y):
     return x % y == 0
-
 ```
+
+
+### Funções que chamam outras e recursivas 
+
+É possível uma função chamar outra; também é permitido para uma função chamar a si própria. Uma função que chama a si mesma é dita recursiva; o processo para executá-la é a recursividade. Por exemplo:
+
+```python
+def contagem_regressiva(n):
+    if n <= 0:
+        print('FIM!')
+    else:
+        print(n)
+        contagem_regressiva(n-1)
+
+contagem_regressiva(4)
+```
+
+
+### Parâmetros e Argumentos das funções
+
+Na definição de uma função, ou seja quando se usa a instrução `def`, os valores entre parêntesis são chamados **parâmetros**; e ao ser chamada (invocada) os valores entre parêntesis já levam o nome de **argumentos**. 
+
+É importante saber que o número de argumentos passados deve ser sempre igual ao número de parâmetros estabelecidos. Veja exemplo:
+
+```python
+def funcao_nova(a,b,c,d):
+  print(a)
+  print(b)
+  print(c)
+  print(d)
+  return 'Tudo ok!'
+
+# tente isto:
+funcao_nova(1,2,3) 	#erro
+
+# agora isto:
+funcao_nova(1,2,3,4) 	# ok
+funcao_nova(1,2,'',4) 	# ok
+```
+
+**Argumentos default de uma função**
+
+Há também a possibilidade de passar os argumentos aos parâmetros logo quando eles são definidos (criados) tornando-os argumentos default (padrão), e assumem estes valores se não forem modificados quando a função for chamada:
+
+```python
+def venda_realizada(vendedor="João", valor=''):
+	comissao = int(valor) * 0.15
+	print(f'O vendedor {vendedor} ganhou a comissão de {comissao}.')
+
+venda_realizada('', 1000)	# assume o valor default: 'João' para vendedor
+venda_realizada('Maria', 1200)	# muda o valor default de vendedor para Maria
+venda_realizada(1000)		# erro por não declarar os dois argumentos necessários
+venda_realizada('Maria')	# erro por não declarar os dois argumentos necessários
+```
+
+Note que ao criarmos a função acima, se necessitou passar para o parâmtro "valor" o conteúdo de '' (vazio), pois caso contrário, retornaria um erro. Mas se o parâmetro "vendedor" estivesse vazio, não seria erro. 
+
+**Por tanto, nem todos os parâmetros precisam ser declarados como padrão, desde que o último sim.**
+
+Veja no exemplo:
+
+```python
+# esta função abaixo retornaria erro:
+def nova_funcao(x='7', y):
+	pass
+
+# esta função abaixo retornaria NÃO erro:
+def nova_funcao(x, y="3"):
+	pass
+```
+
+
+### XARGS - Passando vários valores como argumentos
+
+Quando tratamos com as funções sempre devemos lembrar que o número de argumentos que passamos ao chamá-las deve ser igual ao número de parâmetros que ela originalmente possui.
+
+No entanto, poderiamos usar um número indefinido (x) de argumentos para que uma função pudesse processar, ou seja, não seria 1 ou 2 ou 3 argumentos permitidos, mas 'X' argumentos permitidos. Por isso, esse recurso se chama Xargs (x-args).
+
+Para isso, basta que acrescentemos ao nome do parâmetro da função um asterisco antes do seu nome: `funcao(*args)`.
+
+No exemplo a seguir, temos uma função que soma infinitos números:
+
+```python
+def soma_tudo(*nros):
+	total = 0
+	for nro in nros:
+		total += nro
+	return total
+
+print(soma_tudo(1,2,3,4,5,6,7))
+#resultado: 28
+```
+
+Porém no caso acima, poderíamos refatorar este código, abreviando-o para apenas isso:
+
+```python
+def soma_tudo(*nros):
+	return sum(nros)
+```
+
+O resultado é o mesmo, já que a função nativa do Python `sum()` já faz a soma dos `xargs`.
+
+
+
+### KWARGS - Uso de XARGS com argumentos default (chave=valor)
+
+Também podemos usar, caso necessite, a funcionalidade de xargs para passarmos argumentos nos parâmetros, inserindo para isso dois asteriscos (\**). E isso de maneira infinita (sem limites). Essa funcionalidade se chama **kwargs**, que remete a "**k**ey**w**ords-**arg**uments".
+
+Nesse caso, ao chamarmos uma função com KWARGS, passamos não apenas um valor, mas chave e valor, como em forma de `variáveis=valor`, como vemos neste exemplo:
+
+```python
+# criamos uma função com kwargs:
+def soma_moveis(**moveis):
+	total = 0
+	for variavel, valor in moveis.items():
+		total += valor
+	return total
+
+# chamamos a função com kwargs:
+soma_moveis(cama=1500, mesa=800, sofa=750)
+# resultado: 3050
+```
+
+Obs.: Os nomes `xargs` ou `kwargs` não são palavras reservadas do Python, mas apenas nomes usados por convenção pela comunidade e criadores do Python.
+
+Veja outro exemplo, onde se nota que esta funcionalidade (se não for usada como soma acumulativa) retorna um dicionário:
+
+```python
+def exemplo(**kwargs):
+	return kwargs
+
+# ao chamar:
+exemplo(a=1,b=2,c=3)
+exemplo(nome="Helio", idade="30", estado="vivo")
+
+# resultados:
+{'a': 1, 'b': 2, 'c': 3}
+{'nome': 'Helio', 'idade': '30', 'estado': 'vivo'}
+```
+
+Podemos também formatar a impressão (saída) de uma função que usa kwargs:
+
+```python
+def mostrar_kwargs(**dados):
+    for chave, valor in dados.items():
+        print(f"{chave} = {valor}")
+
+# chama:
+mostrar_kwargs(nome="Helio", idade=35, cidade="México DF")
+# resultado:
+nome = Helio
+idade = 35
+cidade = México DF
+```
+
+O importante é lembrar que uma função com argumentos do tipo **kwargs** se usa:
+ - Na definição/criação da função: Dois asteriscos: `**arg`
+ - Para chamar a função: se passa com "nome-da-chave" e "valor" separados pelo sinal de igual: `funcao(a=1)`. E se for string, colocar entre áspas (simples ou duplas) o valor, como em: `funcao(nome="Ana")`.
+ - O número de argumentos "chave=valor" que se pode passar numa função com parâmetros kwargs é ilimitado.
+
+**A diferença de XARGS para KWARGS é que no primeiro passamos 'valores' infinitos, já o outro, passamos 'chaves=valores' infinitos, quando chamamos uma função.**
+
 
 ## <a class="up" href="#topo"> FUNÇÕES LAMBDAS </a> 
 
@@ -1850,14 +2187,16 @@ Bibliotecas nativas:
 
 ## MAIS:
 
-kwargs:
-pandas: https://www.w3schools.com/python/pandas/default.asp
+Curso pandas: https://www.w3schools.com/python/pandas/default.asp
 
 
 ## LINKS
 
 [Link para o curso da ASIMOV](https://hub.asimov.academy/curso/atividade/criando-seu-primeiro-chatbot/)
+
 [Link para meu Colab de exemplos](https://colab.research.google.com/drive/1RkWH8Uh01Bm2QxjuetvI1RLnVH6o2H1u#scrollTo=yB_phJv4ycer)
+
+
 
 ---
 
@@ -1872,3 +2211,4 @@ a.up{text-decoration: none !important; color: #ffd242;}
 .direita {display: block; text-align: right;}
 </style>
 
+<small>Autor: Hélio Giroto</small>
