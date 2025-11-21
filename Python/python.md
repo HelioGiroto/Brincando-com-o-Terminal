@@ -5,7 +5,7 @@ A linguagem Python foi lançada em 1991. Desenvolvida por Guido van Rossum.
 
 > Python é uma linguagem de propósito geral de alto nível, multiparadigma, suporta o paradigma orientado a objetos, imperativo, funcional e procedural. Possui tipagem dinâmica e uma de suas principais características é permitir a fácil leitura do código e exigir poucas linhas de código se comparado ao mesmo programa em outras linguagens. Devido às suas características, ela é utilizada, principalmente, para processamento de textos, dados científicos e criação de CGIs para páginas dinâmicas para a web. Foi considerada pelo público a 3ª linguagem "mais amada", de acordo com uma pesquisa conduzida pelo site Stack Overflow em 2018 e está entre as 5 linguagens mais populares, de acordo com uma pesquisa conduzida pela RedMonk. _(fonte: Wikipedia)_
 
-Possivelmente, as características mais marcantes da linguagem sejam: a simplicidade, facilidade para aprendê-la, elegância no seu estilo e ampla conexão com milhares de bibliotecas (módulos) que tornam o Python uma linguagem capaz de realizar praticamente tudo no universo computacional, na área científica e pesquisa, na matemática e estatística, na inteligência artificial, na interação com APIs, na integração com outros programas como planilhas e processadores de texto, computação gráfica, gerenciamento de arquivos, na facilidade de conexão com outras linguagens: como C (por exemplo), em análise de dados, em desenvolvimento de gráficos estatísticos, no WebScraping, no desenvolvimento de programas e aplicativos para desktop, Mobile e Web, no uso com banco de dados, de redes, nas aplicações de OSINT e segurança da informação, no reconhecimento de imagens, na Internet das coisas (IoT), robótica e mecatrônica, desenvolvimento de jogos e muitos outros. 
+Possivelmente, as características mais marcantes dessa linguagem sejam: a simplicidade, facilidade para aprendê-la, elegância no seu estilo e ampla conexão com milhares de bibliotecas (módulos) que tornam o Python uma linguagem capaz de realizar praticamente tudo no universo computacional, na área científica e pesquisa, na matemática e estatística, na inteligência artificial, na interação com APIs, na integração com outros programas como planilhas e processadores de texto, computação gráfica, gerenciamento de arquivos, na facilidade de conexão com outras linguagens: como C (por exemplo), em análise de dados, em desenvolvimento de gráficos estatísticos, no WebScraping, no desenvolvimento de programas e aplicativos para desktop, Mobile e Web, no uso com banco de dados, de redes, nas aplicações de OSINT e segurança da informação, no reconhecimento de imagens, na Internet das coisas (IoT), robótica e mecatrônica, desenvolvimento de jogos e muitos outros. 
 
 Tudo isso, rodando em todos os sistemas operacionais, como por exemplo: Linux, FreeBSD, MacOS, Android, Windows, etc. \[ em ordem de importância :D ].
 
@@ -1149,6 +1149,7 @@ Aqui:
 - 'clientes' é uma lista
 - Cada elemento da lista é um dicionário
 - Cada dicionário representa um registro individual
+- Cada dicionário possui: Chave (nome da propriedade) e valor (conteúdo)
 
 Para acessar o primeiro dicionário: `print(clientes[0])`
 Para acessar o nome do primeiro cliente: `print(clientes[0]['nome'])`
@@ -1366,7 +1367,45 @@ Em cada laço se obteve apenas ou o nome ou o valor de cada dicionário contida 
 
 ## <a class="up" href="#topo"> LIST COMPREHENSIONS - COMPREENSÃO DE LISTAS </a>
 
-Compreensão de listas (List Comprehensions) é uma forma abreviada de usar o comando `for` em uma única linha de código normalmente usada para manipular lista (seja atualizar toda uma lista ou filtrá-la). Seria basicamente um modo ternário de usar o `for` (tal como existe quanfo usamos o `if`).
+Compreensão de listas (List Comprehensions) é uma forma abreviada de usar o comando `for` em uma única linha de código, normalmente usada para manipular uma lista (seja atualizar toda uma lista ou filtrá-la). Seria basicamente um modo ternário de usar o `for` (tal como existe quando usamos o `if`).
+
+O formato de uma list comprehension é este:
+`[x for x in lista]`
+
+A variável 'x' que está antes de `for` é a mesma que está sendo referenciada em cada iteração do laço, ou seja, é cada valor da lista que está sendo percorrida. E por estar antes de `for` ela será impressa ou colocada dentro dessa nova lista que está sendo formada.
+
+Para um melhor entendimento, dentro do modo interativo do Python, digite estes comandos para ver o como a compreensão de lista funciona:
+
+```
+>>> lista = [0,1,2,3]
+>>> print([x for x in lista])
+# resultado: [0,1,2,3]
+```
+
+Exemplos simples:
+
+```python
+# cria nova lista somando +1 a cada elemento:
+nros = [1,2,3,4]
+lista_soma = [n+1 for n in nros]
+print(lista_soma)
+
+# se fosse usar o modo convencional de for, o mesmo código acima seria assim (note quantas linhas!):
+nros = [1,2,3,4]
+lista_soma = []
+for n in nros:
+	lista_soma.append(n+1)
+print(lista_soma)
+
+# multiplicando cada um por 10:
+lista_multipl = [n*10 for n in nros]
+print(lista_multipl)
+
+# imprime de 1 a 10:
+print([x for x in range(1,11)])
+```
+
+Porém, podemos fazer mais com as lists comprehension...
 
 ### Usando List Comprehension para FILTRAR listas simples:
 
@@ -1376,7 +1415,7 @@ O formato é: `lista_nova = [x for x in lista if condição]`.
 
 Observe acima que toda a instrução está entre colchetes.
 
-Exemplos:
+Exemplos de uso:
 
 ```python 
 # filtra somente as frutas que tenha a letra 'a':
@@ -1387,9 +1426,6 @@ print(novalista)
 # Criar uma lista de números pares de 0 a 10
 pares = [num for num in range(11) if num % 2 == 0]
 print(pares)
-
-# imprime de 1 a 10:
-print([x for x in range(1,11)])
 
 # lista de nomes:
 nomes = ["Ana", "Bruno", "Carla", "Caio", "Paulo", "Miguel"]
