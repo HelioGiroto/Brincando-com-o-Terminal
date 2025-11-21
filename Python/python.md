@@ -920,51 +920,9 @@ list1.extend(list2)
 print(list1) 	# ['a', 'b', 'c', 1, 2, 3]
 ```
 
-### Filtrando uma lista
 
-(Estes tópicos serão abordados de uma forma melhor em laços de repetição `for` e funções (`lambda`)
-
-**Usando `for` e 'List Comprehension' (em português: Compreensão de Lista)**
-
-```python
-nomes = ["Ana", "Bruno", "Carla", "Caio", "Paulo", "Miguel"]
-# nomes que comecem com 'C':
-filtrados = [n for n in nomes if n.startswith("C")]
-# que tenham a letra 'P'
-filtrados = [n for n in nomes if "p" in n.lower()]
-# cujo nro de letras seja maior que 4:
-filtrados = [n for n in nomes if len(n) > 4]
-# cuja letra final seja 'A' ou 'L':
-letras = ['a', 'l']
-filtrados = [n for n in nomes if n[-1].lower() in letras]
-```
-
-
-**Usando o método filter() - com ou sem função lambda:**
-
-```python
-# usando função e método filter():
-numeros = [4, 11, 20, 3]
-def maior_que_10(x):
-    return x > 10
-filtrados = list(filter(maior_que_10, numeros))
-
-
-# filtrando uma lista de strings - usando lambda:
-nomes = ["Ana", "Bruno", "Alice", "Caio"]
-filtrados = list(filter(lambda n: n.startswith("A"), nomes))
-
-
-# filtrando uma lista de dicionários - usando lambda:
-clientes = [
-    {"nome": "Ana", "idade": 30},
-    {"nome": "Bruno", "idade": 25},
-    {"nome": "Carla", "idade": 40}
-]
-filtrados = list(filter(lambda c: c["idade"] > 30, clientes))
-
-
-```
+### Outros métodos para listas
+Há também dois métodos muito úteis usados para atualizar e filtrar listas que veremos mais adiante: `map()` e `filter()` e as `Lists Comprehension`.
 
 
 
@@ -1062,7 +1020,7 @@ Existem três métodos básicos que retornam a uma lista de dados relacionados a
 
 - keys(), values(), items().
 
-Exemplo:
+Nos exemplos usados em código abaixo, vamos adiantar um pouco e usar as "Repetições em laço - FOR" que vermos mais adiante.
 
 ```python
 idades = {'Ana':30, 'Bruno":25, 'Carlos':40}
@@ -1197,8 +1155,10 @@ Para acessar o nome do primeiro cliente: `print(clientes[0]['nome'])`
 Para acessar a idade do primeiro cliente: `print(clientes[0]['idade'])`
 
 
+**Para percorrer uma lista de dicionários, ir até: "Percorrendo lista de dicionários", em Laços (FOR).**
 
-Para percorrer uma lista de dicionários, ir até: "Percorrendo lista de dicionários", em Laços (FOR).
+Mais adiante, veremos os métodos `map()` e `filter()`, como também as `Lists Comprehension` que são usadas com muita utilidade e frequência para atualizar ou filtrar dicionários em lista.
+
 
 
 ## <a class="up" href="#topo"> LAÇOS DE REPETIÇÃO - FOR</a> 
@@ -1271,31 +1231,8 @@ for i,e in enumerate(nomes):
 ```
 
 
-**4) Compreensão de listas**
 
-Compreensão de listas (List Comprehensions) é uma forma de *filtrar listas* usando o comando `for` geralmente um uma única linha de código.
-
-O formato é: `lista_nova = [x for x in lista if condição]`. Observe que toda a instrução está entre colchetes.
-
-Os exemplos:
-
-```python 
-# filtra somente as frutas que tenha a letra 'a':
-frutas = ["maça", "banana", "kiwi", "manga"]
-novalista = [x for x in frutas if "a" in x]
-print(novalista)
-# (mais exemplos abaixo)
-
-# Criar uma lista de números pares de 0 a 10
-pares = [num for num in range(11) if num % 2 == 0]
-print(pares)
-
-
-# imprime de 1 a 10:
-print([x for x in range(1,11)])
-```
-
-**5) Loops/Laços aninhados**
+**4) Loops/Laços aninhados**
 
 Em algum momento será necessário usar um laço dentro de outro quando se tem que percorrer duas listas que têm categorias em conexão ou quando se tenha listas dentro de listas.
 
@@ -1344,7 +1281,7 @@ for cada_lista in listas:
 print('FIM')
 ```
 
-**6) Percorrendo uma lista de dicionários**
+**5) Percorrendo uma lista de dicionários**
 
 
 Um exemplo simples:
@@ -1390,7 +1327,7 @@ for k,v in tabela_de_precos.items():
 
 ```
 
-**7) Iterando dicionários para obter apenas o nome da chave ou apenas o valor:**
+**6) Iterando dicionários para obter apenas o nome da chave ou apenas o valor:**
 
 - Keys() para retornar apenas a *chave* de cada dicionário da lista:
 
@@ -1422,6 +1359,172 @@ for k in tabela_de_precos:
 ```
 
 Em cada laço se obteve apenas ou o nome ou o valor de cada dicionário contida na lista. 
+
+
+
+
+
+## <a class="up" href="#topo"> LIST COMPREHENSIONS - COMPREENSÃO DE LISTAS </a>
+
+Compreensão de listas (List Comprehensions) é uma forma abreviada de usar o comando `for` em uma única linha de código normalmente usada para manipular lista (seja atualizar toda uma lista ou filtrá-la). Seria basicamente um modo ternário de usar o `for` (tal como existe quanfo usamos o `if`).
+
+### Usando List Comprehension para FILTRAR listas simples:
+
+Vamos percorrer uma lista filtrando elementos que cumpram certa condição, gerando assim uma nova lista:
+
+O formato é: `lista_nova = [x for x in lista if condição]`. 
+
+Observe acima que toda a instrução está entre colchetes.
+
+Exemplos:
+
+```python 
+# filtra somente as frutas que tenha a letra 'a':
+frutas = ["maça", "banana", "kiwi", "manga"]
+novalista = [x for x in frutas if "a" in x]
+print(novalista)
+
+# Criar uma lista de números pares de 0 a 10
+pares = [num for num in range(11) if num % 2 == 0]
+print(pares)
+
+# imprime de 1 a 10:
+print([x for x in range(1,11)])
+
+# lista de nomes:
+nomes = ["Ana", "Bruno", "Carla", "Caio", "Paulo", "Miguel"]
+
+# nomes que comecem com 'C':
+filtrados = [n for n in nomes if n.startswith("C")]
+
+# que tenham a letra 'P'
+filtrados = [n for n in nomes if "p" in n.lower()]
+
+# cujo nro de letras seja maior que 4:
+filtrados = [n for n in nomes if len(n) > 4]
+
+# cuja letra final seja 'A' ou 'L':
+letras = ['a', 'l']
+filtrados = [n for n in nomes if n[-1].lower() in letras]
+
+```
+
+### Usando List Comprehension numa lista de dicionários para EXTRAIR alguns campos
+
+Seguindo a mesma lógica dos códigos acima usados em listas simples, vamos praticar as lists comprehensions em caso de listas de dicionários para filtrar apenas o que interessa:
+
+```python
+# originalmente temos uma lista de dicionários com dados de produtos:
+produtos = [{'nome': 'Café Torrado', 'marca': 'BomDia', 'peso': '500g', 'preco': 17.9}, {'nome': 'Arroz Tipo 1', 'marca': 'PratoFino', 'peso': '5kg', 'preco': 23.5}, {'nome': 'Feijão Carioca', 'marca': 'DaRoça', 'peso': '1kg', 'preco': 8.99}, {'nome': 'Leite Integral', 'marca': 'Lactobom', 'peso': '1L', 'preco': 4.89}, {'nome': 'Açúcar Cristal', 'marca': 'Doçura', 'peso': '1kg', 'preco': 3.49}, {'nome': 'Macarrão Espaguete', 'marca': 'MassaFit', 'peso': '500g', 'preco': 4.29}, {'nome': 'Óleo de Soja', 'marca': 'SolVida', 'peso': '900ml', 'preco': 7.8}, {'nome': 'Farinha de Trigo', 'marca': 'PremiumMix', 'peso': '1kg', 'preco': 4.75}, {'nome': 'Leite em Pó', 'marca': 'NutiMax', 'peso': '400g', 'preco': 14.5}, {'nome': 'Creme Dental', 'marca': 'Brilho+', 'peso': '90g', 'preco': 3.99}, {'nome': 'Sabonete Hidratante', 'marca': 'SoftSkin', 'peso': '85g', 'preco': 2.49}, {'nome': 'Detergente Líquido', 'marca': 'Limpolux', 'peso': '500ml', 'preco': 2.89}, {'nome': 'Shampoo Anticaspa', 'marca': 'HairClear', 'peso': '200ml', 'preco': 12.9}, {'nome': 'Desodorante Aerosol', 'marca': 'FreshUp', 'peso': '150ml', 'preco': 9.99}, {'nome': 'Sabão em Pó', 'marca': 'Limpex', 'peso': '1kg', 'preco': 12.49}, {'nome': 'Amaciante de Roupas', 'marca': 'PerfumeLar', 'peso': '2L', 'preco': 11.8}, {'nome': 'Papel Higiênico', 'marca': 'Macio+', 'peso': '4 rolos', 'preco': 5.99}, {'nome': 'Água Mineral', 'marca': 'PuraFonte', 'peso': '1.5L', 'preco': 2.59}, {'nome': 'Refrigerante Cola', 'marca': 'CoolDrink', 'peso': '2L', 'preco': 7.49}, {'nome': 'Chocolate ao Leite', 'marca': 'ChocoLovers', 'peso': '90g', 'preco': 5.79}]
+
+# Da lista de dicionários acima (produtos) vamos formar uma outra lista de apenas os preços dos produtos:
+soh_precos_lista = [p['preco'] for p in produtos]
+# [17.9, 23.5, 8.99, 4.89, 3.49, 4.29, 7.8, 4.75, 14.5, 3.99, 2.49, 2.89, 12.9, 9.99, 12.49, 11.8, 5.99, 2.59, 7.49, 5.79]
+
+# agora compare com este formato abaixo:
+soh_precos_dic = [{p['preco']} for p in produtos]
+# [{17.9}, {23.5}, {8.99}, {4.89}, {3.49}, {4.29}, {7.8}, {4.75}, {14.5}, {3.99}, {2.49}, {2.89}, {12.9}, {9.99}, {12.49}, {11.8}, {5.99}, {2.59}, {7.49}, {5.79}]
+
+# extraindo um novo dicionário de apenas nome do produto e preço a partir do dicionário principal:
+nova_lista_dics = [{p['nome']: p['preco']} for p in produtos]
+# [{'Café Torrado': 17.9}, {'Arroz Tipo 1': 23.5}, ...}
+
+# formando listas aninhadas:
+nova_lista_aninhada = [[p['nome'], p['preco']] for p in produtos]
+# [['Café Torrado', 17.9], ['Arroz Tipo 1', 23.5], ...]
+```
+
+
+
+### Usando List Comprehension para ATUALIZAR toda uma lista simples:
+
+Agora não vamos filtrar, mas partir de uma lista, usaremos a compreensão de lista para modificar **todos os elementos** de uma lista, incondicionalmente, de modo que todos serão alterados formando assim uma nova lista:
+
+Formato: `[elemento.método() for elemento in elementos]` - aplica um método para todos os elementos da lista: `elementos`.
+
+Exemplos:
+
+```python
+# lista de preços:
+lista_precos = [17.9, 23.5, 8.99, 4.89, 3.49, 4.29, 7.8, 4.75, 14.5, 3.99, 2.49, 2.89, 12.9, 9.99, 12.49, 11.8, 5.99, 2.59, 7.49, 5.79]
+
+# atualizando lista de preços em 10%:
+novos_precos = [x*1.1 for x in lista_precos]
+
+# o mesmo, mas com totais em 2 casas decimais:
+novos_precos = [round(x*1.1, 2) for x in lista_precos]
+
+# lista de nomes - altera todos os elementos para letras maiúsculas:
+nomes = ["Ana", "Bruno", "Alice", "Caio"]
+nomes_maiusc = [nome.upper() for nome in nomes]
+```
+
+### Usando List Comprehension para ATUALIZAR toda uma lista aninhada:
+
+Caso temos que atualizar listas dentro de uma lista, ou seja, sub-listas, assim utilizamos:
+
+```python
+# aqui temos uma lista de listas que em cada linha é um produto com nome, marca, peso e preço:
+produtos = [['Café Torrado', 'BomDia', '500g', 17.9], ['Arroz Tipo 1', 'PratoFino', '5kg', 23.5], ['Feijão Carioca', 'DaRoça', '1kg', 8.99], ['Leite Integral', 'Lactobom', '1L', 4.89], ['Açúcar Cristal', 'Doçura', '1kg', 3.49], ['Macarrão Espaguete', 'MassaFit', '500g', 4.29], ['Óleo de Soja', 'SolVida', '900ml', 7.8], ['Farinha de Trigo', 'PremiumMix', '1kg', 4.75], ['Leite em Pó', 'NutiMax', '400g', 14.5], ['Creme Dental', 'Brilho+', '90g', 3.99], ['Sabonete Hidratante', 'SoftSkin', '85g', 2.49], ['Detergente Líquido', 'Limpolux', '500ml', 2.89], ['Shampoo Anticaspa', 'HairClear', '200ml', 12.9], ['Desodorante Aerosol', 'FreshUp', '150ml', 9.99], ['Sabão em Pó', 'Limpex', '1kg', 12.49], ['Amaciante de Roupas', 'PerfumeLar', '2L', 11.8], ['Papel Higiênico', 'Macio+', '4 rolos', 5.99], ['Água Mineral', 'PuraFonte', '1.5L', 2.59], ['Refrigerante Cola', 'CoolDrink', '2L', 7.49], ['Chocolate ao Leite', 'ChocoLovers', '90g', 5.79]]
+
+# vamos atualizar os preços em 10% da forma mais simples:
+atualizado = [[i[0], i[1], i[2], i[3]*1.1] for i in produtos]
+
+# o mesmo, mas agora usando também xargs - logo veremos na seção "Funções":
+atualizado = [[*i, i[3]*1.1] for i in produtos]
+```
+
+### Usando List Comprehension para ATUALIZAR toda uma lista de Dicionários:
+
+Para atualizarmos toda uma lista de valores de dicionários usando o List Comprehension:
+
+```python
+
+# Aqui temos uma lista de dicionários cujos preços devem ser atualizados em 10%:
+produtos = [{'nome': 'Café Torrado', 'marca': 'BomDia', 'peso': '500g', 'preco': 17.9}, {'nome': 'Arroz Tipo 1', 'marca': 'PratoFino', 'peso': '5kg', 'preco': 23.5}, {'nome': 'Feijão Carioca', 'marca': 'DaRoça', 'peso': '1kg', 'preco': 8.99}, {'nome': 'Leite Integral', 'marca': 'Lactobom', 'peso': '1L', 'preco': 4.89}, {'nome': 'Açúcar Cristal', 'marca': 'Doçura', 'peso': '1kg', 'preco': 3.49}, {'nome': 'Macarrão Espaguete', 'marca': 'MassaFit', 'peso': '500g', 'preco': 4.29}, {'nome': 'Óleo de Soja', 'marca': 'SolVida', 'peso': '900ml', 'preco': 7.8}, {'nome': 'Farinha de Trigo', 'marca': 'PremiumMix', 'peso': '1kg', 'preco': 4.75}, {'nome': 'Leite em Pó', 'marca': 'NutiMax', 'peso': '400g', 'preco': 14.5}, {'nome': 'Creme Dental', 'marca': 'Brilho+', 'peso': '90g', 'preco': 3.99}, {'nome': 'Sabonete Hidratante', 'marca': 'SoftSkin', 'peso': '85g', 'preco': 2.49}, {'nome': 'Detergente Líquido', 'marca': 'Limpolux', 'peso': '500ml', 'preco': 2.89}, {'nome': 'Shampoo Anticaspa', 'marca': 'HairClear', 'peso': '200ml', 'preco': 12.9}, {'nome': 'Desodorante Aerosol', 'marca': 'FreshUp', 'peso': '150ml', 'preco': 9.99}, {'nome': 'Sabão em Pó', 'marca': 'Limpex', 'peso': '1kg', 'preco': 12.49}, {'nome': 'Amaciante de Roupas', 'marca': 'PerfumeLar', 'peso': '2L', 'preco': 11.8}, {'nome': 'Papel Higiênico', 'marca': 'Macio+', 'peso': '4 rolos', 'preco': 5.99}, {'nome': 'Água Mineral', 'marca': 'PuraFonte', 'peso': '1.5L', 'preco': 2.59}, {'nome': 'Refrigerante Cola', 'marca': 'CoolDrink', 'peso': '2L', 'preco': 7.49}, {'nome': 'Chocolate ao Leite', 'marca': 'ChocoLovers', 'peso': '90g', 'preco': 5.79}]
+
+# Atualizando os preços da forma mais simples possível: 
+produtos_ajustados = [
+    {
+    "nome":  p["nome"],
+    "marca": p["marca"],
+    "peso":  p["peso"],
+    "preco": round(p["preco"] * 1.10, 2)
+    }
+    for p in produtos
+]
+
+# atualizando os preços usando List Comprehension e kwargs - logo veremos na seção "Funções":
+produtos_ajustados = [{**p, 'preco': p['preco']*1.10} for p in produtos]
+
+# atualizando o formato do nome da marca:
+marca_maiusc = [{**p, 'marca': p['marca'].upper()} for p in produtos]
+
+# atualizando os dois campos - preço e marca:
+nova_lista = [{ **dic, 'nome': dic['nome'].upper(), 'preco': dic['preco']*1.1 } for dic in produtos]
+
+# o mesmo de cima, mas com outro formato melhor visualizável: 
+nova_lista = [
+    { 
+    **dic, 
+    'nome': dic['nome'].upper(), 
+    'preco': dic['preco']*1.1 
+    } 
+    for dic in produtos
+]
+
+# com centavos em float com 2 casas decimais:
+nova_lista_dec = [
+    { 
+    **dic, 
+    'nome': dic['nome'].upper(), 
+    'preco': round(dic['preco'] * 1.10, 2)
+    } 
+    for dic in produtos
+]
+```
+
+Mais adiante você aprenderá uma outra forma de atingir os mesmos resultados acima apresentados usando os métodos `filter()` e `map()` com funções `lambda`.
 
 
 ## <a class="up" href="#topo"> LAÇOS DE REPETIÇÃO - WHILE </a> 
@@ -1754,6 +1857,124 @@ nros = [1,2,3,4,5,6,7,8,9,10]
 for nro in nros:
 	print(dobro(nro))
 ```
+
+
+## <a class="up" href="#topo">O MÉTODO MAP() PARA ATUALIZAR LISTAS</a>
+
+O método `map()` é usado para aplicar uma certa função lambda em cada elemento uma lista, gerando uma nova lista. Na prática, é o mesmo que fizemos anteriormente neste estudo com as "lists comprehensions", mas usando uma outra sintaxe. 
+
+É importante que o método `map()` aplica uma função a cada um de todos os elementos, sem exceção.
+
+Sua sintaxe é basicamente esta: 
+
+` nova_lista = list(map(função, lista_origem)) `
+
+
+- ATUALIZANDO LISTAS SIMPLES:
+
+```python
+lista_precos = [17.9, 23.5, 8.99, 4.89, 3.49, 4.29, 7.8, 4.75, 14.5, 3.99, 2.49, 2.89, 12.9, 9.99, 12.49, 11.8, 5.99, 2.59, 7.49, 5.79]
+
+# aumentando o valor de cada elemento em 10%
+novos_precos = list(map(lambda p: p*1.1, lista_precos))
+# com 2 casas decimais:
+novos_precos = list(map(lambda p: round(p*1.1, 2), lista_precos))
+
+```
+
+
+- ATUALIZANDO LISTAS ANINHADAS:
+
+```python
+# aqui temos uma lista de listas que em cada linha é um produto com nome, marca, peso e preço:
+produtos = [['Café Torrado', 'BomDia', '500g', 17.9], ['Arroz Tipo 1', 'PratoFino', '5kg', 23.5], ['Feijão Carioca', 'DaRoça', '1kg', 8.99], ['Leite Integral', 'Lactobom', '1L', 4.89], ['Açúcar Cristal', 'Doçura', '1kg', 3.49], ['Macarrão Espaguete', 'MassaFit', '500g', 4.29], ['Óleo de Soja', 'SolVida', '900ml', 7.8], ['Farinha de Trigo', 'PremiumMix', '1kg', 4.75], ['Leite em Pó', 'NutiMax', '400g', 14.5], ['Creme Dental', 'Brilho+', '90g', 3.99], ['Sabonete Hidratante', 'SoftSkin', '85g', 2.49], ['Detergente Líquido', 'Limpolux', '500ml', 2.89], ['Shampoo Anticaspa', 'HairClear', '200ml', 12.9], ['Desodorante Aerosol', 'FreshUp', '150ml', 9.99], ['Sabão em Pó', 'Limpex', '1kg', 12.49], ['Amaciante de Roupas', 'PerfumeLar', '2L', 11.8], ['Papel Higiênico', 'Macio+', '4 rolos', 5.99], ['Água Mineral', 'PuraFonte', '1.5L', 2.59], ['Refrigerante Cola', 'CoolDrink', '2L', 7.49], ['Chocolate ao Leite', 'ChocoLovers', '90g', 5.79]]
+
+# vamos atualizar os preços em 10% da forma simples, usando List Comprehension e map():
+atualizado = list(map(lambda p: [p[0], p[1], p[2], p[3]* 1.1], produtos))
+
+# o mesmo do de cima, mas fazendo slice das sub-listas:
+atualizado = list(map(lambda p: p[:3] + [p[3]*1.1], produtos))
+```
+
+- ATUALIZANDO LISTAS DE DICIONÁRIOS:
+
+```python
+# Aqui temos uma lista de dicionários cujos preços devem ser atualizados em 10%:
+produtos = [{'nome': 'Café Torrado', 'marca': 'BomDia', 'peso': '500g', 'preco': 17.9}, {'nome': 'Arroz Tipo 1', 'marca': 'PratoFino', 'peso': '5kg', 'preco': 23.5}, {'nome': 'Feijão Carioca', 'marca': 'DaRoça', 'peso': '1kg', 'preco': 8.99}, {'nome': 'Leite Integral', 'marca': 'Lactobom', 'peso': '1L', 'preco': 4.89}, {'nome': 'Açúcar Cristal', 'marca': 'Doçura', 'peso': '1kg', 'preco': 3.49}, {'nome': 'Macarrão Espaguete', 'marca': 'MassaFit', 'peso': '500g', 'preco': 4.29}, {'nome': 'Óleo de Soja', 'marca': 'SolVida', 'peso': '900ml', 'preco': 7.8}, {'nome': 'Farinha de Trigo', 'marca': 'PremiumMix', 'peso': '1kg', 'preco': 4.75}, {'nome': 'Leite em Pó', 'marca': 'NutiMax', 'peso': '400g', 'preco': 14.5}, {'nome': 'Creme Dental', 'marca': 'Brilho+', 'peso': '90g', 'preco': 3.99}, {'nome': 'Sabonete Hidratante', 'marca': 'SoftSkin', 'peso': '85g', 'preco': 2.49}, {'nome': 'Detergente Líquido', 'marca': 'Limpolux', 'peso': '500ml', 'preco': 2.89}, {'nome': 'Shampoo Anticaspa', 'marca': 'HairClear', 'peso': '200ml', 'preco': 12.9}, {'nome': 'Desodorante Aerosol', 'marca': 'FreshUp', 'peso': '150ml', 'preco': 9.99}, {'nome': 'Sabão em Pó', 'marca': 'Limpex', 'peso': '1kg', 'preco': 12.49}, {'nome': 'Amaciante de Roupas', 'marca': 'PerfumeLar', 'peso': '2L', 'preco': 11.8}, {'nome': 'Papel Higiênico', 'marca': 'Macio+', 'peso': '4 rolos', 'preco': 5.99}, {'nome': 'Água Mineral', 'marca': 'PuraFonte', 'peso': '1.5L', 'preco': 2.59}, {'nome': 'Refrigerante Cola', 'marca': 'CoolDrink', 'peso': '2L', 'preco': 7.49}, {'nome': 'Chocolate ao Leite', 'marca': 'ChocoLovers', 'peso': '90g', 'preco': 5.79}]
+
+# usando map e lamdda - mesmo resultado ao de cima:
+produtos_ajustados = list(map(lambda p: {'nome': p['nome'], 'marca': p['marca'], 'peso': p['peso'], 'preco': p['preco']*1.1 }, produtos))
+
+# atualiando os preços usando List Comprehension e kwargs:
+novo = list(map(lambda p: {**p, 'preco': p['preco']*1.1}, produtos))
+
+# atualizando o formato do nome da marca:
+novo = list(map(lambda p: {**p, 'marca': p['marca'].upper()}, produtos))
+
+# atualizando os dois campos:
+novo = list(map(lambda dic: {**dic, 'nome': dic['nome'].upper(), 'preco': dic['preco']*1.1 }, produtos))
+```
+
+- GERANDO UM NOVO DICIONÁRIO/LISTA A PARTIR DE UM OUTRO:
+
+Observe nos exemplos abaixo que a cada código colocamos uma comparação de como se realiza a mesma operação usando list comprehension:
+
+```python
+# Da lista de dicionários (produtos) vamos formar uma outra lista de apenas os preços dos produtos:
+soh_precos_lista = [p['preco'] for p in produtos]
+soh_precos_lista = list(map(lambda p: p['preco'] , produtos))
+# [17.9, 23.5, 8.99, 4.89, 3.49, 4.29, 7.8, 4.75, 14.5, 3.99, 2.49, 2.89, 12.9, 9.99, 12.49, 11.8, 5.99, 2.59, 7.49, 5.79]
+
+# compare com este formato abaixo:
+soh_precos_dic = [{p['preco']} for p in produtos]
+soh_precos_dic = list(map(lambda p: {p['preco']} , produtos))
+# [{17.9}, {23.5}, {8.99}, {4.89}, {3.49}, {4.29}, {7.8}, {4.75}, {14.5}, {3.99}, {2.49}, {2.89}, {12.9}, {9.99}, {12.49}, {11.8}, {5.99}, {2.59}, {7.49}, {5.79}]
+
+# extraindo um novo dicionário de apenas nome do produto e preço a partir do dicionário principal:
+nova_lista_dics = [{p['nome']: p['preco']} for p in produtos]
+nova_lista_dic = list(map(lambda p: {p['nome']: p['preco']} , produtos))
+# [{'Café Torrado': 17.9}, {'Arroz Tipo 1': 23.5}, ...}
+
+# listas aninhadas:
+nova_lista_aninhada = [[p['nome'], p['preco']] for p in produtos]
+nova_lista_aninhada = list(map(lambda p: [p['nome'], p['preco']], produtos))
+# [['Café Torrado', 17.9], ['Arroz Tipo 1', 23.5], ...]
+```
+
+
+
+ 
+## <a class="up" href="#topo">O MÉTODO FILTER() PARA FILTRAR LISTAS</a>
+
+O método `filter()` serve para filtrar uma lista produzindo uma nova lista conforme as condições que estipulamos, podendo ou não aplicar funções comuns ou lambda em cada elemento da lista.
+
+Na prática, é o mesmo que fizemos anteriormente neste estudo com as "lists comprehensions", mas usando uma outra sintaxe. 
+
+Formato: `nova_lista = list(filter(função, lista_original))`.
+
+```python
+# usando função comum e método filter():
+numeros = [4, 11, 20, 3]
+def maior_que_dez(x):
+    return x > 10
+filtrados = list(filter(maior_que_dez, numeros))
+
+# filtrando uma lista de strings - usando lambda:
+nomes = ["Ana", "Bruno", "Alice", "Caio"]
+filtrados = list(filter(lambda n: n.startswith("A"), nomes))
+
+# filtrando uma lista de dicionários - usando lambda:
+clientes = [
+    {"nome": "Ana", "idade": 30},
+    {"nome": "Bruno", "idade": 25},
+    {"nome": "Carla", "idade": 40}
+]
+# filtra apenas as pessoas com mais de 30 anos:
+filtrados = list(filter(lambda c: c["idade"] > 30, clientes))
+
+# [{'nome': 'Carla', 'idade': 40}]
+```
+
 
 
 ## <a class="up" href="#topo"> TRATAMENTO DE ERROS - try except... </a>
