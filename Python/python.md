@@ -21,12 +21,51 @@ https://pense-python.caravela.club/		- Tradução do livro "Pense em Python"
 
 https://automatetheboringstuff.com/ 		- Livro "Automatize tarefas maçantes com Python - em inglês."
 
+
 ## Índice:
 
 (Ao clicar sobre o nome de um dos temas abaixo retornará ao topo).
+- [Modos de Execução](#modos)
+- [CLI ou GUI](#cli)
+- [Shebang: Inicio do Programa](#shebang)
+- [Comentários](#comentarios)
+- [Extensão de Scripts em Python](#extensao)
+- [Executando Um Script](#executando)
+- [Sintaxe de Comandos no Script](#sintaxe)
+- [Operações e Operadores Aritméticos](#operadores)
+- [Entrada de Dados 1: Variáveis](#variaveis)
+- [Incrementos](#incrementos)
+- [Imprimir na Tela](#imprimir)
+- [Entrada de Dados 2: Comando Input](#input)
+- [Concatenação](#concatenacao)
+- [Entrada de Dados 3: Parâmetros em Linha do Terminal](#parametros)
+- [Manipulação de Strings](#strings)
+- [Teste de Condições](#teste)
+- [Condições - If, Elif, Else...](#if)
+- [Condições - Operadores Ternários](#ternarios)
+- [Opções em Casos - Criação de Menús](#casos)
+- [Listas](#listas)
+- [Manipulação de Listas](#manipulacao)
+- [Tuplas](#tuplas)
+- [Conjuntos - Sets](#sets)
+- [Dicionários](#dicionarios)
+- [Laços de Repetição - For](#for)
+- [List Comprehensions - Compreensão de Listas](#compreensao)
+- [Laços de Repetição - While](#while)
+- [Continue - Break - Pass](#continue)
+- [Funções](#funcoes)
+- [Funções Lambda](#lambda)
+- [O Método Map() para Atualizar Listas](#map)
+- [O Método Filter() para Filtrar Listas](#filter)
+- [Tratamento de Erros - Try Except...](#erros)
+- [Manipulação de Datas](#datas)
+- [Importando outros Arquivos](#importando)
+- [Lendo e Escrevendo Arquivos](#arquivos)
+- [Bibliotecas](#bibliotecas)
+- [Integração com outras Linguagens](#integracao)
 
 
-## <a class="up" href="#topo"> MODOS DE EXECUÇÃO </a> 
+## <a class="up" href="#topo"> MODOS DE EXECUÇÃO <span id='modos'></span></a> 
 
 Existem dois modos de execução em Python: O Script e o Interativo.
 
@@ -62,14 +101,14 @@ Também se pode fazer testes usando o navegador e alguma plataforma que roda uma
 entre outras...
 
 
-## <a class="up" href="#topo"> CLI OU GUI </a> 
+## <a class="up" href="#topo"> CLI OU GUI <span id='cli'></span></a> 
 
 "Command-Line Interface" ou "Graphical User Interface"?
 
 Os scripts feitos em Python são normalmente executados em CLI, porém existem opções GUI, ou seja, para criar programas com interface gráfica, tais como: 
 Tkinter, PyQt, PySide, Kivy, WxPython e outras.
 
-## <a class="up" href="#topo"> SHEBANG: INICIO DO PROGRAMA </a> 
+## <a class="up" href="#topo"> SHEBANG: INICIO DO PROGRAMA <span id='shebang'></span></a> 
 
 ```python
 # funciona em qualquer sistema porque procura onde o interpretador está:
@@ -84,7 +123,7 @@ Tkinter, PyQt, PySide, Kivy, WxPython e outras.
 
 
 
-## <a class="up" href="#topo"> COMENTÁRIOS </a> 
+## <a class="up" href="#topo"> COMENTÁRIOS <span id='comentarios'></span></a> 
 Comentários em uma linha, se usa o símbolo: #.
 
 ```python
@@ -104,11 +143,11 @@ de comentários
 
 
 
-## <a class="up" href="#topo"> EXTENSÃO DE SCRIPTS EM PYTHON</a> 
+## <a class="up" href="#topo"> EXTENSÃO DE SCRIPTS EM PYTHON <span id='extensao'></span></a> 
 Se salva um script em Python com a extensão `.py`, como por exemplo: `nome_arquivo.py`. 
 
 
-## <a class="up" href="#topo"> EXECUTANDO UM SCRIPT   </a> 
+## <a class="up" href="#topo"> EXECUTANDO UM SCRIPT <span id='executando'></span></a> 
 
 A maneira mais simples para rodar um script em Python, é na linha de comando digitar o seguinte comando do Terminal (ou Shell do DOS):
 
@@ -117,13 +156,13 @@ A maneira mais simples para rodar um script em Python, é na linha de comando di
 Onde `script.py` é o nome do script.
 
 
-## <a class="up" href="#topo"> SINTAXE DE COMANDOS NO SCRIPT  </a> 
+## <a class="up" href="#topo"> SINTAXE DE COMANDOS NO SCRIPT <span id='sintaxe'></span></a> 
 
 Dentro do script em Python é obrigatório o uso de indentação em caso de funções e/ou laços para demarcar o bloco de comandos.
 
 
 
-## <a class="up" href="#topo"> OPERAÇÕES E OPERADORES ARITMÉTICOS </a> 
+## <a class="up" href="#topo"> OPERAÇÕES E OPERADORES ARITMÉTICOS <span id='operadores'></span></a> 
 ```python
 # soma:
 40 + 2
@@ -179,7 +218,7 @@ print(f'{resultado:.2f}')	# 150.25
 
 
 
-## <a class="up" href="#topo"> ENTRADA DE DADOS 1: Variáveis </a> 
+## <a class="up" href="#topo"> ENTRADA DE DADOS 1: Variáveis <span id='variaveis'></span></a> 
 
 ```python
 >>> mensagem = "Isto é uma mensagem, uma frase, ou qualquer coisa que queira."
@@ -225,7 +264,7 @@ print(nro)		# resultado: 3
 
 ```
 
-## <a class="up" href="#topo"> INCREMENTOS </a> 
+## <a class="up" href="#topo"> INCREMENTOS <span id='incrementos'></span></a> 
 
 Incrementos em variáveis são expressões que ao serem usadas alteram o valor numérico de uma variável. 
 
@@ -240,7 +279,7 @@ nro/=2	# divide por 2
 for reposta in string_total_texto += resposta
 ```
 
-## <a class="up" href="#topo"> IMPRIMIR NA TELA </a> 
+## <a class="up" href="#topo"> IMPRIMIR NA TELA <span id='imprimir'></span></a> 
 
 Para imprimir uma string, valor ou número em tela usamos o comando `print`.
 
@@ -276,7 +315,7 @@ print(texto)
 ```
 
 
-## <a class="up" href="#topo"> ENTRADA DE DADOS 2: Comando Input </a> 
+## <a class="up" href="#topo"> ENTRADA DE DADOS 2: Comando Input <span id='input'></span></a> 
 
 Inputs sempre armazenam na memória valores strings. Caso seja necessário usar números, é preciso converter o valor da variável paa inteiro. 
 
@@ -290,7 +329,7 @@ numero = int(input('Digite um número: '))
 ```
 
 
-## <a class="up" href="#topo"> CONCATENAÇÃO </a> 
+## <a class="up" href="#topo"> CONCATENAÇÃO <span id='concatenacao'></span></a> 
 
 
 ```python
@@ -307,7 +346,7 @@ print(f'Essa foi a sua pergunta: {pergunta}')		# Formatação com f-string
 
 
 
-## <a class="up" href="#topo"> ENTRADA DE DADOS 3: Parâmetros em linha do Terminal  </a>
+## <a class="up" href="#topo"> ENTRADA DE DADOS 3: Parâmetros em linha do Terminal  <span id='parametros'></span></a>
 
 É possível em Python passar parâmetros a fim de que a entrada de dados seja por meio de dados fornecidos desde a linha de comando quando o script é chamado:
 
@@ -333,7 +372,7 @@ print(f"Olá, {nome}! Você tem {idade} anos.")
 
 
 
-## <a class="up" href="#topo"> MANIPULAÇÃO DE STRINGS</a> 
+## <a class="up" href="#topo"> MANIPULAÇÃO DE STRINGS <span id='strings'></span></a> 
 ver daí em diante - https://pense-python.caravela.club/08-strings/01-uma-string-e-uma-sequencia.html
 
 Métodos para string:
@@ -343,7 +382,7 @@ Regex:
 https://www.w3schools.com/python/python_regex.asp
 
 
-## <a class="up" href="#topo"> TESTE DE CONDIÇÕES </a> 
+## <a class="up" href="#topo"> TESTE DE CONDIÇÕES <span id='teste'></span></a> 
 
 Aqui estão os principais operadores de comparação:
 
@@ -362,7 +401,7 @@ Aqui estão os principais operadores de comparação:
 Esses operadores são fundamentais para tomar decisões no código, como em condicionais (if) e loops, onde o programa precisa comparar valores para determinar qual ação executar a seguir.
 
 
-## <a class="up" href="#topo"> CONDIÇÕES IF, ELIF, ELSE... </a> 
+## <a class="up" href="#topo"> CONDIÇÕES - IF, ELIF, ELSE... <span id='if'></span></a> 
 
 ### If único 
 
@@ -475,7 +514,7 @@ else:
     print('x e y são iguais')
 ```
 
-## <a class="up" href="#topo"> CONDIÇÕES COM OPERADORES TERNÁRIOS </a> 
+## <a class="up" href="#topo"> CONDIÇÕES - OPERADORES TERNÁRIOS <span id='ternarios'></span></a> 
 
 Operadores ternários são uma forma mais abreviada de escrever código em Python quando o assunto é condições **e não existe um bloco de código** que se executa ao cumprir uma condição. Por exemplo:
 
@@ -492,7 +531,7 @@ print('pode entrar') if idade >= 18 else 'não pode'
 ```
 
 
-## <a class="up" href="#topo"> OPÇÕES EM CASOS - Criação de menús </a> 
+## <a class="up" href="#topo"> OPÇÕES EM CASOS - Criação de menús <span id='casos'></span></a> 
 
 Há duas maneiras de criar um menú de interação com o usuário do seu programa: Usando `if's` ou o `match...case`:
 
@@ -569,7 +608,7 @@ match day:
 
 
 
-## <a class="up" href="#topo"> LISTAS </a> 
+## <a class="up" href="#topo"> LISTAS <span id='listas'></span></a> 
 
 Em Python temos algumas formas de definir variáveis que trazem vários valores. 
 
@@ -603,7 +642,7 @@ lista[3][1]
 ```
 
 
-## <a class="up" href="#topo"> MANIPULAÇÃO DE LISTAS </a>
+## <a class="up" href="#topo"> MANIPULAÇÃO DE LISTAS <span id='manipulacao'></span></a>
 
 Veremos agora os métodos (funções) que se pode usar para manipular listas. Lembrando que listas, diferentemente de variáveis strings, são alteráveis. 
 
@@ -926,7 +965,7 @@ Há também dois métodos muito úteis usados para atualizar e filtrar listas qu
 
 
 
-## <a class="up" href="#topo"> TUPLAS </a> 
+## <a class="up" href="#topo"> TUPLAS <span id='tuplas'></span></a> 
 
 As tuplas em Python são listas, mas com uma única diferença: Elas **não** podem ser modificadas. 
 
@@ -939,7 +978,7 @@ De resto, todas as funções, maneira de acessar e fazer fatiamento é igual.
 `tupla_nova = (0, 1, 2, 3, 4, 10)`  
 
 
-## <a class="up" href="#topo"> CONJUNTOS - SETS </a> 
+## <a class="up" href="#topo"> CONJUNTOS - SETS <span id='sets'></span></a> 
 
 Conjunto em Python é uma lista de elementos não repetitivos. 
 
@@ -982,7 +1021,7 @@ type(lista_convertida)
 print(lista_convertida)
 ```
 
-## <a class="up" href="#topo"> DICIONÁRIOS </a> 
+## <a class="up" href="#topo"> DICIONÁRIOS <span id='dicionarios'></span></a> 
 
 Um dicionário em Python é uma estrutura que guarda informações organizadas em pares (de chave e valor).
 
@@ -1162,7 +1201,7 @@ Mais adiante, veremos os métodos `map()` e `filter()`, como também as `Lists C
 
 
 
-## <a class="up" href="#topo"> LAÇOS DE REPETIÇÃO - FOR</a> 
+## <a class="up" href="#topo"> LAÇOS DE REPETIÇÃO - FOR <span id='for'></span></a> 
 
 Os laços são instruções que farão um bloco de comandos se repetir até encontrar uma condição ou atingir o número de vezes definido, ou acabar de percorrer todos os elementos de uma lista.
 
@@ -1365,7 +1404,7 @@ Em cada laço se obteve apenas ou o nome ou o valor de cada dicionário contida 
 
 
 
-## <a class="up" href="#topo"> LIST COMPREHENSIONS - COMPREENSÃO DE LISTAS </a>
+## <a class="up" href="#topo"> LIST COMPREHENSIONS - COMPREENSÃO DE LISTAS <span id='compreensao'></span></a>
 
 Compreensão de listas (List Comprehensions) é uma forma abreviada de usar o comando `for` em uma única linha de código, normalmente usada para manipular uma lista (seja atualizar toda uma lista ou filtrá-la). Seria basicamente um modo ternário de usar o `for` (tal como existe quando usamos o `if`).
 
@@ -1563,7 +1602,7 @@ nova_lista_dec = [
 Mais adiante você aprenderá uma outra forma de atingir os mesmos resultados acima apresentados usando os métodos `filter()` e `map()` com funções `lambda`.
 
 
-## <a class="up" href="#topo"> LAÇOS DE REPETIÇÃO - WHILE </a> 
+## <a class="up" href="#topo"> LAÇOS DE REPETIÇÃO - WHILE <span id='while'></span></a> 
 
 O `while` é uma laço, mas que difere do `for`, porque este roda o laço indefinidamente até encontrar uma condição que "quebre" (`break`) o laço, sendo que aquele itera o laço algumas vezes definidamente (conforme o número de elementos de uma lista, etc).
 
@@ -1597,7 +1636,7 @@ while pergunta.lower() != 'x':
 ```
 
 
-## <a class="up" href="#topo"> CONTINUE - BREAK - PASS </a> 
+## <a class="up" href="#topo"> CONTINUE - BREAK - PASS <span id='continue'></span></a> 
 
 A instrução `continue` fará com que o laço "pule" a iteração sem realizar nada, mas segue o laço ao próximo. 
 Já o `break` fará terminar o laço completamente, saindo dele. 
@@ -1634,7 +1673,7 @@ for x in [0, 1, 2]:
 ```
 
 
-## <a class="up" href="#topo"> FUNÇÕES </a></a>
+## <a class="up" href="#topo"> FUNÇÕES <span id='funcoes'></span></a>
 
 Funções são pedaços de código são um conjunto de comandos agrupados dentro de um bloco que podem ser executados todas as vezes que são chamados em qualquer parte do programa, quantas vezes for necessário. 
 
@@ -1864,7 +1903,7 @@ O importante é lembrar que uma função com argumentos do tipo **kwargs** se us
 **A diferença de XARGS para KWARGS é que no primeiro passamos 'valores' infinitos, já o outro, passamos 'chaves=valores' infinitos, quando chamamos uma função.**
 
 
-## <a class="up" href="#topo"> FUNÇÕES LAMBDAS </a> 
+## <a class="up" href="#topo"> FUNÇÕES LAMBDA <span id='lambda'></span></a> 
 
 Uma função Lambda é uma forma simplificada de criar uma função anônima em uma única linha de código. 
 
@@ -1895,7 +1934,7 @@ for nro in nros:
 ```
 
 
-## <a class="up" href="#topo">O MÉTODO MAP() PARA ATUALIZAR LISTAS</a>
+## <a class="up" href="#topo"> O MÉTODO MAP() PARA ATUALIZAR LISTAS <span id='map'></span></a>
 
 O método `map()` é usado para aplicar uma certa função lambda em cada elemento uma lista, gerando uma nova lista. Na prática, é o mesmo que fizemos anteriormente neste estudo com as "lists comprehensions", mas usando uma outra sintaxe. 
 
@@ -1980,7 +2019,7 @@ nova_lista_aninhada = list(map(lambda p: [p['nome'], p['preco']], produtos))
 
 
  
-## <a class="up" href="#topo">O MÉTODO FILTER() PARA FILTRAR LISTAS</a>
+## <a class="up" href="#topo"> O MÉTODO FILTER() PARA FILTRAR LISTAS <span id='filter'></span></a>
 
 O método `filter()` serve para filtrar uma lista produzindo uma nova lista conforme as condições que estipulamos, podendo ou não aplicar funções comuns ou lambda em cada elemento da lista.
 
@@ -2013,7 +2052,7 @@ filtrados = list(filter(lambda c: c["idade"] > 30, clientes))
 
 
 
-## <a class="up" href="#topo"> TRATAMENTO DE ERROS - try except... </a>
+## <a class="up" href="#topo"> TRATAMENTO DE ERROS - try/except <span id='erros'></span></a>
 
 Fontes: https://www.w3schools.com/python/python_try_except.asp
 
@@ -2088,7 +2127,7 @@ https://docs.python.org/3/library/exceptions.html
 
 
 
-## <a class="up" href="#topo"> MANIPULAÇÃO DE DATAS </a> 
+## <a class="up" href="#topo"> MANIPULAÇÃO DE DATAS <span id='datas'></span></a> 
 
 Para usar e manipular datas no Python, é preciso fazer uso da biblioteca `datetime`. Logo, se necessita importá-la no início de seu código:
 
@@ -2235,9 +2274,9 @@ for s in datas:
     print(dt.strftime("%d de %B de %Y"))
 ```
 
-## <a class="up" href="#topo"> IMPORTANDO OUTROS ARQUIVOS</a> 
+## <a class="up" href="#topo"> IMPORTANDO OUTROS ARQUIVOS <span id='importando'></span></a> 
 
-## <a class="up" href="#topo"> LENDO E ESCREVENDO ARQUIVOS </a>
+## <a class="up" href="#topo"> LENDO E ESCREVENDO ARQUIVOS <span id='arquivos'></span></a>
 
 https://www.w3schools.com/python/python_file_handling.asp
 
@@ -2245,7 +2284,7 @@ https://www.w3schools.com/python/python_ref_file.asp
 
 
 
-##  <a class="up" href="#topo"> BIBLIOTECAS </a>
+## <a class="up" href="#topo"> BIBLIOTECAS <span id='bibliotecas'></span></a>
 
 No Python, uma biblioteca (ou módulo) é um conjunto de códigos prontos criados por outras pessoas para resolver tarefas específicas — como ler arquivos, criar gráficos, fazer cálculos, conectar-se à internet, manipular planilhas, entre muitas outras coisas.
 
@@ -2439,7 +2478,7 @@ Bibliotecas nativas:
 ---
 
 
-## <a class="up" href="#topo"> INTEGRAÇÃO COM OUTRAS LINGUAGENS</a> 
+## <a class="up" href="#topo"> INTEGRAÇÃO COM OUTRAS LINGUAGENS <span id='integracao'></span></a> 
 
 
 ## MAIS:
