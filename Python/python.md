@@ -40,7 +40,7 @@ https://automatetheboringstuff.com/ 		- Livro "Automatize tarefas maçantes com 
 - [Concatenação](#concatenacao)
 - [Entrada de Dados 3: Parâmetros em Linha do Terminal](#parametros)
 - [Manipulação de Strings](#strings)
-- [Teste de Condições](#teste)
+- [Operadores de comparação](#comparacao)
 - [Condições - If, Elif, Else...](#if)
 - [Condições - Operadores Ternários](#ternarios)
 - [Opções em Casos - Criação de Menús](#casos)
@@ -373,16 +373,120 @@ print(f"Olá, {nome}! Você tem {idade} anos.")
 
 
 ## <a class="up" href="#topo"> MANIPULAÇÃO DE STRINGS <span id='strings'></span></a> 
-ver daí em diante - https://pense-python.caravela.club/08-strings/01-uma-string-e-uma-sequencia.html
 
-Métodos para string:
+Uma string é uma sequência de caracteres normalmente armazenada numa variável:
+
+`frase = "Alguma coisa está acontecendo aqui."`
+
+Cada letra contida nessa string está numerada com um índice iniciando do zero (0) como o primeiro caracter da string.
+
+
+```python
+print(frase[0])		# A
+print(frase[1])		# l
+print(frase[2])		# g
+print(frase[10])	# s
+```
+
+### Fatiamento de strings
+
+Essa string, também, pode ser fatiada, por exemplo:
+
+```python
+print(frase[3:12])	# uma coisa
+print(frase[0:5])	# Algum
+print(frase[:5])	# Algum
+print(frase[15:])	# tá acontecendo aqui.
+print(frase[15:-1])	# tá acontecendo aqui (sem o ponto final)
+```
+
+### Strings são imutáveis
+
+Importante: **Strings são imutáveis**. Contudo, para se usar seu valor modificado, é preciso criar uma nova variável com o novo conteúdo processado e alterado a partir da variável string original.
+
+```python
+frase = "Ser ou não ser"
+nova_frase = frase + " eis a questão."
+print(nova_frase)
+# Ser ou não ser eis a questão.
+```
+
+
+### Tamanho da string
+
+Se usa o método `len()` para obter o tamanho de uma string:
+
+`len(nova_frase)`
+
+
+
+### Métodos usados em strings:
+
+Python possui um conjunto de métodos internos (*built-in*) que você pode usar em strings.
+
+**Nota:** Todos os métodos de string retornam novos valores. Eles **não** alteram a string original.
+
+Alguns dos principais:
+
+| Método           | Descrição                                                                              |
+| ---------------- | -------------------------------------------------------------------------------------- |
+| `capitalize()`   | Converte o primeiro caractere para maiúsculo                                           |
+| `casefold()`     | Converte a string inteira para minúsculas (mais forte que `lower()`)                   |
+| `center()`       | Retorna a string centralizada                                                          |
+| `count()`        | Retorna o número de vezes que um valor específico ocorre na string                     |
+| `endswith()`     | Retorna *True* se a string termina com o valor especificado                            |
+| `expandtabs()`   | Define o tamanho do caractere de tabulação (*tab*)                                     |
+| `find()`         | Procura um valor na string e retorna a posição onde ele foi encontrado (ou -1)         |
+| `format()`       | Formata valores dentro de uma string                                                   |
+| `index()`        | Procura um valor na string e retorna a posição onde foi encontrado (erro se não achar) |
+| `isalnum()`      | Retorna *True* se todos os caracteres forem alfanuméricos                              |
+| `isalpha()`      | Retorna *True* se todos os caracteres estiverem no alfabeto                            |
+| `isascii()`      | Retorna *True* se todos os caracteres forem ASCII                                      |
+| `isdecimal()`    | Retorna *True* se todos os caracteres forem caracteres decimais                        |
+| `isdigit()`      | Retorna *True* se todos os caracteres forem dígitos                                    |
+| `isidentifier()` | Retorna *True* se a string for um identificador válido em Python                       |
+| `islower()`      | Retorna *True* se todos os caracteres forem minúsculos                                 |
+| `isnumeric()`    | Retorna *True* se todos os caracteres forem numéricos                                  |
+| `isprintable()`  | Retorna *True* se todos os caracteres forem imprimíveis                                |
+| `isspace()`      | Retorna *True* se todos os caracteres forem espaços em branco                          |
+| `istitle()`      | Retorna *True* se a string estiver no formato de título                                |
+| `isupper()`      | Retorna *True* se todos os caracteres forem maiúsculos                                 |
+| `join()`         | Junta os elementos de um iterável em uma única string                                  |
+| `ljust()`        | Retorna a string justificada à esquerda                                                |
+| `lower()`        | Converte a string para minúsculas                                                      |
+| `lstrip()`       | Retorna a string com remoção de espaços à esquerda                                     |
+| `maketrans()`    | Retorna uma tabela de tradução para uso no método `translate()`                        |
+| `partition()`    | Retorna uma tupla com a string dividida em três partes                                 |
+| `replace()`      | Retorna uma nova string onde um valor é substituído por outro em todas as vezes        |
+| `rfind()`        | Procura um valor e retorna a última posição onde foi encontrado                        |
+| `rindex()`       | Igual ao `rfind()`, mas gera erro se não encontrar                                     |
+| `rjust()`        | Retorna a string justificada à direita                                                 |
+| `rpartition()`   | Retorna uma tupla com a string dividida em três partes (buscando da direita)           |
+| `rsplit()`       | Divide a string usando o separador especificado, retornando uma lista                  |
+| `rstrip()`       | Retorna a string com remoção de espaços à direita                                      |
+| `split()`        | Divide a string usando o separador especificado, retornando uma lista                  |
+| `splitlines()`   | Divide a string nas quebras de linha e retorna uma lista                               |
+| `startswith()`   | Retorna *True* se a string começar com o valor especificado                            |
+| `strip()`        | Remove espaços em branco do início e do fim da string                                  |
+| `swapcase()`     | Inverte as letras: maiúsculas viram minúsculas e vice-versa                            |
+| `title()`        | Converte a primeira letra de cada palavra para maiúscula                               |
+| `translate()`    | Retorna uma string traduzida usando uma tabela                                         |
+| `upper()`        | Converte a string em maiúsculas                                                        |
+| `zfill()`        | Preenche a string com zeros à esquerda até atingir um tamanho especificado             |
+
+
 https://www.w3schools.com/python/python_strings_methods.asp
 
-Regex:
+
+ver daí em diante - https://pense-python.caravela.club/08-strings/01-uma-string-e-uma-sequencia.html
+
+
+### Regex
+
 https://www.w3schools.com/python/python_regex.asp
 
 
-## <a class="up" href="#topo"> TESTE DE CONDIÇÕES <span id='teste'></span></a> 
+## <a class="up" href="#topo"> OPERADORES DE COMPARAÇÃO <span id='comparacao'></span></a> 
 
 Aqui estão os principais operadores de comparação:
 
