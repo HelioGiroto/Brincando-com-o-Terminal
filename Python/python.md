@@ -226,6 +226,17 @@ print(f'{resultado:.2f}')	# 150.25
 >>> pi = 3.141592653589793
 ```
 
+Também podemos definir várias variáveis em uma só linha. No entanto, o número de valores deve ser o mesmo para o número de variáveis:
+
+```python
+# definindo vários valores para várias variáveis em uma só linha:
+nome, idade, altura = 'João', 33, 1.74
+
+# o valor das três variáveis fica sendo o valor de cada item da lista:
+lista = ["Maria", 21, 1.60]
+nome, idade, altura = lista
+```
+
 Nomes de variáveis podem ser tão longos quanto você queira. Podem conter tanto letras como números, mas não podem começar com um número. É legal usar letras maiúsculas, mas a convenção é usar apenas letras minúsculas para nomes de variáveis. Se aceita o underline (_), mas não caracteres especiais ou palavras reservadas.
 
 OBS.: A linguagem Python é uma linguagem tipada, ou seja, faz diferença entre tipos de variáveis. Por ex.:
@@ -388,17 +399,6 @@ print(frase[2])		# g
 print(frase[10])	# s
 ```
 
-### Fatiamento de strings
-
-Essa string, também, pode ser fatiada, por exemplo:
-
-```python
-print(frase[3:12])	# uma coisa
-print(frase[0:5])	# Algum
-print(frase[:5])	# Algum
-print(frase[15:])	# tá acontecendo aqui.
-print(frase[15:-1])	# tá acontecendo aqui (sem o ponto final)
-```
 
 ### Strings são imutáveis
 
@@ -420,7 +420,43 @@ Se usa o método `len()` para obter o tamanho de uma string:
 
 
 
-### Métodos usados em strings:
+### Fatiamento de strings
+
+Essa string, também, pode ser fatiada, por exemplo:
+
+```python
+print(frase[3:12])	# uma coisa
+print(frase[0:5])	# Algum
+print(frase[:5])	# Algum
+print(frase[15:])	# tá acontecendo aqui.
+print(frase[15:-1])	# tá acontecendo aqui (sem o ponto final)
+```
+
+### Escapando strings
+
+Strings que são armazenadas em variáveis são envolvidas por áspas (simples ou duplas), porém, caso dentro do texto dessa string, se tenha áspas, elas devem ser escapadas com o caracter "\" para evitar-se um erro. 
+
+```python
+txt = "Ele disse: \"Meu nome é Pedro.\""
+print(txt)
+```
+
+### Consultando se uma sub-string está numa string
+
+É possível consultar se dentro de uma string está algum texto, letra ou sub-string:
+
+```python
+frase = "olá mundo, tudo bem?"
+str = 'mundo'
+str in frase
+# True
+
+"planeta" in frase
+# False
+```
+
+
+### Métodos usados em strings
 
 Python possui um conjunto de métodos internos (*built-in*) que você pode usar em strings.
 
@@ -430,55 +466,190 @@ Alguns dos principais:
 
 | Método           | Descrição                                                                              |
 | ---------------- | -------------------------------------------------------------------------------------- |
-| `capitalize()`   | Converte o primeiro caractere para maiúsculo                                           |
-| `casefold()`     | Converte a string inteira para minúsculas (mais forte que `lower()`)                   |
 | `center()`       | Retorna a string centralizada                                                          |
-| `count()`        | Retorna o número de vezes que um valor específico ocorre na string                     |
-| `endswith()`     | Retorna *True* se a string termina com o valor especificado                            |
-| `expandtabs()`   | Define o tamanho do caractere de tabulação (*tab*)                                     |
-| `find()`         | Procura um valor na string e retorna a posição onde ele foi encontrado (ou -1)         |
-| `format()`       | Formata valores dentro de uma string                                                   |
-| `index()`        | Procura um valor na string e retorna a posição onde foi encontrado (erro se não achar) |
-| `isalnum()`      | Retorna *True* se todos os caracteres forem alfanuméricos                              |
-| `isalpha()`      | Retorna *True* se todos os caracteres estiverem no alfabeto                            |
-| `isascii()`      | Retorna *True* se todos os caracteres forem ASCII                                      |
-| `isdecimal()`    | Retorna *True* se todos os caracteres forem caracteres decimais                        |
-| `isdigit()`      | Retorna *True* se todos os caracteres forem dígitos                                    |
-| `isidentifier()` | Retorna *True* se a string for um identificador válido em Python                       |
-| `islower()`      | Retorna *True* se todos os caracteres forem minúsculos                                 |
-| `isnumeric()`    | Retorna *True* se todos os caracteres forem numéricos                                  |
-| `isprintable()`  | Retorna *True* se todos os caracteres forem imprimíveis                                |
-| `isspace()`      | Retorna *True* se todos os caracteres forem espaços em branco                          |
-| `istitle()`      | Retorna *True* se a string estiver no formato de título                                |
-| `isupper()`      | Retorna *True* se todos os caracteres forem maiúsculos                                 |
-| `join()`         | Junta os elementos de um iterável em uma única string                                  |
-| `ljust()`        | Retorna a string justificada à esquerda                                                |
-| `lower()`        | Converte a string para minúsculas                                                      |
-| `lstrip()`       | Retorna a string com remoção de espaços à esquerda                                     |
-| `maketrans()`    | Retorna uma tabela de tradução para uso no método `translate()`                        |
-| `partition()`    | Retorna uma tupla com a string dividida em três partes                                 |
-| `replace()`      | Retorna uma nova string onde um valor é substituído por outro em todas as vezes        |
-| `rfind()`        | Procura um valor e retorna a última posição onde foi encontrado                        |
-| `rindex()`       | Igual ao `rfind()`, mas gera erro se não encontrar                                     |
 | `rjust()`        | Retorna a string justificada à direita                                                 |
-| `rpartition()`   | Retorna uma tupla com a string dividida em três partes (buscando da direita)           |
-| `rsplit()`       | Divide a string usando o separador especificado, retornando uma lista                  |
-| `rstrip()`       | Retorna a string com remoção de espaços à direita                                      |
+| `ljust()`        | Retorna a string justificada à esquerda                                                |
+||
+| `upper()`        | Converte a string em maiúsculas                                                        |
+| `lower()`        | Converte a string para minúsculas                                                      |
+| `title()`        | Converte a primeira letra de cada palavra para maiúscula                               |
+| `capitalize()`   | Converte somente o primeiro caractere para maiúsculo                                   |
+||
+| `replace()`      | Retorna uma nova string onde um valor é substituído por outro em todas as ocorrências  |
+||
+| `strip()`        | Remoção de espaços ou um caracter específico à direita e à esquerda                    |
+| `rstrip()`       | Remoção de espaços ou um caracter específico à direita                                 |
+| `lstrip()`       | Remoção de espaços ou um caracter específico à esquerda                                |
+||
 | `split()`        | Divide a string usando o separador especificado, retornando uma lista                  |
 | `splitlines()`   | Divide a string nas quebras de linha e retorna uma lista                               |
+| `join()`         | Junta os elementos de um iterável em uma única string - converte lista em string       |
+||
+| `count()`        | Retorna o número de vezes que um valor específico ocorre na string                     |
+| `find()`         | Procura um valor na string e retorna a posição onde ele foi encontrado (ou -1)         |
+| `index()`        | O mesmo que find() mas retorna erro se não achar                                       |
+| `rfind()`        | Procura um valor e retorna a última posição onde foi encontrado                        |
+| `rindex()`       | O mesmo que `rfind()`, mas retorna erro se não encontrar                               |
+||
 | `startswith()`   | Retorna *True* se a string começar com o valor especificado                            |
-| `strip()`        | Remove espaços em branco do início e do fim da string                                  |
-| `swapcase()`     | Inverte as letras: maiúsculas viram minúsculas e vice-versa                            |
-| `title()`        | Converte a primeira letra de cada palavra para maiúscula                               |
-| `translate()`    | Retorna uma string traduzida usando uma tabela                                         |
-| `upper()`        | Converte a string em maiúsculas                                                        |
-| `zfill()`        | Preenche a string com zeros à esquerda até atingir um tamanho especificado             |
+| `endswith()`     | Retorna *True* se a string termina com o valor especificado                            |
+||
+| `isupper()`      | Retorna *True* se todos os caracteres forem maiúsculos                                 |
+| `islower()`      | Retorna *True* se todos os caracteres forem minúsculos                                 |
+| `istitle()`      | Retorna *True* se a string estiver no formato de título                                |
+| `isalpha()`      | Retorna *True* se todos os caracteres estiverem no alfabeto  - apenas letras           |
+| `isalnum()`      | Retorna *True* se todos os caracteres forem alfanuméricos - apenas letras ou números   |
+| `isnumeric()`    | Retorna *True* se todos os caracteres forem numéricos                                  |
+| `isdigit()`      | Retorna *True* se todos os caracteres forem dígitos                                    |
+| `isdecimal()`    | Retorna *True* se todos os caracteres forem caracteres decimais                        |
+| `isspace()`      | Retorna *True* se todos os caracteres forem espaços em branco                          |
+| `zfill()`        | Preenche a cadeia de caracteres com um número especificado de 0 valores no início      |
+||
+| `format()`       | Formata valores dentro de uma string                                                   |
 
 
-https://www.w3schools.com/python/python_strings_methods.asp
+*Fonte: https://www.w3schools.com/python/python_strings_methods.asp*
 
+Exemplos na prática:
 
-ver daí em diante - https://pense-python.caravela.club/08-strings/01-uma-string-e-uma-sequencia.html
+```python
+# Centralizando ou ajustando texto/string para direita/esquerda:
+txt = "Produto"
+# centraliza dentro de 20 caracteres:
+x = txt.center(20) 
+# tente tb: x = txt.ljust(20) # x = txt.rjust(20)
+print(f'*{x}*')
+# *       Produto       *
+
+# preenche com asteriscos à esquerda da palavra:
+print("nome".rjust(15, "*"))
+# ***********nome	# total = 15 caracteres.
+
+# Caixa alta e baixa:
+nome = "Jesus"
+nome.upper()
+# 'JESUS'
+# o mesmo formato se aplica nos métodos: lower(), title(), capitalize().
+
+# Substituir textos:
+txt = "Ele come bolo de laranja, laranja com aveia"
+x = txt.replace("laranja", "maçã")
+print(x)
+# Ele come bolo de maçã, maçã com aveia
+
+# Removendo espaços em branco nas extremidades:
+txt = " valor: 100,00  "
+txt.strip()
+# resultado: valor: 100,00
+txt = "*****Nome*****"
+txt.strip('*')
+# resultado: 'Nome'
+# o mesmo formato se aplica para os métodos: rstrip() e lstrip()
+
+# Divide string em lista (converte string em lista) usando um separador:
+txt = "Obrigado por responder, Atenciosamente, Ana"
+txt.split(', ')  # observe que se colocou um espaço depois da vírgula
+# ['Obrigado por responder', 'Atenciosamente', 'Ana']
+
+# divide string em listas por quebra de linha:
+txt = "Obrigado por responder,\nAtenciosamente,\nAna"
+txt.splitlines('') # não usa separador, porque usa '\n' como separador automático.
+# ['Obrigado por responder,', 'Atenciosamente,', 'Ana']
+
+# outro exemplo útil de split():
+nomes = input('Digite os nomes separados por vírgula: ')
+lista = nomes.split(', ')
+print(lista)
+
+# Juntando (join) listas em uma string:
+lista = ['Obrigado por responder,', 'Atenciosamente,', 'Ana']
+unificador = " "
+# Atenção que o nome da lista vem APÓS o nome do método:
+unificador.join(lista)
+# 'Obrigado por responder, Atenciosamente, Ana'
+
+# Encontrar strings em strings
+# conta quantas vezes aparece a letra 'o' na string frase:
+frase.count('o')
+# 20
+
+# retorna à posição da primeira ocorrência encontrada
+frase.find('m')
+frase.index('m') 	# 4	
+frase.find('ç')		# retorna: -1	# não encontrou
+frase.index('ç') 	# retorna: erroo
+# posição da última ocorrência de 'o':
+frase.rfind('o')
+frase.rindex('o')
+# 14
+
+# ver tb o sub-título acima: "Consultando se uma sub-string está numa string"
+
+# se uma string começa/termina com ...:
+frase = "olá mundo, tudo bem?"
+frase.startswith('olá')
+# True
+frase.endswith('bem?')
+# True
+frase.endswith('bem')	# False porque faltou o "?"
+# False
+
+# Verificando a string se é número (diferente de valor inteiro!!!):
+"123".isdigit()		# True
+"123".isdecimal()	# True
+"123".isnumeric()	# True
+
+"3.14".isdigit()	# False
+"3.14".isdecimal()	# False
+"3.14".isnumeric()	# False
+
+"123,000".isdigit()		# False
+"123,000".isdecimal()	# False
+"123,000".isnumeric()	# False
+
+"-2".isdigit()		# False
+"-2".isdecimal()	# False
+"-2".isnumeric()	# False
+# o mesmo formato se aplica nos métodos: isalpha(). isalnum().
+
+# preenche com Zeros à esquerda (z-fill = zero-fill):
+"50".zfill(5)		# 00050
+"150".zfill(5)		# 00150
+"1050".zfill(5)		# 01050
+
+# transformando número em formato de moeda brasileiro:
+valor = 123123
+print(f"{valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."))
+# 123.123,00
+
+# converte string numérica em valor inteiro:
+int("123") if "123".isdigit() else ""
+
+# verifica se nome está em maiúsculas para converter string em iniciais-maiúsculas:
+nome = "JOÃO DA SILVA"
+if nome.isupper():
+	nome = nome.title()
+print(nome)
+# ou:
+nome = nome.title() if nome.isupper() else ""
+
+# converte para maiúsculas caso frase esteja em minúsculas:
+frase.upper() if frase.islower() else ""
+
+```
+
+### Percorrendo cada letra de uma string
+
+Uma string é um conjunto de caracteres iteráveis em que cada letra ou caracter é um elemento.
+
+Mais adiante, veremos como operam os "laços de repetição" para percorrermos sequências e listas, porém, o exemplo abaixo (um pouco avançado para o momento) é para mostrar a possibilidade:
+
+```python
+palavra = "paralelepípedo"
+
+for n, cada_letra in enumerate(palavra):
+	print(f'A {str(n).rjust(2)}ª letra da palavra {palavra} é: {cada_letra}')
+```
 
 
 ### Regex
