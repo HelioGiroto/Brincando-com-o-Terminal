@@ -98,6 +98,10 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 ```
 
+Em seguida resete o bashrc:
+
+`source ~/.bashrc`
+
 Agora, tente no terminal:
 
 ```bash
