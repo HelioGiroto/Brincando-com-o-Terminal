@@ -12,7 +12,14 @@
 _Fonte: https://github.com/termux/termux-app?tab=readme-ov-file#installation_
 
 
+- Baixe também e instale o Termux:API no site do F-Droid.
+ 
+
 ## Primeiras configurações:
+
+- Vá nas configurações do seu celular em Aplicações e libere as permissões para o aplicativo Termux:API a fim de que tenha acesso a ligações, SMS, etc...
+
+Em seguida:
 
 - Abra o aplicativo Termux
 - Digite: `termux-setup-storage`
