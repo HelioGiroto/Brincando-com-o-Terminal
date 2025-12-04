@@ -58,6 +58,7 @@ https://automatetheboringstuff.com/ 		- Livro "Automatize tarefas maçantes com 
 - [O Método Map() para Atualizar Listas](#map)
 - [O Método Filter() para Filtrar Listas](#filter)
 - [Tratamento de Erros - Try Except...](#erros)
+- [POO - Programação Orientada a Objetos](#poo)
 - [Manipulação de Datas](#datas)
 - [Importando outros Arquivos](#importando)
 - [Lendo e Escrevendo Arquivos](#arquivos)
@@ -2398,6 +2399,90 @@ https://docs.python.org/3/library/exceptions.html
 | **EOFError**          | Quando o `input()` não recebe entrada esperada        | `input()` sem digitar nada (em certos contextos) | ❌ Fim inesperado de entrada              |
 | **MemoryError**       | Quando falta memória para executar algo               | Criar lista gigante: `[1]*10**10`                | ❌ Memória insuficiente                   |
 | **Exception**         | Classe geral que cobre qualquer erro                  | —                                                | ✅ Pode capturar todos os erros acima     |
+
+
+
+
+## <a class="up" href="#topo"> POO - Programação Orientada a Objetos <span id='poo'></span></a> 
+
+A programação orientada a objetos (POO — ou *Object-Oriented Programming*, OOP) é uma maneira organizada e moderna de escrever código. Embora, tenha a "fama" de complicada, ela é muito mais simples e objetiva.
+
+A ideia central é representar partes do seu programa como **objetos**, que possuem:
+
+* **Atributos** → características (dados)
+* **Métodos** → ações (funções que pertencem ao objeto)
+
+Isso torna o código mais **fácil de entender**, **reutilizável**, **modular** e muito mais **escalável** conforme o projeto cresce.
+
+
+### Criando uma classe com seus atributos (características do objeto):
+
+Uma classe, analogamente, seria um molde em que serão feitos os objetos. 
+
+Por convenção, o nome de uma classe começa com letra maiúscula: `Pessoa`. E a primeira função de uma classe se chama `__init__` onde definiremos os parâmetros dessa classe:
+
+```python
+class Pessoa:
+	def __init__ (self, nome, cpf, idade):
+		self.nome = nome
+		self.cpf = cpf
+		self.idade = idade
+	def imprime_dados(self):
+		print(f'Os dados de {self.nome} são: {self.cpf} - {self.idade} anos.')
+```
+
+A palavra reservada `self` se refere aos próprios objetos que serão criados conforme essa classe. *(Em Javascript é muito semelhante ao `this` em certos casos)*
+
+Uma vez feito acima o "molde" em que os objetos serão criados, começamos a adicionar objetos:
+
+### Criando objetos conforme a classe (instâncias da classe)
+
+Cada objeto novo seria um "case" nos mesmos moldes do modelo (classe) já pré-definidos. Não há limites para criar essas instâncias (o limite é a memória do seu computador). 
+
+Para criar os objetos, definimos uma variável que receberá a Classe "com seus argumentos" correspondentes aos parâmetros estabelecidos em `__init__`. Desta forma:
+
+```python
+# cria duas instâncias (objetos) conforme a classe Pessoa:
+p1 = Pessoa("Helio", "24678912300", 40)
+p2 = Pessoa("Fatima", "32165498700", 30)
+```
+
+E para executar o primeiro método da nossa classe, conforme os exemplos de objetos criados logo acima, podemos chamá-los assim:
+
+```python
+# agora, chama a função (método) para exibir os objetos criados dentro da classe:
+p1.imprime_dados()
+p2.imprime_dados()
+```
+
+**Resultado:**
+
+```python
+Os dados de Helio são: 12345678900 - 40 anos.
+Os dados de Fatima são: 32165498700 - 30 anos.
+```
+
+Cada variável (`p1`, `p2`) é um **objeto independente**, com seus próprios dados.
+
+---
+
+#### Reutilização e escalabilidade
+
+Com uma classe criada, você pode gerar quantos objetos quiser:
+
+```python
+p3 = Pessoa("Mariana", "65498732111", 40)
+p4 = Pessoa("João", "98765432100", 18)
+```
+
+Não precisa reescrever funções para cada pessoa — tudo está organizado dentro da classe.
+
+
+### Herança
+
+### Poliformismo
+
+### Classes aninhadas
 
 
 

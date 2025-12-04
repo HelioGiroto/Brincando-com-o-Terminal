@@ -5,3 +5,6 @@ xrandr --output eDP-1 --mode 1680x1050 --pos 1920x0 --rotate normal --output DP-
 
 
 
+# apagar o monitor:
+# xrandr --output eDP-1 --off
+
