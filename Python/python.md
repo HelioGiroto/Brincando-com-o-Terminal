@@ -2419,7 +2419,19 @@ Isso torna o código mais **fácil de entender**, **reutilizável**, **modular**
 
 Uma classe, analogamente, seria um molde em que serão feitos os objetos. 
 
-Por convenção, o nome de uma classe começa com letra maiúscula: `Pessoa`. E a primeira função de uma classe se chama `__init__` onde definiremos os parâmetros dessa classe:
+Por convenção, o nome de uma classe começa com letra maiúscula: `Pessoa`. E a primeira função de uma classe se chama `__init__`, que se chama tecnicamente **"constructor"**, onde se define os parâmetros dessa classe:
+
+```python
+class Pessoa:
+	def __init__ (self, nome, cpf, idade):
+		self.nome = nome
+		self.cpf = cpf
+		self.idade = idade
+```
+
+A palavra reservada `self` se refere aos próprios objetos que serão criados conforme essa classe. *(Em Javascript é muito semelhante ao `this` em certos casos)*.
+
+Após criarmos o 'constructor', vamos a criar uma função (método) dentro da classe, para definir o que um objeto que seja criado nessa classe vai fazer. (Método é o que o objeto *faz*):
 
 ```python
 class Pessoa:
@@ -2431,9 +2443,9 @@ class Pessoa:
 		print(f'Os dados de {self.nome} são: {self.cpf} - {self.idade} anos.')
 ```
 
-A palavra reservada `self` se refere aos próprios objetos que serão criados conforme essa classe. *(Em Javascript é muito semelhante ao `this` em certos casos)*
 
-Uma vez feito acima o "molde" em que os objetos serão criados, começamos a adicionar objetos:
+Uma vez feito o "molde" em que os objetos serão criados, começaremos a adicionar objetos:
+
 
 ### Criando objetos conforme a classe (instâncias da classe)
 
@@ -2478,9 +2490,189 @@ p4 = Pessoa("João", "98765432100", 18)
 Não precisa reescrever funções para cada pessoa — tudo está organizado dentro da classe.
 
 
-### Herança
 
 ### Poliformismo
+
+Agora, imagine um cenário onde usamos **várias classes dentro do mesmo programa**. Essas classes podem ou não se relacionar entre si — algumas podem compartilhar características e comportamentos, enquanto outras funcionam de maneira totalmente independente. Quando diferentes classes possuem **métodos com o mesmo nome**, mas que **executam ações diferentes**, temos um exemplo de **polimorfismo**: uma mesma “função” assumindo várias formas dependendo do objeto que a utiliza. Isso permite que o código trate objetos diferentes de maneira uniforme, tornando o sistema mais flexível e extensível.
+
+Veja o caso destas classes independentes:
+
+```python
+class Cachorro():
+    def falar(self):
+        return "Au au!"
+
+class Gato():
+    def falar(self):
+        return "Miau!"
+
+class Vaca():
+    def falar(self):
+        return "Muuu!"
+
+# organizando todas as classes numa lista:
+animais = [Cachorro(), Gato(), Vaca()]
+# imprimindo a lista:
+for animal in animais:
+	print(animal.falar())
+```
+
+O resultado foi:
+```
+Au au!
+Miau!
+Muuu!
+```
+
+Se nota que todas as classes existe o método `falar()` porém que se comporta de forma variada (poli-forma, poli-formismo). 
+
+E isso se comprovaria mesmo que todas as classes fossem filhas de uma classe pai, ainda assim, a função `falar()` se comportaria distintamente (veremos isso a seguir em "Herança").
+
+
+
+### Herança
+
+Muitas vezes, algumas dessas classes possuem relações entre si, compartilhando atributos ou métodos. É justamente aí que entra o conceito de **herança** na programação orientada a objetos: quando uma classe pode *herdar* características e comportamentos de outra, reaproveitando código e mantendo a estrutura do programa mais organizada e eficiente.
+
+Para se criar uma classe filha, basta passar o nome da classe pai como argumento. 
+
+Veja este exemplo que além de poliformismo, trabalha com herança:
+
+```python
+class Pai:		# não tem nada entre parêntesis
+    def falar(self):
+        print("Olá, eu sou o pai.")
+
+class Filho(Pai):	# aqui se referencia a classe pai
+    def falar(self):
+        print("Olá, eu sou o filho.")
+
+
+# Cria uma instância de cada classe e utiliza:
+a = Pai()
+b = Filho()
+a.falar()    # Olá, eu sou o pai.
+b.falar()    # Olá, eu sou o filho.
+
+# ou direto:
+Pai().falar()
+Filho().falar()
+```
+
+Mas também podemos herdar algum método da classe pai ao chamarmos o método com a função `super()`:
+
+```python
+
+class Pai:
+    def falar(self):
+        print("Eu sou o pai.")
+
+class Filho(Pai):
+    def falar(self):
+        super().falar()  # chama o método da classe pai
+        print("Eu sou o filho.")
+
+# chamando os métodos:
+Pai().falar()
+Filho().falar()
+
+# resultado:
+'''
+Eu sou o pai.
+Eu sou o pai.
+Eu sou o filho.
+'''
+```
+
+Outro exemplo mais robusto, em que não somente funções, mas também **compartilhamos o constructor de pai**:
+
+```python
+# Classe Pai: Veículo
+class Veiculo:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def info(self):
+        print(f"Veículo: {self.marca}, {self.modelo}")
+
+
+# Classe Filha 1: Carro (herda de Veiculo)
+class Carro(Veiculo):
+    def __init__(self, marca, modelo, portas):
+        super().__init__(marca, modelo)   # chama o construtor da classe pai
+        self.portas = portas
+
+    def info(self):
+        print(f"Carro: {self.marca}, {self.modelo} com {self.portas} portas.")
+
+
+# Classe Filha 2: Moto (herda de Veiculo)
+class Moto(Veiculo):
+    def __init__(self, marca, modelo, cilindradas):
+        super().__init__(marca, modelo)   # herda marca e modelo da classe pai
+        self.cilindradas = cilindradas
+
+    def info(self):
+        print(f"Moto: {self.marca}, {self.modelo} - {self.cilindradas}cc")
+
+
+# Criando e usando os objetos (instâncias)
+veic=Veiculo("Audi", "TT")
+carro1 = Carro("Honda", "Civic", 4)
+moto1 = Moto("Yamaha", "MT-03", 321)
+
+veic.info()
+carro1.info()
+moto1.info()
+
+# resultado:
+'''
+Veículo: Audi TT
+Carro: Honda Civic com 4 portas.
+Moto: Yamaha MT-03 - 321cc
+'''
+```
+
+Acima, se nota que o método `info()` funciona distintamente conforme cada classe.
+
+
+```python
+# Classe Pai (Superclasse)
+class Animal:
+	def __init__(self, nome, cor, patas, tipo):
+		self.nome = nome
+		self.cor = cor
+		self.patas = patas
+		self.tipo = tipo
+	def apresenta(self):
+		print(f'Eu sou o {self.nome}, um {self.tipo} tenho {self.patas} patas e sou {self.cor}.')
+
+
+# Classe Filha herdando de Animal:
+class Cachorro(Animal):
+    def __init__(self, nome, cor, patas):
+        super().__init__(nome, cor, patas, tipo="cachorro")
+
+
+# Outra Classe Filha herdando de Animal:
+class Gato(Animal):
+    def __init__(self, nome, cor, patas):
+        super().__init__(nome, cor, patas, tipo="gato")
+
+
+# 🧪 Criando e usando as instâncias:
+animal1=Cachorro('Bob', 'Caramelo', 4)
+animal2=Gato('Mingal', 'Malhado', 4)
+
+animal1.apresenta()
+animal2.apresenta()
+```
+
+O método `super()` é um atalho para acessar a classe pai sem precisar escrever o nome dela.
+
+
+
 
 ### Classes aninhadas
 
