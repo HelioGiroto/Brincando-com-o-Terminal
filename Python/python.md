@@ -57,6 +57,7 @@ https://automatetheboringstuff.com/ 		- Livro "Automatize tarefas maçantes com 
 - [Funções Lambda](#lambda)
 - [O Método Map() para Atualizar Listas](#map)
 - [O Método Filter() para Filtrar Listas](#filter)
+- [O Método Sorted() para Ordenar Listas de Dicionários](#sorted)
 - [Tratamento de Erros - Try Except...](#erros)
 - [POO - Programação Orientada a Objetos](#poo)
 - [Manipulação de Datas](#datas)
@@ -1141,7 +1142,14 @@ print(posicoes)
 
 ### Ordenando uma lista
 
+Para ordenar listas podemos usar dois métodos: `sort()` ou `sorted()`. O método sort() atua diretamente numa lista modificando-a sem gerar outra. No caso de sorted(), é usado para gerar uma nova lista. 
+
+Ou seja, o método `sorted()` não modifica a coleção original, o `sort()`, sim.
+
+Por exemplo:
+
 ```python
+# Ordenando a mesma lista:
 lista = [4,2,5,7,0,1]
 lista.sort()
 print(lista)
@@ -1152,8 +1160,30 @@ lista.sort(reverse=True)
 print(lista)
 # [7, 5, 4, 2, 1, 0]
 
+# não funciona caso queira produzir uma nova lista a partir da original:
+ordenada = lista.sort()
+print(ordenada) 	# resultado: None
 
-# Numa lista com letras maiúsculas e minúsculas, usar (key=str.lower):
+
+# Para produzir uma nova lista ordenada a partir de uma original:
+lista = [4,2,5,7,0,1]
+lista_ordenada = sorted(lista)
+lista_inversa = sorted(lista, reverse=True)
+print(lista_ordenada) 	# resultado: [0, 1, 2, 4, 5, 7]
+print(lista_inversa) 	# resultado: [7, 5, 4, 2, 1, 0]
+```
+
+A diferença na sintaxe é:
+
+`lista.sort()`
+
+`sorted(lista)`
+
+
+Mais exemplos:
+
+```python
+# Ordenar lista com ignore-case - usar (key=str.lower):
 lista = ['Zélia', 'Ana', 'Carla', 'alunas', 'Bárbara', 'assinantes']
 lista.sort(key=str.lower)
 print(lista)
@@ -1162,8 +1192,39 @@ print(lista)
 
 # em ordem reversa, usaria-se:
 lista.sort(key=str.lower, reverse=True)
-
 ```
+
+
+### Ordenando uma lista de dicionários
+
+Nesse tópico, vamos usar apenas o método `sort()` para ordenar uma lista de dicionários, e mais adiante `sorted()` como forma mais avançada. Lembrando que `sort` ordena ao mesmo tempo que altera a lsita original.
+
+Abaixo, você encontrará exemplos de funções lambdas, que só veremos mais adiante como funcionam.
+
+Exemplo de código:
+
+```python
+dados_pessoais = [
+    {'nome': 'Carlos', 'idade': 35, 'profissão': 'Engenheiro'},
+    {'nome': 'Beatriz', 'idade': 28, 'profissão': 'Designer'},
+    {'nome': 'Amanda', 'idade': 42, 'profissão': 'Professora'},
+    {'nome': 'Daniel', 'idade': 24, 'profissão': 'Estudante'},
+    {'nome': 'Eva', 'idade': 51, 'profissão': 'Médica'}
+]
+
+# para ordenar uma lista de dicionários alterando-a:
+dados_pessoais.sort(key = lambda elemento: elemento['nome'])
+print(dados_pessoais)
+
+dados_pessoais.sort(key = lambda elemento: elemento['idade'])
+print(dados_pessoais)
+
+dados_pessoais.sort(key = lambda elemento: elemento['profissão'])
+print(dados_pessoais)
+```
+
+Para ordenar com o método `sorted()`, veja o tópico: [O MÉTODO SORTED() PARA ORDENAR LISTAS DE DICIONÁRIOS](#sorted)
+
 
 ### Convertendo uma lista em string (texto)
 
@@ -2326,6 +2387,40 @@ filtrados = list(filter(lambda c: c["idade"] > 30, clientes))
 # [{'nome': 'Carla', 'idade': 40}]
 ```
 
+
+
+## <a class="up" href="#topo"> O MÉTODO SORTED() PARA ORDENAR LISTAS DE DICIONÁRIOS <span id='sorted'></span></a>
+
+O método `sorted()` é usado para ordenar listas de dicionários e tem semelhança com a sintaxe de `map()` e `filter()`, também por usar função `lambda`. Lembrando que ele automaticamente, como map() e filter(), gera outra lista. 
+
+Sua sintaxe é:
+
+`sorted(lista, key=função_lambda)`
+
+E a função lambda será formatada desta maneira: 
+
+`lambda elemento: elemento['chave']`
+
+Sendo `'chave'` o nome da chave escolhida do dicionário como critério para ordenar a lista.
+
+Mas, observe também que usaremos `key` (chave) para definirmos esse critério:
+
+```python
+dados_pessoais = [
+    {'nome': 'Carlos', 'idade': 35, 'profissão': 'Engenheiro'},
+    {'nome': 'Beatriz', 'idade': 28, 'profissão': 'Designer'},
+    {'nome': 'Amanda', 'idade': 42, 'profissão': 'Professora'},
+    {'nome': 'Daniel', 'idade': 24, 'profissão': 'Estudante'},
+    {'nome': 'Eva', 'idade': 51, 'profissão': 'Médica'}
+]
+
+# produziremos novas listas ordenadas:
+ordenada_por_nome  = sorted(dados_pessoais, key=lambda elemento: elemento['nome'])
+ordenada_por_idade = sorted(dados_pessoais, key=lambda elemento: elemento['idade'])
+ordenada_por_profissao = sorted(dados_pessoais, key=lambda elemento: elemento['profissão'])
+```
+
+Além do método mencionado nesse tópico é possível ordenar uma lista de dicionários através do método `sort()`, mas nesse caso, não se produzirá uma nova lista, senão apenas se modificará a original. Exemplos em: [Ordenando uma lista de dicionários](#ordenando-uma-lista-de-dicion%C3%A1rios).
 
 
 ## <a class="up" href="#topo"> TRATAMENTO DE ERROS - try/except <span id='erros'></span></a>
