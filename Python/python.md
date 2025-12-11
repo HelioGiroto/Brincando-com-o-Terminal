@@ -45,6 +45,7 @@ https://automatetheboringstuff.com/ 		- Livro "Automatize tarefas maçantes com 
 - [Condições - Operadores Ternários](#ternarios)
 - [Opções em Casos - Criação de Menús](#casos)
 - [Listas](#listas)
+- [Matrizes](#matrizes)
 - [Manipulação de Listas](#manipulacao)
 - [Tuplas](#tuplas)
 - [Conjuntos - Sets](#sets)
@@ -307,8 +308,11 @@ print(nome)
 # imprime 4 vezes a mesma string:
 print('Olá '*4)
 
-# imprime com uma quebra de linha:
-print('Bem-vindo!\n')
+# imprime com uma quebra de linha no meio da frase:
+print('Bem-vindo!\nComo vai?')
+
+# imprime sem quebra de linha:
+print('Olá, esta é a informação que me pediu:', end=' ')
 
 # usando 3 áspas simples podemos imprimir um texto com quebra de linhas:
 print('''
@@ -917,6 +921,34 @@ lista = [0, 1, 2, ['a', 'b', 'c']]
 lista[3][1]
 # 'b'
 ```
+
+## <a class="up" href="#topo"> MATRIZES <span id='matrizes'></span></a> 
+
+Uma matriz é uma lista de lista, ou seja, ao invés de cada elemento da lista ser uma string, é outra lista. 
+
+Um exemplo de criação de uma matriz:
+
+```python
+notas = [[7,8,9],
+[6,5,7],
+[9,10,10]]
+```
+
+Para acessar um valor da matriz, é preciso seguir este formato, para a posição linha: 0 e coluna: 2.
+
+`notas[0][2]`
+
+O resultado seria "9". 
+
+Exemplo de código para cálculo da média de todos os valores de uma linha:
+
+```python
+notas = [[7,8,9], [6,5,7], [9,10,10]]
+for linha in notas:
+	media = sum(linha) / len(linha)
+	print(f'Média: {media}')
+```
+
 
 
 ## <a class="up" href="#topo"> MANIPULAÇÃO DE LISTAS <span id='manipulacao'></span></a>
@@ -2925,10 +2957,67 @@ for s in datas:
 
 ## <a class="up" href="#topo"> LENDO E ESCREVENDO ARQUIVOS <span id='arquivos'></span></a>
 
+### Abrindo arquivos
+
+A maneira mais eficaz para abrir e ler um arquivo é usando a palavra reservada 'with' com o comando `open()`. Dessa forma, ao sairmos assim que realiza a leitura e processamento dos dados desse arquivo, o mesmo é automaticamente fechado, sem ocupar memória da máquina. Vejamos o exemplo:
+
+```python
+with open('arquivo.txt', 'r') as arq:
+	conteudo = arq.read()
+	print(conteudo)
+```
+
+Explicação:
+- O arquivo é aberto em mode de leitura ('r' - read) e referenciado num alias - linha 1
+- O arquivo é lido e guardado em uma variável - linha 2
+- O conteúdo da variável é impresso na tela   - linha 3
+
+Após a impressão (fim do bloco de código), automaticamente o arquivo é fechado, sem precisar o uso do comando `close()` e a memória é liberada.
+
+
+### Lendo arquivos - Métodos: read() e readlines()
+
+Após abrir um arquivo em modo de leitura, o próximo passo é quase sempre ler o arquivo aberto. No exemplo acima, todo o conteúdo do arquivo foi lido e guardado numa variável como uma única string. 
+
+Porém, às vezes será interessante que cada linha desse arquivo seja salva como um item de uma lista, principalmente se estivermos tratando de arquivos csv, por exemplo, ou outros. 
+
+Assim, o método mais usual para isso ao invés de `read()` seria o `readlines()` (plural).
+
+O `readlines` lê todas as linhas do arquivo e a guarda numa lista.
+
+Exemplo:
+
+```python
+with open('arq.csv', 'r') as arq:
+	arq_lista = arq.readlines()
+	type(arq_lista)
+```
+
+E para percorrer todos os itens da lista:
+
+```python 
+with open('arq.csv', 'r') as arq:
+	lista = arq.readlines()
+	for linha in lista:
+		print(linha, end='')
+
+# para que não pule uma linha a mais entre cada uma, use ao lado de print:
+		print(linha, end='')
+```
+
+### Escrevendo em arquivos 
+
+- open....
+- Métodos write() e writelines()...
+
+(p.144) - python em bco
+
+### Mais...:
+
+
 https://www.w3schools.com/python/python_file_handling.asp
 
 https://www.w3schools.com/python/python_ref_file.asp
-
 
 
 ## <a class="up" href="#topo"> BIBLIOTECAS <span id='bibliotecas'></span></a>
