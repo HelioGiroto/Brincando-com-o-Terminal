@@ -62,9 +62,10 @@ https://automatetheboringstuff.com/ 		- Livro "Automatize tarefas maçantes com 
 - [Tratamento de Erros - Try Except...](#erros)
 - [POO - Programação Orientada a Objetos](#poo)
 - [Manipulação de Datas](#datas)
-- [Importando outros Arquivos](#importando)
 - [Lendo e Escrevendo Arquivos](#arquivos)
+- [Importando Arquivos](#importando)
 - [Bibliotecas](#bibliotecas)
+- [Expressões Regulares](#regex)
 - [Integração com outras Linguagens](#integracao)
 
 
@@ -657,10 +658,7 @@ for n, cada_letra in enumerate(palavra):
 	print(f'A {str(n).rjust(2)}ª letra da palavra {palavra} é: {cada_letra}')
 ```
 
-
-### Regex
-
-https://www.w3schools.com/python/python_regex.asp
+Ver também: [Expressões Regulares - REGEX](#regex)
 
 
 ## <a class="up" href="#topo"> OPERADORES DE COMPARAÇÃO <span id='comparacao'></span></a> 
@@ -2953,7 +2951,6 @@ for s in datas:
     print(dt.strftime("%d de %B de %Y"))
 ```
 
-## <a class="up" href="#topo"> IMPORTANDO OUTROS ARQUIVOS <span id='importando'></span></a> 
 
 ## <a class="up" href="#topo"> LENDO E ESCREVENDO ARQUIVOS <span id='arquivos'></span></a>
 
@@ -2968,14 +2965,14 @@ with open('arquivo.txt', 'r') as arq:
 ```
 
 Explicação:
-- O arquivo é aberto em mode de leitura ('r' - read) e referenciado num alias - linha 1
+- O arquivo é aberto em mode de leitura ('r' - read) e referenciado num alias: 'arq'- linha 1
 - O arquivo é lido e guardado em uma variável - linha 2
 - O conteúdo da variável é impresso na tela   - linha 3
 
 Após a impressão (fim do bloco de código), automaticamente o arquivo é fechado, sem precisar o uso do comando `close()` e a memória é liberada.
 
 
-### Lendo arquivos - Métodos: read() e readlines()
+### Lendo arquivos
 
 Após abrir um arquivo em modo de leitura, o próximo passo é quase sempre ler o arquivo aberto. No exemplo acima, todo o conteúdo do arquivo foi lido e guardado numa variável como uma única string. 
 
@@ -3007,17 +3004,58 @@ with open('arq.csv', 'r') as arq:
 
 ### Escrevendo em arquivos 
 
-- open....
-- Métodos write() e writelines()...
+Para escrever em arquivos usamos os métodos `write()` ou `writelines()`.
+
+Porém, antes disso, é preciso observar o modo que abriremos nosso arquivo que será escrito. Basicamente, são dois modos:
+
+- 'w': Para escrever no arquivo (**w**rite). Caso o arquivo não exista, o Python criará o arquivo. Mas caso sim exista, o Python sobrescreverá o arquivo, sendo assim, todo o conteúdo anterior do mesmo será perdido e somente se terá dentro dela as informações escritas a partir de então. 
+
+- 'a': Para escrever ao fim do arquivo (**a**ppend). Ou seja, preserva o arquivo com as informações existentes, porém adiciona após sua última linha, o conteúdo que está sendo passado agora.
+
+Já os métodos `write` e `writelines` trabalha semelhante a `read` e `readlines`, porém, se usados diretamente, ele não salta uma linha para escrever abaixo do que já existe, por tanto, é necessário sempre antes de escrever no arquivo, acrescentar à string uma quebra de linha. 
+
+Vejamos como fica no exemplo:
+
+```python
+lista = ['maçã', 'açafrão', 'cajá', 'limão', 'café']
+with open ('teste.csv', 'w') as f:
+    f.writelines(lista)
+
+teste = 'chimarrão'
+with open('teste.csv', 'a') as f:
+    f.write(f'\n{teste}'
+	f.write('\nfeijão'))
+
+outra_lista = [1,2,3,4,5]
+with open('teste.csv', 'a') as f:
+    for i in outra_lista:
+        f.write(f'\n{i}')
+
+# Saída em teste.csv:
+maçãaçafrãocajálimãocafé.	# sem \n
+chimarrão					# com \n
+feijão
+1
+2
+3
+4
+5
+```
+
+Observe acima os modos em que o arquivo `teste.csv` foi aberto. Primeiramente em modo 'w' e depois 'a'. 
+
+Note também como o `write` e o `writelines` operam. No caso de `writelines` ele não escreve cada elemento da lista numa linha a parte, mas todos os elementos numa mesma linha. Sendo assim, para evitar este formato de saída, teria que acrescentar uma quebra de linha (new line) '\n' antes de cada elemento ou executar um laço `for` para fazê-lo (como mostramos acima em `outra_lista`):
+
+`lista = ['\na', '\nb', '\nc', '\nd', '\ne']`
+
+Na forma acima de definir a lista, `writelines` imprimiria cada elemento em uma linha nova. 
+
 
 (p.144) - python em bco
 
-### Mais...:
 
+## <a class="up" href="#topo"> IMPORTANDO OUTROS ARQUIVOS <span id='importando'></span></a> 
 
-https://www.w3schools.com/python/python_file_handling.asp
-
-https://www.w3schools.com/python/python_ref_file.asp
 
 
 ## <a class="up" href="#topo"> BIBLIOTECAS <span id='bibliotecas'></span></a>
@@ -3212,6 +3250,10 @@ Bibliotecas nativas:
 | **fastapi / flask**          | Criação de APIs e microserviços.                   |
 
 ---
+
+## <a class="up" href="#topo"> EXPRESSÕES REGULARES <span id='regex'></span></a> 
+
+ver - https://www.w3schools.com/python/python_regex.asp
 
 
 ## <a class="up" href="#topo"> INTEGRAÇÃO COM OUTRAS LINGUAGENS <span id='integracao'></span></a> 
