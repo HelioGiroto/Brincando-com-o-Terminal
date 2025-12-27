@@ -31,7 +31,8 @@
 - Printa depois de 3 segundos as coordenadas da tela:
 ` scrot -a 200,300,500,500 -d3 `
 
-
+- Printa seleção da tela e copia para o clipboard:
+`scrot -s -o /tmp/captura.png && xclip -selection clipboard -t image/png -i /tmp/captura.png `
 
 ## Página man:
 
