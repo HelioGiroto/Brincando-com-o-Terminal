@@ -3253,6 +3253,152 @@ Bibliotecas nativas:
 
 ## <a class="up" href="#topo"> EXPRESSÕES REGULARES <span id='regex'></span></a> 
 
+Expressões regulares, ou Regex (em inglês abreviado), são recursos muito usados em qualquer linguagem e servem para procurar, identificar e/ou extrair certos padrões de strings dentro de um texto maior. 
+
+Suponhamos que dentro de um texto de 1 Gigabytes você queira extrair os emails que estejam ali, ou que você queira saber se dentro de um documento existe algum nome específico ou termo (seja no singular ou plural), ou que você queira extrair apenas os parágrafos que contenham uma determinada tag ou expressão ou número. Tudo isso é possível através do uso de expressões regulares. 
+
+Dentro do Python há módulos nativos, chamados `re` e `regex`, que tratam especificamente desse assunto. 
+
+Sem o uso de expressões regulares, seria possível, por exemplo, verificar se uma string aparece num texto ou lista, usando a instrução `in`, como vemos a seguir:
+
+```python
+contador = 0
+with open('texto.md', 'r') as f:
+    lista = f.readlines()
+    for linha in lista:
+            if 'linguagem' in linha:
+                contador += 1
+                print(linha)
+
+print(f'Ocorrências: {contador}')
+```
+
+No exemplo acima, um arquivo é aberto, seus parágrafos são "convertidos" em lista, e após percorrer cada linha, se contará em quantas linhas aparece a palavra "linguagem", como também se imprime a linha inteira onde essas ocorrências existem no texto. 
+
+Porém, o exemplo acima, não usa expressões regulares, mas a palavra "linguagem". Variações dessa palavras como "linguagens" (plural), ou "Linguagem" com 'L' maiúsculo não seriam identificadas. Logo, se necessitaria usar um padrão para que a procura fosse mais assertiva, ou seja, uma expressão regular.
+
+Como usamos expressões regulares:
+
+### Extraindo ocorrências de uma expressão regular de dentro de um texto
+
+Utilizamos os métodos `re.compile()` para definir a expressão regular (ou padrão), e `re.findall()` para encontrar todas as vezes que aparece o padrão, gerando uma lista com todas as ocorrências encontradas.
+
+_(É equivalente ao `grep -o expressao` do Bash)_
+
+Obs.: Vamos direto ao uso prático e fuincional com esses métodos acima, porém poderíamos usar o método `re.search()`, que retornaria apenas um objeto e após usar o `group()` para imprimí-lo (o que complicaria a explicação).
+
+**Extraindo emails de um texto:**
+
+```python
+# importa módulo:
+import re
+
+# texto a ser garimpado:
+mensagem = '''
+Prezado Sr. Silva,
+Espero que este e-mail o encontre bem.
+Gostaria de confirmar a nossa reunião agendada para amanhã, dia 28 de dezembro, às 10h, para discutir os próximos passos do Projeto X.
+Estou à sua disposição para quaisquer esclarecimentos.
+Atenciosamente,
+João Santos
+Analista de Projetos
+Empresa XYZ
+(11) 98765-4321
+Emails: joao_santos@gmail.com, jc01@hotmail.com
+LinkedIn da Empresa XYZ
+'''
+
+# define expressão regular que quer extrair:
+expressao = re.compile(r'\w+@.\w+.\w+') # ou somente:
+expressao = r'\w+@.\w+.\w+'
+# procura por todas as ocorrências, retornando uma lista:
+ocorrencias = re.findall(email, mensagem)
+# imprime a lista:
+print(ocorrencias)
+# ['joao_santos@gmail.com', 'jc01@hotmail.com']
+```
+
+Note que a sintaxe do método `re.findall()` obedece a seguinte ordem de argumentos: (expressao, texto_fonte) ou para melhor memorização: **`re.findall(o_que, de_onde)`**.
+
+
+### Verificar se uma expressão aparece num texto:
+
+Queremos apenas ver se uma expressão consta num texto. NAda mais.
+
+```python
+# importa a biblioteca:
+import re
+
+# em seguida o texto:
+frase = "Minha terra tem palmeiras, onde canta o Sabiá" 
+
+expressao1 = r'palmeiras'
+expressao2 = r'Palmeiras'
+expressao3 = r'[P|p]almeiras'
+
+print(re.search(expressao1.teste))
+
+if re.search(expressao1, frase):
+    print(f'A expressão {expressao1} aparece na frase.\n')
+
+if re.search(expressao2, frase):
+	print(f'A expressão {expressao2} aparece na frase.\n')
+
+if re.search(expressao3, frase):
+	print(f'A expressão {expressao3} aparece na frase.\n')
+
+# resultado:
+# apenas as expressões 1 e 3 têm ocorrências na frase.
+```
+
+Igualmente o método `re.search()` também segue a mesma sintaxe de `findall`: `re.rearch(o_que, de_onde)`, ou seja, primeiro o argumento da expressão definida (em compile) e depois de onde se procurará a expressão.
+
+### Obtendo toda a linha onde aparece uma expressão regular no texto:
+
+Extrairemos do texto apenas os parágrafos (linhas) que contenham certo padrão de texto (expressão regular):
+
+_Equivalente ao `grep expressao` do Bash_
+
+```python
+conto = '''
+A Beleza Total, de Carlos Drummond
+    A beleza de Gertrudes fascinava todo mundo e a própria Gertrudes. Os espelhos pasmavam diante de seu rosto, recusando-se a refletir as pessoas da casa e muito menos as visitas. Não ousavam abranger o corpo inteiro de Gertrudes. Era impossível, de tão belo, e o espelho do banheiro, que se atreveu a isto, partiu-se em mil estilhaços.
+
+    A moça já não podia sair à rua, pois os veículos paravam à revelia dos condutores, e estes, por sua vez, perdiam toda capacidade de ação. Houve um engarrafamento monstro, que durou uma semana, embora Gertrudes houvesse voltado logo para casa.
+    
+    O Senado aprovou lei de emergência, proibindo Gertrudes de chegar à janela. A moça vivia confinada num salão em que só penetrava sua mãe, pois o mordomo se suicidara com uma foto de Gertrudes sobre o peito.
+    
+    Gertrudes não podia fazer nada. Nascera assim, este era o seu destino fatal: a extrema beleza. E era feliz, sabendo-se incomparável. Por falta de ar puro, acabou sem condições de vida, e um dia cerrou os olhos para sempre. Sua beleza saiu do corpo e ficou pairando, imortal. O corpo já então enfezado de Gertrudes foi recolhido ao jazigo, e a beleza de Gertrudes continuou cintilando no salão fechado a sete chaves.
+'''
+
+# para facilitar a operação, vamos "converter" o texto todo em lista:
+lista = conto.splitlines()
+
+# definimos a expressão a ser buscada:
+expressao = r'casa'
+
+# Agora, vamos obter a(s) linha(s) inteira(s) do conto acima que contanha a palavra "casa":
+# Se percorrerá com a list compreension abaixo a cada item (linha) da lista e se verificou se a expressao está em linha, gerando assim uma nova lista.
+ocorrencias = [linha for linha in lista if re.search(expressao, linha)]
+
+# outra alternativa para o comando acima, seria com uso de filter() desta forma:
+ocorrencias = list(filter(lambda linha: re.search(expressao, linha), lista))
+
+# se imprime todas as ocorrências encontradas:
+print(ocorrencias)
+```
+
+Outro exemplo útil:
+
+**Extraindo certas linhas de um arquivo csv que contenham uma expressão regular:**
+
+Exemplo:
+
+```python
+
+```
+
+
 ver - https://www.w3schools.com/python/python_regex.asp
 
 
