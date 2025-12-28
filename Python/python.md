@@ -3279,11 +3279,12 @@ Porém, o exemplo acima, não usa expressões regulares, mas a palavra "linguage
 
 Como usamos expressões regulares:
 
-### Extraindo ocorrências de uma expressão regular de dentro de um texto
+### Extraindo ocorrências de um texto
+_(É equivalente ao `grep -o expressao` do Bash)_
 
 Utilizamos os métodos `re.compile()` para definir a expressão regular (ou padrão), e `re.findall()` para encontrar todas as vezes que aparece o padrão, gerando uma lista com todas as ocorrências encontradas.
 
-_(É equivalente ao `grep -o expressao` do Bash)_
+Para mais exemplos de como definir uma expressão regular e seus símbolos, ver a sub-seção: "Metacaracteres, Conjuntos e Sequências especiais".
 
 Obs.: Vamos direto ao uso prático e fuincional com esses métodos acima, porém poderíamos usar o método `re.search()`, que retornaria apenas um objeto e após usar o `group()` para imprimí-lo (o que complicaria a explicação).
 
@@ -3294,7 +3295,7 @@ Obs.: Vamos direto ao uso prático e fuincional com esses métodos acima, porém
 import re
 
 # texto a ser garimpado:
-mensagem = '''
+email = '''
 Prezado Sr. Silva,
 Espero que este e-mail o encontre bem.
 Gostaria de confirmar a nossa reunião agendada para amanhã, dia 28 de dezembro, às 10h, para discutir os próximos passos do Projeto X.
@@ -3309,21 +3310,43 @@ LinkedIn da Empresa XYZ
 '''
 
 # define expressão regular que quer extrair:
-expressao = re.compile(r'\w+@.\w+.\w+') # ou somente:
-expressao = r'\w+@.\w+.\w+'
+expressao = re.compile(r'\w+@.\w+.\w+') 
+# poderia ser usado somente:
+# expressao = r'\w+@.\w+.\w+' # porém usar com compile() o desempenho é melhor.
+
 # procura por todas as ocorrências, retornando uma lista:
-ocorrencias = re.findall(email, mensagem)
+ocorrencias = re.findall(expressao, email)
+# funciona de igual modo, se pode usar esta sintaxe:
+ocorrencias = expressao.findall(email)
+
+# imprime nro de ocorrências:
+print(f'Nro. de ocorrências: {len(ocorrencias)}.')
 # imprime a lista:
 print(ocorrencias)
+
+# resultado:
+# Nro. de ocorrências: 2.
 # ['joao_santos@gmail.com', 'jc01@hotmail.com']
 ```
 
 Note que a sintaxe do método `re.findall()` obedece a seguinte ordem de argumentos: (expressao, texto_fonte) ou para melhor memorização: **`re.findall(o_que, de_onde)`**.
 
+**Outro exemplo de extração de texto:**
 
-### Verificar se uma expressão aparece num texto:
+Jeito mais 'encapsulado' de usar findall - um método seguido de outro na mesma linha de comando:
 
-Queremos apenas ver se uma expressão consta num texto. NAda mais.
+```python
+frase = "Minha terra tem palmeiras, onde canta o Sabiá e o Palmeiras" 
+# regex com ignore case (ignora se é maiúsculas ou minúsculas):
+ocorrencias = re.compile(r'(?i)palme\w+').findall(frase)	# (?i) ou re.I:
+ocorrencias = re.compile(r'palme\w+', re.I).findall(frase)	# =
+print(ocorrencias)
+# ['palmeiras', 'Palmeiras']
+```
+
+### Verificar se uma expressão aparece num texto
+
+Queremos apenas ver se uma expressão consta num texto. Nada mais.
 
 ```python
 # importa a biblioteca:
@@ -3332,9 +3355,9 @@ import re
 # em seguida o texto:
 frase = "Minha terra tem palmeiras, onde canta o Sabiá" 
 
-expressao1 = r'palmeiras'
-expressao2 = r'Palmeiras'
-expressao3 = r'[P|p]almeiras'
+expressao1 = re.compile(r'palmeiras')
+expressao2 = re.compile(r'Palmeiras')
+expressao3 = re.compile(r'[P|p]almeiras')
 
 print(re.search(expressao1.teste))
 
@@ -3353,11 +3376,11 @@ if re.search(expressao3, frase):
 
 Igualmente o método `re.search()` também segue a mesma sintaxe de `findall`: `re.rearch(o_que, de_onde)`, ou seja, primeiro o argumento da expressão definida (em compile) e depois de onde se procurará a expressão.
 
-### Obtendo toda a linha onde aparece uma expressão regular no texto:
-
-Extrairemos do texto apenas os parágrafos (linhas) que contenham certo padrão de texto (expressão regular):
+### Obtendo toda a linha onde a expressão aparece no texto:
 
 _Equivalente ao `grep expressao` do Bash_
+
+Extrairemos do texto apenas os parágrafos (linhas) que contenham certo padrão de texto (expressão regular):
 
 ```python
 conto = '''
@@ -3375,7 +3398,7 @@ A Beleza Total, de Carlos Drummond
 lista = conto.splitlines()
 
 # definimos a expressão a ser buscada:
-expressao = r'casa'
+expressao = re.compile(r'casa')
 
 # Agora, vamos obter a(s) linha(s) inteira(s) do conto acima que contanha a palavra "casa":
 # Se percorrerá com a list compreension abaixo a cada item (linha) da lista e se verificou se a expressao está em linha, gerando assim uma nova lista.
@@ -3395,11 +3418,43 @@ Outro exemplo útil:
 Exemplo:
 
 ```python
+# exemplo de arquivo:
+''' dados.csv:
+		"Nome";"Endereço";"Telefone";"Cidade";"Estado"
+		"Ana Silva";"Rua das Flores, 123";"(11) 98765-4321";"São Paulo";"SP"
+		"Bruno Santos";"Av. Central, 45";"(21) 91234-5678";"Rio de Janeiro";"RJ"
+		"Carla Oliveira";"Rua da Paz, 789";"(31) 99887-6655";"Belo Horizonte";"MG"
+		"Daniel Costa";"Av. Brasil, 1000";"(41) 92345-6789";"Curitiba";"PR"
+		"Eduarda Pereira";"Rua do Sol, 50";"(51) 98765-1234";"Porto Alegre";"RS"
+		"Fernando Lima";"Av. Oceânica, 21";"(71) 91234-9876";"Salvador";"BA"
+		"Gabriela Alves";"Rua dos Bandeirantes, 321";"(61) 99887-4321";"Brasília";"DF"
+		"Heitor Mendes";"Av. Paulista, 1500";"(11) 91234-5432";"São Paulo";"SP"
+		"Isabela Rocha";"Rua da Aurora, 456";"(81) 98765-6789";"Recife";"PE"
+		"João Carvalho";"Av. Beira-Mar, 78";"(85) 91234-3456";"Fortaleza";"CE"
+'''
+# código:
+with open('dados.csv', 'r') as f:
+    arq = f.readlines()
+    padrao_de_busca = re.compile(r'"SP"')
+    ocorrencias = [linha for linha in arq if re.search(padrao_de_busca, linha)]
+    texto = "".join(ocorrencias)
+    print(texto)
 
+# resultado:
+# "Ana Silva";"Rua das Flores, 123";"(11) 98765-4321";"São Paulo";"SP"
+# "Heitor Mendes";"Av. Paulista, 1500";"(11) 91234-5432";"São Paulo";"SP"
 ```
 
 
+### Metacaracteres, Conjuntos e Sequências especiais
+
+
+
 ver - https://www.w3schools.com/python/python_regex.asp
+
+
+
+
 
 
 ## <a class="up" href="#topo"> INTEGRAÇÃO COM OUTRAS LINGUAGENS <span id='integracao'></span></a> 
