@@ -1320,12 +1320,30 @@ print(lista2)
 ### Juntanto duas listas - fusinando listas
 
 ```python 
-list1 = ["a", "b" , "c"]
-list2 = [1, 2, 3]
-list1.extend(list2)
-print(list1) 	# ['a', 'b', 'c', 1, 2, 3]
+lista1 = ["a", "b" , "c"]
+lista2 = [1, 2, 3]
+lista1.extend(lista2)
+print(list1) 	
+# ['a', 'b', 'c', 1, 2, 3]
+
+# ou mais fácil ainda - somando duas listas em uma:
+lista3 = lista1 + lista2
+print(lista3)
+# ['a', 'b', 'c', 1, 2, 3]
 ```
 
+### Transformando uma lista de listas em uma lista de itens
+
+É um conceito avançado pelo momento, mas ao chegar as "Lists Comprehensions", se tornará muito fácil de entender:
+
+```python
+lista_de_sublistas = [[0,1,2], [3,4,5], [6,7,8]]
+
+lista_itens = [item for sublista in lista_de_sublistas for item in sublista]
+
+print(lista_itens)
+# [0, 1, 2, 3, 4, 5, 6, 7, 8] !!!
+```
 
 ### Outros métodos para listas
 Há também dois métodos muito úteis usados para atualizar e filtrar listas que veremos mais adiante: `map()` e `filter()` e as `Lists Comprehension`.
@@ -3443,6 +3461,70 @@ with open('dados.csv', 'r') as f:
 # resultado:
 # "Ana Silva";"Rua das Flores, 123";"(11) 98765-4321";"São Paulo";"SP"
 # "Heitor Mendes";"Av. Paulista, 1500";"(11) 91234-5432";"São Paulo";"SP"
+```
+
+### Obtendo o número da linha que aparece a expressão no texto
+
+_Equivalente ao `grep -c expressao` do Bash_
+
+```python
+import re
+
+expressao = re.compile(r'"Curitiba"')
+
+with open('dados.csv', 'r') as f:
+	arq = f.readlines()
+	ocorrencia = [[nro, linha] for nro, linha in enumerate(arq) if re.search(expressao, linha)]
+
+	# imprime nro da linha e linha:
+	print(ocorrencia)
+
+	# imprime apenas o nro da linha onde a ocorrência(s) aparece(m):
+	somente_nros = [nro for nro, linha in enumerate(arq) if re.search(expressao, linha)]
+    print(somente_nros)
+
+```
+
+### Imprimindo as linhas acima e abaixo da ocorrência - contexto
+
+_Equivalente ao `grep -C2 expressao` do Bash_
+
+Suponha que você precisa imprimir não apenas a(s) linha(s) onde aparece a ocorrência da expressão regular, mas também o seu contexto (o gap em embeding de IA) anterior e posterior, ou seja, algumas linhas antes e depois. como fazer isso em Python?
+
+Observe o código:
+
+```python
+import re
+
+expressao = re.compile(r'"Curitiba"')
+contexto = 2    # anterior e posterior da linha match - (semelhante a grep -C2)
+
+with open('dados.csv', 'r') as f:
+    arq = f.readlines()
+    # print(arq)
+
+    # pega somente o nro exato da linha cuja expressão é encontrada na linha: 
+    ocorrencias = [nro for nro, linha in enumerate(arq) if re.search(expressao, linha)]
+
+    # Fará uma lista de sublistas com os seguntes valores:
+    # o nro da linha de cada ocorrência menos e mais a quantidade de linhas de contexto
+    # para que se tenha o nros das linhas acima e abaixo da ocorrencia encontrada
+    # (simulando assim o grep -C2)
+    # por ex.: se a linha da ocorrência é 5 e o contexto (-C) é 2, então teremos: 3,4,5,6,7
+    # foi colocado o range(contexto) de maneira retrógrada (-1) até chegar a 0 (-1) para
+    # para que conte (se contexto for 2, i. é -C2): 5-2 e 5-1 e 5-0. Como some: 5+2, 5+1, 5+0
+    indexes_com_contexto = [[ocorrencia - index_contexto, ocorrencia + index_contexto] for ocorrencia in ocorrencias for index_contexto in range(contexto,-1,-1)]
+    # transforma lista de sublistas em uma só lista de items e depois faz o set (uniq):
+    # (if item > -1 se porventura tenha linha menor que 0 será descartada)
+    lista_fusionada = [item for sublista in indexes_com_contexto for item in sublista if item > -1]
+    lista_sem_duplicados = set(lista_fusionada)
+
+    # imprime o número de todas as linhas que serão impressas:
+    print(f'\nLinhas que aparecem as ocorrências: {ocorrencias}. Linhas de contexto: {set(lista_sem_duplicados)}\n')
+
+    # e imprime as linhas match com as de contexto:
+    [print(arq[nro]) for nro in lista_sem_duplicados]
+
 ```
 
 
