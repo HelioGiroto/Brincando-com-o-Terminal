@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Lê o conteúdo do clipboard (seleção clipboard)
+TEXTO=$(xclip -selection clipboard -o 2>/dev/null)
+
+# Se estiver vazio, sai silenciosamente
+[ -z "$TEXTO" ] && exit 0
+
+# Envia para o Speech Dispatcher usando RHVoice
+spd-say -o rhvoice -l pt-BR "$TEXTO"

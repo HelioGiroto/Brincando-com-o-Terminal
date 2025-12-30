@@ -65,7 +65,7 @@ https://automatetheboringstuff.com/ 		- Livro "Automatize tarefas maçantes com 
 - [Lendo e Escrevendo Arquivos](#arquivos)
 - [Importando Arquivos](#importando)
 - [Bibliotecas](#bibliotecas)
-- [Expressões Regulares](#regex)
+- [Expressões Regulares - REGEX](#regex)
 - [Integração com outras Linguagens](#integracao)
 
 
@@ -1105,7 +1105,7 @@ while 0 in lista: lista.remove(0)
 print(lista)
 ```
 
-Poderia usar este outro exemplo, filtrando a lista de todos os itens não desejados (ver Compreensão de Listas):
+Poderia usar este outro exemplo, filtrando a lista de todos os itens não desejados (ver [Compreensão de Listas](#compreensao)):
 
 ```python
 lista = [0,1,2,3,0,4,5,6,0,0,7]
@@ -1320,13 +1320,21 @@ print(lista2)
 ### Juntanto duas listas - fusinando listas
 
 ```python 
+# instrução extend:
 lista1 = ["a", "b" , "c"]
 lista2 = [1, 2, 3]
 lista1.extend(lista2)
-print(list1) 	
+print(list1)
 # ['a', 'b', 'c', 1, 2, 3]
 
-# ou mais fácil ainda - somando duas listas em uma:
+# ou usando operadores acumuladores (+=):
+lista1 = ["a", "b" , "c"]
+lista1 += [1, 2, 3]
+print(list1)
+# ['a', 'b', 'c', 1, 2, 3]
+
+
+# ou somando duas listas em uma resultando numa terceira:
 lista3 = lista1 + lista2
 print(lista3)
 # ['a', 'b', 'c', 1, 2, 3]
@@ -1334,15 +1342,20 @@ print(lista3)
 
 ### Transformando uma lista de listas em uma lista de itens
 
-É um conceito avançado pelo momento, mas ao chegar as "Lists Comprehensions", se tornará muito fácil de entender:
+É um conceito avançado pelo momento, mas ao chegar as "[Lists Comprehensions](#compreensao)", se tornará muito fácil de entender:
 
 ```python
-lista_de_sublistas = [[0,1,2], [3,4,5], [6,7,8]]
+listas = [[0,1,2], [3,4,5], [6,7,8]]
 
-lista_itens = [item for sublista in lista_de_sublistas for item in sublista]
+lista_itens = [item for sublista in listas for item in sublista]
 
 print(lista_itens)
 # [0, 1, 2, 3, 4, 5, 6, 7, 8] !!!
+
+
+# para memorizar a sintaxe mais fácil:
+nova_lista = [cadaitem for cadalista in listas for cadaitem in cadalista]
+
 ```
 
 ### Outros métodos para listas
@@ -1524,7 +1537,7 @@ print("Arquivo JSON criado com sucesso!")
 
 ### Ordenando os itens dos dicionários:
 
-- Ver também "Ordenando uma lista" no sub-título "Manipução de Listas"
+- Ver também "Ordenando uma lista" no sub-título "[Manipução de Listas](#manipulacao)"
 
 ```python
 # ordenando por (nome da) chave:
@@ -3269,7 +3282,7 @@ Bibliotecas nativas:
 
 ---
 
-## <a class="up" href="#topo"> EXPRESSÕES REGULARES <span id='regex'></span></a> 
+## <a class="up" href="#topo"> EXPRESSÕES REGULARES - REGEX<span id='regex'></span></a> 
 
 Expressões regulares, ou Regex (em inglês abreviado), são recursos muito usados em qualquer linguagem e servem para procurar, identificar e/ou extrair certos padrões de strings dentro de um texto maior. 
 
@@ -3277,7 +3290,7 @@ Suponhamos que dentro de um texto de 1 Gigabytes você queira extrair os emails 
 
 Dentro do Python há módulos nativos, chamados `re` e `regex`, que tratam especificamente desse assunto. 
 
-Sem o uso de expressões regulares, seria possível, por exemplo, verificar se uma string aparece num texto ou lista, usando a instrução `in`, como vemos a seguir:
+Mesmo sem o uso de expressões regulares, seria possível, por exemplo, verificar se uma string aparece num texto ou lista, usando a instrução `in`, como vemos a seguir:
 
 ```python
 contador = 0
@@ -3293,18 +3306,18 @@ print(f'Ocorrências: {contador}')
 
 No exemplo acima, um arquivo é aberto, seus parágrafos são "convertidos" em lista, e após percorrer cada linha, se contará em quantas linhas aparece a palavra "linguagem", como também se imprime a linha inteira onde essas ocorrências existem no texto. 
 
-Porém, o exemplo acima, não usa expressões regulares, mas a palavra "linguagem". Variações dessa palavras como "linguagens" (plural), ou "Linguagem" com 'L' maiúsculo não seriam identificadas. Logo, se necessitaria usar um padrão para que a procura fosse mais assertiva, ou seja, uma expressão regular.
+Porém, no exemplo acima, não se usa expressões regulares, mas a palavra exata "linguagem" sem variações. As variações dessa palavra como "linguagens" (plural), ou "Linguagem" com 'L' maiúsculo, não seriam identificadas. Logo, se necessitaria usar um padrão para que a procura fosse mais assertiva, é aí que entra as expressões regulares.
 
-Como usamos expressões regulares:
+Usos de expressões regulares:
 
 ### Extraindo ocorrências de um texto
 _(É equivalente ao `grep -o expressao` do Bash)_
 
 Utilizamos os métodos `re.compile()` para definir a expressão regular (ou padrão), e `re.findall()` para encontrar todas as vezes que aparece o padrão, gerando uma lista com todas as ocorrências encontradas.
 
-Para mais exemplos de como definir uma expressão regular e seus símbolos, ver a sub-seção: "Metacaracteres, Conjuntos e Sequências especiais".
+Para mais exemplos de como definir uma expressão regular e seus símbolos, ver a sub-seção: "[Metacaracteres, Conjuntos e Sequências especiais](#metacaracteres-conjuntos-e-sequências-especiais)", mas agora vamos nos concentrar em como as demais instruções são usadas.
 
-Obs.: Vamos direto ao uso prático e fuincional com esses métodos acima, porém poderíamos usar o método `re.search()`, que retornaria apenas um objeto e após usar o `group()` para imprimí-lo (o que complicaria a explicação).
+Obs.: Vamos direto ao uso prático e funcional com esses métodos acima, porém poderíamos usar o método `re.search()`, que retornaria apenas um objeto e após usar o `group()` para imprimí-lo (o que complicaria a explicação).
 
 **Extraindo emails de um texto:**
 
@@ -3412,7 +3425,7 @@ A Beleza Total, de Carlos Drummond
     Gertrudes não podia fazer nada. Nascera assim, este era o seu destino fatal: a extrema beleza. E era feliz, sabendo-se incomparável. Por falta de ar puro, acabou sem condições de vida, e um dia cerrou os olhos para sempre. Sua beleza saiu do corpo e ficou pairando, imortal. O corpo já então enfezado de Gertrudes foi recolhido ao jazigo, e a beleza de Gertrudes continuou cintilando no salão fechado a sete chaves.
 '''
 
-# para facilitar a operação, vamos "converter" o texto todo em lista:
+# para facilitar a operação, vamos "converter" o texto todo acima em lista:
 lista = conto.splitlines()
 
 # definimos a expressão a ser buscada:
@@ -3438,17 +3451,17 @@ Exemplo:
 ```python
 # exemplo de arquivo:
 ''' dados.csv:
-		"Nome";"Endereço";"Telefone";"Cidade";"Estado"
-		"Ana Silva";"Rua das Flores, 123";"(11) 98765-4321";"São Paulo";"SP"
-		"Bruno Santos";"Av. Central, 45";"(21) 91234-5678";"Rio de Janeiro";"RJ"
-		"Carla Oliveira";"Rua da Paz, 789";"(31) 99887-6655";"Belo Horizonte";"MG"
-		"Daniel Costa";"Av. Brasil, 1000";"(41) 92345-6789";"Curitiba";"PR"
-		"Eduarda Pereira";"Rua do Sol, 50";"(51) 98765-1234";"Porto Alegre";"RS"
-		"Fernando Lima";"Av. Oceânica, 21";"(71) 91234-9876";"Salvador";"BA"
-		"Gabriela Alves";"Rua dos Bandeirantes, 321";"(61) 99887-4321";"Brasília";"DF"
-		"Heitor Mendes";"Av. Paulista, 1500";"(11) 91234-5432";"São Paulo";"SP"
-		"Isabela Rocha";"Rua da Aurora, 456";"(81) 98765-6789";"Recife";"PE"
-		"João Carvalho";"Av. Beira-Mar, 78";"(85) 91234-3456";"Fortaleza";"CE"
+	"Nome";"Endereço";"Telefone";"Cidade";"Estado"
+	"Ana Silva";"Rua das Flores, 123";"(11) 98765-4321";"São Paulo";"SP"
+	"Bruno Santos";"Av. Central, 45";"(21) 91234-5678";"Rio de Janeiro";"RJ"
+	"Carla Oliveira";"Rua da Paz, 789";"(31) 99887-6655";"Belo Horizonte";"MG"
+	"Daniel Costa";"Av. Brasil, 1000";"(41) 92345-6789";"Curitiba";"PR"
+	"Eduarda Pereira";"Rua do Sol, 50";"(51) 98765-1234";"Porto Alegre";"RS"
+	"Fernando Lima";"Av. Oceânica, 21";"(71) 91234-9876";"Salvador";"BA"
+	"Gabriela Alves";"Rua dos Bandeirantes, 321";"(61) 99887-4321";"Brasília";"DF"
+	"Heitor Mendes";"Av. Paulista, 1500";"(11) 91234-5432";"São Paulo";"SP"
+	"Isabela Rocha";"Rua da Aurora, 456";"(81) 98765-6789";"Recife";"PE"
+	"João Carvalho";"Av. Beira-Mar, 78";"(85) 91234-3456";"Fortaleza";"CE"
 '''
 # código:
 with open('dados.csv', 'r') as f:
@@ -3481,7 +3494,7 @@ with open('dados.csv', 'r') as f:
 
 	# imprime apenas o nro da linha onde a ocorrência(s) aparece(m):
 	somente_nros = [nro for nro, linha in enumerate(arq) if re.search(expressao, linha)]
-    print(somente_nros)
+	print(somente_nros)
 
 ```
 
