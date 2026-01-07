@@ -3144,6 +3144,9 @@ Bibliotecas nativas:
 | **xlsxwriter** | Criar planilhas com formatação avançada (cores, gráficos).            |
 | **pyexcel**    | Interface unificada para vários formatos (CSV, ODS, XLSX).            |
 
+
+[Abra o tutorial da biblioteca OPENPYXL](openpyxl.md)
+
 ---
 
 ### 🧾 Textos, DOC, DOCX, TXT e PDFs
