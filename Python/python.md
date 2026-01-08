@@ -1432,9 +1432,9 @@ cliente = {
 	"cidade": "Maceió" 
 }
 ```
-Sendo assim, em Python "cliente" é um **dicionário** nesse formato. "nome", "idade", "cidade" são **chaves** desse dicionário, com seus respectivos **valores**: "Ana", 30, "Maceió".
+Sendo assim, em Python "cliente" é um **dicionário** nesse formato. "nome", "idade", "cidade" são **chaves** desse dicionário, com seus respectivos **valores**: "Ana", 30, "Maceió". E cada chave-valor é considerado um item, logo, no exemplo acima, esse dicionário tem 3 itens e seu nome é 'cliente'.
 
-Lembre-se: Dicionários estão envolvidos com chaves "{}", e entre as chaves e seus valores, usamos ":" (dois pontos).
+Lembre-se: Dicionários estão envolvidos com chaves "{}", e entre as chaves e seus valores, usamos ":" (dois pontos). 
 
 
 ```python
@@ -1450,6 +1450,33 @@ print(pessoa['nome'])	# Paulo
 # deletando um dos itens do dicionário:
 del pessoa['idade']
 ```
+
+Existem também dicionários que podem estar dentro de uma lista de dicionários. Nesse caso, eles não tem nomes (como o da variável cliente acima), contudo, são referenciados com o índice da lista. Por exemplo:
+
+```python
+lista_dicionarios = [{'Nome':'Ana', 'Idade':'21'}, {'Nome':'Pedro', 'Idade':'32'}, {'Nome':'Zacarias', 'Idade':'40'}]
+```
+
+A lista acima tem 3 dicionários: 
+
+`len(lista_dicionarios)` - resultado: 3.
+
+Para referenciarmos um dicionário dessa lista (que não possuem nomes individuais próprios, como no caso de uma variável declarada), assim fazemos:
+
+`lista_dicionarios[0]`
+
+Resultado:
+`{'Nome': 'Ana', 'Idade': '21'}`
+
+E para acessarmos algum item desse primeiro dicionário da lista ([0]), assim fazemos:
+
+`lista_dicionarios[0]['Nome']`
+
+Resultado: 
+
+`'Ana'`
+
+---
 
 ### Métodos usados para dicionários
 
