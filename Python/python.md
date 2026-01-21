@@ -2861,155 +2861,6 @@ O método `super()` é um atalho para acessar a classe pai sem precisar escrever
 
 
 
-
-## <a class="up" href="#topo"> MANIPULAÇÃO DE DATAS <span id='datas'></span></a> 
-
-Para usar e manipular datas no Python, é preciso fazer uso da biblioteca `datetime`. Logo, se necessita importá-la no início de seu código:
-
-` from datetime import date, time, datetime, timedelta `
-
-E para imprimir, o dia e hora atuais:
-
-```python
-hoje = date.today()                     # só data, ex.: 2025-10-28 (aaaa-mm-dd)
-agora = datetime.now()                  # data e hora, ex.: 2025-10-28 16:05:32.069588
-```
-
-Para criar datas e horas (que não sejam agora):
-
-```python
-
-d = date(2024, 10, 28)                  # 2025-10-28
-t = time(14, 30, 0)                     # 14:30:00
-dt = datetime(2025, 10, 28, 14, 30, 0)  # 2025-10-28 14:30:00
-
-```
-
-Calculando entre duas datas:
-
-```python
-hoje = date.today() 
-nasc = date(1976,5,27)
-
-diferenca = hoje - nasc
-
-print(diferenca)
-print(diferenca.days) 
-```
-
-Outra forma de calcular entre datas:
-
-```python
-d1 = datetime(2025,10,28)
-d2 = datetime(2025,11,5)
-diferenca = d2 - d1           # calcula
-print(diferenca.days)         # número de dias (8)
-
-```
-
-Somando ou subtraindo dias, semanas, meses, etc:
-
-```python
-hoje = date.today()
-amanha = hoje + timedelta(days=1)
-semana_passada = hoje - timedelta(weeks=1)
-
-# Para soma de meses/anos se usa o relativedelta 
-# (timedelta não tem months, por isso, se usa o módulo relativedelta):
-from dateutil.relativedelta import relativedelta
-mes_que_vem = hoje + relativedelta(months=1)
-ano_passado = hoje + relativedelta(years=-1)
-```
-
-Imprimir datas em formato string:
-
-```python
-dt = datetime(2025, 10, 28, 14, 30)
-print(dt.strftime("%d/%m/%Y %H:%M:%S")) 	# 28/10/2025 14:30:00
-print(dt.strftime("%Y-%m-%d"))          	# 2025-10-28
-print(dt.strftime("%d/%m/%y"))			# 28/10/25
-
-# imprime a hora atual:
-datetime.now().strftime('%H:%m:%S')		# 17:10:58
-```
-
-Tomando um formato de data e convertendo para outro:
-
-```python
-# a data vem desta forma:
-formato_que_veio = "2025-10-28 14:30"
-
-# informo valores correspondentes ( strPtime - 'P' de pega ):
-valores = datetime.strptime(formato_que_veio, "%Y-%m-%d %H:%M")
-
-# reformato a data para um novo formato ( strFtime - 'F' de formata ):
-novo_formato = valores.strftime("%d/%m/%y")
-
-# imprime:
-print(novo_formato) 	# 28/10/25
-
-```
-
-Imprimir com nome do mês:
-
-```python
-# para que saia em português:
-import locale
-locale.setlocale(locale.LC_TIME, "pt_BR.UTF-8")
-
-# definindo datas que serão usadas:
-hoje = date.today()
-outro_dia = datetime(2025,3,5)
-
-# imprime com o nome do mês:
-print(hoje.strftime("%d de %B de %Y"))
-print(outro_dia.strftime("%d de %B de %Y"))
-
-# com o nome do mês abreviado:
-print(hoje.strftime("%d de %b de %Y"))
-```
-
-Descobrindo o dia da semana de uma data:
-
-```python
-# define hoje
-hoje = date.today()
-# imprime o dia da semana (completo ou abreviado) por extenso:
-print(hoje.strftime("%A"))
-print(hoje.strftime("%a"))
-
-# define uma outra data:
-outro_dia = datetime(1976,5,27)
-print(outro_dia.strftime("%A"))
-
-# caso queira o nome do dia da semana em nros (0=Segunda... 6=Domingo):
-print(outro_dia.weekday())
-```
-
-Será que o Natal cai num fim de semana?
-
-```python
-natal = datetime(2025,12,25)
-formato = natal.strftime('%d/%m/%Y')
-dia_sem=natal.strftime('%A')
-if natal.weekday() >= 5:
-	print(f"É fim de semana! Cai num {dia_sem}")
-else:
-	print(f"{formato} é dia útil. Cai numa: {dia_sem}.")
-```
-
-
-Convertendo uma lista de datas:
-
-```python
-datas = ["28/10/2025 14:30", "05/11/2025 08:00", "12/12/2025 19:45"]
-
-for s in datas:
-    dt = datetime.strptime(s, "%d/%m/%Y %H:%M")
-    print(dt.strftime("%d de %B de %Y"))
-```
-
-
 ## <a class="up" href="#topo"> LENDO E ESCREVENDO ARQUIVOS <span id='arquivos'></span></a>
 
 ### Abrindo arquivos
@@ -3245,6 +3096,8 @@ Bibliotecas nativas:
 | **mouse**     | Controlar movimentos e cliques do mouse.                   |
 | **pynput**    | Leitura e controle avançado de teclado e mouse.            |
 
+Como usar a biblioteca [Pyautogui](pyautogui.md)
+
 ---
 
 ### 🎤🔊 Reconhecimento de Fala e Text-to-Speech
@@ -3309,6 +3162,9 @@ Bibliotecas nativas:
 | **dotenv / os.environ**      | Gerenciar variáveis de ambiente.                   |
 | **logging / rich**           | Logs coloridos e monitoramento no terminal.        |
 | **fastapi / flask**          | Criação de APIs e microserviços.                   |
+
+
+Como usar a biblioteca [Schedule](schedule.md).
 
 ---
 
@@ -3579,6 +3435,155 @@ ver - https://www.w3schools.com/python/python_regex.asp
 
 
 
+
+## <a class="up" href="#topo"> MANIPULAÇÃO DE DATAS <span id='datas'></span></a> 
+
+Para usar e manipular datas no Python, é preciso fazer uso da biblioteca `datetime`. Logo, se necessita importá-la no início de seu código:
+
+` from datetime import date, time, datetime, timedelta `
+
+E para imprimir, o dia e hora atuais:
+
+```python
+hoje = date.today()                     # só data, ex.: 2025-10-28 (aaaa-mm-dd)
+agora = datetime.now()                  # data e hora, ex.: 2025-10-28 16:05:32.069588
+```
+
+Para criar datas e horas (que não sejam agora):
+
+```python
+
+d = date(2024, 10, 28)                  # 2025-10-28
+t = time(14, 30, 0)                     # 14:30:00
+dt = datetime(2025, 10, 28, 14, 30, 0)  # 2025-10-28 14:30:00
+
+```
+
+Calculando entre duas datas:
+
+```python
+hoje = date.today() 
+nasc = date(1976,5,27)
+
+diferenca = hoje - nasc
+
+print(diferenca)
+print(diferenca.days) 
+```
+
+Outra forma de calcular entre datas:
+
+```python
+d1 = datetime(2025,10,28)
+d2 = datetime(2025,11,5)
+diferenca = d2 - d1           # calcula
+print(diferenca.days)         # número de dias (8)
+
+```
+
+Somando ou subtraindo dias, semanas, meses, etc:
+
+```python
+hoje = date.today()
+amanha = hoje + timedelta(days=1)
+semana_passada = hoje - timedelta(weeks=1)
+
+# Para soma de meses/anos se usa o relativedelta 
+# (timedelta não tem months, por isso, se usa o módulo relativedelta):
+from dateutil.relativedelta import relativedelta
+mes_que_vem = hoje + relativedelta(months=1)
+ano_passado = hoje + relativedelta(years=-1)
+```
+
+Imprimir datas em formato string:
+
+```python
+dt = datetime(2025, 10, 28, 14, 30)
+print(dt.strftime("%d/%m/%Y %H:%M:%S")) 	# 28/10/2025 14:30:00
+print(dt.strftime("%Y-%m-%d"))          	# 2025-10-28
+print(dt.strftime("%d/%m/%y"))			# 28/10/25
+
+# imprime a hora atual:
+datetime.now().strftime('%H:%m:%S')		# 17:10:58
+```
+
+Tomando um formato de data e convertendo para outro:
+
+```python
+# a data vem desta forma:
+formato_que_veio = "2025-10-28 14:30"
+
+# informo valores correspondentes ( strPtime - 'P' de pega ):
+valores = datetime.strptime(formato_que_veio, "%Y-%m-%d %H:%M")
+
+# reformato a data para um novo formato ( strFtime - 'F' de formata ):
+novo_formato = valores.strftime("%d/%m/%y")
+
+# imprime:
+print(novo_formato) 	# 28/10/25
+
+```
+
+Imprimir com nome do mês:
+
+```python
+# para que saia em português:
+import locale
+locale.setlocale(locale.LC_TIME, "pt_BR.UTF-8")
+
+# definindo datas que serão usadas:
+hoje = date.today()
+outro_dia = datetime(2025,3,5)
+
+# imprime com o nome do mês:
+print(hoje.strftime("%d de %B de %Y"))
+print(outro_dia.strftime("%d de %B de %Y"))
+
+# com o nome do mês abreviado:
+print(hoje.strftime("%d de %b de %Y"))
+```
+
+Descobrindo o dia da semana de uma data:
+
+```python
+# define hoje
+hoje = date.today()
+# imprime o dia da semana (completo ou abreviado) por extenso:
+print(hoje.strftime("%A"))
+print(hoje.strftime("%a"))
+
+# define uma outra data:
+outro_dia = datetime(1976,5,27)
+print(outro_dia.strftime("%A"))
+
+# caso queira o nome do dia da semana em nros (0=Segunda... 6=Domingo):
+print(outro_dia.weekday())
+```
+
+Será que o Natal cai num fim de semana?
+
+```python
+natal = datetime(2025,12,25)
+formato = natal.strftime('%d/%m/%Y')
+dia_sem=natal.strftime('%A')
+if natal.weekday() >= 5:
+	print(f"É fim de semana! Cai num {dia_sem}")
+else:
+	print(f"{formato} é dia útil. Cai numa: {dia_sem}.")
+```
+
+
+Convertendo uma lista de datas:
+
+```python
+datas = ["28/10/2025 14:30", "05/11/2025 08:00", "12/12/2025 19:45"]
+
+for s in datas:
+    dt = datetime.strptime(s, "%d/%m/%Y %H:%M")
+    print(dt.strftime("%d de %B de %Y"))
+```
+
+Caso seja necessário agendar tarefas para que elas se executem automaticamente em uma determinada data ou horário, é melhor usar a biblioteca [Schedule](schedule.md).
 
 
 
