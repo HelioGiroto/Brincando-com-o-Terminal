@@ -30,7 +30,7 @@ tesseract-ocr-script-hebr
 sudo apt install tesseract-ocr-por
 
 
-## Para executar o comando - Digitalizando uma imagem png:
+## PARA EXECUTAR O COMANDO - DIGITALIZANDO UMA IMAGEM PNG:
 
  - Sintaxe:
  
@@ -62,7 +62,7 @@ A um pdf:
  
 `tesseract img-63.png arquivo --dpi 150`
 
-## Para digitalizar um pdf (usar outro comando):
+## PARA DIGITALIZAR UM PDF (USAR OUTRO COMANDO):
 
 `pdftoppm -png arquivo.pdf arquivo`
 
