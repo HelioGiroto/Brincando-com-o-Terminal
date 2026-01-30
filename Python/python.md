@@ -3060,6 +3060,10 @@ Bibliotecas nativas:
 | **json**                  | Leitura e escrita de arquivos JSON. Nativa.  |
 | **xmltodict**             | Converter XML ↔ dicionário Python.           |
 
+
+Como usar a biblioteca [JSON](json.md)
+
+
 ---
 
 ### 📈 Criação de Dashboards e Gráficos
