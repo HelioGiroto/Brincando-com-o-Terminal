@@ -67,6 +67,7 @@ https://automatetheboringstuff.com/ 		- Livro "Automatize tarefas maçantes com 
 - [Bibliotecas](#bibliotecas)
 - [Expressões Regulares - REGEX](#regex)
 - [Integração com outras Linguagens](#integracao)
+- [Ambientes Virtuais](#ambientes)
 
 
 ## <a class="up" href="#topo"> MODOS DE EXECUÇÃO <span id='modos'></span></a> 
@@ -1561,6 +1562,38 @@ with open("clientes.json", "w", encoding="utf-8") as arquivo:
 print("Arquivo JSON criado com sucesso!")
 ```
 
+### Unindo dois ou mais dicionários
+
+
+- Usando operador de união:
+
+```python
+d1 = {'a': 1, 'b': 2}
+d2 = {'b': 3, 'c': 4}
+resultado = d1 | d2
+# Resultado: {'a': 1, 'b': 3, 'c': 4}
+```
+
+- Com operador de desempacotamento:
+
+```python
+d1 = {'a': 1, 'b': 2}
+d2 = {'b': 3, 'c': 4}
+resultado = {**d1, **d2}
+# Resultado: {'a': 1, 'b': 3, 'c': 4}
+```
+
+- Usando o método `update()`:
+
+```python
+d1 = {'a': 1, 'b': 2}
+d2 = {'b': 3, 'c': 4}
+d1.update(d2)
+# d1 agora é: {'a': 1, 'b': 3, 'c': 4}
+```
+
+Perceba que a chave 'b' assume o valor do último dicionário (em caso de aparecer nos dois dicionários).
+
 
 ### Ordenando os itens dos dicionários:
 
@@ -2997,6 +3030,9 @@ Bibliotecas nativas:
 | **shutil**  | Copiar, mover, apagar e comprimir diretórios inteiros.                         |
 | **pathlib** | Manipular caminhos de forma orientada a objetos (`Path("pasta/arquivo.txt")`). |
 | **glob**    | Buscar arquivos por padrão (`*.pdf`, `dados_*.csv`, etc.).                     |
+| **subprocess** | Executa e controla processos externos incluindo comandos do sistema operacional. |
+
+[Abra o tutorial da biblioteca SUBPROCESS](subprocess.md)
 
 ---
 
@@ -3009,6 +3045,8 @@ Bibliotecas nativas:
 | **fitz (PyMuPDF)** | Leitura, edição, imagens, anotações e OCR embutido.             |
 | **pdfminer.six**   | Extração detalhada de texto (baixo nível, mas preciso).         |
 | **reportlab**      | Criar e gerar PDFs do zero (relatórios, notas fiscais, etc.).   |
+
+[Ver exemplo de script de uso dessas ferramentas acima](PDFs/pdf_utils.py)
 
 ---
 
@@ -3125,6 +3163,8 @@ Como usar a biblioteca [Pyautogui](pyautogui.md)
 | **imaplib / poplib** | Leitura de e-mails por IMAP/POP3. Nativa.       |
 | **yagmail**          | Envio simples via Gmail com autenticação OAuth. |
 
+[Abrir pasta com scripts utilitários para gerenciamento de emails](EMAILs/)
+
 ---
 
 ### 🌐 Web Scraping e Automação Web
@@ -3132,10 +3172,10 @@ Como usar a biblioteca [Pyautogui](pyautogui.md)
 | Biblioteca                               | Descrição                                           |
 | ---------------------------------------- | --------------------------------------------------- |
 | **requests**                             | Requisições HTTP simples e poderosas.               |
+| **playwright** 			   | Automação moderna (rápida e menos bloqueada).       |
 | **beautifulsoup4 (bs4)**                 | Extração de dados HTML.                             |
-| **lxml**                                 | Parser rápido e robusto (HTML/XML).                 |
 | **selenium**                             | Automação de navegadores (clica, digita, interage). |
-| **playwright / undetected-chromedriver** | Automação moderna (rápida e menos bloqueada).       |
+| **lxml**                                 | Parser rápido e robusto (HTML/XML).                 |
 | **scrapy**                               | Framework completo para scraping e crawlers.        |
 
 ---
@@ -3592,6 +3632,111 @@ Caso seja necessário agendar tarefas para que elas se executem automaticamente 
 
 
 ## <a class="up" href="#topo"> INTEGRAÇÃO COM OUTRAS LINGUAGENS <span id='integracao'></span></a> 
+
+
+
+## <a class="up" href="#topo"> AMBIENTES VIRTUAIS <span id='ambientes'></span></a> 
+
+👉 Um **ambiente virtual** é uma pasta isolada que contém:
+
+* Uma **cópia do Python**
+* Suas **próprias bibliotecas**
+* Suas **próprias versões de pacotes**
+
+Ou seja:
+
+✔️ Cada projeto pode ter suas próprias dependências
+
+✔️ Evita conflitos entre versões
+
+✔️ Não “polui” o Python do sistema
+
+Vantagens:
+
+* Cada projeto tem seu próprio ambiente
+* As bibliotecas ficam isoladas
+* Zero conflito 🎯
+
+O mais comum é usar o `venv`, um **módulo padrão do Python** usado para criar e usar **ambientes virtuais**.
+
+
+#### Resumo dos comandos:
+
+```
+# Mostra a versão do Python instalada no sistema
+python3 --version	# Linux/macOS
+python --version	# no Ruindows
+
+# Cria e entra no diretório do projeto
+mkdir meu_projeto
+cd meu_projeto
+
+# Cria um ambiente virtual chamado "venv" (por convenção)
+python3 -m venv venv	# Linux/macOS
+python -m venv venv 	# Windows
+
+# Ativa o ambiente virtual
+source venv/bin/activate	# Linux/macOS
+venv\Scripts\activate		# Windows
+venv\Scripts\Activate.ps1	# PowerShell (Windows)
+
+# Indicação visual de que o ambiente virtual está ativo
+(venv) usuario@computador:~/meu_projeto$ 
+
+# Instala um pacote dentro do ambiente virtual após ativo:
+pip install nome_do_pacote
+# O pacote será instalado somente dentro do venv
+# Não afeta outros projetos nem o Python do sistema
+
+# Lista os pacotes instalados no ambiente virtual
+pip list
+
+# Lista pacotes e versões no formato requirements
+pip freeze
+
+# Salva todas as dependências do projeto em um arquivo
+pip freeze > requirements.txt
+
+# Instala todas as dependências listadas no arquivo
+pip install -r requirements.txt
+
+# Sai do ambiente virtual ativo
+deactivate
+
+# Remove a pasta do ambiente virtual (Linux/macOS)
+rm -rf venv
+
+# Remove a pasta do ambiente virtual (Windows)
+rmdir /s /q venv
+
+```
+
+#### 📁 Estrutura típica de um projeto com `venv`
+
+```text
+meu_projeto/
+├── venv/
+├── main.py
+├── requirements.txt
+```
+
+* `venv/` → ambiente virtual
+* `main.py` → seu código
+* `requirements.txt` → dependências do projeto
+
+---
+
+#### ❌ Versionamento do `venv` no Git
+
+Nunca versionar a pasta `venv`.
+
+📄 `.gitignore` recomendado:
+
+```text
+venv/
+```
+
+[Mais informações sobre o VENV](venv.md)
 
 
 ## MAIS:

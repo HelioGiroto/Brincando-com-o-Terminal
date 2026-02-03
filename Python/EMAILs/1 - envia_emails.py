@@ -7,7 +7,6 @@
 # Data: 15/01/2026
 	
 
-
 # Importa o módulo SMTP
 import smtplib
 

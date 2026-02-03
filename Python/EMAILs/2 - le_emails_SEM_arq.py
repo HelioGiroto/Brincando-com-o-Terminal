@@ -7,7 +7,6 @@
 # Data: 15/01/2026
 	
 
-
 # Importa a classe MailBox (conexão IMAP)
 # e o construtor AND (para filtros combinados)
 # pip install imap-tools
