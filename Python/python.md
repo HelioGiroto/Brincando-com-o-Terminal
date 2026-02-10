@@ -794,6 +794,58 @@ else:
     print('x e y são iguais')
 ```
 
+
+### Evitando usar vários `if's`
+
+**Usando e percorrendo listas correspondentes**
+
+Ao invés de poluir o código com muitos `if's`, podemos usar algumas formas alternativas para obter o mesmo resultado.
+
+Por exemplo, suponha que temos 5 tipos de condições e cada uma realiza uma ação específica. Ao invés de usarmos 5 if's, uma das formas seria esta abaixo (Embora alguns conceitos deste código serão vistos posteriormente nesse mesmo documento):
+
+```python
+# definimos as condições
+condicoes = ['Opção1', 'Opção2', 'Opção3', 'Opção4', 'Opção5']
+# definimos os resultados/consequências correspondente a cada condição acima
+acao = ['Ação1', 'Ação2', 'Ação3', 'Ação4', 'Ação5']
+# deixamos o usuário entrar com sua escolha
+escolha = input('Escolha uma opção: ')
+# percorremos todas as condições, obtendo o nro da condição uma vez sendo satisfeita em um único if:
+for nro, condicao in enumerate(condicoes):
+	if escolha == condicao:
+		# imprimimos a ação correspondente ao mesmo nro de index da condição escolhida:
+		print(ação[nro])
+```
+
+**Usando e percorrendo uma lista de dicionários**
+
+```python 
+# passa uma lista de dicionários de condição e ação:
+lista_condicoes = [
+	{'condicao': 'Opção1', 'acao': 'Ação1'},
+	{'condicao': 'Opção2', 'acao': 'Ação2'},
+	{'condicao': 'Opção3', 'acao': 'Ação3'},
+	{'condicao': 'Opção4', 'acao': 'Ação4'},
+	{'condicao': 'Opção5', 'acao': 'Ação5'},
+]
+
+# aguarda escolha do usuário:
+escolha = input('Escolha uma opção: ')
+# suponha que foi "Opção2"
+
+# percorre lista procurando por condição semelhante ao que escolheu o usuário e retornando à sua ação correspondente:
+for condicao in lista_condicoes:
+	if condicao['condicao'] == escolha:
+		print(condicao['acao'])
+# resultado: Ação2
+```
+
+
+**Usando o match e case**
+
+Mais a frente nos próximos tópicos se verá como. Ver: ["Opções em casos"](#casos)
+
+
 ## <a class="up" href="#topo"> CONDIÇÕES - OPERADORES TERNÁRIOS <span id='ternarios'></span></a> 
 
 Operadores ternários são uma forma mais abreviada de escrever código em Python quando o assunto é condições **e não existe um bloco de código** que se executa ao cumprir uma condição. Por exemplo:
@@ -3742,6 +3794,10 @@ venv/
 ## MAIS:
 
 Curso pandas: https://www.w3schools.com/python/pandas/default.asp
+
+Curto circuito com AND e OR
+
+Splitlines para strings e Readlines para arquivos
 
 
 ## LINKS
