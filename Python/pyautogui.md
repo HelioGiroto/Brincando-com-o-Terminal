@@ -99,20 +99,33 @@ pyautogui.keyDown('shift')
 pyautogui.write(['left', 'left', 'left', 'left', 'left', 'left'])
 
 # Pressiona 3 vezes:
-pyautogui.press("left", presses=3)           
+pyautogui.press("left", presses=3)       
+pyautogui.press("tab", presses=3, interval=0.5)
+
 
 # Solta a tecla SHIFT
 pyautogui.keyUp('shift')
 
-# Executa o atalho Ctrl + C
+# Executa o atalho Ctrl + C - Hotkey para combinações de teclas de atalho:
 pyautogui.hotkey('ctrl', 'c')
 
 # Executa atalho com 3 teclas:
 pyautogui.hotkey("ctrl", "shift", "esc")
 
+# Pressiona 3 vezes uma combinação de teclas:
+# (não aceita `presses=3` com combinação de teclas)
+for _ in range(3):
+	pyautogui.hotkey("shift", "tab")
+	time.sleep(3)
+
 # Shift mais setas:
 with pyautogui.hold("shift"):
     pyautogui.press(["left", "left", "left"])
+    
+# Cola conteudo (Ctrl + v):
+# (usando import pyperclip)
+pyperclip.copy(texto)
+pyautogui.hotkey('ctrl', 'v')
 ```
 
 
@@ -209,10 +222,38 @@ pyautogui.click(buttonx, buttony)
 
 # Localiza todas as ocorrências da imagem na tela
 todos_botoes = pyautogui.locateAllOnScreen('someButton.png')
+
+# script que localiza um botão a cada segundo, caso não o encontre:
+for _ in range(10):  # até 10 segundos
+	# o argumento `confidence` é uma margem de diferença aceitável (fuzz no imagemagick):
+	botao = pyautogui.locateCenterOnScreen('botao_hamburguer.png', confidence=0.7)
+	if botao:
+		pyautogui.click(botao)
+		break
+	time.sleep(1)
+else:
+	print("Timeout: botão HAMBURGUER não localizado")
+pausa()
 ```
 
 ---
 
+
+## GERANDO UMA FUNÇÃO DE PAUSA RANDÔMICA
+
+```python
+def pausa(min=2, max=4):
+	# Gera um número de ponto flutuante aleatório:
+	espera = random.uniform(min, max)
+	time.sleep(espera)
+
+pausa() 	# assume valor aleatório (padrão) entre 2,4
+pausa(1,10)	# assume valor aleatório entre 1 e 10
+```
+
+
+
+---
 
 ## LISTA DE TODAS AS TECLAS COM SEUS NOMES: 
 ```
