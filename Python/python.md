@@ -2945,6 +2945,7 @@ O método `super()` é um atalho para acessar a classe pai sem precisar escrever
 ### Classes aninhadas
 
 
+---
 
 ## <a class="up" href="#topo"> LENDO E ESCREVENDO ARQUIVOS <span id='arquivos'></span></a>
 
@@ -2965,8 +2966,18 @@ Explicação:
 
 Após a impressão (fim do bloco de código), automaticamente o arquivo é fechado, sem precisar o uso do comando `close()` e a memória é liberada.
 
-
 ### Lendo arquivos
+
+**Método read()**
+
+Perceba que foi utilizado o método `read()` que **lê todo o arquivo** de uma vez e retorna todo o seu conteúdo para uma **única string**.
+
+```python
+with open('arq.txt', 'r') as arq:
+	arq_string = arq.read()
+```
+
+**Método readlines()**
 
 Após abrir um arquivo em modo de leitura, o próximo passo é quase sempre ler o arquivo aberto. No exemplo acima, todo o conteúdo do arquivo foi lido e guardado numa variável como uma única string. 
 
@@ -2974,7 +2985,7 @@ Porém, às vezes será interessante que cada linha desse arquivo seja salva com
 
 Assim, o método mais usual para isso ao invés de `read()` seria o `readlines()` (plural).
 
-O `readlines` lê todas as linhas do arquivo e a guarda numa lista.
+O `readlines` **lê todas as linhas do arquivo** e a guarda **numa lista**. Diferente de `read()` que gera uma string.
 
 Exemplo:
 
@@ -2984,16 +2995,43 @@ with open('arq.csv', 'r') as arq:
 	type(arq_lista)
 ```
 
-E para percorrer todos os itens da lista:
+
+Para apenas imprimir em tela (não em forma de lista):
 
 ```python 
 with open('arq.csv', 'r') as arq:
 	lista = arq.readlines()
 	for linha in lista:
-		print(linha, end='')
+		print(linha)
 
-# para que não pule uma linha a mais entre cada uma, use ao lado de print:
+# E para que não pule uma linha a mais entre cada uma -
+# ... use o argumento end='' ao lado de print:
 		print(linha, end='')
+```
+
+
+**Usando a biblioteca Pathlib**
+
+Há outra opção para abrir e ler arquivos, que seria usar a biblioteca `pathlib`.
+
+Os métodos usados são:
+
+- Path(): Abre o arquivo.
+
+- read_text(): Lê o arquivo.
+
+Retornar uma string:
+
+```python
+from pathlib import Path
+texto = Path("arq.csv").read_text(encoding="utf-8")
+```
+
+Gerar uma lista com o conteúdo do arquivo:
+
+```python
+from pathlib import Path
+lista = Path("arq.csv").read_text(encoding="utf-8").splitlines()
 ```
 
 ### Escrevendo em arquivos 
