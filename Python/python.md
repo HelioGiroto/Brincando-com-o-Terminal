@@ -3560,6 +3560,39 @@ with open('dados.csv', 'r') as f:
 
 ```
 
+Utilizando um código mais simples - para converter o conteúdo do arquivo para string (e não lista):
+
+```python
+import re
+
+# define contexto (quantas linhas acima e abaixo da ocorrência):
+contexto = 2
+# montamos como será a expressão completa para compilar o regex:
+pre_expressao = '.*\n' * contexto + ".*"
+expressao = 'Curitiba'
+pos_expressao = '.*\n' * (contexto + 1)
+
+# regex formado e completo:
+busca = re.compile(rf'{pre_expressao}{expressao}{pos_expressao}', re.I)
+# se usou 'r' para regex e 'f' para concatenar variáveis. Além de re.I para ignore case:
+# se concatenou as variáveis acima para que se obtesse o mesmo que:
+# expressao = re.compile(r'.*\n.*\n.*Curitiba.*\n.*\n.*\n')
+
+# abre arquivo a ser consultado:
+with open('dados.csv', 'r') as f:
+	# a variável arq recebe como string todo o conteúdo do arquivo:
+    arq = f.read()
+    # se aplica o findall para retornar uma lista de ocorrências do regex 'busca' em arq (string):
+	ocorrencias = re.findall(busca, arq)
+	# imprime as ocorrencias encontradas:
+	for ocorrencia in ocorrencias:
+		print(ocorrencia)
+
+# único erro para corrigir: 
+# Caso a expressão esteja na primeira linha (por não ter linhas de contexto anterior, será omitido??
+# Testar ao invés de "Curitiba", use: "São Paulo").
+```
+
 
 ### Metacaracteres, Conjuntos e Sequências especiais
 
