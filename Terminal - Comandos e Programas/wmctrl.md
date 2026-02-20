@@ -25,6 +25,8 @@ def focus_window(window_title):
     # -a: Ativa (foca) a janela cujo título contém a string
     subprocess.run(["wmctrl", "-a", window_title])
 
+# subprocess.run(["wmctrl", "-a", "Instagram — Mozilla Firefox"])
+
 # Exemplo: Focar no Firefox
 focus_window("Firefox")
 
