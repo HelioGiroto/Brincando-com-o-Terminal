@@ -3591,11 +3591,13 @@ with open('dados.csv', 'r') as f:
 # único erro para corrigir: 
 # Caso a expressão esteja na primeira linha (por não ter linhas de contexto anterior, será omitido??
 # Testar ao invés de "Curitiba", use: "São Paulo").
+
+# busca = re.compile(r'(.*\n)?(.*\n)?(.*S.o Paulo.*\n)(.*\n)?(.*\n)?')
+
 ```
 
 
 ### Metacaracteres, Conjuntos e Sequências especiais
-
 
 
 ver - https://www.w3schools.com/python/python_regex.asp
