@@ -41,6 +41,7 @@ https://automatetheboringstuff.com/ 		- Livro "Automatize tarefas maçantes com 
 - [Entrada de Dados 3: Parâmetros em Linha do Terminal](#parametros)
 - [Manipulação de Strings](#strings)
 - [Operadores de comparação](#comparacao)
+- [F-Strings](#fstrings)
 - [Condições - If, Elif, Else...](#if)
 - [Condições - Operadores Ternários](#ternarios)
 - [Opções em Casos - Criação de Menús](#casos)
@@ -661,6 +662,60 @@ for n, cada_letra in enumerate(palavra):
 
 Ver também: [Expressões Regulares - REGEX](#regex)
 
+
+
+## <a class="up" href="#topo"> F-STRINGS <span id='fstrings'></span></a> 
+
+Com as `f-strings` não só fazemos concatenação de variáveis ao imprimir, mas também imprimimos em formatos dos mais diversos e úteis. 
+
+Formato: 
+
+`print(f'var:__')`
+
+Ou seja, `f` seguido de áspas, nome da variável, dois-pontos (:) e o formato.
+
+
+
+Exemplos:
+
+```python
+# imprime com 2 casas decimais:
+valor = 1234.56789
+print(f'{valor:.2f}')
+print(f'{valor:,.2f}')
+print(f'{valor:,2f}')
+
+empresa = "Linux"
+# alinha à esquerda
+print(f"{empresa:<15}")
+# alinha à direita
+print(f"{empresa:>15}")
+# alinha ao centro
+print(f"{empresa:^15}")
+# alinha ao centro com preenchimento
+print(f"{empresa:-^20}")
+
+# preenche com zeros à esquerda
+numero = 42
+print(f"{numero:05}")
+# 00042
+
+# imprimir em formato data:
+from datetime import datetime
+agora = datetime.now()
+print(f"{agora:%d/%m/%Y}")	# dd/mm/aaaa
+print(f"{agora:%d/%m/%Y %H:%M}")	
+print(f"{agora:%Y}")	# ano
+print(f"{agora:%y}")	# ano (abrev)
+print(f"{agora:%A}")	# dia da semana
+print(f"{agora:%a}")	# dia da semana (abrev)
+print(f"{agora:%B}")	# mês
+print(f"{agora:%b}")	# mês (abrev)
+
+# descobre dia da semana de alguma data:
+dia = datetime(2025, 12, 31)
+print(f'{dia:%A}')
+```
 
 ## <a class="up" href="#topo"> OPERADORES DE COMPARAÇÃO <span id='comparacao'></span></a> 
 
