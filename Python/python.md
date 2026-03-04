@@ -3943,7 +3943,7 @@ Splitlines para strings e Readlines para arquivos
 /*CSS do documento:*/
 img {float: right; margin-left:5px; width: 20%;} 
 h2 {color: #ffd242; background: #3771a1; padding-left: 0.5rem; padding-top: 3px;} 
-a.up{text-decoration: none !important; color: #ffd242;}
+a{text-decoration: none !important; color: #00008B;}
 .vermelho{color: red;} 
 .letraPeq {font-size: 0.7em;} 
 .direita {display: block; text-align: right;}
