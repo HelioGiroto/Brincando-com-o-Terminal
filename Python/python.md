@@ -3646,8 +3646,7 @@ with open('dados.csv', 'r') as f:
 # único erro para corrigir: 
 # Caso a expressão esteja na primeira linha (por não ter linhas de contexto anterior, será omitido??
 # Testar ao invés de "Curitiba", use: "São Paulo").
-
-# busca = re.compile(r'(.*\n)?(.*\n)?(.*S.o Paulo.*\n)(.*\n)?(.*\n)?')
+# busca = re.compile(r'(.*\n)?(.*\n)?(.*S.o Paulo.*\n)(.*\n)?(.*\n)?') # correção
 
 ```
 
@@ -3944,6 +3943,7 @@ Splitlines para strings e Readlines para arquivos
 img {float: right; margin-left:5px; width: 20%;} 
 h2 {color: #ffd242; background: #3771a1; padding-left: 0.5rem; padding-top: 3px;} 
 a{text-decoration: none !important; color: #00008B;}
+h2 > a{text-decoration: none !important; color: #ffd242;}
 .vermelho{color: red;} 
 .letraPeq {font-size: 0.7em;} 
 .direita {display: block; text-align: right;}

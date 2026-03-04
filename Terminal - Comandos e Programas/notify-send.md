@@ -39,8 +39,10 @@ notify-send -u critical "URGENTE" "Algo deu errado!"
 notify-send -t 5000 -u critical "URGENTE" "Algo deu errado!"	# permanece 5 seg
 notify-send -t 0 "Aviso Fixo" "Esta mensagem só sai se você clicar nela."
 notify-send -h string:bgcolor:#00ff00 -h string:fgcolor:#000000 "AVISO" "Este é um alerta verde."
-
 ```
+
+- Ver o histórico de notificações desde a última vez que a máquina foi ligada:
+` dunstctl history `
 
 
 ## Em Python 
