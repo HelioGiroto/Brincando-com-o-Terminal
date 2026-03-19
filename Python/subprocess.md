@@ -59,6 +59,17 @@ subprocess.run(['python', 'calcula_imposto.py'])
 ```
 
 
+### Ver:
+
+```python 
+import subprocess
+comando = f"whois {url} | grep 'expires'"
+executa = subprocess.run(comando, shell=True, capture_output=True, text=True)
+resultado = executa.stdout
+```
+
+
+
 ### Diferenças no Windows em relação ao Linux
 
 Pelo fato de ter diferenças na sintaxe dos comandos dos sistemas operacionais, a sintaxe do subprocess muda conforme o sistema:
