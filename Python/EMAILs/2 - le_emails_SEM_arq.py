@@ -22,16 +22,21 @@ from zoneinfo import ZoneInfo
 
 # Endereço de e-mail
 # EMAIL = "seuemail@seudominio.com"
-EMAIL = "treecomexhelio@gmail.com"
+# EMAIL = "treecomexhelio@gmail.com"
+EMAIL = "adm@rsassi.com.br"
 
 # Senha do e-mail (ou senha de app no Gmail)
 # SENHA = "sua_senha_ou_senha_de_app"
-SENHA = "abcs abcd abcd abcd"	 # mudar
+# SENHA = "abcs abcd abcd abcd"	 # mudar
+SENHA = ""
 
 # Servidor IMAP
 # Gmail -> imap.gmail.com
-# HostGator -> imap.seudominio.com
-IMAP_SERVER = "imap.gmail.com"
+# IMAP_SERVER = "imap.gmail.com"
+
+# HostGator -> imap.seudominio.com:
+# HostGator Titan:
+IMAP_SERVER = "imap.titan.email"
 
 # Nome da pasta de e-mail
 # INBOX é padrão
@@ -80,8 +85,12 @@ with MailBox(IMAP_SERVER).login(EMAIL, SENHA) as mailbox:
 	# mailbox.fetch(OR(subject="Invoice", subject="BL"))
 
 	# Busca emails a partir de uma data (YYYY-MM-DD) - usado junto com a biblioteca date:
-	mails = mailbox.fetch(AND(date_gte=date(2026, 1, 15)) )
+	# mails = mailbox.fetch(AND(date_gte=date(2026, 3, 15)) )
 
+	# Busca emails a partir de uma data (YYYY-MM-DD) - e NÃO visto:
+	mails = mailbox.fetch(AND(date_gte=date(2026, 3, 26), seen=False) )
+	
+	
 	# Combina filtros:
 	# - Não lido
 	# - Assunto contém "Invoice"
