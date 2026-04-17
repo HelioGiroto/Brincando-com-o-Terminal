@@ -264,7 +264,12 @@
         <menu>client-menu</menu>
       </action>
     </keybind>
-
+    <!-- Take a screenshot of the current window with scrot when Alt+Print are pressed -->
+    <keybind key="A-Print">
+      <action name="Execute">
+        <command>scrot -s</command>
+      </action>
+    </keybind>
     <!-- Keybindings for window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
@@ -492,13 +497,9 @@
           <enabled>true</enabled>
           <name>GitHub Pass</name>
         </startupnotify>
-        <command>sh -c "getpenha"</command>
+        <command>sh -c "cat ~/.gpw | xclip -sel clip"</command>
       </action>
     </keybind>
-    
-    
-    
-    
     <!-- SUPER v - VS Codium -->
     <keybind key="W-v">
       <action name="Execute">
@@ -510,25 +511,25 @@
       </action>
     </keybind>
     
-    <!-- SUPER w - Navegador -->
+    <!-- SUPER w - Chromium -->
     <keybind key="W-w">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Firefox</name>
+          <name>Chromium</name>
         </startupnotify>
-        <command>firefox</command>
+        <command>chromium</command>
       </action>
     </keybind>
     
-    <!-- SUPER 3 - Navegador -->
+    <!-- SUPER 3 - Chromium -->
     <keybind key="W-3">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Firefox</name>
+          <name>Chromium</name>
         </startupnotify>
-        <command>firefox</command>
+        <command>chromium</command>
       </action>
     </keybind>
      
@@ -569,8 +570,7 @@
           <enabled>true</enabled>
           <name>JDonwloader</name>
         </startupnotify>
-        <!-- <command>/bin/sh "/home/h/jd2/JDownloader2"</command> -->
-        <command>java -jar ~/.jd2/JDownloader.jar</command>
+        <command>/bin/sh "/home/h/jd2/JDownloader2"</command>
       </action>
     </keybind>
     
@@ -595,7 +595,6 @@
         <command>audacity</command>
       </action>
     </keybind>
-    
     <!-- SUPER p - Pavucontrol -->
     <keybind key="W-p">
       <action name="Execute">
@@ -606,21 +605,6 @@
         <command>pavucontrol</command>
       </action>
     </keybind>
-       
-
-    <!-- SUPER L - Lê texto do clipboard -->    
-    <keybind key="W-l">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>Lê Clipboard</name>
-        </startupnotify>
-        <command>sh -c "ler_clipboard"</command>
-      </action>
-    </keybind>
-    
-    
-    
     <!-- SUPER espaço - ROFI -->
     <!-- Com Ubuntu, este atalho não funciona 100% -->
     <keybind key="W-space">
@@ -629,10 +613,10 @@
           <enabled>true</enabled>
           <name>Rofi</name>
         </startupnotify>
-        <command>rofi -modi drun,run -show drun -theme gruvbox-light-soft -font "hack 12" -show-icons</command>
         <!-- command>rofi -show run -theme solarized -font "hack 12"</command -->
         <!-- <command>rofi -show combi -combi-modi: "window,run,combi" -theme solarized -font "hack 12"</command> -->
         <!-- <command>rofi -modi drun,run -show drun -theme solarized -font "hack 12" -show-icons</command> -->
+        <command>rofi -modi drun,run -show drun -theme gruvbox-light-soft -font "hack 12" -show-icons</command>
       </action>
     </keybind>
     <!-- ALT F2 - Search Tool -->
@@ -641,29 +625,12 @@
         <command>mate-search-tool</command>
       </action>
     </keybind>
-    
     <!-- Launch scrot when Print is pressed -->
     <keybind key="Print">
       <action name="Execute">
         <command>scrot</command>
       </action>
     </keybind>
-    
-    <!-- Seleciona pedaço da tela para capturar e salva quando Alt+Print é pressionado-->
-    <keybind key="A-Print">
-      <action name="Execute">
-        <command>scrot -s</command>
-      </action>
-    </keybind>
-    
-    <!-- Seleciona pedaço da tela para capturar e copia para clipboard quando Alt+Print é pressionado-->
-    <keybind key="C-Print">
-      <action name="Execute">
-        <!-- <command> scrot -s -o /tmp/captura.png && xclip -selection clipboard -t image/png -i /tmp/captura.png </command> -->
-        <command>sh -c "clipboard_PrtSr.sh"</command>
-      </action>
-    </keybind>
-    
     <!-- SUPER Print: Screen Simple Recorder -->
     <keybind key="W-Print">
       <action name="Execute">
@@ -717,8 +684,6 @@
       </action>
     </keybind>
     <!-- FIM DAS MINHAS ALTERAÇÕES -->
-    
-    
   </keyboard>
   <mouse>
     <dragThreshold>1</dragThreshold>

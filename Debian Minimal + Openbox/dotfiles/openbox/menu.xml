@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openbox_menu xmlns="http://openbox.org/3.6.1/menu">
-    <menu execute="/usr/bin/openbox-menu lxde-applications.menu" id="desktop-app-menu" label="Aplicativos"/>
+  <!--  <menu execute="/usr/bin/openbox-menu lxde-applications.menu" id="desktop-app-menu" label="Aplicativos"/> -->
+        <menu execute="/usr/bin/openbox-menu lxde-applications.menu" id="desktop-app-menu" label="Aplicativos"/>
     <menu id="root-menu" label="Openbox 3">
         <separator label="Menu"/>
         <menu id="desktop-app-menu"/>
@@ -22,7 +23,7 @@
         <item label="3. Navegador Web">
             <action name="Execute">
                 <execute>
-                    google-chrome
+                    firefox
                 </execute>
             </action>
         </item>
@@ -37,21 +38,13 @@
         <item label="5. Calculadora">
             <action name="Execute">
                 <execute>
-                    gnome-calculator
+                    galculator
                 </execute>
             </action>
         </item>   
 
-        <item label="V- VS Code">
-            <action name="Execute">
-                <execute>
-                    code
-                </execute>
-            </action>
-        </item>
 
-
-        <item label="A- Audacity">
+        <item label="A - Audacity">
             <action name="Execute">
                 <execute>
                     audacity
@@ -60,7 +53,25 @@
         </item>
 
 
-        <item label="G- Gimp">
+        <item label="C - Codium">
+            <action name="Execute">
+                <execute>
+                    codium
+                </execute>
+            </action>
+        </item>
+
+
+        <item label="F - Firefox">
+            <action name="Execute">
+                <execute>
+                    firefox
+                </execute>
+            </action>
+        </item>
+
+
+        <item label="G - Gimp">
             <action name="Execute">
                 <execute>
                     gimp
@@ -69,7 +80,16 @@
         </item>
 
 
-        <item label="K- Kdenlive">
+        <item label="J - JDonwloader">
+            <action name="Execute">
+                <execute>
+                    java -jar ~/.jd2/JDownloader.jar
+                </execute>
+            </action>
+        </item>
+
+
+        <item label="K - Kdenlive">
             <action name="Execute">
                 <execute>
                     kdenlive
@@ -78,16 +98,7 @@
         </item>
 
 
-        <item label="J- JDonwloader">
-            <action name="Execute">
-                <execute>
-                    /bin/sh "/home/h/jd2/JDownloader2"
-                </execute>
-            </action>
-        </item>
-
-
-        <item label="P- Pavulcontrol">
+        <item label="P - Pavulcontrol">
             <action name="Execute">
                 <execute>
                     pavucontrol
@@ -95,6 +106,15 @@
             </action>
         </item>
 
+        
+       <item label="T - Terminal">
+            <action name="Execute">
+                <execute>
+                    lxterminal
+                </execute>
+            </action>
+        </item>
+        
         
         <separator/>
         
@@ -124,7 +144,7 @@
                 <item label="Wiki Page">
                     <action name="Execute">
                         <execute>
-                            google-chrome http://crunchbanglinux.org/wiki/conky
+                            firefox http://crunchbanglinux.org/wiki/conky
                         </execute>
                     </action>
                 </item>
@@ -167,14 +187,14 @@
                 <item label="Edit menu.xml">
                     <action name="Execute">
                         <execute>
-                            gedit ~/.config/openbox/menu.xml
+                            sudo gedit ~/.config/openbox/menu.xml
                         </execute>
                     </action>
                 </item>
                 <item label="Edit rc.xml">
                     <action name="Execute">
                         <execute>
-                            gedit ~/.config/openbox/rc.xml
+                            sudo gedit ~/.config/openbox/rc.xml
                         </execute>
                     </action>
                 </item>
@@ -256,7 +276,7 @@
                 <item label="Online Help">
                     <action name="Execute">
                         <execute>
-                            google-chrome http://code.google.com/p/tint2/wiki/Welcome
+                            firefox http://code.google.com/p/tint2/wiki/Welcome
                         </execute>
                     </action>
                 </item>

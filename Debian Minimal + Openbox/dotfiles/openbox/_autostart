@@ -3,16 +3,12 @@ xrandr --output DisplayPort-0 --off --output HDMI-1 --primary --mode 1920x1080 -
 
 nitrogen --restore &
 
+# tint2 &	# tira barra tint2
+
 compton &
 
 conky -p 2 -c /etc/conky/conky_info &
 conky -c /etc/conky/conky_shortcuts &
-
-polybar barra_superior &
-
-# tint2 &	# tira barra tint2
-tint2 ~/.config/tint2/barra_inferior.tint2rc &
-
 
 # ligawifi
 # organizapastas
