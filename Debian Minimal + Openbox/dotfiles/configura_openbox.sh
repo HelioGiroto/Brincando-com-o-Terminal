@@ -15,14 +15,14 @@ git clone https://github.com/HelioGiroto/Brincando-com-o-Terminal.git
 
 # conky
 cd
-cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/arquivos-de-configuracao
+cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/dotfiles
 cd conky
 sudo cp * /etc/conky
 
 
 # lxterminal
 cd
-cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/arquivos-de-configuracao
+cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/dotfiles
 cd lxterminal
 sudo cp * ~/.config/lxterminal
 # Arquivos copiados para: ~/.config/lxterminal
@@ -31,7 +31,7 @@ sudo cp * ~/.config/lxterminal
 
 # openbox
 cd
-cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/arquivos-de-configuracao
+cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/dotfiles
 cd openbox
 sudo cp * ~/.config/openbox
 # Arquivos copiados para ~/.config/openbox da máquina:
@@ -43,7 +43,7 @@ sudo cp * ~/.config/openbox
 
 # rofi
 cd
-cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/arquivos-de-configuracao
+cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/dotfiles
 cd rofi
 sudo cp * ~/.config/rofi
 
@@ -52,7 +52,7 @@ sudo cp * ~/.config/rofi
 
 # Thunar:
 cd
-cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/arquivos-de-configuracao
+cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/dotfiles
 cd rofi
 sudo cp * ~/.config/Thunar
 
@@ -60,9 +60,24 @@ sudo cp * ~/.config/Thunar
 
 # Tint2
 cd
-cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/arquivos-de-configuracao
+cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/dotfiles
 cd tint2
 sudo cp * ~/.config/tint2
+
+
+
+
+# Polybar
+cd
+mkdir -p ~/.config/polybar
+cd Brincando-com-o-Terminal/Debian\ Minimal\ +\ Openbox/dotfiles
+cd polybar
+sudo cp * ~/.config/polybar
+
+
+
+
+
 
 
 cd
