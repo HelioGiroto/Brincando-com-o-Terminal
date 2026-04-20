@@ -1,0 +1,15 @@
+#!/bin/bash
+
+sudo apt update
+
+sudo apt -y upgrade
+
+sudo apt autoremove
+
+sudo apt autoclean
+
+sudo apt clean 
+
+sudo apt remove
+
+sudo apt -f install

@@ -16,7 +16,7 @@ conky.config = {
 	text_buffer_size = 2048,
 
 	gap_x = 20,
-	gap_y = 40,
+	gap_y = 64,
 	minimum_width = 225, 
 	maximum_width = 350,
 	
@@ -60,17 +60,17 @@ SUPER D 	 - Desktop
 
 SUPER 1 | T	 - Terminal
 SUPER 2 | F 	   - File Manager / Thunar
-SUPER 3 | W	 - WebBrowser
+SUPER 3 | W	 - WebBrowser / Firefox
 SUPER 4 | E 	 - Gedit
 SUPER 5 | C	 - Calculadora
 SUPER 9 	 - Github Pwd
 
-SUPER V 	 - VS Code
-SUPER A 	 - Audacity
+SUPER A 	 - Antigravity
 SUPER G 	 - Gimp
 SUPER K	 - Kdenlive
+SUPER V 	 - VS Codium
 SUPER J 	 - JDownloader
-SUPER S 	 - Skype
+SUPER L 	 - Lê seleção
 
 ALT + F2 	 - Search File/Folder
 SUPER espaço 	  - Rofi

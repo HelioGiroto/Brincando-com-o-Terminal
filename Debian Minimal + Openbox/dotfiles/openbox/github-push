@@ -1,0 +1,45 @@
+#!/bin/bash
+# Script para realizar um push ao Github automático
+# Autor: Hélio Giroto
+
+# if [ -z "$1" ] 
+# then
+#	echo "Falta parâmetro entre áspas para nomear o commit"
+#	echo
+#fi
+
+# cat ~/tcx/2-Recursos/penhas/.gpw | xclip -sel clip
+
+# git add .
+# git commit -m "$1"
+# echo
+# echo "==========="
+# echo
+# git push
+
+echo
+
+# copia penha para o clipboard:
+xclip -selection clipboard < ~/tcx/2-Recursos/penhas/.gpw
+
+# obtem argumento da linha de comando (opcional)
+ARGUMENTO1=$1
+
+# obtem data:
+DATA=$(date)
+USUARIO=$(whoami)
+MAQUINA=$(hostname)
+
+# comandos de git:
+git add . 
+git commit -m "$USUARIO $MAQUINA - $ARGUMENTO1 - $DATA"
+git push
+
+
+echo "Feito o commit $USUARIO $MAQUINA - $ARGUMENTO1 - $DATA e Github já atualizado." 
+echo
+
+
+
+
+
