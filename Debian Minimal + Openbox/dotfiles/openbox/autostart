@@ -8,7 +8,10 @@ compton &
 conky -p 2 -c /etc/conky/conky_info &
 conky -c /etc/conky/conky_shortcuts &
 
-polybar barra_superior &
+# polybar barra_superior &
+bash ~/.config/polybar/launch.sh &
+
+
 
 # tint2 &	# tira barra tint2
 tint2 ~/.config/tint2/barra_inferior.tint2rc &
