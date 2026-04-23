@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 # sleep 5
+# Instalar fontes: 
+# sudo apt install fonts-jetbrains-mono
+# sudo apt install fonts-font-awesome
+
 
 # Encerrar instâncias existentes
 killall -q polybar
