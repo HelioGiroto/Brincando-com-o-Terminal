@@ -1,3 +1,5 @@
+- salvar o conteudo de dotfiles/thunar para: ~/.config/Thunar/ 
+
 # Para acrescentar uma tecla de atalho no Thunar:
 
 - ver: https://qastack.com.br/ubuntu/403922/keyboard-shortcut-for-thunar-custom-actions

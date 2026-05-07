@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
-	<icon>utilities-terminal</icon>
+	<icon>antigravity</icon>
+	<name>Antigravity</name>
+	<submenu></submenu>
+	<unique-id>1777920203517474-1</unique-id>
+	<command>antigravity .</command>
+	<description>Abrir Antigravity na pasta atual</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>/usr/share/pixmaps/opencode.png</icon>
+	<name>OpenCode</name>
+	<submenu></submenu>
+	<unique-id>1778162194584362-1</unique-id>
+	<command>lxterminal --working-directory=%f -e &quot;tmux new &apos;/home/mkt/.opencode/bin/opencode .&apos;&quot;</command>
+	<description>Abre o OpenCode na pasta atual</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>org.gnome.Terminal</icon>
 	<name>Abrir terminal nessa pasta</name>
 	<submenu></submenu>
 	<unique-id>1631809188049771-1</unique-id>
 	<command>lxterminal</command>
-	<description>ALT + t</description>
+	<description>Abre Terminal - ALT + t</description>
 	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>
@@ -18,10 +49,40 @@
 	<submenu></submenu>
 	<unique-id>1634572691874033-1</unique-id>
 	<command>gedit %f</command>
-	<description>Alt + e</description>
+	<description>Abre o Gedit - Alt + e</description>
 	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>mcedit</icon>
+	<name>Ranger</name>
+	<submenu></submenu>
+	<unique-id>1777920482575829-2</unique-id>
+	<command>lxterminal -e &quot;ranger %f&quot;</command>
+	<description>Abre o Ranger na pasta atual</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>python3.13</icon>
+	<name>Python</name>
+	<submenu></submenu>
+	<unique-id>1777985345590894-1</unique-id>
+	<command>lxterminal -e &quot;bash -c &apos;if [ -d %f ]; then cd %f &amp;&amp; /usr/bin/python3 main.py; else /usr/bin/python3 %f; fi; echo; echo Pressione Enter para fechar...; read&apos;&quot;</command>
+	<description>Executa o script em Python</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
 	<other-files/>
 	<text-files/>
 </action>
@@ -48,5 +109,16 @@
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>Abre MD</name>
+	<submenu></submenu>
+	<unique-id>1777921216366284-3</unique-id>
+	<command>firefox %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*.md</patterns>
+	<other-files/>
 </action>
 </actions>
