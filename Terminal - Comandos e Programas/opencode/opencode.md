@@ -73,4 +73,18 @@
 
 
 
+## Instalando o comando de live-server no Opencode: 
+
+```
+# instala o live-server globalmente: 
+sudo npm install -g live-server
+
+# roda no opencode de forma que não bloqueia a execução atual:
+!nohup live-server > /dev/null 2>&1 &
+
+# será aberto no navegador padrão em `http://127.0.0.1:8080`
+
+# pode ser usado como comando
+```
+
 
