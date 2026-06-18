@@ -1,24 +1,31 @@
-sleep 1
-xrandr --output DisplayPort-0 --off --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-0 --off --output DVI-1 --off --output VGA-1-1 --mode 1600x900 --pos 1920x0 --rotate normal --output HDMI-1-1 --off
+# 1. Espera um momento para o servidor X estabilizar
+sleep 2
 
+# 2. Detecta o fabricante do hardware
+FABRICANTE=$(hostnamectl | grep 'Vendor' | cut -d":" -f2 | xargs)
+
+# 3. Condicional para aplicar o xrandr correto
+if [ "$FABRICANTE" = "Dell Inc." ]; then
+    # Configuração para o Notebook Dell (eDP-1 + HDMI-2)
+    xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --off --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-3 --off --output HDMI-3 --off
+else
+    # Configuração padrão / Desktop (HDMI-1 + VGA-1-1)
+    xrandr --output DisplayPort-0 --off --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-0 --off --output DVI-1 --off --output VGA-1-1 --mode 1600x900 --pos 1920x0 --rotate normal --output HDMI-1-1 --off
+fi
+
+# Pequena pausa para o Openbox processar a nova resolução antes dos painéis
+sleep 2
+
+# 4. Restaura o papel de parede
 nitrogen --restore &
 
+# 5. Ativa o compositor de efeitos
 compton &
 
+# 6. Inicializa os Conkys
 conky -p 2 -c /etc/conky/conky_info &
 conky -c /etc/conky/conky_shortcuts &
 
-
-# polybar barra_superior &
+# 7. Inicializa as barras de tarefas
 bash ~/.config/polybar/launch.sh &
-
-
-# tint2 &	# tira barra tint2
 tint2 ~/.config/tint2/barra_inferior.tint2rc &
-
-
-# ligawifi
-# organizapastas
-
-# Corrigir abaixo pq não funciona:
-# bash start_conky.sh &
