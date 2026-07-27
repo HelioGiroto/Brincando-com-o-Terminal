@@ -5,7 +5,8 @@
 
 - Ir a https://opencode.ai/
 - Baixar de: ` curl -fsSL https://opencode.ai/install | bash `
-
+- Comando: `opencode`
+- Comando: `source ~/.bashrc` (caso não abra)
 
 ## Instalar comandos: 
 

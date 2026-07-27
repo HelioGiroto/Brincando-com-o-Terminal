@@ -2,6 +2,7 @@
 
 ## Instalação
 
+ver em https://wacli.sh/install.html
 
 
 `sudo apt install sqlite3`  
