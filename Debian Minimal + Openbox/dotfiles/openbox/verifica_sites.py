@@ -10,7 +10,6 @@ from rich import print
 from pathlib import Path
 
 # arquivo_urls = 'verificado.csv'
-# expanduser() - assume ~ como diretório home
 arquivo_urls = Path('~/tcx/1-Projetos/Sites/sites_texto_verificado.csv').expanduser()
 retornos = []
 
@@ -20,21 +19,39 @@ with open(arquivo_urls, 'r') as f:
 		frase = frase.strip()
 		ocorrencia = re.compile(re.escape(frase), re.I)
 
-		try:
-			# lynx imprime linhas de até ~ 80 colunas de caracteres
-			saida = subprocess.check_output(
-				["lynx", "-dump", "-nolist", f"https://{site}"],
-				text=True,
-				stderr=subprocess.DEVNULL
-			)
+		saida = ""
+		redirecionou = False
+		for proto in ("https", "http"):
+			try:
+				saida = subprocess.check_output(
+					["lynx", "-dump", "-nolist", f"{proto}://{site}"],
+					text=True,
+					stderr=subprocess.DEVNULL,
+					timeout=10
+				)
+				break
+			except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+				pass
+		if not saida:
+			try:
+				saida = subprocess.check_output(
+					["lynx", "-dump", "-nolist", "-noredir", f"http://{site}"],
+					text=True,
+					stderr=subprocess.DEVNULL,
+					timeout=10
+				)
+				redirecionou = True
+			except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+				pass
 
+		if redirecionou:
+			retorno = f"{site}; [bold green]Site OK[/]"
+		else:
 			encontrado = re.search(ocorrencia, saida)
-			retorno = f"{site}; Site OK" if encontrado else f"{site}; [bold white on red]Problemas com o site[/]"
-
-		except subprocess.CalledProcessError:
-			retorno = f"{site}; [bold white on red]Problemas com o site[/]"
+			retorno = f"{site}; [bold green]Site OK[/]" if encontrado else f"{site}; [bold white on red]Problemas com o site[/]"
 		
-		print(retorno)	
+		print(retorno)
+		# saída: retorno = "skyron.com.br; Site OK"
 		retornos.append(retorno)
 
 
@@ -43,9 +60,16 @@ sites_fora = [retorno.split(';')[0] for retorno in retornos if "Problemas com o 
 sites_ok   = [retorno.split(';')[0] for retorno in retornos if "Site OK" in retorno]
 # sites_sem_ssl = [retorno.split(';')[0] for retorno in retornos if "sem SSL" in retorno]
 
+
+lista_resultado = []
+for site in sites_fora: 
+	prefixo = 'https://'
+	lista_resultado.append(prefixo + site)
+
+
 print()
 # imprime sites fora:
-print(sites_fora)
+print(lista_resultado)
 print()
 
 
