@@ -14,7 +14,7 @@ ver em https://wacli.sh/install.html
 
 - Deixar o sync rodando (em outro terminal ou em background):
 `wacli sync --follow`
-`nohup wacli sync --follow > /dev/null 2>&1 &` 
+`nohup wacli sync --follow > /dev/null 2>&1 &` 					[1] 684868
 
 - Para matar o processo: 
 `pkill wacli` 
@@ -67,6 +67,33 @@ Para grupo com JID:
 ## Escutando mensagens:
 
 
+
+
+
+## Extraindo mensagens do Banco de Dados do Wacli
+
+importar_wacli_portatil.sh
+
+O problema: o escutar_mensagens_hermes.sh está rodando em modo tempo real (polling a cada 3s,
+pegando as últimas 30 mensagens). Ele só processa mensagens novas que chegam depois que o script
+iniciou. As 30k+ mensagens históricas continuam no banco do wacli, nunca foram exportadas.
+
+Solução: rodar o --import para fazer o backfill do histórico:
+
+bash
+cd /root
+`bash /root/wacli/escutar_mensagens_hermes.sh --import --limit 5000`
+
+
+Isso importa as últimas 5.000 mensagens do banco para os .txt. Pode repetir com --limit 10000 etc. para
+alcançar mais mensagens antigas. Depois que o import terminar, o script entra automaticamente em modo
+tempo real.
+
+Atenção: o import de 32k mensagens pode demorar um pouco (cada mensagem é processada individualmente,
+e mídias são baixadas). Se quiser pular o download de mídia no import (mais rápido), use --no-media:
+
+bash
+bash /root/wacli/escutar_mensagens_hermes.sh --import --limit 5000 --no-media
 
 
 
