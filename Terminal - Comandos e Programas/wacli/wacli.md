@@ -3,23 +3,47 @@
 ## Instalação
 
 ver em https://wacli.sh/install.html
-
-
 `sudo apt install sqlite3`  
 
 
-## Parear e sincronizar:
-- Parear com o WhatsApp (escaneie o QR code com o celular):
+## Parear, sincronizar, monitorar e matar o processo:
+
+1- Parear com o WhatsApp (escaneie o QR code com o celular):
 `wacli auth`
+`wacli --store /root/.wacli auth` 
 
-- Deixar o sync rodando (em outro terminal ou em background):
+> Esperar!! -> No caso do WACLI, é recomendável aguardar terminar a sincronização inicial antes de rodar outros comandos de escrita ou consultas pesadas no mesmo banco. Para a primeira execução (autenticação e baixa do histórico), aguarde a conclusão. Riscos: Bloqueio do Banco SQLite, Mecanismo de Lock do WACLI
+
+
+2- Deixar o sync rodando (em outro terminal ou em background):
 `wacli sync --follow`
-`nohup wacli sync --follow > /dev/null 2>&1 &` 					[1] 684868
+`wacli --store /root/.wacli sync --follow` 	-   explícito* (melhor - ver https://share.gemini.google/AErFYcvi1FzL) 
 
-- Para matar o processo: 
+> *Indicado por garantir que a aplicação sempre encontre a sessão correta sem depender de variáveis de ambiente como $HOME ou ~.
+
+
+- Com `nohup`:
+`nohup wacli sync --follow > /dev/null 2>&1 &` 
+`nohup wacli --store /root/.wacli sync --follow > /var/log/wacli.log 2>&1 &`
+
+
+3- Acompanhar logs em tempo real:
+`tail -f /var/log/wacli.log` 
+
+
+
+4- Para matar o processo: 
+`ps aux | grep wacli` 	- Encontrar o processo correspondente
+
+Alternativas:
 `pkill wacli` 
 `killall wacli`
+`pkill -f "wacli --store /root/.wacli sync"` 
 
+
+
+
+---
 
 ## Listando os JIDs e números dos grupos:
 `wacli groups list`
@@ -72,7 +96,7 @@ Para grupo com JID:
 
 ## Extraindo mensagens do Banco de Dados do Wacli
 
-importar_wacli_portatil.sh
+importar_wacli_portatil.sh		- em que VPS está esse script? 
 
 O problema: o escutar_mensagens_hermes.sh está rodando em modo tempo real (polling a cada 3s,
 pegando as últimas 30 mensagens). Ele só processa mensagens novas que chegam depois que o script
