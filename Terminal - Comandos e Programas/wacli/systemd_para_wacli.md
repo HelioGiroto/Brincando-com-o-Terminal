@@ -52,6 +52,8 @@ systemctl start wacli.service
 - Verificar se está ativo:
 `systemctl status wacli.service`
 
+	ou apenas: `systemctl status wacli`
+
 - Acompanhar os logs em tempo real:
 `journalctl -u wacli.service -f` 
 
@@ -64,7 +66,14 @@ systemctl start wacli.service
 - Verificar versão:
 `systemctl --version`
 
+- Para cancelar um service de inicializar junto com o sistema: 
+`sudo systemctl disable wacli.service`
 
+- Para habilitar novamente o serviço ao iniciar: 
+`systemctl enable wacli.service`
+
+- Verificar se está habilitado:
+`systemctl is-enabled wacli.service`
 
 
 
